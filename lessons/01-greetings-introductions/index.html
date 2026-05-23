@@ -32,50 +32,98 @@
     }
 
     .subpage-hero {
-      padding: var(--space-10) 0 var(--space-8);
+      position: relative;
+      padding: 52px 48px 48px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2A2540 0%, #3D2A1E 45%, #C4593A 100%);
+      margin-bottom: var(--space-8);
+      overflow: hidden;
+    }
+    .subpage-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+      pointer-events: none;
+      border-radius: 10px;
+    }
+    .subpage-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      border: 3px solid rgba(201,154,61,0.25);
+      border-radius: 50%;
+      pointer-events: none;
     }
     .subpage-hero .kicker {
       font-family: var(--font-data);
       font-size: var(--text-xs);
-      letter-spacing: var(--tracking-caps);
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--color-ochre);
-      margin-bottom: var(--space-3);
+      color: #C99A3D;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
     }
     .subpage-hero h1 {
-      font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
       font-weight: 400;
       font-style: italic;
-      color: var(--color-ink);
-      margin-bottom: var(--space-4);
+      color: #FAF6EE;
+      margin-bottom: 6px;
+      line-height: 1.05;
+      position: relative;
+      z-index: 1;
+    }
+    .subpage-hero .title-accent {
+      display: block;
+      width: 52px;
+      height: 3px;
+      background: #C99A3D;
+      border-radius: 2px;
+      margin: 14px 0 16px;
+      position: relative;
+      z-index: 1;
     }
     .subpage-hero .meta {
       font-size: var(--text-sm);
-      color: var(--color-text-muted);
+      color: rgba(250,246,238,0.55);
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 600px) {
+      .subpage-hero { padding: 32px 20px 28px; border-radius: 8px; }
+      .subpage-hero h1 { font-size: 1.9rem; }
     }
 
-    /* Progress meter */
+    /* Progress meter — sits inside dark hero */
     .progress-meter {
-      margin-top: var(--space-6);
-      max-width: 400px;
+      margin-top: var(--space-5);
+      max-width: 340px;
+      position: relative;
+      z-index: 1;
     }
     .progress-text {
       font-family: var(--font-data);
       font-size: var(--text-xs);
       letter-spacing: var(--tracking-wide);
-      color: var(--color-sage);
+      color: rgba(250,246,238,0.6);
       display: block;
       margin-bottom: var(--space-2);
     }
     .progress-bar {
-      height: 6px;
-      background: var(--color-surface-200);
+      height: 5px;
+      background: rgba(250,246,238,0.15);
       border-radius: 99px;
       overflow: hidden;
     }
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--color-sage), color-mix(in srgb, var(--color-sage) 70%, var(--color-ochre)));
+      background: linear-gradient(90deg, #C99A3D, #E8B84B);
       border-radius: 99px;
       transition: width 0.4s ease;
       width: 0%;
@@ -233,6 +281,7 @@
     <header class="subpage-hero">
       <div class="kicker">Lección 01 · A1</div>
       <h1>Saludos y presentaciones</h1>
+      <span class="title-accent"></span>
       <div class="meta">~38 pasos totales · ~76 min · 13 bloques</div>
       <div class="progress-meter" data-topic-id="01-greetings-introductions" data-total-blocks="13">
         <span class="progress-text">0/13 bloques completados</span>
