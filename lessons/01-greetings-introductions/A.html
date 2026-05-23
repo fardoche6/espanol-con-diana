@@ -183,7 +183,53 @@
       flex-direction: column;
       gap: 6px;
       box-shadow: 3px 3px 0 rgba(201,154,61,0.18);
+      position: relative;
     }
+    .ba-speak-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid #C99A3D;
+      background: #FAF6EE;
+      color: #C99A3D;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: background 0.15s, color 0.15s, transform 0.1s;
+      flex-shrink: 0;
+    }
+    .ba-speak-btn:hover { background: #C99A3D; color: #FAF6EE; }
+    .ba-speak-btn:active { transform: scale(0.92); }
+    .ba-speak-btn.speaking { background: #C4593A; border-color: #C4593A; color: #FAF6EE; animation: ba-pulse 0.7s infinite alternate; }
+    @keyframes ba-pulse { from { box-shadow: 0 0 0 0 rgba(196,89,58,0.4); } to { box-shadow: 0 0 0 6px rgba(196,89,58,0); } }
+    .bac-caption-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .bac-caption-speak {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid #1F1A14;
+      background: #EDE8DC;
+      color: #1F1A14;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      flex-shrink: 0;
+      transition: background 0.15s, color 0.15s;
+    }
+    .bac-caption-speak:hover { background: #1F1A14; color: #FAF6EE; }
+    .bac-caption-speak.speaking { background: #C4593A; border-color: #C4593A; color: #FAF6EE; }
     .ba-trans-es {
       font-family: 'Fraunces', Georgia, serif;
       font-size: 1.35rem;
@@ -524,7 +570,12 @@
                 <text x="181" y="38" font-family="'Caveat', cursive" font-size="21" font-weight="700" fill="#1F1A14" text-anchor="middle">Buenos días</text>
               </svg>
               <div class="bac-caption">
-                <span class="bac-greeting">Buenos días</span>
+                <div class="bac-caption-row">
+                  <span class="bac-greeting">Buenos días</span>
+                  <button class="bac-caption-speak" data-speak="Buenos días" aria-label="Pronounce Buenos días" title="Listen">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  </button>
+                </div>
                 <span class="bac-time-hint">6am – 12pm</span>
               </div>
             </div>
@@ -585,7 +636,12 @@
                 <text x="136" y="35" font-family="'Caveat', cursive" font-size="21" font-weight="700" fill="#1F1A14" text-anchor="middle">Buenas tardes</text>
               </svg>
               <div class="bac-caption">
-                <span class="bac-greeting">Buenas tardes</span>
+                <div class="bac-caption-row">
+                  <span class="bac-greeting">Buenas tardes</span>
+                  <button class="bac-caption-speak" data-speak="Buenas tardes" aria-label="Pronounce Buenas tardes" title="Listen">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  </button>
+                </div>
                 <span class="bac-time-hint">12pm – 8pm</span>
               </div>
             </div>
@@ -644,7 +700,12 @@
                 <text x="194" y="34" font-family="'Caveat', cursive" font-size="18" font-weight="700" fill="#1F1A14" text-anchor="middle">Buenas noches</text>
               </svg>
               <div class="bac-caption">
-                <span class="bac-greeting">Buenas noches</span>
+                <div class="bac-caption-row">
+                  <span class="bac-greeting">Buenas noches</span>
+                  <button class="bac-caption-speak" data-speak="Buenas noches" aria-label="Pronounce Buenas noches" title="Listen">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  </button>
+                </div>
                 <span class="bac-time-hint">after 8pm</span>
               </div>
             </div>
@@ -681,16 +742,25 @@
       <h2 class="section-label" id="label-trans">Translations</h2>
       <div class="ba-trans-grid">
         <div class="ba-trans-card">
+          <button class="ba-speak-btn" data-speak="Buenos días" aria-label="Pronounce Buenos días" title="Listen">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </button>
           <div class="ba-trans-es">Buenos días</div>
           <div class="ba-trans-en">Good morning</div>
           <div class="ba-trans-when">6am – 12pm</div>
         </div>
         <div class="ba-trans-card">
+          <button class="ba-speak-btn" data-speak="Buenas tardes" aria-label="Pronounce Buenas tardes" title="Listen">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </button>
           <div class="ba-trans-es">Buenas tardes</div>
           <div class="ba-trans-en">Good afternoon</div>
           <div class="ba-trans-when">12pm – 8pm</div>
         </div>
         <div class="ba-trans-card">
+          <button class="ba-speak-btn" data-speak="Buenas noches" aria-label="Pronounce Buenas noches" title="Listen">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </button>
           <div class="ba-trans-es">Buenas noches</div>
           <div class="ba-trans-en">Good evening / night</div>
           <div class="ba-trans-when">after 8pm</div>
@@ -827,6 +897,47 @@
         document.querySelector('.complete-hint').textContent = 'Test passed! Mark the block as complete.';
       }
     });
+
+    // Audio pronunciation via Web Speech API
+    (function () {
+      var synth = window.speechSynthesis;
+      if (!synth) return;
+
+      function speak(text, btn) {
+        synth.cancel();
+        var utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'es-MX';
+        utter.rate = 0.85;
+
+        // Pick a Spanish voice if available
+        var voices = synth.getVoices();
+        var esVoice = voices.find(function(v) { return v.lang.startsWith('es'); });
+        if (esVoice) utter.voice = esVoice;
+
+        if (btn) {
+          btn.classList.add('speaking');
+          utter.onend = utter.onerror = function () { btn.classList.remove('speaking'); };
+        }
+        synth.speak(utter);
+      }
+
+      // Voices may load async
+      function attachSpeakButtons() {
+        document.querySelectorAll('[data-speak]').forEach(function (btn) {
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            speak(btn.dataset.speak, btn);
+          });
+        });
+      }
+
+      if (synth.getVoices().length) {
+        attachSpeakButtons();
+      } else {
+        synth.addEventListener('voiceschanged', attachSpeakButtons, { once: true });
+        attachSpeakButtons(); // attach anyway so clicks queue after voices load
+      }
+    })();
 
     // Mobile nav
     var toggle = document.querySelector('.site-nav__toggle');
