@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loisirs &amp; Temps Libre — Espagnol ↔ Français</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #FAF6EE;
+    --ink: #1F1A14;
+    --ochre: #C99A3D;
+    --terracotta: #C4593A;
+    --sage: #6B8E6B;
+    --night: #2A2540;
+    --muted: #7B736B;
+    --ochre-light: #EDD9A3;
+    --terra-light: #F0C4B8;
+    --sage-light: #C3D9C3;
+    --night-light: #B8B4CC;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO HEADER ── */
+  .hero {
+    background: var(--terracotta);
+    color: var(--paper);
+    padding: 56px 80px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -100px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: 0.22;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 30%;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: var(--night);
+    opacity: 0.16;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ochre-light);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--ochre-light);
+  }
+  .hero-sub {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: rgba(250,246,238,0.75);
+    margin-bottom: 0;
+  }
+  .hero-badge {
+    position: absolute;
+    top: 40px; right: 80px;
+    background: var(--night);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 8px 18px;
+    border-radius: 100px;
+    letter-spacing: 1px;
+  }
+
+  /* ── MAIN GRID ── */
+  .main {
+    padding: 64px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+
+  /* ── MOSAIC ── */
+  .mosaic {
+    grid-column: 1 / 4;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+
+  .phrase-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: transform 0.2s;
+  }
+  .phrase-card:hover { transform: translateY(-3px); }
+
+  .phrase-card.c-ochre   { border-color: var(--ochre);     background: #FFFCF4; }
+  .phrase-card.c-terra   { border-color: var(--terracotta); background: #FDF6F4; }
+  .phrase-card.c-sage    { border-color: var(--sage);       background: #F4F8F4; }
+  .phrase-card.c-night   { border-color: var(--night);      background: #F4F3F8; }
+  .phrase-card.c-ink     { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .phrase-card .icon {
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .phrase-card .es {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .phrase-card .fr {
+    font-family: 'Caveat', cursive;
+    font-size: 17px;
+    color: var(--muted);
+  }
+  .phrase-card.c-ink .fr { color: var(--night-light); }
+  .phrase-card .tag {
+    position: absolute;
+    top: 14px; right: 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 100px;
+    background: rgba(0,0,0,0.06);
+  }
+  .phrase-card.c-ink .tag { background: rgba(255,255,255,0.12); color: var(--paper); }
+  .phrase-card.c-ochre .tag { background: var(--ochre-light); color: var(--ink); }
+  .phrase-card.c-terra .tag { background: var(--terra-light); color: var(--ink); }
+  .phrase-card.c-sage  .tag { background: var(--sage-light);  color: var(--ink); }
+  .phrase-card.c-night .tag { background: var(--night-light); color: var(--ink); }
+
+  .phrase-card.wide { grid-column: span 2; }
+
+  .callout {
+    display: inline-block;
+    background: var(--ochre);
+    color: white;
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    border-radius: 12px;
+    padding: 5px 12px;
+    margin-top: 10px;
+  }
+  .callout.red  { background: var(--terracotta); }
+  .callout.green{ background: var(--sage); }
+  .callout.dark { background: var(--night); }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.3;
+  }
+
+  /* ── GRAMMAR ZONE ── */
+  .grammar-zone {
+    grid-column: 1 / 4;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 64px;
+  }
+
+  .grammar-block {
+    background: var(--night);
+    color: var(--paper);
+    border-radius: 20px;
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .grammar-block::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    opacity: 0.12;
+  }
+  .grammar-block h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--ochre);
+  }
+  .grammar-block .subtitle {
+    font-family: 'Caveat', cursive;
+    font-size: 17px;
+    color: var(--night-light);
+    margin-bottom: 22px;
+  }
+  .formula-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .formula-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  .pill-fixed  { background: var(--ochre);     color: white; }
+  .pill-var    { background: var(--sage);       color: white; }
+  .pill-noun   { background: var(--terracotta); color: white; }
+  .pill-op     { color: var(--night-light); font-size: 18px; }
+  .example-line {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--paper);
+    margin-bottom: 4px;
+  }
+  .example-fr {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    color: var(--night-light);
+    margin-bottom: 16px;
+  }
+
+  .note-box {
+    background: rgba(255,255,255,0.07);
+    border-left: 4px solid var(--ochre);
+    border-radius: 0 12px 12px 0;
+    padding: 14px 18px;
+    margin-top: 18px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--night-light);
+  }
+  .note-box strong { color: var(--paper); }
+
+  .trap-block {
+    background: var(--terracotta);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-top: 24px;
+  }
+  .trap-block h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 14px;
+  }
+  .trap-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+  .trap-wrong { font-family: 'Fraunces', serif; font-size: 16px; color: rgba(255,255,255,0.45); text-decoration: line-through; }
+  .trap-right { font-family: 'Fraunces', serif; font-size: 16px; color: white; font-weight: 700; }
+  .trap-arrow { color: rgba(255,255,255,0.6); font-size: 18px; }
+
+  /* ── COMPARAISON FR/ES ── */
+  .contrast-zone {
+    grid-column: 1 / 4;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 64px;
+  }
+  .contrast-zone h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .contrast-zone .intro {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .contrast-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .contrast-item {
+    border-radius: 14px;
+    padding: 20px 22px;
+    border-left: 5px solid var(--ochre);
+    background: var(--paper);
+  }
+  .contrast-item:nth-child(even) { border-color: var(--sage); }
+  .contrast-item .fr-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .contrast-item .fr-phrase {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    color: var(--muted);
+    text-decoration: line-through;
+    margin-bottom: 8px;
+  }
+  .contrast-item .es-phrase {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .contrast-item .explanation {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── TIPS STRIP ── */
+  .tips-strip {
+    grid-column: 1 / 4;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 64px;
+  }
+  .tip-card {
+    background: white;
+    border-left: 5px solid var(--terracotta);
+    border-radius: 0 14px 14px 0;
+    padding: 22px 20px;
+  }
+  .tip-card:nth-child(2) { border-color: var(--ochre); }
+  .tip-card:nth-child(3) { border-color: var(--sage); }
+  .tip-card:nth-child(4) { border-color: var(--night); }
+  .tip-card .tip-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+  .tip-card h4 { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .tip-card p  { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .tip-card code { font-family: 'DM Mono', monospace; background: var(--paper); padding: 1px 5px; border-radius: 4px; font-size: 12px; color: var(--ink); }
+
+  /* ── PHRASE TABLE ── */
+  .phrase-table-wrap {
+    grid-column: 1 / 4;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+  .phrase-table-wrap h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 8px 16px;
+    border-bottom: 2px solid var(--paper);
+  }
+  tbody tr { border-bottom: 1px solid var(--paper); }
+  tbody tr:hover { background: var(--paper); }
+  tbody td { padding: 14px 16px; vertical-align: top; }
+  td.es { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--ink); width: 38%; }
+  td.fr { font-family: 'Inter', sans-serif; font-size: 15px; color: var(--muted); width: 38%; }
+  td.cat { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; width: 24%; }
+  .cat-pill { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 10px; }
+  .cp-verb  { background: var(--ochre-light); color: var(--ink); }
+  .cp-gusta { background: var(--terra-light); color: var(--ink); }
+  .cp-noun  { background: var(--sage-light);  color: var(--ink); }
+  .cp-time  { background: var(--night-light); color: var(--ink); }
+  .cp-q     { background: #e8e4f0;            color: var(--ink); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--muted);
+    padding: 28px 80px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer span { color: var(--terracotta); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-label">Español con Diana · A1 · Thème 12</div>
+  <h1>Loisirs &amp; <em>Tiempo Libre</em></h1>
+  <p class="hero-sub">Espagnol → Français · Phrases clés + guide grammatical</p>
+  <div class="hero-badge">A1 · DELE</div>
+</header>
+
+<div class="main">
+
+  <!-- ══ MOSAIC ══ -->
+  <div class="mosaic">
+
+    <div class="phrase-card c-ochre">
+      <span class="tag">verbe</span>
+      <span class="icon">📚</span>
+      <div class="es">leer</div>
+      <div class="fr">lire</div>
+      <span class="callout">leh-EHR</span>
+    </div>
+
+    <div class="phrase-card c-terra">
+      <span class="tag">verbe</span>
+      <span class="icon">💃</span>
+      <div class="es">bailar</div>
+      <div class="fr">danser</div>
+      <span class="callout red">by-LAR</span>
+    </div>
+
+    <div class="phrase-card c-night wide">
+      <span class="tag">me gusta + ∞</span>
+      <span class="icon">❤️</span>
+      <div class="es">Me gusta mucho leer</div>
+      <div class="fr">J'aime beaucoup lire</div>
+      <span class="callout dark">gusta = invariable avec infinitif</span>
+    </div>
+
+    <div class="phrase-card c-sage">
+      <span class="tag">verbe</span>
+      <span class="icon">✈️</span>
+      <div class="es">viajar</div>
+      <div class="fr">voyager</div>
+      <span class="callout green">via-HAR</span>
+    </div>
+
+    <div class="phrase-card c-ochre">
+      <span class="tag">verbe</span>
+      <span class="icon">🍳</span>
+      <div class="es">cocinar</div>
+      <div class="fr">cuisiner</div>
+      <span class="callout">co-see-NAR</span>
+    </div>
+
+    <div class="phrase-card c-ink wide">
+      <span class="tag">me gustan + nom pluriel</span>
+      <span class="icon">🎬</span>
+      <div class="es">Me gustan las películas</div>
+      <div class="fr">J'aime les films (pluriel → gustan)</div>
+      <span class="callout">≠ Me gusta el cine ← singulier</span>
+    </div>
+
+    <div class="phrase-card c-terra">
+      <span class="tag">sport</span>
+      <span class="icon">⚽</span>
+      <div class="es">jugar al fútbol</div>
+      <div class="fr">jouer au football</div>
+      <span class="callout red">a + el = al (obligatoire)</span>
+    </div>
+
+    <div class="phrase-card c-sage">
+      <span class="tag">question</span>
+      <span class="icon">🗣️</span>
+      <div class="es">¿Qué te gusta hacer?</div>
+      <div class="fr">Qu'est-ce que tu aimes faire ?</div>
+      <span class="callout green">¿Y a ti? pour renvoyer la question</span>
+    </div>
+
+  </div>
+  <!-- end mosaic -->
+
+  <!-- ══ GRAMMAR ZONE ══ -->
+  <div class="grammar-zone">
+
+    <div class="grammar-block">
+      <h2>Me gusta + infinitif</h2>
+      <p class="subtitle">Pour les activités (verbes)</p>
+      <div class="formula-row">
+        <div class="formula-pill pill-fixed">me</div>
+        <div class="formula-pill pill-fixed">gusta</div>
+        <div class="formula-pill pill-op">+</div>
+        <div class="formula-pill pill-var">infinitif</div>
+      </div>
+      <p class="example-line">Me gusta cocinar.</p>
+      <p class="example-fr">J'aime cuisiner.</p>
+      <p class="example-line">No me gusta bailar.</p>
+      <p class="example-fr">Je n'aime pas danser.</p>
+      <p class="example-line">Me gusta mucho viajar.</p>
+      <p class="example-fr">J'aime beaucoup voyager.</p>
+      <div class="note-box">
+        En français on dit <strong>«&nbsp;j'aime&nbsp;»</strong> qui se conjugue selon la personne. En espagnol, <strong>gusta</strong> ne change pas avec un infinitif — c'est le verbe de la chose aimée, pas de la personne.
+      </div>
+    </div>
+
+    <div class="grammar-block">
+      <h2>Me gusta/gustan + nom</h2>
+      <p class="subtitle">Le nom gouverne le verbe</p>
+      <div class="formula-row">
+        <div class="formula-pill pill-fixed">me</div>
+        <div class="formula-pill pill-fixed">gusta</div>
+        <div class="formula-pill pill-op">+</div>
+        <div class="formula-pill pill-noun">el / la + nom sing.</div>
+      </div>
+      <p class="example-line">Me gusta <u>el</u> cine.</p>
+      <p class="example-fr">J'aime le cinéma. (singulier → gusta)</p>
+      <div class="formula-row" style="margin-top:12px">
+        <div class="formula-pill pill-fixed">me</div>
+        <div class="formula-pill pill-noun">gustan</div>
+        <div class="formula-pill pill-op">+</div>
+        <div class="formula-pill pill-noun">los / las + nom pl.</div>
+      </div>
+      <p class="example-line">Me gustan <u>los</u> deportes.</p>
+      <p class="example-fr">J'aime les sports. (pluriel → gustan)</p>
+      <div class="trap-block">
+        <h3>⚠ Piège : l'article est OBLIGATOIRE</h3>
+        <div class="trap-row">
+          <span class="trap-wrong">Me gusta música</span>
+          <span class="trap-arrow">→</span>
+          <span class="trap-right">Me gusta la música ✓</span>
+        </div>
+        <div class="trap-row">
+          <span class="trap-wrong">Me gusta películas</span>
+          <span class="trap-arrow">→</span>
+          <span class="trap-right">Me gustan las películas ✓</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- end grammar zone -->
+
+  <!-- ══ COMPARAISON FRANÇAIS / ESPAGNOL ══ -->
+  <div class="contrast-zone">
+    <div class="section-label">Pièges pour les francophones</div>
+    <h2>Ce que le français ne te dit pas</h2>
+    <p class="intro">Là où l'espagnol fonctionne différemment du français</p>
+    <div class="contrast-grid">
+
+      <div class="contrast-item">
+        <div class="fr-note">En français</div>
+        <div class="fr-phrase">J'aime la musique.</div>
+        <div class="es-phrase">Me gusta la música.</div>
+        <div class="explanation">Article obligatoire en espagnol aussi — mais le verbe (<em>gusta</em>) s'accorde avec le NOM, pas avec «&nbsp;je&nbsp;».</div>
+      </div>
+
+      <div class="contrast-item">
+        <div class="fr-note">En français</div>
+        <div class="fr-phrase">J'aime les films.</div>
+        <div class="es-phrase">Me gustan las películas.</div>
+        <div class="explanation">Le pluriel change le verbe : <em>gusta</em> → <em>gustan</em>. En français, «&nbsp;j'aime&nbsp;» reste invariable.</div>
+      </div>
+
+      <div class="contrast-item">
+        <div class="fr-note">En français</div>
+        <div class="fr-phrase">Je joue au foot.</div>
+        <div class="es-phrase">Juego al fútbol.</div>
+        <div class="explanation"><em>Al</em> = contraction de <em>a + el</em>, exactement comme le français «&nbsp;au&nbsp;» = «&nbsp;à + le&nbsp;». Même logique !</div>
+      </div>
+
+      <div class="contrast-item">
+        <div class="fr-note">En français</div>
+        <div class="fr-phrase">Et toi ?</div>
+        <div class="es-phrase">¿Y a ti?</div>
+        <div class="explanation">Après <em>me gusta</em>, on doit utiliser <em>a ti</em> (et non <em>¿Y tú?</em>). La préposition <em>a</em> est obligatoire avant <em>ti / mí / él</em>.</div>
+      </div>
+
+      <div class="contrast-item">
+        <div class="fr-note">En français</div>
+        <div class="fr-phrase">Le week-end</div>
+        <div class="es-phrase">Los fines de semana</div>
+        <div class="explanation">Littéralement «&nbsp;les fins de semaine&nbsp;» — toujours au pluriel en espagnol, contrairement au français singulier «&nbsp;le week-end&nbsp;».</div>
+      </div>
+
+      <div class="contrast-item">
+        <div class="fr-note">En français</div>
+        <div class="fr-phrase">Je n'aime pas du tout ça.</div>
+        <div class="es-phrase">No me gusta nada.</div>
+        <div class="explanation">Double négation espagnole qui fonctionne : <em>no + nada</em> = «&nbsp;pas du tout&nbsp;». Pas d'équivalent au «&nbsp;ne…pas&nbsp;» français ici.</div>
+      </div>
+
+    </div>
+  </div>
+  <!-- end contrast zone -->
+
+  <!-- ══ TIPS STRIP ══ -->
+  <div class="tips-strip">
+    <div class="tip-card">
+      <span class="tip-icon">🎯</span>
+      <h4>gusta ou gustan ?</h4>
+      <p>Infinitif → toujours <code>gusta</code>. Nom singulier → <code>gusta</code>. Nom pluriel → <code>gustan</code>. Le verbe suit le NOM aimé, pas la personne.</p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">📌</span>
+      <h4>L'article est obligatoire</h4>
+      <p>Français : «&nbsp;J'aime la musique.&nbsp;» Espagnol : «&nbsp;Me gusta <strong>la</strong> música.&nbsp;» L'article défini est toujours présent — pas d'exception.</p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">⚡</span>
+      <h4>Jugar al + sport</h4>
+      <p><code>a + el</code> = <code>al</code>, comme en français <em>à + le = au</em>. «&nbsp;Jouer au foot&nbsp;» = «&nbsp;jugar al fútbol&nbsp;». La contraction est identique et obligatoire.</p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">🔄</span>
+      <h4>Rebond : ¿Y a ti?</h4>
+      <p>Pour renvoyer la question après «&nbsp;me gusta…&nbsp;», dis <code>¿Y a ti?</code> — jamais <code>¿Y tú?</code>. La préposition <em>a</em> est requise avant <em>ti / mí</em>.</p>
+    </div>
+  </div>
+  <!-- end tips strip -->
+
+  <!-- ══ PHRASE TABLE ══ -->
+  <div class="phrase-table-wrap">
+    <div class="section-label">Toutes les phrases clés — espagnol vers français</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Español</th>
+          <th>Français</th>
+          <th>Catégorie</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="es">leer</td><td class="fr">lire</td><td class="cat"><span class="cat-pill cp-verb">Verbe</span></td></tr>
+        <tr><td class="es">bailar</td><td class="fr">danser</td><td class="cat"><span class="cat-pill cp-verb">Verbe</span></td></tr>
+        <tr><td class="es">cocinar</td><td class="fr">cuisiner</td><td class="cat"><span class="cat-pill cp-verb">Verbe</span></td></tr>
+        <tr><td class="es">viajar</td><td class="fr">voyager</td><td class="cat"><span class="cat-pill cp-verb">Verbe</span></td></tr>
+        <tr><td class="es">escuchar música</td><td class="fr">écouter de la musique</td><td class="cat"><span class="cat-pill cp-verb">Verbe</span></td></tr>
+        <tr><td class="es">ver películas</td><td class="fr">regarder des films</td><td class="cat"><span class="cat-pill cp-verb">Verbe</span></td></tr>
+        <tr><td class="es">jugar al fútbol</td><td class="fr">jouer au football</td><td class="cat"><span class="cat-pill cp-verb">Sport</span></td></tr>
+        <tr><td class="es">jugar al tenis</td><td class="fr">jouer au tennis</td><td class="cat"><span class="cat-pill cp-verb">Sport</span></td></tr>
+        <tr><td class="es">hacer deporte</td><td class="fr">faire du sport</td><td class="cat"><span class="cat-pill cp-verb">Sport</span></td></tr>
+        <tr><td class="es">Me gusta leer.</td><td class="fr">J'aime lire.</td><td class="cat"><span class="cat-pill cp-gusta">me gusta</span></td></tr>
+        <tr><td class="es">No me gusta bailar.</td><td class="fr">Je n'aime pas danser.</td><td class="cat"><span class="cat-pill cp-gusta">me gusta</span></td></tr>
+        <tr><td class="es">Me gusta mucho viajar.</td><td class="fr">J'aime beaucoup voyager.</td><td class="cat"><span class="cat-pill cp-gusta">me gusta</span></td></tr>
+        <tr><td class="es">Me gusta un poco cocinar.</td><td class="fr">J'aime un peu cuisiner.</td><td class="cat"><span class="cat-pill cp-gusta">me gusta</span></td></tr>
+        <tr><td class="es">No me gusta nada bailar.</td><td class="fr">Je n'aime pas du tout danser.</td><td class="cat"><span class="cat-pill cp-gusta">me gusta</span></td></tr>
+        <tr><td class="es">Me gusta el cine.</td><td class="fr">J'aime le cinéma.</td><td class="cat"><span class="cat-pill cp-noun">nom sing.</span></td></tr>
+        <tr><td class="es">Me gusta la música.</td><td class="fr">J'aime la musique.</td><td class="cat"><span class="cat-pill cp-noun">nom sing.</span></td></tr>
+        <tr><td class="es">Me gustan los deportes.</td><td class="fr">J'aime les sports.</td><td class="cat"><span class="cat-pill cp-noun">nom pl.</span></td></tr>
+        <tr><td class="es">Me gustan las películas.</td><td class="fr">J'aime les films.</td><td class="cat"><span class="cat-pill cp-noun">nom pl.</span></td></tr>
+        <tr><td class="es">¿Qué te gusta hacer?</td><td class="fr">Qu'est-ce que tu aimes faire ?</td><td class="cat"><span class="cat-pill cp-q">Question</span></td></tr>
+        <tr><td class="es">¿Y a ti?</td><td class="fr">Et toi ?</td><td class="cat"><span class="cat-pill cp-q">Question</span></td></tr>
+        <tr><td class="es">A mí me gusta...</td><td class="fr">Moi, j'aime... (forme emphatique)</td><td class="cat"><span class="cat-pill cp-gusta">emphatique</span></td></tr>
+        <tr><td class="es">¿Tienes algún hobby?</td><td class="fr">Tu as un hobby ?</td><td class="cat"><span class="cat-pill cp-q">Question</span></td></tr>
+        <tr><td class="es">los fines de semana</td><td class="fr">le week-end / les week-ends</td><td class="cat"><span class="cat-pill cp-time">Temps</span></td></tr>
+        <tr><td class="es">los sábados</td><td class="fr">le samedi / les samedis</td><td class="cat"><span class="cat-pill cp-time">Temps</span></td></tr>
+        <tr><td class="es">los domingos</td><td class="fr">le dimanche / les dimanches</td><td class="cat"><span class="cat-pill cp-time">Temps</span></td></tr>
+        <tr><td class="es">en tu tiempo libre</td><td class="fr">pendant ton temps libre</td><td class="cat"><span class="cat-pill cp-time">Temps</span></td></tr>
+        <tr><td class="es">¿Qué haces los fines de semana?</td><td class="fr">Qu'est-ce que tu fais le week-end ?</td><td class="cat"><span class="cat-pill cp-q">Question</span></td></tr>
+        <tr><td class="es">El fin de semana hago deporte.</td><td class="fr">Le week-end, je fais du sport.</td><td class="cat"><span class="cat-pill cp-time">Temps</span></td></tr>
+        <tr><td class="es">¡Qué bien!</td><td class="fr">Super ! / C'est bien !</td><td class="cat"><span class="cat-pill cp-q">Réaction</span></td></tr>
+        <tr><td class="es">¡Qué interesante!</td><td class="fr">Comme c'est intéressant !</td><td class="cat"><span class="cat-pill cp-q">Réaction</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- end phrase table -->
+
+</div><!-- end main -->
+
+<footer>
+  <div>Español con Diana · A1 · Thème 12 · Loisirs &amp; Temps Libre</div>
+  <div><span>ES → FR</span> · Référence de traduction</div>
+</footer>
+
+</body>
+</html>

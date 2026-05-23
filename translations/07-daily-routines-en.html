@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Daily Routines — Spanish / English · Español con Diana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;600;700&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:      #FAF6EE;
+    --ink:        #1F1A14;
+    --ochre:      #C99A3D;
+    --terracotta: #C4593A;
+    --sage:       #6B8E6B;
+    --night:      #2A2540;
+    --muted:      #7B736B;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ──────────────────────────────────────── */
+  header {
+    background: var(--night);
+    color: var(--paper);
+    padding: 36px 80px 32px;
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    opacity: 0.18;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 40%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: 0.12;
+  }
+  .header-badge {
+    background: var(--terracotta);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 6px;
+  }
+  .header-text h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--paper);
+  }
+  .header-text h1 span { color: var(--ochre); }
+  .header-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: rgba(250,246,238,0.6);
+    margin-top: 8px;
+    letter-spacing: 0.3px;
+  }
+  .header-lang-flag {
+    margin-left: auto;
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ochre);
+    padding: 12px 24px;
+    border: 2px solid var(--ochre);
+    border-radius: 8px;
+    flex-shrink: 0;
+    align-self: center;
+    letter-spacing: 3px;
+  }
+
+  /* ── TIMELINE CANVAS ─────────────────────────────── */
+  .canvas {
+    display: grid;
+    grid-template-columns: 200px 4px 1fr;
+    gap: 0;
+    padding: 60px 80px 80px;
+    position: relative;
+  }
+
+  /* Time column */
+  .time-col { display: flex; flex-direction: column; gap: 0; }
+  .time-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 28px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 1px;
+    height: var(--card-h, 160px);
+  }
+  .time-label.highlight { color: var(--terracotta); font-weight: 700; }
+
+  /* Spine */
+  .spine-col {
+    background: var(--ochre);
+    opacity: 0.35;
+    border-radius: 4px;
+    position: relative;
+  }
+  .spine-col::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 14px; height: 14px;
+    background: var(--ochre);
+    border-radius: 50%;
+    border: 3px solid var(--paper);
+    box-shadow: 0 0 0 2px var(--ochre);
+  }
+
+  /* Cards column */
+  .cards-col { padding-left: 32px; display: flex; flex-direction: column; gap: 20px; }
+
+  /* ── PHRASE CARD ──────────────────────────────────── */
+  .phrase-card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1.5px solid rgba(31,26,20,0.07);
+    padding: 24px 28px 24px 24px;
+    display: grid;
+    grid-template-columns: 72px 1fr 1fr;
+    gap: 0 24px;
+    align-items: start;
+    box-shadow: 0 2px 16px rgba(31,26,20,0.06);
+    position: relative;
+    overflow: visible;
+  }
+  .phrase-card::before {
+    content: '';
+    position: absolute;
+    left: -32px; top: 36px;
+    width: 32px; height: 2px;
+    background: var(--ochre);
+    opacity: 0.6;
+  }
+  .phrase-card::after {
+    content: '';
+    position: absolute;
+    left: -40px; top: 30px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 3px solid var(--ochre);
+  }
+  .phrase-card.morning  { border-left: 5px solid var(--ochre); }
+  .phrase-card.work     { border-left: 5px solid var(--terracotta); }
+  .phrase-card.midday   { border-left: 5px solid var(--sage); }
+  .phrase-card.evening  { border-left: 5px solid var(--night); }
+
+  /* Icon cell */
+  .card-icon {
+    width: 60px; height: 60px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .morning  .card-icon { background: #FFF5DD; }
+  .work     .card-icon { background: #FCEEE9; }
+  .midday   .card-icon { background: #EDF3ED; }
+  .evening  .card-icon { background: #EDEAF5; }
+
+  /* Spanish phrase */
+  .card-es h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .card-es .verb-highlight { color: var(--terracotta); }
+  .card-es .subphrase {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 6px;
+    display: block;
+  }
+  .card-es .grammar-tag {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--paper);
+    border: 1px solid var(--ochre);
+    color: var(--ochre);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  /* English translation */
+  .card-en {
+    border-left: 1.5px solid rgba(31,26,20,0.08);
+    padding-left: 24px;
+  }
+  .card-en .translation {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .card-en .tip {
+    font-family: 'Caveat', cursive;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 10px;
+    line-height: 1.5;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .card-en .tip::before {
+    content: '✎';
+    color: var(--sage);
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── SECTION DIVIDERS ────────────────────────────── */
+  .section-label {
+    grid-column: 3;
+    margin-left: 32px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label span {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .section-label.morning span  { color: var(--ochre); }
+  .section-label.work span     { color: var(--terracotta); }
+  .section-label.midday span   { color: var(--sage); }
+  .section-label.evening span  { color: var(--night); }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.2;
+  }
+
+  /* ── TIPS SIDEBAR ─────────────────────────────────── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0 80px 80px;
+  }
+  .tip-card {
+    background: var(--night);
+    color: var(--paper);
+    border-radius: 14px;
+    padding: 22px 22px 20px;
+  }
+  .tip-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .tip-card p {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.55;
+    color: rgba(250,246,238,0.88);
+  }
+  .tip-card strong { color: var(--ochre); font-weight: 700; }
+
+  /* ── FOOTER ───────────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: rgba(250,246,238,0.45);
+    text-align: center;
+    padding: 20px 80px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  footer span { color: var(--ochre); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-badge">A1 · Topic 07</div>
+  <div class="header-text">
+    <h1>La <span>Rutina</span> Diaria</h1>
+    <p class="header-sub">Daily Routines · Spanish → English · Español con Diana</p>
+  </div>
+  <div class="header-lang-flag">EN</div>
+</header>
+
+<!-- TIMELINE -->
+<div class="canvas">
+  <!-- TIME COLUMN -->
+  <div class="time-col">
+    <div class="time-label highlight" style="--card-h:20px">MORNING</div>
+    <div class="time-label" style="height:180px">07:00</div>
+    <div class="time-label" style="height:180px">07:30</div>
+    <div class="time-label" style="height:180px">08:00</div>
+    <div class="time-label highlight" style="height:30px">WORK</div>
+    <div class="time-label" style="height:180px">09:00</div>
+    <div class="time-label" style="height:180px">09:30</div>
+    <div class="time-label highlight" style="height:30px">MIDDAY</div>
+    <div class="time-label" style="height:180px">14:00</div>
+    <div class="time-label" style="height:180px">18:00</div>
+    <div class="time-label highlight" style="height:30px">EVENING</div>
+    <div class="time-label" style="height:180px">21:00</div>
+    <div class="time-label" style="height:180px">23:00</div>
+  </div>
+
+  <!-- SPINE -->
+  <div class="spine-col"></div>
+
+  <!-- CARDS -->
+  <div class="cards-col">
+
+    <!-- MORNING -->
+    <div class="section-label morning"><span>Morning · La Mañana</span></div>
+
+    <div class="phrase-card morning">
+      <div class="card-icon">☀️</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Me levanto</span> a las siete.</h2>
+        <span class="subphrase">levantarse · reflexive</span>
+        <span class="grammar-tag">Reflexive Verb</span>
+      </div>
+      <div class="card-en">
+        <p class="translation">I get up at seven o'clock.</p>
+        <p class="tip">The <strong>me</strong> anchors the action to yourself — you lift yourself up.</p>
+      </div>
+    </div>
+
+    <div class="phrase-card morning">
+      <div class="card-icon">🚿</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Me ducho</span> y <span class="verb-highlight">me visto</span>.</h2>
+        <span class="subphrase">ducharse · vestirse · reflexive pair</span>
+        <span class="grammar-tag">Reflexive Chain</span>
+      </div>
+      <div class="card-en">
+        <p class="translation">I shower and I get dressed.</p>
+        <p class="tip">Both actions return to you — <strong>me</strong> goes on each verb in a chain.</p>
+      </div>
+    </div>
+
+    <div class="phrase-card morning">
+      <div class="card-icon">☕</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Desayuno</span> y <span class="verb-highlight">tomo</span> el café.</h2>
+        <span class="subphrase">desayunar · tomar · no reflexive</span>
+        <span class="grammar-tag">Regular -ar Verbs</span>
+      </div>
+      <div class="card-en">
+        <p class="translation">I have breakfast and drink coffee.</p>
+        <p class="tip">No <strong>me</strong> here — the action goes toward the food, not yourself.</p>
+      </div>
+    </div>
+
+    <!-- WORK -->
+    <div class="section-label work"><span>Work &amp; Study · El Trabajo</span></div>
+
+    <div class="phrase-card work">
+      <div class="card-icon">🏃</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Salgo</span> de casa a las ocho.</h2>
+        <span class="subphrase">salir · irregular yo form</span>
+        <span class="grammar-tag">Irregular yo</span>
+      </div>
+      <div class="card-en">
+        <p class="translation">I leave the house at eight.</p>
+        <p class="tip"><strong>Salgo</strong> is irregular only in yo — all other forms follow the pattern.</p>
+      </div>
+    </div>
+
+    <div class="phrase-card work">
+      <div class="card-icon">💼</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Empiezo</span> a trabajar a las nueve.</h2>
+        <span class="subphrase">empezar · e→ie stem change</span>
+        <span class="grammar-tag">Stem-changing</span>
+      </div>
+      <div class="card-en">
+        <p class="translation">I start working at nine o'clock.</p>
+        <p class="tip"><strong>Empezar + a + infinitive</strong> — never skip the <em>a</em>.</p>
+      </div>
+    </div>
+
+    <!-- MIDDAY -->
+    <div class="section-label midday"><span>Midday · El Mediodía</span></div>
+
+    <div class="phrase-card midday">
+      <div class="card-icon">🍽️</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Como</span> a las dos de la tarde.</h2>
+        <span class="subphrase">comer · regular -er verb</span>
+        <span class="grammar-tag">Cultural Note</span>
+      </div>
+      <div class="card-en">
+        <p class="translation">I have lunch at two in the afternoon.</p>
+        <p class="tip">Spain's main meal is at 2 pm — much later than in English-speaking countries.</p>
+      </div>
+    </div>
+
+    <div class="phrase-card midday">
+      <div class="card-icon">🏠</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Vuelvo</span> a casa a las seis.</h2>
+        <span class="subphrase">volver · o→ue stem change</span>
+        <span class="grammar-tag">Stem-changing</span>
+      </div>
+      <div class="card-en">
+        <p class="translation">I return home at six o'clock.</p>
+        <p class="tip"><strong>Vuelvo → vuelves → vuelve</strong> but <em>volvemos</em> stays regular.</p>
+      </div>
+    </div>
+
+    <!-- EVENING -->
+    <div class="section-label evening"><span>Evening &amp; Night · La Noche</span></div>
+
+    <div class="phrase-card evening">
+      <div class="card-icon">🌙</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Ceno</span> a las nueve de la noche.</h2>
+        <span class="subphrase">cenar · regular -ar verb</span>
+        <span class="grammar-tag">Cultural Note</span>
+      </div>
+      <div class="card-en">
+        <p class="translation">I have dinner at nine at night.</p>
+        <p class="tip">9–10 pm dinner is completely normal in Spain. Don't be surprised!</p>
+      </div>
+    </div>
+
+    <div class="phrase-card evening">
+      <div class="card-icon">📖</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Me relajo</span> y <span class="verb-highlight">leo</span> un poco.</h2>
+        <span class="subphrase">relajarse (reflexive) · leer (not reflexive)</span>
+        <span class="grammar-tag">Mixed Pair</span>
+      </div>
+      <div class="card-en">
+        <p class="translation">I relax and I read a little.</p>
+        <p class="tip"><strong>Relajarse</strong> is reflexive; <strong>leer</strong> is not — learn the contrast.</p>
+      </div>
+    </div>
+
+    <div class="phrase-card evening">
+      <div class="card-icon">😴</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Me acuesto</span> y <span class="verb-highlight">me duermo</span>.</h2>
+        <span class="subphrase">acostarse · dormirse · both o→ue</span>
+        <span class="grammar-tag">Reflexive + Stem</span>
+      </div>
+      <div class="card-en">
+        <p class="translation">I go to bed and I fall asleep.</p>
+        <p class="tip"><strong>Me duermo</strong> = I fall asleep (onset). <em>Duermo</em> alone = I sleep (state).</p>
+      </div>
+    </div>
+
+  </div><!-- /cards-col -->
+</div><!-- /canvas -->
+
+<!-- TIPS STRIP -->
+<div class="tips-grid">
+  <div class="tip-card">
+    <div class="tip-card-label">Reflexive Trap</div>
+    <p>Remove <strong>me/te/se</strong> — does the meaning survive? <strong>Ducho al perro</strong> (I bathe the dog) vs. <strong>me ducho</strong> (I bathe myself). If the action returns to you, you need the pronoun.</p>
+  </div>
+  <div class="tip-card">
+    <div class="tip-card-label">Clock vs. Period</div>
+    <p>Use <strong>a las ocho</strong> for clock precision. Use <strong>por la mañana</strong> for fuzzy period. Never swap them: "I work in the morning" ≠ "I work at the morning."</p>
+  </div>
+  <div class="tip-card">
+    <div class="tip-card-label">Double Negative</div>
+    <p>Spanish welcomes double negatives. <strong>No como nunca tarde</strong> and <strong>Nunca como tarde</strong> are both correct. Stop translating English grammar rules directly.</p>
+  </div>
+</div>
+
+<footer>Español con Diana · A1 · Topic 07 · Daily Routines · <span>EN</span> · infographic</footer>
+</body>
+</html>

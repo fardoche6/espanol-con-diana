@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Familia — Espagnol Famille &amp; Amis (FR)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;600;700&family=Caveat:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #FAF6EE;
+    --ink: #1F1A14;
+    --ochre: #C99A3D;
+    --terra: #C4593A;
+    --sage: #6B8E6B;
+    --night: #2A2540;
+    --muted: #7B736B;
+    --ochre-pale: #F5ECD4;
+    --terra-pale: #F7E8E3;
+    --sage-pale: #E8F0E8;
+    --night-pale: #ECEAF5;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    width: 1280px;
+    margin: 0 auto;
+    padding: 48px 40px;
+  }
+
+  /* ─── HEADER ─── */
+  .page-header {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 56px;
+    border: 3px solid var(--ink);
+    overflow: hidden;
+  }
+  .header-left {
+    background: var(--night);
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .topic-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,0.45);
+  }
+  .page-title {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 0.88;
+    color: var(--paper);
+  }
+  .page-title span { color: var(--ochre); }
+  .page-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: rgba(250,246,238,0.55);
+    margin-top: 4px;
+  }
+  .header-right {
+    background: var(--terra);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header-right-top {
+    font-family: 'Fraunces', serif;
+    font-size: 80px;
+    font-weight: 900;
+    color: rgba(250,246,238,0.15);
+    line-height: 1;
+    text-align: right;
+  }
+  .header-right-info {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: rgba(250,246,238,0.85);
+    line-height: 1.8;
+    text-align: right;
+  }
+  .header-right-info strong {
+    font-size: 18px;
+    display: block;
+    color: var(--paper);
+    margin-bottom: 4px;
+  }
+
+  /* ─── SECTION LABELS ─── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    margin-top: 40px;
+  }
+
+  /* ─── FAMILY TREE SVG ─── */
+  .tree-container {
+    background: var(--ink);
+    padding: 40px;
+    margin-bottom: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .tree-bg-text {
+    position: absolute;
+    bottom: -10px;
+    right: 20px;
+    font-family: 'Fraunces', serif;
+    font-size: 160px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    user-select: none;
+    line-height: 1;
+  }
+
+  /* ─── VOCAB GRID ─── */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .vocab-tile {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 22px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .vocab-tile::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+  }
+  .vocab-tile.m::after { background: var(--night); }
+  .vocab-tile.f::after { background: var(--terra); }
+  .vocab-tile.n::after { background: var(--sage); }
+  .vocab-tile.pair::after { background: var(--ochre); }
+
+  .tile-emoji { font-size: 28px; margin-bottom: 4px; }
+  .tile-es {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .tile-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--terra);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .tile-phon {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+  }
+  .tile-gender {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+  }
+  .tile-gender.m { background: var(--night-pale); color: var(--night); }
+  .tile-gender.f { background: var(--terra-pale); color: var(--terra); }
+  .tile-gender.n { background: var(--sage-pale); color: var(--sage); }
+
+  /* ─── PHRASE CARDS ─── */
+  .phrases-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .phrase-card {
+    border: 2px solid var(--ink);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 200px;
+  }
+  .phrase-card.a { background: var(--paper); }
+  .phrase-card.b { background: var(--ochre-pale); }
+  .phrase-card.c { background: var(--terra-pale); }
+  .phrase-card.d { background: var(--sage-pale); }
+  .phrase-card.e { background: var(--night-pale); }
+  .phrase-card.f { background: var(--paper); }
+
+  .card-stripe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 4px;
+  }
+  .stripe-ochre { background: var(--ochre); }
+  .stripe-terra { background: var(--terra); }
+  .stripe-sage { background: var(--sage); }
+  .stripe-night { background: var(--night); }
+
+  .card-block-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .card-es {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .card-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--terra);
+  }
+  .card-example {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.3;
+    padding-top: 10px;
+    border-top: 1px dashed #D4CEC6;
+    margin-top: auto;
+  }
+  .card-annotation {
+    position: absolute;
+    bottom: 24px;
+    right: 20px;
+    max-width: 130px;
+    background: var(--night);
+    color: var(--paper);
+    padding: 6px 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    line-height: 1.5;
+    text-align: right;
+  }
+
+  /* ─── POSSESSIVES PANEL ─── */
+  .possessives-panel {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 0;
+    margin-bottom: 2px;
+    border: 2px solid var(--ink);
+    overflow: hidden;
+  }
+  .poss-left {
+    background: var(--ochre);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+  .poss-left-title {
+    font-family: 'Fraunces', serif;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .poss-left-rule {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    color: var(--ink);
+    opacity: 0.75;
+    line-height: 1.4;
+  }
+  .poss-right {
+    background: var(--paper);
+    padding: 32px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .poss-item {
+    background: var(--ochre-pale);
+    border: 1px solid var(--ochre);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .poss-item.alt { background: var(--night-pale); border-color: var(--night); }
+  .poss-es {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--ink);
+  }
+  .poss-item.alt .poss-es { color: var(--night); }
+  .poss-rule-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  .poss-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--terra);
+  }
+  .poss-examples {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+    padding-top: 8px;
+    border-top: 1px dashed #D4CEC6;
+  }
+
+  /* ─── TRAPS ─── */
+  .traps-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .trap-card {
+    background: var(--terra-pale);
+    border: 2px solid var(--terra);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .trap-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terra);
+  }
+  .trap-compare {
+    display: grid;
+    grid-template-columns: 1fr 24px 1fr;
+    align-items: center;
+    gap: 8px;
+  }
+  .trap-box {
+    padding: 12px 14px;
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .trap-wrong-box {
+    background: #F0D0C8;
+    border: 2px solid var(--terra);
+    color: var(--terra);
+    text-decoration: line-through;
+    text-decoration-color: var(--terra);
+  }
+  .trap-right-box {
+    background: var(--sage-pale);
+    border: 2px solid var(--sage);
+    color: var(--sage);
+  }
+  .trap-arrow-box { text-align: center; font-size: 18px; color: var(--terra); }
+  .trap-explain {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.4;
+    padding: 10px 14px;
+    background: white;
+    border-left: 4px solid var(--sage);
+  }
+
+  /* ─── DIALOGUE ─── */
+  .dialogue-section {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .dialogue-main {
+    background: var(--sage-pale);
+    border: 2px solid var(--sage);
+    padding: 40px;
+  }
+  .dialogue-main-title {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .dialogue-line {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    margin-bottom: 18px;
+    align-items: start;
+  }
+  .speaker {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-weight: 500;
+  }
+  .spk-a { background: var(--night); color: var(--paper); }
+  .spk-b { background: var(--terra); color: var(--paper); }
+  .dlg-es {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .dlg-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .dialogue-g2 {
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 2px solid var(--sage);
+  }
+  .dialogue-g2-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 16px;
+  }
+  .dialogue-sidebar {
+    background: var(--night);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .sidebar-title {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--paper);
+    margin-bottom: 8px;
+  }
+  .sidebar-tip {
+    background: rgba(255,255,255,0.06);
+    border-left: 3px solid var(--ochre);
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(250,246,238,0.8);
+    line-height: 1.5;
+  }
+  .sidebar-tip strong { color: var(--ochre); display: block; margin-bottom: 4px; }
+  .sidebar-tip.cultural { border-left-color: var(--sage); }
+  .sidebar-tip.cultural strong { color: var(--sage); }
+
+  /* ─── QUESTION PATTERNS ─── */
+  .q-patterns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .q-card {
+    background: var(--ink);
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .q-bg-num {
+    position: absolute;
+    top: -8px; right: 16px;
+    font-family: 'Fraunces', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.06);
+    user-select: none;
+  }
+  .q-block-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,0.35);
+    margin-bottom: 12px;
+  }
+  .q-es-big {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ochre);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .q-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(250,246,238,0.55);
+    margin-bottom: 16px;
+  }
+  .q-answer-row {
+    background: rgba(255,255,255,0.06);
+    border-left: 3px solid var(--terra);
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-family: 'Caveat', cursive;
+    font-size: 14px;
+    color: var(--paper);
+    line-height: 1.4;
+  }
+  .q-answer-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--terra);
+    margin-bottom: 3px;
+  }
+  .q-answer-row.green { border-left-color: var(--sage); }
+  .q-answer-row.green .q-answer-tag { color: var(--sage); }
+  .q-answer-row.gold { border-left-color: var(--ochre); }
+  .q-answer-row.gold .q-answer-tag { color: var(--ochre); }
+
+  /* ─── CULTURAL NOTE STRIP ─── */
+  .cultural-strip {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 0;
+    margin-bottom: 2px;
+    border: 2px solid var(--ink);
+    overflow: hidden;
+  }
+  .cultural-flag {
+    background: var(--sage);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+  }
+  .cultural-flag-icon { font-size: 40px; }
+  .cultural-flag-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--paper);
+    opacity: 0.8;
+  }
+  .cultural-notes {
+    background: var(--sage-pale);
+    padding: 28px 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  .cultural-note-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .cultural-note-title {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--sage);
+  }
+  .cultural-note-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 200px;
+    gap: 2px;
+    margin-top: 2px;
+  }
+  .footer-cell {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 20px 24px;
+  }
+  .footer-cell-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(250,246,238,0.35);
+    margin-bottom: 4px;
+  }
+  .footer-cell-value {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ochre);
+  }
+  .footer-brand {
+    background: var(--terra);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .footer-brand-name {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--paper);
+    text-align: center;
+  }
+  .footer-brand-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(250,246,238,0.7);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="page-header">
+  <div class="header-left">
+    <span class="topic-tag">Español con Diana · A1 · Thème 03</span>
+    <h1 class="page-title">La <span>Familia</span><br>&amp; Los Amigos</h1>
+    <p class="page-subtitle">Famille &amp; Amis — Référence espagnol–français</p>
+  </div>
+  <div class="header-right">
+    <div class="header-right-top">A1</div>
+    <div class="header-right-info">
+      <strong>MCCER A1</strong>
+      ~60 min · 8 blocs<br>
+      30 micro-étapes<br>
+      8+ mots de famille
+    </div>
+  </div>
+</header>
+
+<!-- VOCAB GRID -->
+<div class="section-label">Vocabulaire de base — Tous les membres de la famille</div>
+<div class="vocab-grid">
+  <div class="vocab-tile m">
+    <div class="tile-gender m">m</div>
+    <div class="tile-emoji">👨</div>
+    <div class="tile-es">padre</div>
+    <div class="tile-fr">père</div>
+    <div class="tile-phon">PAH-dreh</div>
+  </div>
+  <div class="vocab-tile f">
+    <div class="tile-gender f">f</div>
+    <div class="tile-emoji">👩</div>
+    <div class="tile-es">madre</div>
+    <div class="tile-fr">mère</div>
+    <div class="tile-phon">MAH-dreh</div>
+  </div>
+  <div class="vocab-tile m">
+    <div class="tile-gender m">m</div>
+    <div class="tile-emoji">👦</div>
+    <div class="tile-es">hermano</div>
+    <div class="tile-fr">frère</div>
+    <div class="tile-phon">er-MAH-no</div>
+  </div>
+  <div class="vocab-tile f">
+    <div class="tile-gender f">f</div>
+    <div class="tile-emoji">👧</div>
+    <div class="tile-es">hermana</div>
+    <div class="tile-fr">sœur</div>
+    <div class="tile-phon">er-MAH-na</div>
+  </div>
+  <div class="vocab-tile m">
+    <div class="tile-gender m">m</div>
+    <div class="tile-emoji">👶</div>
+    <div class="tile-es">hijo</div>
+    <div class="tile-fr">fils / enfant</div>
+    <div class="tile-phon">EE-hoh</div>
+  </div>
+  <div class="vocab-tile f">
+    <div class="tile-gender f">f</div>
+    <div class="tile-emoji">👧</div>
+    <div class="tile-es">hija</div>
+    <div class="tile-fr">fille</div>
+    <div class="tile-phon">EE-ha</div>
+  </div>
+  <div class="vocab-tile m">
+    <div class="tile-gender m">m</div>
+    <div class="tile-emoji">👴</div>
+    <div class="tile-es">abuelo</div>
+    <div class="tile-fr">grand-père</div>
+    <div class="tile-phon">ah-BWEH-lo</div>
+  </div>
+  <div class="vocab-tile f">
+    <div class="tile-gender f">f</div>
+    <div class="tile-emoji">👵</div>
+    <div class="tile-es">abuela</div>
+    <div class="tile-fr">grand-mère</div>
+    <div class="tile-phon">ah-BWEH-la</div>
+  </div>
+  <div class="vocab-tile m">
+    <div class="tile-gender m">m</div>
+    <div class="tile-emoji">👨</div>
+    <div class="tile-es">tío</div>
+    <div class="tile-fr">oncle</div>
+    <div class="tile-phon">TEE-oh</div>
+  </div>
+  <div class="vocab-tile f">
+    <div class="tile-gender f">f</div>
+    <div class="tile-emoji">👩</div>
+    <div class="tile-es">tía</div>
+    <div class="tile-fr">tante</div>
+    <div class="tile-phon">TEE-ah</div>
+  </div>
+  <div class="vocab-tile m">
+    <div class="tile-gender m">m</div>
+    <div class="tile-emoji">🧑</div>
+    <div class="tile-es">primo</div>
+    <div class="tile-fr">cousin</div>
+    <div class="tile-phon">PREE-mo</div>
+  </div>
+  <div class="vocab-tile f">
+    <div class="tile-gender f">f</div>
+    <div class="tile-emoji">🧒</div>
+    <div class="tile-es">prima</div>
+    <div class="tile-fr">cousine</div>
+    <div class="tile-phon">PREE-ma</div>
+  </div>
+  <div class="vocab-tile n">
+    <div class="tile-gender n">n</div>
+    <div class="tile-emoji">🧑</div>
+    <div class="tile-es">amigo</div>
+    <div class="tile-fr">ami</div>
+    <div class="tile-phon">ah-MEE-go</div>
+  </div>
+  <div class="vocab-tile n">
+    <div class="tile-gender n">n</div>
+    <div class="tile-emoji">🧒</div>
+    <div class="tile-es">amiga</div>
+    <div class="tile-fr">amie</div>
+    <div class="tile-phon">ah-MEE-ga</div>
+  </div>
+  <div class="vocab-tile pair">
+    <div class="tile-emoji">💑</div>
+    <div class="tile-es">novio/a</div>
+    <div class="tile-fr">petit ami / petite amie</div>
+    <div class="tile-phon">NOH-byoh</div>
+  </div>
+</div>
+
+<!-- KEY PHRASES -->
+<div class="section-label">Phrases clés — Annotées</div>
+<div class="phrases-block">
+  <div class="phrase-card a">
+    <div class="card-stripe stripe-ochre"></div>
+    <div class="card-block-tag">Bloc A · Famille immédiate</div>
+    <div class="card-es">mi madre / mi padre</div>
+    <div class="card-fr">ma mère / mon père</div>
+    <div class="card-example">"Mi madre se llama Ana. Mi padre se llama Luis."</div>
+    <div class="card-annotation">Jamais "mia madre" — le possessif ne s'accorde pas en genre</div>
+  </div>
+  <div class="phrase-card b">
+    <div class="card-stripe stripe-terra"></div>
+    <div class="card-block-tag">Bloc A · Fratrie</div>
+    <div class="card-es">mi hermano / mi hermana</div>
+    <div class="card-fr">mon frère / ma sœur</div>
+    <div class="card-example">"No tengo hermanos. Tengo una hermana."</div>
+    <div class="card-annotation">Seul le nom change de genre — "mi" reste invariable</div>
+  </div>
+  <div class="phrase-card c">
+    <div class="card-stripe stripe-sage"></div>
+    <div class="card-block-tag">Bloc B · Famille élargie</div>
+    <div class="card-es">mis abuelos</div>
+    <div class="card-fr">mes grands-parents (les deux)</div>
+    <div class="card-example">"Mis abuelos están muy bien, gracias."</div>
+    <div class="card-annotation">Pluriel masc. = groupe mixte : abuelos = grand-père + grand-mère</div>
+  </div>
+  <div class="phrase-card d">
+    <div class="card-stripe stripe-ochre"></div>
+    <div class="card-block-tag">Bloc B · Famille élargie</div>
+    <div class="card-es">mis tíos</div>
+    <div class="card-fr">mes oncles / mon oncle et ma tante</div>
+    <div class="card-example">"Tengo dos tíos y tres tías."</div>
+    <div class="card-annotation">Le masculin pluriel regroupe les deux genres</div>
+  </div>
+  <div class="phrase-card e">
+    <div class="card-stripe stripe-night"></div>
+    <div class="card-block-tag">Bloc C · Amis</div>
+    <div class="card-es">mi mejor amigo/a</div>
+    <div class="card-fr">mon/ma meilleur(e) ami(e)</div>
+    <div class="card-example">"Mi mejor amiga se llama Sara."</div>
+    <div class="card-annotation">"mejor" est invariable — same pour amigo et amiga</div>
+  </div>
+  <div class="phrase-card f">
+    <div class="card-stripe stripe-terra"></div>
+    <div class="card-block-tag">Bloc C · Relations</div>
+    <div class="card-es">novio / novia</div>
+    <div class="card-fr">petit ami / petite amie (aussi fiancé/e)</div>
+    <div class="card-example">"No tengo novio." / "Mi novia se llama Clara."</div>
+    <div class="card-annotation">Couvre petit ami, fiancé, et parfois conjoint selon le contexte</div>
+  </div>
+</div>
+
+<!-- POSSESSIVES -->
+<div class="section-label">Les Possessifs — Règle fondamentale</div>
+<div class="possessives-panel">
+  <div class="poss-left">
+    <div class="poss-left-title">Mes /<br>Mon /<br>Ma</div>
+    <div class="poss-left-rule">mi (singulier)<br>mis (pluriel)<br>Le genre n'a pas d'importance !</div>
+  </div>
+  <div class="poss-right">
+    <div class="poss-item">
+      <span class="poss-es">mi</span>
+      <span class="poss-rule-tag">singulier · tous genres</span>
+      <span class="poss-fr">mon / ma / (un seul)</span>
+      <span class="poss-examples">mi madre · mi padre · mi hermana · mi hermano</span>
+    </div>
+    <div class="poss-item">
+      <span class="poss-es">mis</span>
+      <span class="poss-rule-tag">pluriel · tous genres</span>
+      <span class="poss-fr">mes (plusieurs)</span>
+      <span class="poss-examples">mis padres · mis hermanos · mis amigos · mis tíos</span>
+    </div>
+    <div class="poss-item alt">
+      <span class="poss-es">tu</span>
+      <span class="poss-rule-tag">singulier · informel</span>
+      <span class="poss-fr">ton / ta (un seul)</span>
+      <span class="poss-examples">tu madre · tu padre · tu hermana</span>
+    </div>
+    <div class="poss-item alt">
+      <span class="poss-es">su</span>
+      <span class="poss-rule-tag">son / leur / votre</span>
+      <span class="poss-fr">son / sa / leur / votre</span>
+      <span class="poss-examples">su madre · sus hijos · su mejor amiga</span>
+    </div>
+  </div>
+</div>
+
+<!-- TRAPS -->
+<div class="section-label">Erreurs fréquentes — À éviter</div>
+<div class="traps-section">
+  <div class="trap-card">
+    <div class="trap-card-label">Piège #1 · Possessif féminin</div>
+    <div class="trap-compare">
+      <div class="trap-box trap-wrong-box">mia madre</div>
+      <div class="trap-arrow-box">→</div>
+      <div class="trap-box trap-right-box">mi madre</div>
+    </div>
+    <div class="trap-explain">En espagnol, le possessif ne s'accorde JAMAIS en genre. "mi" = mon/ma sans exception.</div>
+  </div>
+  <div class="trap-card">
+    <div class="trap-card-label">Piège #2 · Article après négation</div>
+    <div class="trap-compare">
+      <div class="trap-box trap-wrong-box">No tengo unos hermanos</div>
+      <div class="trap-arrow-box">→</div>
+      <div class="trap-box trap-right-box">No tengo hermanos</div>
+    </div>
+    <div class="trap-explain">Après une négation, on supprime l'article : "no tengo + nom sans article".</div>
+  </div>
+  <div class="trap-card">
+    <div class="trap-card-label">Piège #3 · Accord de cuántos/cuántas</div>
+    <div class="trap-compare">
+      <div class="trap-box trap-wrong-box">¿Cuántos hermanas?</div>
+      <div class="trap-arrow-box">→</div>
+      <div class="trap-box trap-right-box">¿Cuántas hermanas?</div>
+    </div>
+    <div class="trap-explain">cuántos (masc.) / cuántas (fém.) s'accorde avec le nom — hermanas est féminin.</div>
+  </div>
+  <div class="trap-card">
+    <div class="trap-card-label">Piège #4 · Tener vs Ser</div>
+    <div class="trap-compare">
+      <div class="trap-box trap-wrong-box">Soy dos hermanos</div>
+      <div class="trap-arrow-box">→</div>
+      <div class="trap-box trap-right-box">Tengo dos hermanos</div>
+    </div>
+    <div class="trap-explain">Pour les membres de la famille, on utilise "tener" (avoir), jamais "ser" (être).</div>
+  </div>
+</div>
+
+<!-- DIALOGUE -->
+<div class="section-label">Dialogues réels — Bloc G</div>
+<div class="dialogue-section">
+  <div class="dialogue-main">
+    <div class="dialogue-main-title">Parler de<br>sa famille</div>
+    <div style="font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px;">Dialogue G1</div>
+    <div class="dialogue-line">
+      <div class="speaker spk-a">A</div>
+      <div>
+        <div class="dlg-es">¿Tienes hermanos?</div>
+        <div class="dlg-fr">Tu as des frères et sœurs ?</div>
+      </div>
+    </div>
+    <div class="dialogue-line">
+      <div class="speaker spk-b">B</div>
+      <div>
+        <div class="dlg-es">Sí, tengo un hermano. Se llama Carlos. ¿Y tú?</div>
+        <div class="dlg-fr">Oui, j'ai un frère. Il s'appelle Carlos. Et toi ?</div>
+      </div>
+    </div>
+    <div class="dialogue-line">
+      <div class="speaker spk-a">A</div>
+      <div>
+        <div class="dlg-es">Yo no tengo hermanos, pero tengo dos primas.</div>
+        <div class="dlg-fr">Je n'ai pas de frères et sœurs, mais j'ai deux cousines.</div>
+      </div>
+    </div>
+    <div class="dialogue-g2">
+      <div class="dialogue-g2-label">Dialogue G2</div>
+      <div class="dialogue-line">
+        <div class="speaker spk-a">A</div>
+        <div>
+          <div class="dlg-es">¿Cómo se llama tu madre?</div>
+          <div class="dlg-fr">Comment s'appelle ta mère ?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <div class="speaker spk-b">B</div>
+        <div>
+          <div class="dlg-es">Se llama Ana. ¿Y tus abuelos? ¿Están bien?</div>
+          <div class="dlg-fr">Elle s'appelle Ana. Et tes grands-parents ? Ils vont bien ?</div>
+        </div>
+      </div>
+      <div class="dialogue-line">
+        <div class="speaker spk-a">A</div>
+        <div>
+          <div class="dlg-es">Sí, mis abuelos están muy bien, gracias.</div>
+          <div class="dlg-fr">Oui, mes grands-parents vont très bien, merci.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dialogue-sidebar">
+    <div class="sidebar-title">Conseils<br>pour les<br>dialogues</div>
+    <div class="sidebar-tip">
+      <strong>¿Y tú? = Et toi ?</strong>
+      Retourne la question naturellement — très idiomatique en espagnol parlé.
+    </div>
+    <div class="sidebar-tip">
+      <strong>pero = mais</strong>
+      "No tengo X, pero tengo Y" — structure de base pour nuancer.
+    </div>
+    <div class="sidebar-tip">
+      <strong>Se llama…</strong>
+      "Il/elle s'appelle…" — fonctionne pour toute personne qu'on présente.
+    </div>
+    <div class="sidebar-tip cultural">
+      <strong>Note culturelle</strong>
+      "¿Están bien?" est une formule de politesse courante en Espagne et en Amérique latine. L'apprendre tôt fait très naturel.
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION PATTERNS -->
+<div class="section-label">Structures interrogatives — Blocs F &amp; G</div>
+<div class="q-patterns">
+  <div class="q-card">
+    <div class="q-bg-num">1</div>
+    <div class="q-block-tag">Bloc F1 · Oui / Non</div>
+    <div class="q-es-big">¿Tienes hermanos?</div>
+    <div class="q-fr">Tu as des frères et sœurs ?</div>
+    <div class="q-answer-row">
+      <div class="q-answer-tag">Oui →</div>
+      Sí, tengo un hermano.
+    </div>
+    <div class="q-answer-row green">
+      <div class="q-answer-tag" style="color: var(--sage);">Non →</div>
+      No, no tengo hermanos.
+    </div>
+  </div>
+  <div class="q-card">
+    <div class="q-bg-num">2</div>
+    <div class="q-block-tag">Bloc F2 · Quantité</div>
+    <div class="q-es-big">¿Cuántos tíos tienes?</div>
+    <div class="q-fr">Combien d'oncles as-tu ?</div>
+    <div class="q-answer-row">
+      <div class="q-answer-tag">Réponse →</div>
+      Tengo dos tíos y una tía.
+    </div>
+    <div class="q-answer-row gold">
+      <div class="q-answer-tag" style="color: var(--ochre);">Règle →</div>
+      cuántos (m) / cuántas (f)
+    </div>
+  </div>
+  <div class="q-card">
+    <div class="q-bg-num">3</div>
+    <div class="q-block-tag">Bloc G2 · Identité</div>
+    <div class="q-es-big">¿Cómo se llama tu madre?</div>
+    <div class="q-fr">Comment s'appelle ta mère ?</div>
+    <div class="q-answer-row">
+      <div class="q-answer-tag">Réponse →</div>
+      Se llama Ana.
+    </div>
+    <div class="q-answer-row green">
+      <div class="q-answer-tag" style="color: var(--sage);">Suite naturelle →</div>
+      ¿Y tus abuelos? ¿Están bien?
+    </div>
+  </div>
+</div>
+
+<!-- CULTURAL NOTES -->
+<div class="section-label">Notes culturelles</div>
+<div class="cultural-strip">
+  <div class="cultural-flag">
+    <div class="cultural-flag-icon">🌍</div>
+    <div class="cultural-flag-label">Culture<br>&amp;<br>Usage</div>
+  </div>
+  <div class="cultural-notes">
+    <div class="cultural-note-item">
+      <div class="cultural-note-title">tío / tía au quotidien</div>
+      <div class="cultural-note-text">En Espagne, "tío/tía" s'utilise aussi pour dire "mec/nana" en argot. En Amérique latine, c'est parfois un terme affectueux pour les amis proches de la famille.</div>
+    </div>
+    <div class="cultural-note-item">
+      <div class="cultural-note-title">novio / novia — ambiguïté</div>
+      <div class="cultural-note-text">"Novio" couvre petit ami, fiancé, et parfois époux selon la région et le contexte. Ne pas sur-traduire — laissez le contexte décider.</div>
+    </div>
+    <div class="cultural-note-item">
+      <div class="cultural-note-title">papá / mamá — registre</div>
+      <div class="cultural-note-text">"Papá" et "mamá" (avec accent) sont les formes familières de "padre" et "madre". Plus formels à l'écrit, plus naturels à l'oral — les deux sont corrects.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-cell">
+    <div class="footer-cell-label">Thème</div>
+    <div class="footer-cell-value">03 — La Familia</div>
+  </div>
+  <div class="footer-cell">
+    <div class="footer-cell-label">Niveau</div>
+    <div class="footer-cell-value">MCCER A1</div>
+  </div>
+  <div class="footer-cell">
+    <div class="footer-cell-label">Objectif vocabulaire</div>
+    <div class="footer-cell-value">8+ membres de famille</div>
+  </div>
+  <div class="footer-brand">
+    <div class="footer-brand-name">Español con Diana</div>
+    <div class="footer-brand-sub">A1 Référence · FR</div>
+  </div>
+</div>
+
+</body>
+</html>

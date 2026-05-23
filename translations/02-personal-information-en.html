@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Information — Spanish → English</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Inter:wght@400;600;700&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF6EE;
+    --ink: #1F1A14;
+    --ochre: #C99A3D;
+    --terra: #C4593A;
+    --sage: #6B8E6B;
+    --night: #2A2540;
+    --muted: #7B736B;
+    --card-bg: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO HEADER ─────────────────────────────────────────── */
+  .hero {
+    background: var(--night);
+    color: var(--paper);
+    padding: 48px 80px 40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent, transparent 40px,
+      rgba(201,154,61,0.06) 40px, rgba(201,154,61,0.06) 41px
+    );
+  }
+  .hero-accent-block {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 320px;
+    background: var(--terra);
+    opacity: 0.18;
+    clip-path: polygon(60px 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .hero-left { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--ochre);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1.0;
+    margin-bottom: 12px;
+  }
+  .hero-title em { color: var(--ochre); font-style: normal; }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(250,246,238,0.65);
+    letter-spacing: 0.02em;
+  }
+  .hero-badge {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--ochre);
+    background: rgba(201,154,61,0.12);
+  }
+  .hero-badge .badge-lang {
+    font-family: 'Fraunces', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--ochre);
+  }
+  .hero-badge .badge-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; color: rgba(250,246,238,0.6);
+    letter-spacing: 0.12em;
+    margin-top: 2px;
+  }
+
+  /* ── LAYOUT ─────────────────────────────────────────────── */
+  .canvas {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 0;
+    padding: 0;
+  }
+
+  /* ── PHRASE CARD ─────────────────────────────────────────── */
+  .block {
+    padding: 36px 32px 32px;
+    border-right: 1px solid rgba(31,26,20,0.08);
+    border-bottom: 1px solid rgba(31,26,20,0.08);
+    position: relative;
+    background: var(--paper);
+    transition: background 0.15s;
+  }
+  .block:nth-child(3n) { border-right: none; }
+  .block:hover { background: #F5F0E6; }
+
+  .block-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+  }
+
+  .block-theme-name .block-accent { background: var(--ochre); }
+  .block-theme-origin .block-accent { background: var(--terra); }
+  .block-theme-age .block-accent { background: var(--sage); }
+  .block-theme-job .block-accent { background: var(--night); }
+  .block-theme-city .block-accent { background: var(--muted); }
+
+  .block-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.55;
+  }
+  .block-theme-name .block-label { color: var(--ochre); opacity: 1; }
+  .block-theme-origin .block-label { color: var(--terra); opacity: 1; }
+  .block-theme-age .block-label { color: var(--sage); opacity: 1; }
+  .block-theme-job .block-label { color: var(--night); opacity: 1; }
+  .block-theme-city .block-label { color: var(--muted); opacity: 1; }
+
+  .phrase-es {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .phrase-es .stress { color: var(--terra); }
+
+  /* Leader-line callout */
+  .callout-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(31,26,20,0.12);
+  }
+  .callout-line {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    position: relative;
+  }
+  .callout-line::after {
+    content: '';
+    position: absolute;
+    top: 10px; left: 0; right: 0;
+    height: 1.5px;
+    background: var(--ochre);
+  }
+  .callout-line::before {
+    content: '';
+    position: absolute;
+    right: 0; top: 5px;
+    width: 0; height: 0;
+    border-left: 5px solid var(--ochre);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+  .callout-text {
+    flex: 1;
+  }
+  .phrase-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--night);
+    margin-bottom: 3px;
+  }
+  .phrase-literal {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* Tip annotation */
+  .tip-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 12px;
+    background: rgba(201,154,61,0.12);
+    border-left: 3px solid var(--ochre);
+    padding: 5px 9px;
+    border-radius: 0 4px 4px 0;
+  }
+  .tip-badge.danger {
+    background: rgba(196,89,58,0.10);
+    border-left-color: var(--terra);
+  }
+  .tip-badge.sage {
+    background: rgba(107,142,107,0.12);
+    border-left-color: var(--sage);
+  }
+  .tip-text {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  /* ── WIDE BLOCK (spans 2 cols) ───────────────────────────── */
+  .block-wide {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .block-wide .block-inner {
+    padding: 36px 32px 32px;
+    border-right: 1px solid rgba(31,26,20,0.08);
+    position: relative;
+  }
+  .block-wide .block-inner:last-child { border-right: none; }
+
+  /* ── SECTION DIVIDERS ────────────────────────────────────── */
+  .section-header {
+    grid-column: 1 / -1;
+    background: var(--night);
+    color: var(--paper);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .section-header .section-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ochre);
+    border: 1px solid rgba(201,154,61,0.4);
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+  .section-header .section-desc {
+    font-size: 12px;
+    color: rgba(250,246,238,0.55);
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FULL-WIDTH DIALOGUE STRIP ───────────────────────────── */
+  .dialogue-strip {
+    grid-column: 1 / -1;
+    background: var(--night);
+    padding: 36px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  .dialogue-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,154,61,0.2);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .dialogue-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ochre);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .dialogue-line {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+  .dialogue-speaker {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ochre);
+    min-width: 18px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .dialogue-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--paper);
+    line-height: 1.5;
+  }
+  .dialogue-text em {
+    color: var(--ochre);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* ── NUMBERS BAR ─────────────────────────────────────────── */
+  .numbers-bar {
+    grid-column: 1 / -1;
+    background: var(--sage);
+    padding: 28px 80px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow: hidden;
+  }
+  .number-cell {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    border-right: 1px solid rgba(250,246,238,0.15);
+  }
+  .number-cell:last-child { border-right: none; }
+  .number-digit {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1;
+  }
+  .number-word {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(250,246,238,0.75);
+    margin-top: 4px;
+  }
+
+  /* ── FOOTER ──────────────────────────────────────────────── */
+  .footer {
+    grid-column: 1 / -1;
+    background: var(--ink);
+    color: rgba(250,246,238,0.4);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    padding: 18px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer strong { color: var(--ochre); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-accent-block"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Español con Diana · A1 · Topic 02</div>
+    <div class="hero-title">Personal<br><em>Information</em></div>
+    <div class="hero-sub">Key phrases — Spanish → English · 15 focal entries</div>
+  </div>
+  <div class="hero-badge">
+    <span class="badge-lang">EN</span>
+    <span class="badge-sub">ENGLISH</span>
+  </div>
+</div>
+
+<!-- CANVAS GRID -->
+<div class="canvas">
+
+  <!-- ── BLOCK A: NAME ────────────────────────────────────── -->
+  <div class="section-header">
+    <span class="section-code">BLOCK A</span>
+    <h2>Your Name</h2>
+    <span class="section-desc">me llamo · mi nombre es · ¿cómo te llamas?</span>
+  </div>
+
+  <div class="block block-theme-name">
+    <div class="block-accent"></div>
+    <span class="block-icon">🪪</span>
+    <div class="block-label">Name — Casual</div>
+    <div class="phrase-es">Me <span class="stress">lla</span>mo…</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">My name is… / I'm called…</div>
+        <div class="phrase-literal">Lit. "I call myself…"</div>
+      </div>
+    </div>
+    <div class="tip-badge">
+      <span class="tip-text">Double-L sounds like Y in Latin America ("yamo")</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-name">
+    <div class="block-accent"></div>
+    <span class="block-icon">📋</span>
+    <div class="block-label">Name — Formal</div>
+    <div class="phrase-es">Mi nombre es…</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">My name is… (more formal)</div>
+        <div class="phrase-literal">Lit. "My name is…"</div>
+      </div>
+    </div>
+    <div class="tip-badge sage">
+      <span class="tip-text">Use in offices, forms, official introductions</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-name">
+    <div class="block-accent"></div>
+    <span class="block-icon">❓</span>
+    <div class="block-label">Name — Question</div>
+    <div class="phrase-es">¿Cómo te <span class="stress">lla</span>mas?</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">What's your name?</div>
+        <div class="phrase-literal">Lit. "How do you call yourself?"</div>
+      </div>
+    </div>
+    <div class="tip-badge sage">
+      <span class="tip-text">Formal: ¿Cómo se llama usted?</span>
+    </div>
+  </div>
+
+  <!-- ── BLOCK C+D: ORIGIN & AGE ──────────────────────────── -->
+  <div class="section-header">
+    <span class="section-code">BLOCKS C · D</span>
+    <h2>Origin &amp; Age</h2>
+    <span class="section-desc">soy de · ¿de dónde eres? · tengo X años</span>
+  </div>
+
+  <div class="block block-theme-origin">
+    <div class="block-accent"></div>
+    <span class="block-icon">🌍</span>
+    <div class="block-label">Origin</div>
+    <div class="phrase-es">Soy de…</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">I am from…</div>
+        <div class="phrase-literal">Lit. "I am of…"</div>
+      </div>
+    </div>
+    <div class="tip-badge">
+      <span class="tip-text">soy de México · soy de España · soy de Canadá</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-origin">
+    <div class="block-accent"></div>
+    <span class="block-icon">🗺️</span>
+    <div class="block-label">Origin — Question</div>
+    <div class="phrase-es">¿De <span class="stress">dón</span>de eres?</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">Where are you from?</div>
+        <div class="phrase-literal">Lit. "From where are you?"</div>
+      </div>
+    </div>
+    <div class="tip-badge danger">
+      <span class="tip-text">Stress: de DÓNDE — accent marks show where to land</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-age">
+    <div class="block-accent"></div>
+    <span class="block-icon">🎂</span>
+    <div class="block-label">Age — The Key Rule</div>
+    <div class="phrase-es">Tengo X años</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">I am X years old</div>
+        <div class="phrase-literal">Lit. "I have X years"</div>
+      </div>
+    </div>
+    <div class="tip-badge danger">
+      <span class="tip-text">⚠ NEVER "Soy 30 años" — Spanish uses TENER not SER for age</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-age">
+    <div class="block-accent"></div>
+    <span class="block-icon">🔢</span>
+    <div class="block-label">Age — Question</div>
+    <div class="phrase-es">¿<span class="stress">Cuán</span>tos años tienes?</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">How old are you?</div>
+        <div class="phrase-literal">Lit. "How many years do you have?"</div>
+      </div>
+    </div>
+    <div class="tip-badge">
+      <span class="tip-text">Stress first syllable: CUÁN-tos</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-origin">
+    <div class="block-accent"></div>
+    <span class="block-icon">🏷️</span>
+    <div class="block-label">Nationality</div>
+    <div class="phrase-es">Soy mexicano / mexicana</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">I am Mexican (male / female)</div>
+        <div class="phrase-literal">-o = male · -a = female</div>
+      </div>
+    </div>
+    <div class="tip-badge sage">
+      <span class="tip-text">canadiense = same form for both genders</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-origin">
+    <div class="block-accent"></div>
+    <span class="block-icon">🇫🇷</span>
+    <div class="block-label">Nationality — Gender pair</div>
+    <div class="phrase-es">francés / francesa</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">French (male / female)</div>
+        <div class="phrase-literal">Adjective agrees with speaker's gender</div>
+      </div>
+    </div>
+    <div class="tip-badge">
+      <span class="tip-text">español/española · argentino/argentina</span>
+    </div>
+  </div>
+
+  <!-- ── BLOCK E+F: JOB & CITY ──────────────────────────── -->
+  <div class="section-header">
+    <span class="section-code">BLOCKS E · F</span>
+    <h2>Profession &amp; Where You Live</h2>
+    <span class="section-desc">soy + profesión · vivo en · ¿dónde vives?</span>
+  </div>
+
+  <div class="block block-theme-job">
+    <div class="block-accent"></div>
+    <span class="block-icon">💼</span>
+    <div class="block-label">Profession — The No-Article Rule</div>
+    <div class="phrase-es">Soy estudiante</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">I am a student</div>
+        <div class="phrase-literal">No "un/una" before the job</div>
+      </div>
+    </div>
+    <div class="tip-badge danger">
+      <span class="tip-text">⚠ NOT "Soy una estudiante" — drop the article</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-job">
+    <div class="block-accent"></div>
+    <span class="block-icon">🏥</span>
+    <div class="block-label">Profession — Gendered pair</div>
+    <div class="phrase-es">médico / médica</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">doctor (male / female)</div>
+        <div class="phrase-literal">maestro/maestra · enfermero/enfermera</div>
+      </div>
+    </div>
+    <div class="tip-badge sage">
+      <span class="tip-text">artista / cantante = same for both genders</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-job">
+    <div class="block-accent"></div>
+    <span class="block-icon">🤔</span>
+    <div class="block-label">Profession — Question (2 forms)</div>
+    <div class="phrase-es">¿A qué te dedicas?</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">What do you do (for work)?</div>
+        <div class="phrase-literal">Also: ¿Qué haces? (informal)</div>
+      </div>
+    </div>
+    <div class="tip-badge">
+      <span class="tip-text">Both are correct — learn both, you'll hear both</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-city">
+    <div class="block-accent"></div>
+    <span class="block-icon">🏙️</span>
+    <div class="block-label">Residence</div>
+    <div class="phrase-es">Vivo en…</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">I live in…</div>
+        <div class="phrase-literal">vivo en Madrid · vivo en Toronto</div>
+      </div>
+    </div>
+    <div class="tip-badge sage">
+      <span class="tip-text">Exception: "en los Estados Unidos" (with article)</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-city">
+    <div class="block-accent"></div>
+    <span class="block-icon">📍</span>
+    <div class="block-label">Residence — Question</div>
+    <div class="phrase-es">¿Dónde vives?</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">Where do you live?</div>
+        <div class="phrase-literal">≠ ¿De dónde eres? (origin ≠ residence)</div>
+      </div>
+    </div>
+    <div class="tip-badge danger">
+      <span class="tip-text">⚠ dónde vives (live now) vs de dónde eres (born/from)</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-city">
+    <div class="block-accent"></div>
+    <span class="block-icon">🔄</span>
+    <div class="block-label">Conversation Extender</div>
+    <div class="phrase-es">¿Y tú?</div>
+    <div class="callout-row">
+      <div class="callout-line"></div>
+      <div class="callout-text">
+        <div class="phrase-en">And you? / What about you?</div>
+        <div class="phrase-literal">Keeps the conversation moving</div>
+      </div>
+    </div>
+    <div class="tip-badge">
+      <span class="tip-text">Add after EVERY answer to sound natural instantly</span>
+    </div>
+  </div>
+
+  <!-- ── NUMBERS BAR ──────────────────────────────────────── -->
+  <div class="section-header">
+    <span class="section-code">BLOCK G</span>
+    <h2>Numbers (0–10)</h2>
+    <span class="section-desc">for phone numbers, age, and contact details</span>
+  </div>
+
+  <div class="numbers-bar">
+    <div class="number-cell"><div class="number-digit">0</div><div class="number-word">cero</div></div>
+    <div class="number-cell"><div class="number-digit">1</div><div class="number-word">uno</div></div>
+    <div class="number-cell"><div class="number-digit">2</div><div class="number-word">dos</div></div>
+    <div class="number-cell"><div class="number-digit">3</div><div class="number-word">tres</div></div>
+    <div class="number-cell"><div class="number-digit">4</div><div class="number-word">cuatro</div></div>
+    <div class="number-cell"><div class="number-digit">5</div><div class="number-word">cinco</div></div>
+    <div class="number-cell"><div class="number-digit">6</div><div class="number-word">seis</div></div>
+    <div class="number-cell"><div class="number-digit">7</div><div class="number-word">siete</div></div>
+    <div class="number-cell"><div class="number-digit">8</div><div class="number-word">ocho</div></div>
+    <div class="number-cell"><div class="number-digit">9</div><div class="number-word">nueve</div></div>
+    <div class="number-cell"><div class="number-digit">10</div><div class="number-word">diez</div></div>
+    <div class="number-cell"><div class="number-digit">20</div><div class="number-word">veinte</div></div>
+    <div class="number-cell"><div class="number-digit">30</div><div class="number-word">treinta</div></div>
+    <div class="number-cell"><div class="number-digit">100</div><div class="number-word">cien</div></div>
+  </div>
+
+  <!-- ── DIALOGUE STRIP ──────────────────────────────────── -->
+  <div class="section-header">
+    <span class="section-code">BLOCK I</span>
+    <h2>In Context — Real Dialogues</h2>
+    <span class="section-desc">phrases in action</span>
+  </div>
+
+  <div class="dialogue-strip">
+    <div class="dialogue-card">
+      <div class="dialogue-title">Registration Desk</div>
+      <div class="dialogue-line"><span class="dialogue-speaker">A:</span><span class="dialogue-text">Buenos días. ¿Cómo <em>se llama</em> usted?</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">B:</span><span class="dialogue-text">Me <em>llamo</em> Carlos Ruiz.</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">A:</span><span class="dialogue-text">¿De dónde es?</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">B:</span><span class="dialogue-text"><em>Soy de</em> Colombia. <em>Vivo en</em> Bogotá.</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">A:</span><span class="dialogue-text">¿Cuántos años tiene?</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">B:</span><span class="dialogue-text"><em>Tengo</em> 34 <em>años</em>.</span></div>
+    </div>
+    <div class="dialogue-card">
+      <div class="dialogue-title">First Day at Language Class</div>
+      <div class="dialogue-line"><span class="dialogue-speaker">A:</span><span class="dialogue-text">Hola, ¿cómo te llamas?</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">B:</span><span class="dialogue-text">Me llamo Yuki. <em>¿Y tú?</em></span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">A:</span><span class="dialogue-text">Ana. ¿De dónde eres?</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">B:</span><span class="dialogue-text">Soy de Japón. ¿Y tú?</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">A:</span><span class="dialogue-text">Soy española. ¿A qué te dedicas?</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">B:</span><span class="dialogue-text"><em>Soy estudiante</em>. Estudio español.</span></div>
+    </div>
+    <div class="dialogue-card">
+      <div class="dialogue-title">Contact Info — Phone Call</div>
+      <div class="dialogue-line"><span class="dialogue-speaker">A:</span><span class="dialogue-text">¿Cuál es tu <em>número de teléfono</em>?</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">B:</span><span class="dialogue-text">Es el 55 20 31 47.</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">A:</span><span class="dialogue-text">¿Y tu <em>correo electrónico</em>?</span></div>
+      <div class="dialogue-line"><span class="dialogue-speaker">B:</span><span class="dialogue-text">Es yuki.tanaka <em>arroba</em> gmail <em>punto</em> com.</span></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>Español con Diana · <strong>A1 · Topic 02</strong> · Personal Information</span>
+    <span>Spanish → <strong>English</strong> · translation-en.html</span>
+  </div>
+
+</div><!-- /canvas -->
+</body>
+</html>

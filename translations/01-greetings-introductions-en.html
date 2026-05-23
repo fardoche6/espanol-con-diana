@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=1280"/>
+<title>Español con Diana — Greetings & Introductions · EN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --paper:  #FAF6EE;
+    --ink:    #1F1A14;
+    --ochre:  #C99A3D;
+    --terra:  #C4593A;
+    --sage:   #6B8E6B;
+    --night:  #2A2540;
+    --muted:  #7B736B;
+  }
+  html, body { background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; min-height: 100vh; }
+
+  /* ── HERO HEADER ── */
+  .hero {
+    background: var(--night);
+    color: var(--paper);
+    padding: 48px 72px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 80% 50%, rgba(201,154,61,.18) 0%, transparent 70%),
+      radial-gradient(ellipse 300px 300px at 10% 80%, rgba(196,89,58,.14) 0%, transparent 60%);
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+  .hero-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ochre); margin-bottom: 10px; }
+  .hero-title { font-family: 'Fraunces', serif; font-size: 56px; font-weight: 900; line-height: 1.05; }
+  .hero-title span { color: var(--ochre); }
+  .hero-sub { font-family: 'Inter', sans-serif; font-size: 15px; color: rgba(250,246,238,.65); margin-top: 12px; max-width: 480px; }
+  .hero-badge {
+    flex-shrink: 0;
+    background: var(--terra);
+    border-radius: 50%;
+    width: 110px; height: 110px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    font-family: 'Fraunces', serif;
+  }
+  .hero-badge .big { font-size: 36px; font-weight: 900; line-height: 1; }
+  .hero-badge .sm { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: rgba(250,246,238,.8); margin-top: 3px; }
+
+  /* ── LAYOUT ── */
+  .canvas {
+    max-width: 1280px; margin: 0 auto;
+    padding: 56px 56px 72px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px;
+  }
+
+  /* ── PHRASE CARD ── */
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    border: 1.5px solid rgba(31,26,20,.08);
+    padding: 0;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    box-shadow: 0 2px 12px rgba(31,26,20,.06);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(31,26,20,.12); }
+
+  .card-top {
+    padding: 22px 24px 16px;
+    position: relative;
+  }
+  .card-category {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .card-es {
+    font-family: 'Fraunces', serif;
+    font-size: 26px; font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .card-icon {
+    position: absolute; top: 18px; right: 20px;
+    font-size: 28px;
+    opacity: .75;
+  }
+
+  .card-divider { height: 3px; margin: 0 24px; border-radius: 2px; }
+
+  .card-body { padding: 14px 24px 20px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+
+  .translation-row { display: flex; align-items: flex-start; gap: 10px; }
+  .flag {
+    font-size: 16px; line-height: 1.4; flex-shrink: 0; margin-top: 1px;
+  }
+  .translation-en {
+    font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 600; color: var(--ink);
+  }
+  .translation-literal {
+    font-family: 'Caveat', cursive; font-size: 14px; color: var(--muted);
+    margin-left: 26px;
+  }
+
+  /* leader-line annotation strip */
+  .annotation-strip {
+    margin: 6px 0 0;
+    background: rgba(201,154,61,.08);
+    border-left: 3px solid var(--ochre);
+    border-radius: 0 6px 6px 0;
+    padding: 7px 10px 7px 12px;
+    font-family: 'Caveat', cursive;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .annotation-strip.tip { background: rgba(107,142,107,.1); border-left-color: var(--sage); }
+  .annotation-strip.warn { background: rgba(196,89,58,.09); border-left-color: var(--terra); }
+
+  /* accent breakdown */
+  .stress-row {
+    display: flex; gap: 4px; align-items: baseline; flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .syllable {
+    font-family: 'DM Mono', monospace; font-size: 13px;
+    padding: 2px 6px; border-radius: 4px;
+    background: var(--paper);
+    color: var(--muted);
+  }
+  .syllable.stress {
+    background: var(--ochre); color: #fff; font-weight: 500;
+  }
+
+  /* ── WIDE CARD (col-span-2) ── */
+  .card.wide { grid-column: span 2; }
+  .card.wide .card-top { display: flex; align-items: flex-start; gap: 20px; }
+  .card.wide .card-es-group { flex: 1; }
+  .card.wide .card-es { font-size: 28px; }
+  .card.wide .dialogue-col {
+    flex: 1;
+    display: flex; flex-direction: column; gap: 6px;
+    margin-top: 4px;
+  }
+  .dialogue-line {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Inter', sans-serif; font-size: 13.5px;
+  }
+  .dialogue-speaker {
+    font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted);
+    letter-spacing: .12em; flex-shrink: 0; min-width: 14px;
+  }
+  .dialogue-es { color: var(--ink); font-weight: 500; }
+  .dialogue-en { color: var(--muted); font-style: italic; }
+
+  /* ── SECTION HEADER ── */
+  .section-head {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: 16px;
+    margin-top: 16px;
+  }
+  .section-head-line { flex: 1; height: 1px; background: rgba(31,26,20,.12); }
+  .section-head-label {
+    font-family: 'Fraunces', serif; font-size: 13px; font-weight: 700;
+    color: var(--muted); letter-spacing: .06em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ── TRAP BOX ── */
+  .trap-box {
+    grid-column: 1 / -1;
+    background: var(--night);
+    color: var(--paper);
+    border-radius: 16px;
+    padding: 28px 36px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .trap-item { }
+  .trap-wrong {
+    font-family: 'DM Mono', monospace; font-size: 14px;
+    color: var(--terra); text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+  .trap-right {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700;
+    color: var(--ochre);
+    margin-bottom: 4px;
+  }
+  .trap-note {
+    font-family: 'Inter', sans-serif; font-size: 12px;
+    color: rgba(250,246,238,.65);
+    line-height: 1.45;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 24px 0 40px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: var(--muted); letter-spacing: .12em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-label">Español con Diana · Topic 01 · A1</div>
+      <h1 class="hero-title">Greetings &amp;<br/><span>Introductions</span></h1>
+      <p class="hero-sub">Key Spanish phrases with English translations, pronunciation breakdowns, and learner tips.</p>
+    </div>
+    <div class="hero-badge">
+      <div class="big">EN</div>
+      <div class="sm">Translation</div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════ CANVAS ═══════════════════════ -->
+<main class="canvas">
+
+  <!-- ── GREETINGS ── -->
+  <div class="section-head">
+    <div class="section-head-line"></div>
+    <div class="section-head-label">Time-of-day Greetings</div>
+    <div class="section-head-line"></div>
+  </div>
+
+  <!-- Hola -->
+  <div class="card">
+    <div class="card-top" style="background: linear-gradient(135deg,#2A2540 0%,#3d3660 100%);">
+      <div class="card-category" style="color:rgba(201,154,61,.8);">informal · any time</div>
+      <div class="card-es" style="color:#FAF6EE;">Hola</div>
+      <div class="card-icon">👋</div>
+    </div>
+    <div class="card-divider" style="background:var(--ochre);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">Hello / Hi</span></div>
+      <div class="translation-literal">Literally: "Hello" (universal)</div>
+      <div class="stress-row">
+        <span class="syllable stress">HO</span><span class="syllable">la</span>
+      </div>
+      <div class="annotation-strip warn">⚠ Don't rely on Hola alone — natives expect varied greetings.</div>
+    </div>
+  </div>
+
+  <!-- Buenos días -->
+  <div class="card">
+    <div class="card-top" style="background: linear-gradient(135deg,#C99A3D 0%,#e6b84d 100%);">
+      <div class="card-category" style="color:rgba(31,26,20,.6);">morning · until ~noon</div>
+      <div class="card-es" style="color:#1F1A14;">Buenos días</div>
+      <div class="card-icon">☀️</div>
+    </div>
+    <div class="card-divider" style="background:var(--night);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">Good morning</span></div>
+      <div class="translation-literal">Literally: "Good days"</div>
+      <div class="stress-row">
+        <span class="syllable">Bue</span><span class="syllable">nos</span>
+        <span class="syllable stress">dí</span><span class="syllable">as</span>
+      </div>
+      <div class="annotation-strip">✦ 2 syllables: <b>dee-as</b>, never "dee-ya"</div>
+    </div>
+  </div>
+
+  <!-- Buenas tardes -->
+  <div class="card">
+    <div class="card-top" style="background: linear-gradient(135deg,#C4593A 0%,#d97050 100%);">
+      <div class="card-category" style="color:rgba(250,246,238,.75);">afternoon · noon → ~8pm</div>
+      <div class="card-es" style="color:#FAF6EE;">Buenas tardes</div>
+      <div class="card-icon">🌤</div>
+    </div>
+    <div class="card-divider" style="background:var(--night);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">Good afternoon</span></div>
+      <div class="translation-literal">Literally: "Good afternoons"</div>
+      <div class="stress-row">
+        <span class="syllable">Bue</span><span class="syllable">nas</span>
+        <span class="syllable stress">tar</span><span class="syllable">des</span>
+      </div>
+      <div class="annotation-strip tip">✦ Cognate: "tardy" (late in the day). Same Latin root.</div>
+    </div>
+  </div>
+
+  <!-- Buenas noches -->
+  <div class="card">
+    <div class="card-top" style="background: linear-gradient(135deg,#1F1A14 0%,#2e2720 100%);">
+      <div class="card-category" style="color:rgba(201,154,61,.75);">evening / night · after ~8pm</div>
+      <div class="card-es" style="color:#FAF6EE;">Buenas noches</div>
+      <div class="card-icon">🌙</div>
+    </div>
+    <div class="card-divider" style="background:var(--ochre);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">Good evening / Good night</span></div>
+      <div class="translation-literal">Literally: "Good nights"</div>
+      <div class="stress-row">
+        <span class="syllable">Bue</span><span class="syllable">nas</span>
+        <span class="syllable stress">no</span><span class="syllable">ches</span>
+      </div>
+      <div class="annotation-strip">✦ Nocturnal → noches. Same Latin root.</div>
+    </div>
+  </div>
+
+  <!-- ── FAREWELLS ── -->
+  <div class="section-head">
+    <div class="section-head-line"></div>
+    <div class="section-head-label">Farewells</div>
+    <div class="section-head-line"></div>
+  </div>
+
+  <!-- Adiós -->
+  <div class="card">
+    <div class="card-top" style="background: var(--sage);">
+      <div class="card-category" style="color:rgba(250,246,238,.75);">final goodbye</div>
+      <div class="card-es" style="color:#FAF6EE;">Adiós</div>
+      <div class="card-icon">✋</div>
+    </div>
+    <div class="card-divider" style="background:var(--night);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">Goodbye</span></div>
+      <div class="translation-literal">Literally: "To God" (archaic)</div>
+      <div class="stress-row">
+        <span class="syllable">A</span><span class="syllable stress">diós</span>
+      </div>
+      <div class="annotation-strip warn">⚠ Final parting only — don't use when you'll see them again soon.</div>
+    </div>
+  </div>
+
+  <!-- Hasta luego -->
+  <div class="card">
+    <div class="card-top" style="background: #6B8E6B;">
+      <div class="card-category" style="color:rgba(250,246,238,.75);">casual · see you later</div>
+      <div class="card-es" style="color:#FAF6EE;">Hasta luego</div>
+      <div class="card-icon">🙌</div>
+    </div>
+    <div class="card-divider" style="background:var(--night);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">See you later / Bye</span></div>
+      <div class="translation-literal">Literally: "Until later"</div>
+      <div class="stress-row">
+        <span class="syllable stress">Has</span><span class="syllable">ta</span>
+        <span class="syllable stress">lue</span><span class="syllable">go</span>
+      </div>
+      <div class="annotation-strip">✦ Hasta = "until" — the anchor word for all see-you-X goodbyes.</div>
+    </div>
+  </div>
+
+  <!-- Hasta mañana -->
+  <div class="card">
+    <div class="card-top">
+      <div class="card-category">farewell · for today</div>
+      <div class="card-es">Hasta mañana</div>
+      <div class="card-icon">📅</div>
+    </div>
+    <div class="card-divider" style="background:var(--sage);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">See you tomorrow</span></div>
+      <div class="translation-literal">Literally: "Until tomorrow"</div>
+      <div class="stress-row">
+        <span class="syllable">ma</span><span class="syllable stress">ña</span><span class="syllable">na</span>
+      </div>
+      <div class="annotation-strip warn">⚠ ñ ≠ n — say "mah-NYA-na", not "man-yana"</div>
+    </div>
+  </div>
+
+  <!-- Nos vemos + Hasta pronto side-by-side via wide card -->
+  <div class="card wide">
+    <div class="card-top" style="flex-direction:column; background: var(--paper);">
+      <div style="display:flex; gap:40px; width:100%; flex-wrap:wrap;">
+        <div style="flex:1; min-width:160px;">
+          <div class="card-category">informal · casual</div>
+          <div class="card-es">Nos vemos</div>
+          <div class="translation-row" style="margin-top:8px;"><span class="flag">🇺🇸</span><span class="translation-en">See you around</span></div>
+          <div class="translation-literal">Literally: "We see each other"</div>
+          <div class="annotation-strip tip" style="margin-top:8px;">✦ Very colloquial — only with friends.</div>
+        </div>
+        <div style="width:1px; background:rgba(31,26,20,.1); align-self:stretch; margin:4px 0;"></div>
+        <div style="flex:1; min-width:160px;">
+          <div class="card-category">warm farewell</div>
+          <div class="card-es">Hasta pronto</div>
+          <div class="translation-row" style="margin-top:8px;"><span class="flag">🇺🇸</span><span class="translation-en">See you soon</span></div>
+          <div class="translation-literal">Literally: "Until soon"</div>
+          <div class="annotation-strip tip" style="margin-top:8px;">✦ Pronto = soon (cognate with Italian "pronto").</div>
+        </div>
+        <div style="width:1px; background:rgba(31,26,20,.1); align-self:stretch; margin:4px 0;"></div>
+        <div style="flex:1; min-width:160px;">
+          <div class="card-category">warm · people you know</div>
+          <div class="card-es">Que te vaya bien</div>
+          <div class="translation-row" style="margin-top:8px;"><span class="flag">🇺🇸</span><span class="translation-en">Take care / All the best</span></div>
+          <div class="translation-literal">Literally: "May it go well for you"</div>
+          <div class="annotation-strip warn" style="margin-top:8px;">⚠ Don't use with strangers — too intimate.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── INTRODUCTIONS ── -->
+  <div class="section-head">
+    <div class="section-head-line"></div>
+    <div class="section-head-label">Name · Origin · Age · Profession</div>
+    <div class="section-head-line"></div>
+  </div>
+
+  <!-- Me llamo -->
+  <div class="card">
+    <div class="card-top" style="background: linear-gradient(135deg,#2A2540 0%,#4a3a70 100%);">
+      <div class="card-category" style="color:rgba(201,154,61,.8);">name · informal</div>
+      <div class="card-es" style="color:#FAF6EE;">Me llamo [Nombre]</div>
+      <div class="card-icon">🪪</div>
+    </div>
+    <div class="card-divider" style="background:var(--ochre);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">My name is [Name]</span></div>
+      <div class="translation-literal">Literally: "I call myself [Name]"</div>
+      <div class="stress-row">
+        <span class="syllable">Me</span>
+        <span class="syllable stress">lla</span><span class="syllable">mo</span>
+      </div>
+      <div class="annotation-strip warn">⚠ ll = Y sound: "me YA-mo", not "me LA-mo"</div>
+    </div>
+  </div>
+
+  <!-- ¿Cómo te llamas? -->
+  <div class="card">
+    <div class="card-top">
+      <div class="card-category">question · asking name</div>
+      <div class="card-es">¿Cómo te llamas?</div>
+      <div class="card-icon">❓</div>
+    </div>
+    <div class="card-divider" style="background:var(--ochre);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">What's your name?</span></div>
+      <div class="translation-literal">Literally: "How do you call yourself?"</div>
+      <div class="stress-row">
+        <span class="syllable stress">Có</span><span class="syllable">mo</span>
+        <span class="syllable">te</span>
+        <span class="syllable stress">lla</span><span class="syllable">mas</span>
+      </div>
+      <div class="annotation-strip">✦ Accent on Có- marks the stress AND the question.</div>
+    </div>
+  </div>
+
+  <!-- Soy de -->
+  <div class="card">
+    <div class="card-top" style="background: var(--terra);">
+      <div class="card-category" style="color:rgba(250,246,238,.75);">origin</div>
+      <div class="card-es" style="color:#FAF6EE;">Soy de [Lugar]</div>
+      <div class="card-icon">📍</div>
+    </div>
+    <div class="card-divider" style="background:var(--night);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">I'm from [Place]</span></div>
+      <div class="translation-literal">Literally: "I am from [Place]"</div>
+      <div class="annotation-strip tip">✦ Permanent fact → uses <b>ser</b> (soy), not estar.</div>
+      <div class="annotation-strip warn">⚠ ¿De dónde eres? = Where are you from?</div>
+    </div>
+  </div>
+
+  <!-- Tengo X años -->
+  <div class="card">
+    <div class="card-top" style="background: var(--ochre);">
+      <div class="card-category" style="color:rgba(31,26,20,.65);">age · the big trap</div>
+      <div class="card-es" style="color:#1F1A14;">Tengo [X] años</div>
+      <div class="card-icon">🎂</div>
+    </div>
+    <div class="card-divider" style="background:var(--night);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">I am [X] years old</span></div>
+      <div class="translation-literal">Literally: "I have [X] years"</div>
+      <div class="stress-row">
+        <span class="syllable stress">Ten</span><span class="syllable">go</span>
+        <span class="syllable stress">a</span><span class="syllable">ños</span>
+      </div>
+      <div class="annotation-strip warn">⚠ NEVER "Soy 30 años" — age uses <b>tener</b>, not ser!</div>
+    </div>
+  </div>
+
+  <!-- Soy [profesión] -->
+  <div class="card">
+    <div class="card-top">
+      <div class="card-category">profession</div>
+      <div class="card-es">Soy [profesión]</div>
+      <div class="card-icon">💼</div>
+    </div>
+    <div class="card-divider" style="background:var(--sage);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">I am a [profession]</span></div>
+      <div class="translation-literal">Literally: "I am [profession]" — no article!</div>
+      <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;background:var(--paper);padding:3px 8px;border-radius:20px;color:var(--ink);">estudiante</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;background:var(--paper);padding:3px 8px;border-radius:20px;color:var(--ink);">médico/a</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;background:var(--paper);padding:3px 8px;border-radius:20px;color:var(--ink);">profesor/a</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;background:var(--paper);padding:3px 8px;border-radius:20px;color:var(--ink);">ingeniero/a</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;background:var(--paper);padding:3px 8px;border-radius:20px;color:var(--ink);">artista</span>
+      </div>
+      <div class="annotation-strip warn" style="margin-top:6px;">⚠ No "un/una" before profession: Soy médico ✓, not Soy un médico ✗</div>
+    </div>
+  </div>
+
+  <!-- ── SOCIAL PHRASES ── -->
+  <div class="section-head">
+    <div class="section-head-line"></div>
+    <div class="section-head-label">Social Glue — Politeness &amp; Pleased-to-Meet</div>
+    <div class="section-head-line"></div>
+  </div>
+
+  <!-- Mucho gusto -->
+  <div class="card">
+    <div class="card-top" style="background:linear-gradient(135deg,#C99A3D,#d4ab50);">
+      <div class="card-category" style="color:rgba(31,26,20,.65);">first meeting</div>
+      <div class="card-es" style="color:#1F1A14;">Mucho gusto</div>
+      <div class="card-icon">🤝</div>
+    </div>
+    <div class="card-divider" style="background:var(--night);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">Pleased to meet you</span></div>
+      <div class="translation-literal">Literally: "Much pleasure"</div>
+      <div class="annotation-strip tip">✦ Cognate: gusto → "gusto" in English. Easy!</div>
+    </div>
+  </div>
+
+  <!-- Igualmente / Encantado -->
+  <div class="card wide">
+    <div class="card-top" style="flex-direction:column;">
+      <div style="display:flex; gap:40px; width:100%; flex-wrap:wrap;">
+        <div style="flex:1; min-width:160px;">
+          <div class="card-category">reply to mucho gusto</div>
+          <div class="card-es">Igualmente</div>
+          <div class="translation-row" style="margin-top:8px;"><span class="flag">🇺🇸</span><span class="translation-en">Likewise / Same to you</span></div>
+          <div class="translation-literal">Literally: "Equally"</div>
+          <div class="annotation-strip" style="margin-top:8px;">✦ One word. Saves you repeating mucho gusto.</div>
+        </div>
+        <div style="width:1px; background:rgba(31,26,20,.1); align-self:stretch; margin:4px 0;"></div>
+        <div style="flex:1; min-width:200px;">
+          <div class="card-category">delighted to meet you</div>
+          <div class="card-es">Encantado / Encantada</div>
+          <div class="translation-row" style="margin-top:8px;"><span class="flag">🇺🇸</span><span class="translation-en">Delighted to meet you</span></div>
+          <div class="translation-literal">Literally: "Enchanted" — cognate!</div>
+          <div class="annotation-strip warn" style="margin-top:8px;">⚠ Ending = SPEAKER's gender: male → -o, female → -a</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Por favor / Gracias / De nada -->
+  <div class="card">
+    <div class="card-top">
+      <div class="card-category">please</div>
+      <div class="card-es">Por favor</div>
+      <div class="card-icon">🙏</div>
+    </div>
+    <div class="card-divider" style="background:var(--sage);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">Please</span></div>
+      <div class="translation-literal">Literally: "For a favour"</div>
+      <div class="annotation-strip">✦ Goes at the END: Un café, por favor.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top" style="background:var(--sage);">
+      <div class="card-category" style="color:rgba(250,246,238,.75);">thank you · reply</div>
+      <div class="card-es" style="color:#FAF6EE;">Gracias / De nada</div>
+      <div class="card-icon">💚</div>
+    </div>
+    <div class="card-divider" style="background:var(--night);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">Thank you / You're welcome</span></div>
+      <div class="translation-literal">De nada = "Of nothing"</div>
+      <div class="annotation-strip tip">✦ De nada ≈ French "de rien". Same pattern.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-category">sorry · excuse me</div>
+      <div class="card-es">Perdón</div>
+      <div class="card-icon">🙇</div>
+    </div>
+    <div class="card-divider" style="background:var(--terra);"></div>
+    <div class="card-body">
+      <div class="translation-row"><span class="flag">🇺🇸</span><span class="translation-en">Sorry / Excuse me</span></div>
+      <div class="translation-literal">Literally: "Pardon" — cognate!</div>
+      <div class="annotation-strip">✦ Two uses: apology + getting attention. <br/>Disculpe = slightly more formal for attention.</div>
+    </div>
+  </div>
+
+  <!-- ── COMMON TRAPS ── -->
+  <div class="section-head">
+    <div class="section-head-line"></div>
+    <div class="section-head-label">Common Traps — Don't Say These</div>
+    <div class="section-head-line"></div>
+  </div>
+
+  <div class="trap-box">
+    <div class="trap-item">
+      <div class="trap-wrong">Soy 30 años</div>
+      <div class="trap-right">Tengo 30 años</div>
+      <div class="trap-note">Age uses <b>tener</b> (to have), not <b>ser</b> (to be). You "have" years in Spanish.</div>
+    </div>
+    <div class="trap-item">
+      <div class="trap-wrong">Soy bien</div>
+      <div class="trap-right">Estoy bien</div>
+      <div class="trap-note">States use <b>estar</b>. Being well is temporary — use estoy, not soy.</div>
+    </div>
+    <div class="trap-item">
+      <div class="trap-wrong">Soy un médico</div>
+      <div class="trap-right">Soy médico</div>
+      <div class="trap-note">No article before profession after <b>ser</b> in Spanish.</div>
+    </div>
+    <div class="trap-item">
+      <div class="trap-wrong">di-as (flat)</div>
+      <div class="trap-right">dí·as (2 syllables)</div>
+      <div class="trap-note">The written accent on <b>días</b> marks the break — say dee·as, not dee-ya.</div>
+    </div>
+    <div class="trap-item">
+      <div class="trap-wrong">me LA-mo</div>
+      <div class="trap-right">me YA-mo</div>
+      <div class="trap-note"><b>ll</b> sounds like the English Y in "yes" — never like the letter L.</div>
+    </div>
+    <div class="trap-item">
+      <div class="trap-wrong">man-yana</div>
+      <div class="trap-right">mah-NYA-na</div>
+      <div class="trap-note">The ñ is a distinct letter. It adds the "ny" sound — like "canyon".</div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">Español con Diana · A1 · Topic 01 — Greetings &amp; Introductions · EN Translation Sheet</footer>
+</body>
+</html>

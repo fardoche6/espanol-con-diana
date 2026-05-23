@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Shopping in Spanish — English Infographic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:      #FAF6EE;
+    --ink:        #1F1A14;
+    --ochre:      #C99A3D;
+    --terra:      #C4593A;
+    --sage:       #6B8E6B;
+    --night:      #2A2540;
+    --muted:      #7B736B;
+    --paper-dark: #EDE8DC;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────────── */
+  .header {
+    background: var(--night);
+    padding: 48px 80px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    background: var(--ochre);
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 200px;
+    width: 180px; height: 180px;
+    background: var(--terra);
+    border-radius: 50%;
+    opacity: 0.12;
+  }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 12px;
+  }
+  .header-title {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1.0;
+    margin-bottom: 8px;
+  }
+  .header-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--ochre);
+    margin-bottom: 20px;
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--terra);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+  }
+
+  /* ─── SHOP WINDOW SCENE ──────────────────────────────── */
+  .scene-wrapper {
+    background: var(--paper-dark);
+    padding: 60px 80px;
+    position: relative;
+    border-bottom: 4px solid var(--ochre);
+  }
+  .scene-title {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+
+  /* Shop window SVG */
+  .shop-window {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* ─── PHRASES GRID ───────────────────────────────────── */
+  .phrases-section {
+    padding: 60px 80px;
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--paper-dark);
+  }
+
+  .phrases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .phrase-card {
+    background: #fff;
+    border-radius: 4px;
+    border: 1.5px solid var(--paper-dark);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phrase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--ochre);
+  }
+  .phrase-card.terra::before  { background: var(--terra); }
+  .phrase-card.sage::before   { background: var(--sage); }
+  .phrase-card.night::before  { background: var(--night); }
+  .phrase-card.ochre::before  { background: var(--ochre); }
+
+  .phrase-block {
+    font-family: 'DM DM Mono', monospace;
+    margin-bottom: 4px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .phrase-es {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .phrase-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .phrase-phonetic {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    color: var(--ochre);
+  }
+  .phrase-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px dashed var(--paper-dark);
+    margin-top: 12px;
+    padding-top: 10px;
+    line-height: 1.5;
+  }
+  .phrase-context {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--paper-dark);
+    color: var(--muted);
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 8px;
+  }
+
+  /* ─── PRICE TAG SECTION ──────────────────────────────── */
+  .price-section {
+    background: var(--night);
+    padding: 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .price-section::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 400px; height: 400px;
+    background: var(--terra);
+    border-radius: 50%;
+    opacity: 0.06;
+    transform: translate(150px, -150px);
+  }
+  .price-section .section-label { color: var(--ochre); }
+  .price-section .section-label::after { background: rgba(255,255,255,0.1); }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 0;
+  }
+
+  .price-tag {
+    background: var(--paper);
+    border-radius: 4px;
+    padding: 20px 20px 16px;
+    position: relative;
+  }
+  .price-tag::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -12px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: var(--paper);
+    border-radius: 50%;
+    border: 3px solid var(--night);
+  }
+  .price-tag::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -24px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 2px;
+    background: var(--muted);
+    opacity: 0.4;
+  }
+  .price-tag-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .price-tag-es {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .price-tag-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .price-tag-phonetic {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--terra);
+    margin-top: 6px;
+  }
+
+  /* ─── RECEIPT STRIP ──────────────────────────────────── */
+  .receipt-section {
+    padding: 60px 80px;
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .receipt {
+    background: #fff;
+    border: 1.5px solid var(--paper-dark);
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    overflow: hidden;
+  }
+  .receipt-header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 16px 24px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .receipt-store { font-weight: 500; }
+  .receipt-date { font-size: 11px; color: var(--muted); }
+  .receipt-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 24px;
+    border-bottom: 1px dashed var(--paper-dark);
+    font-size: 13px;
+    align-items: center;
+  }
+  .receipt-row:last-child { border-bottom: none; }
+  .receipt-es { color: var(--ink); font-weight: 500; }
+  .receipt-en { color: var(--muted); font-size: 12px; text-align: right; max-width: 200px; }
+  .receipt-total {
+    background: var(--ochre);
+    color: var(--ink);
+    padding: 16px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Tips panel */
+  .tips-panel { }
+  .tips-panel-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .tips-panel-sub {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: var(--terra);
+    margin-bottom: 24px;
+  }
+  .tip-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+  .tip-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .tip-icon.ochre  { background: var(--ochre);  color: #fff; }
+  .tip-icon.terra  { background: var(--terra);  color: #fff; }
+  .tip-icon.sage   { background: var(--sage);   color: #fff; }
+  .tip-icon.night  { background: var(--night);  color: #fff; }
+  .tip-body { }
+  .tip-heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .tip-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ─── COLOR + SIZE STRIP ─────────────────────────────── */
+  .color-size-section {
+    background: var(--paper-dark);
+    padding: 48px 80px;
+    border-top: 4px solid var(--terra);
+  }
+  .color-size-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 32px;
+  }
+
+  .color-strip {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .color-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .color-swatch {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid rgba(0,0,0,0.08);
+  }
+  .color-es {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .color-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .size-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .size-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .size-table td {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    padding: 10px 12px;
+    border-bottom: 1px dashed var(--paper);
+    color: var(--ink);
+  }
+  .size-table tr:last-child td { border-bottom: none; }
+  .size-es { font-family: 'Fraunces', serif; font-weight: 700; }
+
+  /* ─── DIALOGUE STRIP ─────────────────────────────────── */
+  .dialogue-section {
+    padding: 60px 80px;
+    background: var(--night);
+    color: var(--paper);
+  }
+  .dialogue-section .section-label { color: var(--ochre); }
+  .dialogue-section .section-label::after { background: rgba(255,255,255,0.1); }
+
+  .dialogue-bubbles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 40px;
+  }
+  .dialogue-col-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 16px;
+  }
+  .bubble {
+    margin-bottom: 12px;
+  }
+  .bubble-es {
+    background: var(--ochre);
+    color: var(--ink);
+    padding: 10px 16px;
+    border-radius: 4px 4px 4px 0;
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 3px;
+    display: inline-block;
+  }
+  .bubble-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: rgba(250,246,238,0.65);
+    padding-left: 4px;
+    display: block;
+  }
+
+  /* ─── FOOTER ─────────────────────────────────────────── */
+  .footer {
+    background: var(--ink);
+    padding: 24px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--paper);
+  }
+  .footer-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .footer-lang {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ochre);
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ──────────────────────────────────────────── -->
+<header class="header">
+  <p class="header-eyebrow">Español con Diana · A1 · Topic 11</p>
+  <h1 class="header-title">Shopping in Spanish</h1>
+  <p class="header-sub">De compras — visual reference</p>
+  <span class="header-badge">English Edition</span>
+</header>
+
+<!-- ─── SHOP WINDOW SCENE ───────────────────────────────── -->
+<section class="scene-wrapper">
+  <p class="scene-title">Shop Window — Key Phrases at a Glance</p>
+
+  <svg class="shop-window" viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+    <!-- shop facade -->
+    <rect x="0" y="0" width="1120" height="520" fill="#EDE8DC"/>
+
+    <!-- awning -->
+    <polygon points="60,60 1060,60 1020,120 100,120" fill="#2A2540"/>
+    <line x1="100" y1="60" x2="100" y2="120" stroke="#C99A3D" stroke-width="2"/>
+    <line x1="280" y1="60" x2="260" y2="120" stroke="#C99A3D" stroke-width="2"/>
+    <line x1="460" y1="60" x2="440" y2="120" stroke="#C99A3D" stroke-width="2"/>
+    <line x1="640" y1="60" x2="620" y2="120" stroke="#C99A3D" stroke-width="2"/>
+    <line x1="820" y1="60" x2="800" y2="120" stroke="#C99A3D" stroke-width="2"/>
+    <line x1="1000" y1="60" x2="980" y2="120" stroke="#C99A3D" stroke-width="2"/>
+    <text x="560" y="100" text-anchor="middle" font-family="Fraunces, serif" font-size="26" font-weight="900" fill="#FAF6EE" letter-spacing="6">LA TIENDA</text>
+
+    <!-- shop frame -->
+    <rect x="80" y="120" width="960" height="340" rx="2" fill="#fff" stroke="#1F1A14" stroke-width="3"/>
+
+    <!-- left window -->
+    <rect x="100" y="140" width="420" height="300" rx="1" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+    <!-- shirt display -->
+    <rect x="160" y="190" width="140" height="160" rx="4" fill="#C4593A" opacity="0.9"/>
+    <text x="230" y="290" text-anchor="middle" font-size="11" fill="white" font-weight="600">camisa roja</text>
+    <!-- tag -->
+    <rect x="310" y="210" width="140" height="56" rx="3" fill="white" stroke="#C99A3D" stroke-width="1.5"/>
+    <text x="380" y="232" text-anchor="middle" font-family="Fraunces, serif" font-size="13" font-weight="700" fill="#1F1A14">¿Cuánto cuesta?</text>
+    <text x="380" y="252" text-anchor="middle" font-size="11" fill="#7B736B">How much does it cost?</text>
+    <line x1="380" y1="266" x2="380" y2="190" stroke="#C99A3D" stroke-width="1" stroke-dasharray="3,3"/>
+
+    <!-- callout: queria -->
+    <rect x="100" y="370" width="200" height="56" rx="3" fill="#2A2540"/>
+    <text x="200" y="393" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="#FAF6EE">Quería una camisa</text>
+    <text x="200" y="412" text-anchor="middle" font-size="11" fill="#C99A3D">I'd like a shirt</text>
+
+    <!-- callout: talla -->
+    <rect x="330" y="370" width="180" height="56" rx="3" fill="#6B8E6B"/>
+    <text x="420" y="393" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="white">¿Qué talla tiene?</text>
+    <text x="420" y="412" text-anchor="middle" font-size="11" fill="#EDE8DC">What size is it?</text>
+
+    <!-- right window -->
+    <rect x="600" y="140" width="420" height="300" rx="1" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+
+    <!-- bag display -->
+    <path d="M680 230 Q680 200 720 200 L800 200 Q840 200 840 230 L840 340 Q840 360 820 360 L700 360 Q680 360 680 340 Z" fill="#C99A3D" opacity="0.85"/>
+    <path d="M720 200 Q720 170 760 170 Q800 170 800 200" fill="none" stroke="#1F1A14" stroke-width="2.5"/>
+    <text x="760" y="300" text-anchor="middle" font-size="11" fill="white" font-weight="600">bolsa grande</text>
+
+    <!-- callout: ¿Tiene? -->
+    <rect x="860" y="160" width="150" height="52" rx="3" fill="#C4593A"/>
+    <text x="935" y="181" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="white">¿Tiene...?</text>
+    <text x="935" y="200" text-anchor="middle" font-size="11" fill="#FAF6EE">Do you have…?</text>
+    <line x1="860" y1="186" x2="840" y2="270" stroke="#C4593A" stroke-width="1" stroke-dasharray="3,3"/>
+
+    <!-- callout: me lo llevo -->
+    <rect x="600" y="370" width="180" height="56" rx="3" fill="#1F1A14"/>
+    <text x="690" y="393" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="#FAF6EE">Me lo llevo.</text>
+    <text x="690" y="412" text-anchor="middle" font-size="11" fill="#C99A3D">I'll take it.</text>
+
+    <!-- callout: pago con tarjeta -->
+    <rect x="800" y="370" width="200" height="56" rx="3" fill="#6B8E6B"/>
+    <text x="900" y="393" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="white">Pago con tarjeta.</text>
+    <text x="900" y="412" text-anchor="middle" font-size="11" fill="#EDE8DC">I'll pay by card.</text>
+
+    <!-- door -->
+    <rect x="490" y="200" width="140" height="260" rx="2" fill="#EDE8DC" stroke="#1F1A14" stroke-width="1.5"/>
+    <circle cx="530" cy="335" r="6" fill="#C99A3D"/>
+    <text x="560" y="320" text-anchor="middle" font-family="Fraunces, serif" font-size="11" fill="#7B736B">ABIERTO</text>
+    <text x="560" y="338" text-anchor="middle" font-size="10" fill="#7B736B">Open</text>
+  </svg>
+</section>
+
+<!-- ─── PHRASES GRID ────────────────────────────────────── -->
+<section class="phrases-section">
+  <p class="section-label">Core Phrases — Annotated</p>
+  <div class="phrases-grid">
+
+    <div class="phrase-card ochre">
+      <span class="phrase-context">Greetings</span>
+      <p class="phrase-es">Buenos días.</p>
+      <p class="phrase-en">Good morning.</p>
+      <p class="phrase-phonetic">BWE-nos DEE-as</p>
+      <p class="phrase-note">Use until noon. Switch to <em>Buenas tardes</em> from 12 pm onwards. When uncertain, <em>Buenas</em> alone works at any hour.</p>
+    </div>
+
+    <div class="phrase-card terra">
+      <span class="phrase-context">Shopkeeper → You</span>
+      <p class="phrase-es">¿En qué puedo ayudarle?</p>
+      <p class="phrase-en">How can I help you?</p>
+      <p class="phrase-phonetic">en ke PWE-do a-yu-DAR-le</p>
+      <p class="phrase-note">Formal usted form. If they say <em>ayudarte</em> (casual), don't be confused — both mean the same.</p>
+    </div>
+
+    <div class="phrase-card sage">
+      <span class="phrase-context">Browsing</span>
+      <p class="phrase-es">Estoy mirando, gracias.</p>
+      <p class="phrase-en">Just looking, thanks.</p>
+      <p class="phrase-phonetic">es-TOY mi-RAN-do, GRA-syas</p>
+      <p class="phrase-note">The single most useful phrase before a trip. Polite; ends further questions gracefully.</p>
+    </div>
+
+    <div class="phrase-card night">
+      <span class="phrase-context">Requesting — Polite</span>
+      <p class="phrase-es">Quería una camisa azul.</p>
+      <p class="phrase-en">I'd like a blue shirt.</p>
+      <p class="phrase-phonetic">ke-RI-a OO-na ka-MI-sa a-SOUL</p>
+      <p class="phrase-note"><em>Quería</em> (imperfect) is the polite Spanish equivalent of "I would like." Softer than <em>Quiero</em>.</p>
+    </div>
+
+    <div class="phrase-card ochre">
+      <span class="phrase-context">Requesting — Checking stock</span>
+      <p class="phrase-es">¿Tiene talla M?</p>
+      <p class="phrase-en">Do you have size M?</p>
+      <p class="phrase-phonetic">TYE-ne TAL-ya EME</p>
+      <p class="phrase-note">For shoes, swap <em>talla</em> → <em>número</em>: <em>¿Tiene número 42?</em></p>
+    </div>
+
+    <div class="phrase-card terra">
+      <span class="phrase-context">Searching</span>
+      <p class="phrase-es">Busco una bolsa grande.</p>
+      <p class="phrase-en">I'm looking for a large bag.</p>
+      <p class="phrase-phonetic">BUS-ko OO-na BOL-sa GRAN-de</p>
+      <p class="phrase-note">More open than <em>¿Tiene?</em> — ideal when you're not sure they stock it.</p>
+    </div>
+
+    <div class="phrase-card sage">
+      <span class="phrase-context">Price</span>
+      <p class="phrase-es">¿Cuánto cuesta?</p>
+      <p class="phrase-en">How much does it cost?</p>
+      <p class="phrase-phonetic">KWAN-to KWES-ta</p>
+      <p class="phrase-note">Multiple items → <em>¿Cuánto cuestan?</em> Prices are spoken with <em>con</em>: €5.50 = cinco euros con cincuenta.</p>
+    </div>
+
+    <div class="phrase-card night">
+      <span class="phrase-context">Negotiating</span>
+      <p class="phrase-es">¿Tiene algo más barato?</p>
+      <p class="phrase-en">Do you have anything cheaper?</p>
+      <p class="phrase-phonetic">TYE-ne AL-go mas ba-RA-to</p>
+      <p class="phrase-note">Works in fixed-price shops. At open markets, follow up with <em>¿Me hace un precio?</em> to open negotiation.</p>
+    </div>
+
+    <div class="phrase-card ochre">
+      <span class="phrase-context">Closing the sale</span>
+      <p class="phrase-es">Me lo llevo. Pago en efectivo.</p>
+      <p class="phrase-en">I'll take it. I'll pay in cash.</p>
+      <p class="phrase-phonetic">me lo YE-vo. PA-go en e-fek-TI-vo</p>
+      <p class="phrase-note"><em>Me lo llevo</em> (m.) / <em>Me la llevo</em> (f.) — the pronoun matches the item's gender.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── PRICE TAGS ───────────────────────────────────────── -->
+<section class="price-section">
+  <p class="section-label">Price Phrases — Tag Reference</p>
+  <div class="price-grid">
+
+    <div class="price-tag">
+      <p class="price-tag-label">Shopkeeper says</p>
+      <p class="price-tag-es">Son veinte euros.</p>
+      <p class="price-tag-en">That's twenty euros.</p>
+      <p class="price-tag-phonetic">son BEIN-te EW-ros</p>
+    </div>
+
+    <div class="price-tag">
+      <p class="price-tag-label">With cents</p>
+      <p class="price-tag-es">Son tres euros con cincuenta.</p>
+      <p class="price-tag-en">That's €3.50.</p>
+      <p class="price-tag-phonetic">…con sin-KWEN-ta</p>
+    </div>
+
+    <div class="price-tag">
+      <p class="price-tag-label">Paying cash</p>
+      <p class="price-tag-es">Pago en efectivo.</p>
+      <p class="price-tag-en">I'll pay in cash.</p>
+      <p class="price-tag-phonetic">PA-go en e-fek-TI-vo</p>
+    </div>
+
+    <div class="price-tag">
+      <p class="price-tag-label">Paying by card</p>
+      <p class="price-tag-es">Pago con tarjeta.</p>
+      <p class="price-tag-en">I'll pay by card.</p>
+      <p class="price-tag-phonetic">PA-go kon tar-HE-ta</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── RECEIPT + TIPS ──────────────────────────────────── -->
+<section class="receipt-section">
+
+  <div>
+    <p class="section-label" style="margin-bottom:24px">Sample Receipt — Full Purchase</p>
+    <div class="receipt">
+      <div class="receipt-header">
+        <span class="receipt-store">TIENDA DE ROPA</span>
+        <span class="receipt-date">HOY · HOY · HOY</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">Buenos días.</span>
+        <span class="receipt-en">Good morning.</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">¿En qué puedo ayudarle?</span>
+        <span class="receipt-en">How can I help you?</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">Quería una camisa azul, talla M.</span>
+        <span class="receipt-en">I'd like a blue shirt, size M.</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">Sí, aquí tiene.</span>
+        <span class="receipt-en">Yes, here you go.</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">¿Cuánto cuesta?</span>
+        <span class="receipt-en">How much does it cost?</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">Son veintidós euros.</span>
+        <span class="receipt-en">That's twenty-two euros.</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">Me la llevo. Pago con tarjeta.</span>
+        <span class="receipt-en">I'll take it. I'll pay by card.</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">¡Hasta luego!</span>
+        <span class="receipt-en">Goodbye!</span>
+      </div>
+      <div class="receipt-total">
+        <span>TOTAL</span>
+        <span>22,00 €</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tips-panel">
+    <h2 class="tips-panel-title">Tips & Tricks</h2>
+    <p class="tips-panel-sub">Cultural notes for confident shopping</p>
+
+    <div class="tip-item">
+      <div class="tip-icon ochre">★</div>
+      <div class="tip-body">
+        <p class="tip-heading">Always greet first</p>
+        <p class="tip-text">In Spain, entering a small shop without a greeting is considered rude. Open with <em>Buenos días</em> or <em>Buenas</em> before saying anything else.</p>
+      </div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-icon terra">¥</div>
+      <div class="tip-body">
+        <p class="tip-heading">Haggling etiquette</p>
+        <p class="tip-text">Fixed-price shops (Spain, most cities) don't bargain. Open markets welcome <em>¿Me hace un precio?</em> In Mexico, saying <em>está muy caro</em> with a smile often opens a counter-offer.</p>
+      </div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-icon sage">G</div>
+      <div class="tip-body">
+        <p class="tip-heading">Gender agreement</p>
+        <p class="tip-text">Colors ending in -o/-a agree: <em>zapato rojo / camisa roja</em>. Colors ending in -e or a consonant don't change: <em>zapato verde / camisa verde</em>.</p>
+      </div>
+    </div>
+
+    <div class="tip-item">
+      <div class="tip-icon night">S</div>
+      <div class="tip-body">
+        <p class="tip-heading">Sizes across regions</p>
+        <p class="tip-text">Spain uses EU sizes (38/40/42 for clothes). S/M/L/XL are universally understood. For shoes ask <em>¿Qué número?</em> — not <em>talla</em>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COLORS + SIZES ──────────────────────────────────── -->
+<section class="color-size-section">
+  <p class="section-label">Colors & Sizes — Quick Reference</p>
+  <div class="color-size-grid">
+
+    <div>
+      <p style="font-family:'Inter',sans-serif; font-size:13px; color:var(--muted); margin-bottom:4px; font-weight:600; letter-spacing:1px; text-transform:uppercase;">Los colores · Colors</p>
+      <div class="color-strip">
+        <div class="color-chip"><div class="color-swatch" style="background:#c0392b"></div><span class="color-es">rojo</span><span class="color-en">red</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#2471a3"></div><span class="color-es">azul</span><span class="color-en">blue</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#27ae60"></div><span class="color-es">verde</span><span class="color-en">green</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#1a1a1a; border-color:#555"></div><span class="color-es">negro</span><span class="color-en">black</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#f5f5f5"></div><span class="color-es">blanco</span><span class="color-en">white</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#f4d03f"></div><span class="color-es">amarillo</span><span class="color-en">yellow</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#e59866"></div><span class="color-es">naranja</span><span class="color-en">orange</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#8e44ad"></div><span class="color-es">morado</span><span class="color-en">purple</span></div>
+      </div>
+      <p style="font-family:'Caveat',cursive; font-size:16px; color:var(--terra); margin-top:16px;">
+        Invariable: azul, verde, gris — no -a ending needed.
+      </p>
+    </div>
+
+    <div>
+      <p style="font-family:'Inter',sans-serif; font-size:13px; color:var(--muted); margin-bottom:4px; font-weight:600; letter-spacing:1px; text-transform:uppercase;">Las tallas · Clothing Sizes</p>
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Español</th>
+            <th>English</th>
+            <th>EU</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="size-es">pequeño (P)</td><td>Small (S)</td><td>36–38</td></tr>
+          <tr><td class="size-es">mediano (M)</td><td>Medium (M)</td><td>40–42</td></tr>
+          <tr><td class="size-es">grande (G)</td><td>Large (L)</td><td>44–46</td></tr>
+          <tr><td class="size-es">extra grande (XG)</td><td>Extra Large (XL)</td><td>48+</td></tr>
+        </tbody>
+      </table>
+      <p style="font-family:'Caveat',cursive; font-size:16px; color:var(--sage); margin-top:16px;">
+        Shoes → número, not talla: ¿Tiene número 42?
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── DIALOGUE SCENE ──────────────────────────────────── -->
+<section class="dialogue-section">
+  <p class="section-label">Full Dialogue — Bakery Scene</p>
+  <div class="dialogue-bubbles">
+    <div>
+      <p class="dialogue-col-label">SHOPKEEPER (dependiente/a)</p>
+      <div class="bubble"><span class="bubble-es">Buenas tardes.</span><span class="bubble-en">Good afternoon.</span></div>
+      <div class="bubble"><span class="bubble-es">¿En qué puedo ayudarle?</span><span class="bubble-en">How can I help you?</span></div>
+      <div class="bubble"><span class="bubble-es">Son tres euros cincuenta.</span><span class="bubble-en">That's €3.50.</span></div>
+      <div class="bubble"><span class="bubble-es">De nada. ¡Hasta luego!</span><span class="bubble-en">You're welcome. Goodbye!</span></div>
+    </div>
+    <div>
+      <p class="dialogue-col-label">YOU (cliente/a)</p>
+      <div class="bubble"><span class="bubble-es">Buenas tardes.</span><span class="bubble-en">Good afternoon.</span></div>
+      <div class="bubble"><span class="bubble-es">Quería dos baguettes y un croissant, por favor.</span><span class="bubble-en">I'd like two baguettes and a croissant, please.</span></div>
+      <div class="bubble"><span class="bubble-es">Aquí tiene. Gracias.</span><span class="bubble-en">Here you go. Thank you.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────── -->
+<footer class="footer">
+  <span class="footer-brand">Español con Diana</span>
+  <span class="footer-meta">A1 · Topic 11 · Shopping</span>
+  <span class="footer-lang">EN</span>
+</footer>
+
+</body>
+</html>

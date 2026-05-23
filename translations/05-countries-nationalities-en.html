@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Countries, Nationalities & Languages — English</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #FAF6EE;
+    --ink: #1F1A14;
+    --ochre: #C99A3D;
+    --terra: #C4593A;
+    --sage: #6B8E6B;
+    --night: #2A2540;
+    --muted: #7B736B;
+    --paper-dark: #EDE8DC;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--night);
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 520px;
+    min-height: 340px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: 320px;
+    width: 500px; height: 500px;
+    background: var(--ochre);
+    border-radius: 50%;
+    opacity: 0.08;
+  }
+  .hero-text {
+    padding: 56px 64px;
+    z-index: 1;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    color: var(--ochre);
+    font-style: italic;
+  }
+  .hero-sub {
+    font-size: 16px;
+    color: #B8B0A8;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 28px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-n {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--ochre);
+    line-height: 1;
+  }
+  .stat-l {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 4px;
+  }
+  .hero-map {
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    position: relative;
+  }
+  .globe-svg { width: 260px; height: 260px; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: var(--ochre);
+    color: var(--paper);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ── LAYOUT WRAPPERS ── */
+  .page { padding: 64px; }
+  .page + .page { padding-top: 0; }
+
+  /* ── FLAG MOSAIC ── */
+  .flag-mosaic {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .flag-card {
+    background: white;
+    border: 1px solid var(--paper-dark);
+    border-radius: 8px;
+    padding: 16px 12px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.15s;
+    cursor: default;
+  }
+  .flag-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+  .flag-emoji { font-size: 36px; display: block; margin-bottom: 8px; }
+  .flag-es {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    display: block;
+  }
+  .flag-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+    display: block;
+  }
+  .flag-nat {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    color: var(--terra);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── PHRASE CARDS ── */
+  .phrase-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .phrase-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--paper-dark);
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phrase-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--ochre);
+  }
+  .phrase-card.terra::before { background: var(--terra); }
+  .phrase-card.sage::before { background: var(--sage); }
+  .phrase-card.night::before { background: var(--night); }
+
+  .phrase-es {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .phrase-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .phrase-annotation {
+    background: var(--paper);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.5;
+    border-left: 3px solid var(--ochre);
+  }
+  .phrase-annotation.terra { border-color: var(--terra); }
+  .phrase-annotation.sage { border-color: var(--sage); }
+  .phrase-card .badge {
+    position: absolute;
+    top: 16px; right: 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--paper-dark);
+    color: var(--muted);
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+
+  /* ── RULE BLOCKS ── */
+  .rule-strip {
+    background: var(--night);
+    color: var(--paper);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .rule-title {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ochre);
+    margin-bottom: 16px;
+  }
+  .rule-compare {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .rule-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+  }
+  .rule-row .arrow { color: var(--ochre); font-size: 16px; }
+  .rule-row .wrong { color: #E07070; text-decoration: line-through; }
+  .rule-row .right { color: #8FD88F; }
+  .rule-note {
+    font-size: 12px;
+    color: #B8B0A8;
+    margin-top: 8px;
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ── ENDING TABLE ── */
+  .ending-table-wrap {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--paper-dark);
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .ending-table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .ending-table-wrap th {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    text-align: left;
+  }
+  .ending-table-wrap td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--paper-dark);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+  }
+  .ending-table-wrap tr:last-child td { border-bottom: none; }
+  .ending-table-wrap tr:nth-child(even) td { background: var(--paper); }
+  td.es { font-family: 'Fraunces', serif; font-weight: 700; font-size: 16px; }
+  td.en { color: var(--muted); }
+  td.note { font-size: 12px; color: var(--muted); font-style: italic; }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .pill-o { background: #FFF0DC; color: var(--ochre); }
+  .pill-t { background: #FDEAE5; color: var(--terra); }
+  .pill-s { background: #EBF3EB; color: var(--sage); }
+  .pill-n { background: #E8E7F0; color: var(--night); }
+
+  /* ── TIPS SIDEBAR CALLOUTS ── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .tip-card {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid var(--paper-dark);
+    padding: 20px;
+    position: relative;
+  }
+  .tip-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .tip-icon.ochre { background: #FFF0DC; }
+  .tip-icon.terra { background: #FDEAE5; }
+  .tip-icon.sage { background: #EBF3EB; }
+  .tip-icon.night { background: #E8E7F0; }
+  .tip-title {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .tip-body {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .tip-body strong { color: var(--ink); }
+
+  /* ── CONVERSATION FLOW ── */
+  .convo {
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 32px;
+  }
+  .convo-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 24px;
+  }
+  .bubble-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .bubble-row.right { flex-direction: row-reverse; }
+  .speaker-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+  }
+  .dot-a { background: var(--ochre); color: var(--ink); }
+  .dot-b { background: var(--sage); color: var(--ink); }
+  .bubble {
+    max-width: 480px;
+    border-radius: 12px;
+    padding: 14px 18px;
+  }
+  .bubble-left { background: #2E2A40; border-radius: 4px 12px 12px 12px; }
+  .bubble-right { background: #3A4A3A; border-radius: 12px 4px 12px 12px; }
+  .bubble-es {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 4px;
+  }
+  .bubble-en {
+    font-size: 12px;
+    color: #9A9490;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: var(--muted);
+    padding: 32px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+  footer .brand {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ochre);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--ochre), transparent);
+    margin-bottom: 48px;
+    opacity: 0.3;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-label">Español con Diana · A1 · Topic 05 · English Edition</div>
+    <h1>Countries,<br>Nationalities &<br><em>Languages</em></h1>
+    <p class="hero-sub">Everything you need to say where you're from, name your nationality, and talk about the languages you speak — in real social settings.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">10+</div><div class="stat-l">Countries</div></div>
+      <div class="stat"><div class="stat-n">3</div><div class="stat-l">Ending types</div></div>
+      <div class="stat"><div class="stat-n">8</div><div class="stat-l">Blocks</div></div>
+      <div class="stat"><div class="stat-n">64</div><div class="stat-l">Minutes</div></div>
+    </div>
+  </div>
+  <div class="hero-map">
+    <svg class="globe-svg" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Globe base -->
+      <circle cx="130" cy="130" r="110" fill="#1A1730" stroke="#C99A3D" stroke-width="1.5"/>
+      <!-- Latitude lines -->
+      <ellipse cx="130" cy="130" rx="110" ry="30" stroke="#2A2540" stroke-width="1"/>
+      <ellipse cx="130" cy="130" rx="110" ry="65" stroke="#2A2540" stroke-width="1"/>
+      <ellipse cx="130" cy="130" rx="110" ry="95" stroke="#2A2540" stroke-width="1"/>
+      <!-- Longitude lines -->
+      <line x1="130" y1="20" x2="130" y2="240" stroke="#2A2540" stroke-width="1"/>
+      <path d="M75 20 Q130 80 75 240" stroke="#2A2540" stroke-width="1"/>
+      <path d="M185 20 Q130 80 185 240" stroke="#2A2540" stroke-width="1"/>
+      <!-- Continents (simplified) -->
+      <!-- Americas -->
+      <path d="M60 80 Q55 100 62 120 Q68 140 60 160 Q55 180 65 195 L80 195 Q90 170 85 150 Q80 130 88 110 Q95 90 85 75 Z" fill="#C99A3D" opacity="0.7"/>
+      <!-- Europe/Africa -->
+      <path d="M120 75 Q130 70 140 75 L145 90 Q150 100 145 115 Q140 130 135 145 L125 145 Q120 130 115 115 Q110 100 115 90 Z" fill="#C4593A" opacity="0.7"/>
+      <!-- Asia -->
+      <path d="M150 75 Q170 70 190 80 Q205 90 200 110 Q195 130 180 140 L160 135 Q145 125 145 110 Q145 90 150 75 Z" fill="#6B8E6B" opacity="0.7"/>
+      <!-- Location pin - Spain -->
+      <circle cx="128" cy="88" r="5" fill="#C99A3D"/>
+      <circle cx="128" cy="88" r="2" fill="#FAF6EE"/>
+      <!-- Location pin - Mexico -->
+      <circle cx="72" cy="105" r="5" fill="#C4593A"/>
+      <circle cx="72" cy="105" r="2" fill="#FAF6EE"/>
+      <!-- Location pin - Argentina -->
+      <circle cx="80" cy="175" r="5" fill="#6B8E6B"/>
+      <circle cx="80" cy="175" r="2" fill="#FAF6EE"/>
+      <!-- Text -->
+      <text x="130" y="250" text-anchor="middle" font-family="DM Mono" font-size="9" fill="#7B736B" letter-spacing="2">EL MUNDO HISPANOHABLANTE</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ══ FLAG MOSAIC ══ -->
+<div class="page">
+  <div class="section-header">
+    <span class="section-tag">Blocks A–B</span>
+    <h2 class="section-title">Key Countries</h2>
+  </div>
+
+  <div class="flag-mosaic">
+    <div class="flag-card">
+      <span class="flag-emoji">🇪🇸</span>
+      <span class="flag-es">España</span>
+      <span class="flag-en">Spain</span>
+      <span class="flag-nat">español/a</span>
+    </div>
+    <div class="flag-card">
+      <span class="flag-emoji">🇲🇽</span>
+      <span class="flag-es">México</span>
+      <span class="flag-en">Mexico</span>
+      <span class="flag-nat">mexicano/a</span>
+    </div>
+    <div class="flag-card">
+      <span class="flag-emoji">🇦🇷</span>
+      <span class="flag-es">Argentina</span>
+      <span class="flag-en">Argentina</span>
+      <span class="flag-nat">argentino/a</span>
+    </div>
+    <div class="flag-card">
+      <span class="flag-emoji">🇨🇴</span>
+      <span class="flag-es">Colombia</span>
+      <span class="flag-en">Colombia</span>
+      <span class="flag-nat">colombiano/a</span>
+    </div>
+    <div class="flag-card">
+      <span class="flag-emoji">🇨🇱</span>
+      <span class="flag-es">Chile</span>
+      <span class="flag-en">Chile</span>
+      <span class="flag-nat">chileno/a</span>
+    </div>
+    <div class="flag-card">
+      <span class="flag-emoji">🇨🇺</span>
+      <span class="flag-es">Cuba</span>
+      <span class="flag-en">Cuba</span>
+      <span class="flag-nat">cubano/a</span>
+    </div>
+    <div class="flag-card">
+      <span class="flag-emoji">🇻🇪</span>
+      <span class="flag-es">Venezuela</span>
+      <span class="flag-en">Venezuela</span>
+      <span class="flag-nat">venezolano/a</span>
+    </div>
+    <div class="flag-card">
+      <span class="flag-emoji">🇵🇪</span>
+      <span class="flag-es">Perú</span>
+      <span class="flag-en">Peru</span>
+      <span class="flag-nat">peruano/a</span>
+    </div>
+    <div class="flag-card">
+      <span class="flag-emoji">🇺🇸</span>
+      <span class="flag-es">Estados Unidos</span>
+      <span class="flag-en">United States</span>
+      <span class="flag-nat">estadounidense</span>
+    </div>
+    <div class="flag-card">
+      <span class="flag-emoji">🇨🇦</span>
+      <span class="flag-es">Canadá</span>
+      <span class="flag-en">Canada</span>
+      <span class="flag-nat">canadiense</span>
+    </div>
+    <div class="flag-card">
+      <span class="flag-emoji">🇫🇷</span>
+      <span class="flag-es">Francia</span>
+      <span class="flag-en">France</span>
+      <span class="flag-nat">francés/esa</span>
+    </div>
+    <div class="flag-card">
+      <span class="flag-emoji">🇩🇪</span>
+      <span class="flag-es">Alemania</span>
+      <span class="flag-en">Germany</span>
+      <span class="flag-nat">alemán/ana</span>
+    </div>
+  </div>
+
+  <!-- ══ CORE PHRASES ══ -->
+  <div class="section-header">
+    <span class="section-tag">Blocks C–H</span>
+    <h2 class="section-title">Key Phrases with Annotations</h2>
+  </div>
+
+  <div class="phrase-grid">
+
+    <div class="phrase-card">
+      <span class="badge">Origin</span>
+      <div class="phrase-es">Soy de México.</div>
+      <div class="phrase-en">I am from Mexico.</div>
+      <div class="phrase-annotation">
+        <strong>Soy de + [country]</strong> — uses <em>ser</em>, not <em>estar</em>. Origin is permanent identity, so <em>ser</em> always. No article: "Soy de Canadá" not "Soy del Canadá".
+      </div>
+    </div>
+
+    <div class="phrase-card terra">
+      <span class="badge">Nationality</span>
+      <div class="phrase-es">Soy mexicano.</div>
+      <div class="phrase-en">I am Mexican.</div>
+      <div class="phrase-annotation terra">
+        <strong>No article!</strong> In English: "I am <em>a</em> Mexican." In Spanish: drop the article entirely. "Soy un mexicano" is wrong at A1 level.
+      </div>
+    </div>
+
+    <div class="phrase-card sage">
+      <span class="badge">Question</span>
+      <div class="phrase-es">¿De dónde eres?</div>
+      <div class="phrase-en">Where are you from?</div>
+      <div class="phrase-annotation sage">
+        Stress: <strong>DE DÓN-de E-res</strong>. The accent on <em>dónde</em> is mandatory — without it you're making a relative clause, not a question. The inverted <em>¿</em> signals the question opens.
+      </div>
+    </div>
+
+    <div class="phrase-card">
+      <span class="badge">Bounce-back</span>
+      <div class="phrase-es">¿Y tú?</div>
+      <div class="phrase-en">And you?</div>
+      <div class="phrase-annotation">
+        The single most useful conversation tool at A1. Always add it after your answer. It shows engagement and keeps the exchange alive. <em>¿Y usted?</em> for formal situations.
+      </div>
+    </div>
+
+    <div class="phrase-card night">
+      <span class="badge">Languages</span>
+      <div class="phrase-es">Hablo español e inglés.</div>
+      <div class="phrase-en">I speak Spanish and English.</div>
+      <div class="phrase-annotation">
+        Languages are <strong>always lowercase</strong> in Spanish. Note: <em>e</em> instead of <em>y</em> before words starting with "i/hi" — so <em>español <strong>e</strong> inglés</em>, not <em>español y inglés</em>.
+      </div>
+    </div>
+
+    <div class="phrase-card terra">
+      <span class="badge">Question</span>
+      <div class="phrase-es">¿Qué idiomas hablas?</div>
+      <div class="phrase-en">What languages do you speak?</div>
+      <div class="phrase-annotation terra">
+        Stress: <strong>i-DIO-mas</strong> — the DIO is stressed, not the first syllable. <em>Idioma</em> is masculine despite ending in -a: say <em>el idioma</em>, not <em>la idioma</em>.
+      </div>
+    </div>
+
+    <div class="phrase-card">
+      <span class="badge">Full intro</span>
+      <div class="phrase-es">Me llamo Ana. Soy de España. Soy española. Hablo español y un poco de inglés.</div>
+      <div class="phrase-en">My name is Ana. I'm from Spain. I'm Spanish. I speak Spanish and a little English.</div>
+      <div class="phrase-annotation">
+        The <strong>4-part social intro</strong>: name + origin + nationality + languages. Rehearse until it flows as one unbroken utterance. This is the A1 conversational graduation test.
+      </div>
+    </div>
+
+    <div class="phrase-card sage">
+      <span class="badge">Tip</span>
+      <div class="phrase-es">Hablo un poco de español.</div>
+      <div class="phrase-en">I speak a little Spanish.</div>
+      <div class="phrase-annotation sage">
+        Immediately endears you to native speakers. Use it early and often. <em>Un poco de</em> + language = humble, warm, and instantly relatable.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ GRAMMAR RULES ══ -->
+  <div class="section-header">
+    <span class="section-tag">Blocks D–F</span>
+    <h2 class="section-title">Nationality Endings</h2>
+  </div>
+
+  <div class="rule-strip">
+    <div>
+      <div class="rule-title">The -o / -a Rule</div>
+      <div class="rule-compare">
+        <div class="rule-row"><span>mexicano</span><span class="arrow">→</span><span>mexicana</span></div>
+        <div class="rule-row"><span>peruano</span><span class="arrow">→</span><span>peruana</span></div>
+        <div class="rule-row"><span>cubano</span><span class="arrow">→</span><span>cubana</span></div>
+        <div class="rule-row"><span>venezolano</span><span class="arrow">→</span><span>venezolana</span></div>
+      </div>
+      <div class="rule-note">The most productive pattern in Spanish. Nail it here and it transfers to every adjective.</div>
+    </div>
+    <div>
+      <div class="rule-title">The -és / -esa Rule</div>
+      <div class="rule-compare">
+        <div class="rule-row"><span>franc<strong>és</strong></span><span class="arrow">→</span><span>franc<strong>esa</strong></span></div>
+        <div class="rule-row"><span>ingl<strong>és</strong></span><span class="arrow">→</span><span>ingl<strong>esa</strong></span></div>
+        <div class="rule-row"><span>españ<strong>ol</strong></span><span class="arrow">→</span><span>españ<strong>ola</strong></span></div>
+      </div>
+      <div class="rule-note">The accent on -és disappears in the feminine. "Francésa" is wrong — the feminine is <strong>francesa</strong>.</div>
+    </div>
+  </div>
+
+  <div class="ending-table-wrap">
+    <table>
+      <tr>
+        <th>Pattern</th>
+        <th>Masculine</th>
+        <th>Feminine</th>
+        <th>English</th>
+        <th>Note</th>
+      </tr>
+      <tr>
+        <td><span class="pill pill-o">-o / -a</span></td>
+        <td class="es">mexicano</td>
+        <td class="es">mexicana</td>
+        <td class="en">Mexican</td>
+        <td class="note">Most common pattern</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-o">-o / -a</span></td>
+        <td class="es">argentino</td>
+        <td class="es">argentina</td>
+        <td class="en">Argentinian</td>
+        <td class="note"></td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-o">-o / -a</span></td>
+        <td class="es">colombiano</td>
+        <td class="es">colombiana</td>
+        <td class="en">Colombian</td>
+        <td class="note"></td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-t">-és / -esa</span></td>
+        <td class="es">francés</td>
+        <td class="es">francesa</td>
+        <td class="en">French</td>
+        <td class="note">Accent drops in feminine</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-t">-és / -esa</span></td>
+        <td class="es">inglés</td>
+        <td class="es">inglesa</td>
+        <td class="en">English</td>
+        <td class="note">Accent drops in feminine</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-s">invariable</span></td>
+        <td class="es">canadiense</td>
+        <td class="es">canadiense</td>
+        <td class="en">Canadian</td>
+        <td class="note">Same form for all genders</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-s">invariable</span></td>
+        <td class="es">estadounidense</td>
+        <td class="es">estadounidense</td>
+        <td class="en">American (USA)</td>
+        <td class="note">Long but invariable — no excuse!</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-n">-ol / -ola</span></td>
+        <td class="es">español</td>
+        <td class="es">española</td>
+        <td class="en">Spanish</td>
+        <td class="note">Consonant ending + -a</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ══ TIPS ══ -->
+  <div class="section-header">
+    <span class="section-tag">All Blocks</span>
+    <h2 class="section-title">Key Tips &amp; Traps</h2>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon ochre">🚫</div>
+      <div class="tip-title">No Article with Nationalities</div>
+      <div class="tip-body"><strong>"Soy un mexicano"</strong> is wrong.<br>"Soy mexicano" — the article disappears entirely, unlike English ("I am <em>a</em> Mexican").</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon terra">⚡</div>
+      <div class="tip-title">ser, not estar</div>
+      <div class="tip-body">Origin and nationality use <strong>ser</strong> always: "Soy de México." Estar is for temporary states. Origin is permanent identity.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon sage">✍</div>
+      <div class="tip-title">Languages are Lowercase</div>
+      <div class="tip-body">Write <strong>español, inglés, francés</strong> — not Español, Inglés. Spanish doesn't capitalize language names or nationality adjectives.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon night">🎯</div>
+      <div class="tip-title">Americano vs. Estadounidense</div>
+      <div class="tip-body"><strong>Americano/a</strong> = anyone from the Americas (ambiguous). <strong>Estadounidense</strong> = from the USA specifically. Know the difference; use the right one in context.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon ochre">📍</div>
+      <div class="tip-title">Accent on dónde</div>
+      <div class="tip-body">The accent on <strong>dónde</strong> is mandatory. Without it, you're not asking a question — you're starting a relative clause. This changes meaning entirely.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon terra">🔄</div>
+      <div class="tip-title">Accent Drops in Feminine -esa</div>
+      <div class="tip-body"><strong>francés → francesa</strong> (not francésa). The accent disappears when the feminine ending restores natural penultimate stress. Consistent rule — don't fight it.</div>
+    </div>
+  </div>
+
+  <!-- ══ CONVERSATION EXAMPLE ══ -->
+  <div class="section-header">
+    <span class="section-tag">Block H</span>
+    <h2 class="section-title">Full Social Exchange</h2>
+  </div>
+
+  <div class="convo">
+    <div class="convo-title">Meeting someone at a language exchange — full A1 script</div>
+
+    <div class="bubble-row">
+      <div class="speaker-dot dot-a">A</div>
+      <div class="bubble bubble-left">
+        <div class="bubble-es">¡Hola! Soy Ana. ¿De dónde eres?</div>
+        <div class="bubble-en">Hi! I'm Ana. Where are you from?</div>
+      </div>
+    </div>
+
+    <div class="bubble-row right">
+      <div class="speaker-dot dot-b">B</div>
+      <div class="bubble bubble-right">
+        <div class="bubble-es">Soy de Canadá. Soy canadiense. ¿Y tú?</div>
+        <div class="bubble-en">I'm from Canada. I'm Canadian. And you?</div>
+      </div>
+    </div>
+
+    <div class="bubble-row">
+      <div class="speaker-dot dot-a">A</div>
+      <div class="bubble bubble-left">
+        <div class="bubble-es">Soy de España, de Madrid. Soy española.</div>
+        <div class="bubble-en">I'm from Spain, from Madrid. I'm Spanish.</div>
+      </div>
+    </div>
+
+    <div class="bubble-row right">
+      <div class="speaker-dot dot-b">B</div>
+      <div class="bubble bubble-right">
+        <div class="bubble-es">¿Qué idiomas hablas?</div>
+        <div class="bubble-en">What languages do you speak?</div>
+      </div>
+    </div>
+
+    <div class="bubble-row">
+      <div class="speaker-dot dot-a">A</div>
+      <div class="bubble bubble-left">
+        <div class="bubble-es">Hablo español e inglés. ¿Y tú?</div>
+        <div class="bubble-en">I speak Spanish and English. And you?</div>
+      </div>
+    </div>
+
+    <div class="bubble-row right">
+      <div class="speaker-dot dot-b">B</div>
+      <div class="bubble bubble-right">
+        <div class="bubble-es">Hablo inglés y un poco de español.</div>
+        <div class="bubble-en">I speak English and a little Spanish.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="brand">Español con Diana</span>
+  <span>A1 · Topic 05 · Countries, Nationalities &amp; Languages</span>
+  <span>English Edition</span>
+</footer>
+
+</body>
+</html>

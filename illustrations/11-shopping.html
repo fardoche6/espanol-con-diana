@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>De Compras — Español con Diana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Inter:wght@400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:       #FAF6EE;
+      --paper-dark:  #EDE8DC;
+      --ink:         #1F1A14;
+      --ochre:       #C99A3D;
+      --terracotta:  #C4593A;
+      --sage:        #6B8E6B;
+      --night:       #2A2540;
+      --muted:       #7B736B;
+      --panel-border: 2.5px;
+    }
+
+    body {
+      background-color: var(--paper-dark);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 64px;
+      font-family: 'Caveat', cursive;
+    }
+
+    /* ── Page header ── */
+    .strip-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    /* ── Hero banner ── */
+    .hero-banner {
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .hero-badge svg {
+      display: block;
+    }
+    .hero-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 190px;
+      line-height: 1.6;
+    }
+    .hero-subtitle strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* ── Comic strip ── */
+    .comic-strip {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: nowrap;
+      max-width: 1320px;
+      width: 100%;
+    }
+
+    .panel-wrap {
+      flex: 1;
+      min-width: 240px;
+      max-width: 320px;
+      position: relative;
+    }
+
+    .panel-wrap:nth-child(1) { transform: rotate(-1.6deg) translateY(8px);  z-index: 2; }
+    .panel-wrap:nth-child(2) { transform: rotate(1.3deg)  translateY(-5px); z-index: 3; }
+    .panel-wrap:nth-child(3) { transform: rotate(-0.8deg) translateY(6px);  z-index: 2; }
+    .panel-wrap:nth-child(4) { transform: rotate(2deg)    translateY(-3px); z-index: 1; }
+
+    .panel {
+      background: var(--paper);
+      border: var(--panel-border) solid var(--ink);
+      border-radius: 3px;
+      box-shadow: 4px 4px 0 var(--ink), 6px 6px 14px rgba(31,26,20,0.16);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Paper texture overlay */
+    .panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .panel-scene {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── Caption bar ── */
+    .caption {
+      background: var(--paper-dark);
+      border-top: var(--panel-border) solid var(--ink);
+      padding: 10px 14px 13px;
+    }
+    .phrase {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--ink);
+      line-height: 1;
+      display: block;
+    }
+    .hint {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* ── Panel number ── */
+    .panel-num {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--ink);
+      opacity: 0.32;
+      z-index: 20;
+    }
+
+    /* ── Reference strip ── */
+    .ref-strip {
+      margin-top: 52px;
+      max-width: 960px;
+      width: 100%;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--ink);
+    }
+    .ref-inner {
+      border: 2px solid var(--ink);
+      border-radius: 4px;
+      background: var(--paper);
+      padding: 20px 24px 16px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .ref-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .phrase-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px 16px;
+    }
+    .phrase-card {
+      border: 1.5px solid var(--ink);
+      border-radius: 3px;
+      padding: 8px 10px;
+      background: var(--paper);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .phrase-card .es {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--ink);
+      display: block;
+      line-height: 1.1;
+    }
+    .phrase-card .en {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 3px;
+      display: block;
+    }
+
+    /* ── Footer ── */
+    .strip-footer {
+      margin-top: 40px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="strip-title">Español con Diana &nbsp;·&nbsp; A1 &nbsp;·&nbsp; De compras</p>
+
+  <!-- Hero badge -->
+  <div class="hero-banner">
+    <div class="hero-badge">
+      <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <!-- Shopping bag burst shape -->
+        <polygon
+          points="60,4 67,36 86,14 83,46 108,30 96,62 120,62 102,84 120,104 93,98 97,120 74,104 70,120 60,103 50,120 46,104 23,120 27,98 0,104 18,84 0,62 24,62 12,30 37,46 34,14 53,36"
+          fill="#C4593A"
+          stroke="#1F1A14"
+          stroke-width="1.5"
+          stroke-linejoin="round"
+        />
+        <circle cx="60" cy="65" r="28" fill="#C4593A"/>
+        <!-- Bag icon in center -->
+        <rect x="46" y="58" width="28" height="22" rx="3" fill="none" stroke="#FAF6EE" stroke-width="2.2"/>
+        <path d="M50,58 Q50,50 60,50 Q70,50 70,58" fill="none" stroke="#FAF6EE" stroke-width="2.2"/>
+        <text x="60" y="92" font-family="'Caveat', cursive" font-size="9" font-weight="600" fill="rgba(250,246,238,0.85)" text-anchor="middle">de compras</text>
+      </svg>
+    </div>
+    <div class="hero-subtitle">
+      <strong>¡Vamos de compras!</strong><br>
+      Ask, buy, pay —<br>in Spanish from the start.
+    </div>
+  </div>
+
+  <!-- Comic Strip — 4 panels -->
+  <div class="comic-strip">
+
+    <!-- PANEL 1: Entering the shop -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">1</span>
+        <svg class="panel-scene" viewBox="0 0 280 330" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink1" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="3" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="shopSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#C99A3D" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#FAF6EE"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Background sky / street -->
+          <rect width="280" height="180" fill="url(#shopSky)"/>
+          <rect y="180" width="280" height="150" fill="#EDE8DC"/>
+          <line x1="0" y1="180" x2="280" y2="180" stroke="#1F1A14" stroke-width="2"/>
+
+          <!-- Shop facade -->
+          <rect x="30" y="40" width="220" height="155" rx="4" fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink1)"/>
+
+          <!-- Awning / toldo -->
+          <path d="M20,75 Q140,55 260,75" fill="#C4593A" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Awning stripes -->
+          <path d="M40,74 Q140,57 240,74" fill="none" stroke="#FAF6EE" stroke-width="7" stroke-dasharray="14,14"/>
+
+          <!-- Sign: LA TIENDA -->
+          <rect x="70" y="45" width="140" height="26" rx="3" fill="#2A2540" stroke="#1F1A14" stroke-width="1.8" filter="url(#ink1)"/>
+          <text x="140" y="63" font-family="'Caveat', cursive" font-size="17" font-weight="700" fill="#FAF6EE" text-anchor="middle">LA TIENDA</text>
+
+          <!-- Shop window -->
+          <rect x="55" y="90" width="80" height="85" rx="3" fill="#D6EAF8" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Items in window -->
+          <!-- Shirt on hanger -->
+          <line x1="95" y1="95" x2="95" y2="103" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M85,103 Q95,100 105,103" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M78,110 L85,103 Q95,100 105,103 L112,110 L108,140 L82,140 Z" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.8"/>
+
+          <!-- Bag in window -->
+          <rect x="60" y="148" width="30" height="22" rx="3" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.8"/>
+          <path d="M65,148 Q65,142 75,142 Q85,142 85,148" fill="none" stroke="#1F1A14" stroke-width="1.8"/>
+
+          <!-- Price tag -->
+          <rect x="105" y="148" width="24" height="16" rx="2" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+          <text x="117" y="160" font-family="'Caveat', cursive" font-size="10" fill="#1F1A14" text-anchor="middle">15 €</text>
+
+          <!-- Shop door -->
+          <rect x="148" y="112" width="52" height="68" rx="3" fill="#C8A97E" stroke="#1F1A14" stroke-width="2.2"/>
+          <rect x="153" y="117" width="42" height="58" rx="2" fill="#D4B896" stroke="#1F1A14" stroke-width="1.2"/>
+          <!-- Door handle -->
+          <circle cx="190" cy="148" r="3.5" fill="#1F1A14"/>
+          <!-- Door window -->
+          <rect x="157" y="120" width="34" height="30" rx="2" fill="#D6EAF8" stroke="#1F1A14" stroke-width="1.2"/>
+
+          <!-- Character approaching door -->
+          <!-- Body -->
+          <ellipse cx="225" cy="230" rx="22" ry="14" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="225" cy="206" rx="19" ry="20" fill="#F5CBA7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M207,198 Q209,182 225,184 Q241,182 243,198" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyes -->
+          <ellipse cx="219" cy="204" rx="3" ry="3.5" fill="#1F1A14"/>
+          <ellipse cx="231" cy="204" rx="3" ry="3.5" fill="#1F1A14"/>
+          <circle cx="220" cy="203" r="1" fill="#FAF6EE"/>
+          <circle cx="232" cy="203" r="1" fill="#FAF6EE"/>
+          <!-- Smile -->
+          <path d="M218,213 Q225,219 232,213" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Arm with shopping bag -->
+          <path d="M244,228 Q256,222 258,240" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <!-- Bag in hand -->
+          <rect x="252" y="238" width="18" height="16" rx="2" fill="#C4593A" stroke="#1F1A14" stroke-width="1.8"/>
+          <path d="M256,238 Q256,233 261,233 Q266,233 266,238" fill="none" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Other arm -->
+          <path d="M206,225 Q195,218 194,235" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <!-- Legs -->
+          <rect x="215" y="242" width="9" height="30" rx="3" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="227" y="242" width="9" height="30" rx="3" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Shoes -->
+          <ellipse cx="219" cy="273" rx="8" ry="4" fill="#1F1A14"/>
+          <ellipse cx="231" cy="271" rx="8" ry="4" fill="#1F1A14"/>
+
+          <!-- Speech bubble — greeting -->
+          <path d="M40,18 Q40,4 60,4 L230,4 Q248,4 248,20 Q248,38 230,38 L155,38 L143,52 L147,38 L60,38 Q40,38 40,20 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink1)"/>
+          <text x="144" y="25" font-family="'Caveat', cursive" font-size="18" font-weight="700" fill="#1F1A14" text-anchor="middle">¡Buenos días!</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">Entrar en la tienda</span>
+          <span class="hint">entering the shop</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: Asking for an item -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">2</span>
+        <svg class="panel-scene" viewBox="0 0 280 330" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink2" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="7" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.3" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+
+          <!-- Interior shop background -->
+          <rect width="280" height="330" fill="#EDE8DC"/>
+
+          <!-- Wall + floor -->
+          <rect width="280" height="200" fill="#F0EAD6"/>
+          <line x1="0" y1="200" x2="280" y2="200" stroke="#1F1A14" stroke-width="2.5"/>
+          <!-- Floor boards -->
+          <line x1="0" y1="215" x2="280" y2="215" stroke="#1F1A14" stroke-width="1" opacity="0.3"/>
+          <line x1="0" y1="230" x2="280" y2="230" stroke="#1F1A14" stroke-width="1" opacity="0.2"/>
+
+          <!-- Clothing rack (perchero) -->
+          <line x1="30" y1="60" x2="180" y2="60" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <line x1="30" y1="60" x2="30" y2="40" stroke="#1F1A14" stroke-width="2.5"/>
+          <line x1="180" y1="60" x2="180" y2="40" stroke="#1F1A14" stroke-width="2.5"/>
+          <line x1="105" y1="60" x2="105" y2="35" stroke="#1F1A14" stroke-width="2" opacity="0.5"/>
+
+          <!-- Shirts on rack -->
+          <!-- Shirt 1 - azul -->
+          <line x1="55" y1="60" x2="55" y2="72" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M45,72 Q55,68 65,72" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M38,80 L45,72 Q55,68 65,72 L72,80 L68,120 L42,120 Z" fill="#2A2540" stroke="#1F1A14" stroke-width="1.8"/>
+
+          <!-- Shirt 2 - roja -->
+          <line x1="90" y1="60" x2="90" y2="72" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M80,72 Q90,68 100,72" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M73,80 L80,72 Q90,68 100,72 L107,80 L103,120 L77,120 Z" fill="#C4593A" stroke="#1F1A14" stroke-width="1.8"/>
+
+          <!-- Shirt 3 - verde -->
+          <line x1="125" y1="60" x2="125" y2="72" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M115,72 Q125,68 135,72" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M108,80 L115,72 Q125,68 135,72 L142,80 L138,120 L112,120 Z" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.8"/>
+
+          <!-- Shirt 4 - amarilla -->
+          <line x1="160" y1="60" x2="160" y2="72" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M150,72 Q160,68 170,72" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M143,80 L150,72 Q160,68 170,72 L177,80 L173,120 L147,120 Z" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.8"/>
+
+          <!-- Shop assistant (dependienta) — right side -->
+          <!-- Body -->
+          <ellipse cx="222" cy="225" rx="24" ry="15" fill="#2A2540" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="222" cy="198" rx="20" ry="22" fill="#F5CBA7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair — up-do bun -->
+          <path d="M203,192 Q204,175 222,178 Q240,175 241,192" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <circle cx="222" cy="172" r="9" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyes (friendly) -->
+          <path d="M213,198 Q217,194 221,198" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <path d="M223,198 Q227,194 231,198" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Smile -->
+          <path d="M214,208 Q222,215 230,208" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Arm extended toward rack -->
+          <path d="M202,220 Q185,212 170,210" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <!-- Other arm -->
+          <path d="M242,220 Q255,214 258,225" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <!-- Legs -->
+          <rect x="212" y="238" width="9" height="30" rx="3" fill="#1F1A14" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="224" y="238" width="9" height="30" rx="3" fill="#1F1A14" stroke="#1F1A14" stroke-width="1.5"/>
+          <ellipse cx="216" cy="269" rx="8" ry="4" fill="#3A2E18"/>
+          <ellipse cx="228" cy="268" rx="8" ry="4" fill="#3A2E18"/>
+
+          <!-- Customer — left side, asking -->
+          <!-- Body -->
+          <ellipse cx="62" cy="228" rx="22" ry="14" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="62" cy="203" rx="19" ry="20" fill="#F5CBA7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M44,196 Q46,180 62,183 Q78,180 80,196" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyes -->
+          <ellipse cx="56" cy="201" rx="3" ry="3.5" fill="#1F1A14"/>
+          <ellipse cx="68" cy="201" rx="3" ry="3.5" fill="#1F1A14"/>
+          <circle cx="57" cy="200" r="1" fill="#FAF6EE"/>
+          <circle cx="69" cy="200" r="1" fill="#FAF6EE"/>
+          <!-- Inquisitive eyebrows -->
+          <path d="M52,195 Q56,191 60,194" fill="none" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M64,193 Q68,190 72,193" fill="none" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Open mouth (asking) -->
+          <path d="M55,212 Q62,218 69,212" fill="#C4593A" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Arm pointing at red shirt -->
+          <path d="M80,223 Q96,213 102,208" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <!-- Legs -->
+          <rect x="52" y="240" width="9" height="28" rx="3" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="64" y="240" width="9" height="28" rx="3" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <ellipse cx="56" cy="269" rx="8" ry="4" fill="#1F1A14"/>
+          <ellipse cx="68" cy="268" rx="8" ry="4" fill="#1F1A14"/>
+
+          <!-- Customer bubble — asking -->
+          <path d="M5,140 Q5,124 26,124 L190,124 Q210,124 210,140 Q210,158 190,158 L100,158 L90,172 L94,158 L26,158 Q5,158 5,140 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink2)"/>
+          <text x="107" y="141" font-family="'Caveat', cursive" font-size="16" font-weight="700" fill="#1F1A14" text-anchor="middle">Quería una camisa</text>
+          <text x="107" y="157" font-family="'Caveat', cursive" font-size="16" font-weight="700" fill="#C4593A" text-anchor="middle">roja, talla M.</text>
+
+          <!-- Assistant bubble — responding -->
+          <path d="M148,82 Q148,68 166,68 L268,68 Q278,68 278,80 Q278,96 268,96 L218,96 L208,108 L212,96 L166,96 Q148,96 148,80 Z"
+            fill="#2A2540" stroke="#1F1A14" stroke-width="2" filter="url(#ink2)"/>
+          <text x="212" y="86" font-family="'Caveat', cursive" font-size="14" fill="#FAF6EE" text-anchor="middle">¡Claro! Aquí</text>
+          <text x="212" y="100" font-family="'Caveat', cursive" font-size="14" fill="#C99A3D" text-anchor="middle">tiene.</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">Quería una camisa roja</span>
+          <span class="hint">I'd like a red shirt</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: Checking the price -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">3</span>
+        <svg class="panel-scene" viewBox="0 0 280 330" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink3" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="11" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+
+          <!-- Counter / caja background -->
+          <rect width="280" height="330" fill="#EDE8DC"/>
+          <rect width="280" height="195" fill="#F0EAD6"/>
+          <line x1="0" y1="195" x2="280" y2="195" stroke="#1F1A14" stroke-width="2"/>
+
+          <!-- Counter top -->
+          <rect x="0" y="155" width="280" height="40" rx="0" fill="#C8A97E" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Counter front -->
+          <rect x="0" y="193" width="280" height="50" fill="#A0785A" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Counter detail lines -->
+          <line x1="0" y1="215" x2="280" y2="215" stroke="#1F1A14" stroke-width="1" opacity="0.4"/>
+          <rect x="20" y="203" width="50" height="30" rx="2" fill="#8B6344" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="100" y="203" width="50" height="30" rx="2" fill="#8B6344" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="180" y="203" width="50" height="30" rx="2" fill="#8B6344" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Item on counter — red shirt folded -->
+          <rect x="90" y="130" width="100" height="28" rx="4" fill="#C4593A" stroke="#1F1A14" stroke-width="2" filter="url(#ink3)"/>
+          <line x1="90" y1="144" x2="190" y2="144" stroke="#1F1A14" stroke-width="1" opacity="0.3"/>
+          <!-- Collar hint -->
+          <path d="M128,130 Q140,125 152,130" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Size tag -->
+          <rect x="172" y="118" width="26" height="16" rx="2" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+          <text x="185" y="130" font-family="'DM Mono', monospace" font-size="9" fill="#1F1A14" text-anchor="middle">M</text>
+
+          <!-- Big price tag -->
+          <rect x="56" y="62" width="80" height="50" rx="4" fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink3)"/>
+          <circle cx="96" cy="55" r="5" fill="none" stroke="#1F1A14" stroke-width="2"/>
+          <line x1="96" y1="60" x2="96" y2="64" stroke="#1F1A14" stroke-width="1.5"/>
+          <text x="96" y="85" font-family="'Caveat', cursive" font-size="22" font-weight="700" fill="#C4593A" text-anchor="middle">22 €</text>
+          <line x1="62" y1="95" x2="130" y2="95" stroke="#1F1A14" stroke-width="1" opacity="0.4"/>
+          <text x="96" y="106" font-family="'DM Mono', monospace" font-size="9" fill="#7B736B" text-anchor="middle">veintidós euros</text>
+
+          <!-- Register / caja -->
+          <rect x="196" y="100" width="68" height="55" rx="4" fill="#2A2540" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Screen -->
+          <rect x="202" y="106" width="56" height="28" rx="3" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.5"/>
+          <text x="230" y="125" font-family="'DM Mono', monospace" font-size="12" font-weight="500" fill="#FAF6EE" text-anchor="middle">22.00 €</text>
+          <!-- Buttons row -->
+          <g fill="#C99A3D" stroke="#1F1A14" stroke-width="1">
+            <rect x="203" y="138" width="12" height="10" rx="2"/>
+            <rect x="219" y="138" width="12" height="10" rx="2"/>
+            <rect x="235" y="138" width="12" height="10" rx="2"/>
+            <rect x="251" y="138" width="9" height="10" rx="2"/>
+          </g>
+
+          <!-- Customer thinking — left -->
+          <!-- Body -->
+          <ellipse cx="55" cy="270" rx="20" ry="13" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="55" cy="247" rx="18" ry="20" fill="#F5CBA7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M38,240 Q40,226 55,228 Q70,226 72,240" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Thinking expression — finger on chin -->
+          <path d="M47,243 Q51,239 55,243" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M57,243 Q61,239 65,243" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Hmm mouth -->
+          <path d="M49,254 Q55,258 61,254" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Arm with finger to chin -->
+          <path d="M73,265 Q80,255 72,247" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="70" cy="247" r="4" fill="#F5CBA7" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Legs -->
+          <rect x="46" y="281" width="8" height="26" rx="3" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="57" y="281" width="8" height="26" rx="3" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <ellipse cx="50" cy="308" rx="7" ry="4" fill="#1F1A14"/>
+          <ellipse cx="61" cy="307" rx="7" ry="4" fill="#1F1A14"/>
+
+          <!-- Question bubble -->
+          <path d="M72,190 Q72,175 90,175 L245,175 Q260,175 260,190 Q260,206 245,206 L168,206 L158,220 L162,206 L90,206 Q72,206 72,190 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink3)"/>
+          <text x="165" y="196" font-family="'Caveat', cursive" font-size="18" font-weight="700" fill="#1F1A14" text-anchor="middle">¿Cuánto cuesta?</text>
+
+          <!-- Answer bubble from register area -->
+          <path d="M142,38 Q142,22 162,22 L256,22 Q270,22 270,38 Q270,54 256,54 L192,54 L182,68 L186,54 L162,54 Q142,54 142,38 Z"
+            fill="#2A2540" stroke="#1F1A14" stroke-width="2" filter="url(#ink3)"/>
+          <text x="206" y="45" font-family="'Caveat', cursive" font-size="17" fill="#C99A3D" text-anchor="middle">Son 22 €.</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">¿Cuánto cuesta?</span>
+          <span class="hint">How much does it cost? — Son 22 euros.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 4: Paying -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">4</span>
+        <svg class="panel-scene" viewBox="0 0 280 330" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink4" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="15" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+
+          <!-- Background -->
+          <rect width="280" height="330" fill="#EDE8DC"/>
+          <rect width="280" height="195" fill="#F0EAD6"/>
+          <line x1="0" y1="195" x2="280" y2="195" stroke="#1F1A14" stroke-width="2"/>
+
+          <!-- Counter -->
+          <rect x="0" y="158" width="280" height="37" fill="#C8A97E" stroke="#1F1A14" stroke-width="2"/>
+          <rect x="0" y="193" width="280" height="50" fill="#A0785A" stroke="#1F1A14" stroke-width="2"/>
+
+          <!-- Shopping bag with purchase -->
+          <rect x="100" y="90" width="55" height="65" rx="4" fill="#C4593A" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink4)"/>
+          <path d="M112,90 Q112,78 127,78 Q142,78 142,90" fill="none" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Store logo on bag -->
+          <text x="127" y="130" font-family="'Caveat', cursive" font-size="12" font-weight="700" fill="#FAF6EE" text-anchor="middle">LA</text>
+          <text x="127" y="146" font-family="'Caveat', cursive" font-size="12" font-weight="700" fill="#FAF6EE" text-anchor="middle">TIENDA</text>
+
+          <!-- Credit card being tapped -->
+          <rect x="168" y="108" width="60" height="40" rx="5" fill="#2A2540" stroke="#1F1A14" stroke-width="2" filter="url(#ink4)"/>
+          <!-- Chip -->
+          <rect x="174" y="120" width="18" height="14" rx="2" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.2"/>
+          <!-- Card stripes -->
+          <line x1="168" y1="136" x2="228" y2="136" stroke="#1F1A14" stroke-width="6" opacity="0.3"/>
+          <!-- Contactless symbol -->
+          <g fill="none" stroke="#FAF6EE" stroke-linecap="round">
+            <path d="M204,115 Q211,122 204,129" stroke-width="1.8"/>
+            <path d="M208,112 Q218,122 208,132" stroke-width="1.8"/>
+            <path d="M213,109 Q226,122 213,135" stroke-width="1.5" opacity="0.6"/>
+          </g>
+
+          <!-- Card reader / datáfono -->
+          <rect x="48" y="130" width="40" height="30" rx="4" fill="#3A2E18" stroke="#1F1A14" stroke-width="2"/>
+          <rect x="52" y="134" width="32" height="16" rx="2" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.2"/>
+          <text x="68" y="146" font-family="'DM Mono', monospace" font-size="8" fill="#FAF6EE" text-anchor="middle">OK ✓</text>
+
+          <!-- Tap lines — contactless animation -->
+          <g stroke="#C99A3D" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.7">
+            <path d="M98,140 Q103,135 103,140 Q103,145 98,140"/>
+            <path d="M92,136 Q100,128 100,140 Q100,152 92,144"/>
+            <path d="M86,132 Q97,120 97,140 Q97,160 86,148"/>
+          </g>
+
+          <!-- Happy customer — right side -->
+          <!-- Body -->
+          <ellipse cx="218" cy="265" rx="22" ry="14" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="218" cy="240" rx="20" ry="21" fill="#F5CBA7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M199,232 Q201,216 218,218 Q235,216 237,232" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Big happy eyes -->
+          <ellipse cx="212" cy="238" rx="3.5" ry="4" fill="#1F1A14"/>
+          <ellipse cx="224" cy="238" rx="3.5" ry="4" fill="#1F1A14"/>
+          <circle cx="213" cy="237" r="1.2" fill="#FAF6EE"/>
+          <circle cx="225" cy="237" r="1.2" fill="#FAF6EE"/>
+          <!-- Big smile -->
+          <path d="M209,251 Q218,260 227,251" fill="#C4593A" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Arm holding shopping bag -->
+          <path d="M198,260 Q185,250 178,236" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <!-- Bag on arm -->
+          <rect x="160" y="218" width="22" height="20" rx="3" fill="#C4593A" stroke="#1F1A14" stroke-width="1.8"/>
+          <path d="M164,218 Q164,212 171,212 Q178,212 178,218" fill="none" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Other arm wave -->
+          <path d="M238,258 Q250,246 255,260" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <!-- Wave lines -->
+          <g stroke="#1F1A14" stroke-width="1.2" stroke-linecap="round">
+            <line x1="249" y1="253" x2="248" y2="246"/>
+            <line x1="253" y1="252" x2="254" y2="245"/>
+            <line x1="257" y1="254" x2="259" y2="247"/>
+          </g>
+          <!-- Legs -->
+          <rect x="208" y="277" width="9" height="28" rx="3" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="220" y="277" width="9" height="28" rx="3" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <ellipse cx="212" cy="306" rx="8" ry="4" fill="#1F1A14"/>
+          <ellipse cx="224" cy="305" rx="8" ry="4" fill="#1F1A14"/>
+
+          <!-- Main bubble — paying -->
+          <path d="M8,180 Q8,164 28,164 L240,164 Q258,164 258,180 Q258,198 240,198 L145,198 L135,212 L139,198 L28,198 Q8,198 8,180 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink4)"/>
+          <text x="134" y="181" font-family="'Caveat', cursive" font-size="16" font-weight="700" fill="#1F1A14" text-anchor="middle">Me lo llevo.</text>
+          <text x="134" y="198" font-family="'Caveat', cursive" font-size="16" font-weight="700" fill="#2A2540" text-anchor="middle">Pago con tarjeta.</text>
+
+          <!-- Farewell bubble -->
+          <path d="M10,50 Q10,34 30,34 L188,34 Q206,34 206,50 Q206,66 188,66 L100,66 L90,80 L94,66 L30,66 Q10,66 10,50 Z"
+            fill="#6B8E6B" stroke="#1F1A14" stroke-width="2" filter="url(#ink4)"/>
+          <text x="108" y="55" font-family="'Caveat', cursive" font-size="17" fill="#FAF6EE" text-anchor="middle">¡Gracias!</text>
+          <text x="108" y="70" font-family="'Caveat', cursive" font-size="14" fill="#FAF6EE" text-anchor="middle">¡Hasta luego!</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">Me lo llevo — Pago con tarjeta</span>
+          <span class="hint">I'll take it — I'll pay by card</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Reference phrase strip -->
+  <div class="ref-strip">
+    <div class="ref-inner">
+      <p class="ref-label">Frases clave &nbsp;·&nbsp; key phrases</p>
+      <div class="phrase-grid">
+        <div class="phrase-card">
+          <span class="es">¿En qué puedo ayudarle?</span>
+          <span class="en">How can I help you?</span>
+        </div>
+        <div class="phrase-card">
+          <span class="es">Quería / Quiero...</span>
+          <span class="en">I'd like / I want…</span>
+        </div>
+        <div class="phrase-card">
+          <span class="es">¿Tiene...? / Busco...</span>
+          <span class="en">Do you have…? / I'm looking for…</span>
+        </div>
+        <div class="phrase-card">
+          <span class="es">¿Cuánto cuesta?</span>
+          <span class="en">How much does it cost?</span>
+        </div>
+        <div class="phrase-card">
+          <span class="es">Son X euros.</span>
+          <span class="en">It is X euros.</span>
+        </div>
+        <div class="phrase-card">
+          <span class="es">Talla S / M / L</span>
+          <span class="en">size S / M / L</span>
+        </div>
+        <div class="phrase-card">
+          <span class="es">Me lo llevo.</span>
+          <span class="en">I'll take it.</span>
+        </div>
+        <div class="phrase-card">
+          <span class="es">Pago en efectivo / con tarjeta.</span>
+          <span class="en">cash / card</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="strip-footer">Español con Diana &nbsp;·&nbsp; Lección A1-11</p>
+
+</body>
+</html>

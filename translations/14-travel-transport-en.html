@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Travel &amp; Transport — Spanish A1 (EN)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;600;700&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:      #FAF6EE;
+    --ink:        #1F1A14;
+    --ochre:      #C99A3D;
+    --terra:      #C4593A;
+    --sage:       #6B8E6B;
+    --night:      #2A2540;
+    --muted:      #7B736B;
+    --rail-gap:   32px;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: auto;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: var(--night);
+    padding: 48px 64px 40px;
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 420px; height: 420px;
+    background: var(--ochre);
+    border-radius: 50%;
+    opacity: 0.12;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 220px;
+    width: 260px; height: 260px;
+    background: var(--terra);
+    border-radius: 50%;
+    opacity: 0.10;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 10px;
+  }
+  .header-title {
+    font-family: 'Fraunces', serif;
+    font-size: 62px;
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1;
+    position: relative;
+  }
+  .header-title em {
+    font-style: italic;
+    color: var(--ochre);
+  }
+  .header-sub {
+    font-size: 15px;
+    color: rgba(250,246,238,0.55);
+    margin-top: 12px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.3px;
+  }
+  .header-badge {
+    margin-left: auto;
+    background: var(--terra);
+    color: var(--paper);
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 22px;
+    padding: 10px 22px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  /* ─── DEPARTURE BOARD ─── */
+  .board-section {
+    background: var(--night);
+    padding: 0 64px 56px;
+  }
+  .board-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 4px;
+    margin-bottom: 20px;
+  }
+  .departure-board {
+    background: #0D0B18;
+    border-radius: 6px;
+    border: 1px solid rgba(201,154,61,0.25);
+    overflow: hidden;
+  }
+  .board-head {
+    display: grid;
+    grid-template-columns: 180px 1fr 160px 160px 90px;
+    padding: 10px 24px;
+    background: rgba(201,154,61,0.10);
+    border-bottom: 1px solid rgba(201,154,61,0.20);
+  }
+  .board-head span {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--ochre);
+  }
+  .board-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 160px 160px 90px;
+    padding: 14px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    align-items: center;
+    transition: background 0.2s;
+  }
+  .board-row:hover { background: rgba(255,255,255,0.03); }
+  .board-row:last-child { border-bottom: none; }
+  .board-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    color: var(--ochre);
+    font-weight: 500;
+  }
+  .board-es {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    color: var(--paper);
+    font-weight: 700;
+  }
+  .board-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: rgba(250,246,238,0.60);
+  }
+  .board-note {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--sage);
+    line-height: 1.35;
+  }
+  .board-icon {
+    font-size: 22px;
+    text-align: right;
+  }
+
+  /* ─── MAIN GRID ─── */
+  .main {
+    padding: 56px 64px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* ─── PHRASE MOSAIC ─── */
+  .mosaic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .phrase-card {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid rgba(31,26,20,0.08);
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(31,26,20,0.06);
+    display: flex;
+    flex-direction: column;
+  }
+  .phrase-card.wide {
+    grid-column: span 2;
+  }
+  .card-color-bar {
+    height: 5px;
+    background: var(--ochre);
+  }
+  .card-color-bar.terra { background: var(--terra); }
+  .card-color-bar.sage  { background: var(--sage); }
+  .card-color-bar.night { background: var(--night); }
+  .card-body {
+    padding: 20px 22px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .card-context {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .card-es {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .card-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .card-tip {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(31,26,20,0.12);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .tip-marker {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    color: var(--terra);
+    font-weight: 700;
+    white-space: nowrap;
+    margin-top: 1px;
+  }
+  .tip-text {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  /* ─── SVG TRANSPORT STRIP ─── */
+  .transport-strip {
+    background: var(--ochre);
+    padding: 28px 64px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .transport-strip::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 200px;
+    background: linear-gradient(to right, transparent, var(--ochre));
+    pointer-events: none;
+  }
+  .strip-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+  .strip-item + .strip-item::before {
+    display: none;
+  }
+  .strip-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(31,26,20,0.20);
+    flex-shrink: 0;
+    margin: 0 4px;
+    align-self: center;
+  }
+  .strip-icon svg {
+    width: 48px;
+    height: 48px;
+  }
+  .strip-es {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .strip-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: rgba(31,26,20,0.65);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .sidebar-block {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid rgba(31,26,20,0.08);
+    box-shadow: 0 2px 12px rgba(31,26,20,0.06);
+    overflow: hidden;
+  }
+  .sidebar-head {
+    padding: 14px 20px 10px;
+    border-bottom: 1px solid rgba(31,26,20,0.07);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sidebar-head-icon {
+    font-size: 18px;
+  }
+  .sidebar-head-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .sidebar-body {
+    padding: 16px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .prep-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .prep-pill {
+    background: var(--ochre);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 3px;
+    min-width: 36px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .prep-pill.terra { background: var(--terra); }
+  .prep-pill.sage  { background: var(--sage); }
+  .prep-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .prep-desc strong {
+    font-weight: 600;
+  }
+  .prep-example {
+    font-family: 'Caveat', cursive;
+    font-size: 14px;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+
+  .gender-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .gender-cell {
+    border-radius: 6px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .gender-cell.masc { background: rgba(42,37,64,0.07); }
+  .gender-cell.fem  { background: rgba(196,89,58,0.07); }
+  .gender-cell-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .gender-cell-word {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .gender-cell.masc .gender-cell-word { color: var(--night); }
+  .gender-cell.fem  .gender-cell-word { color: var(--terra); }
+  .gender-cell-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .tip-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tip-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .tip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ochre);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .tip-dot.terra { background: var(--terra); }
+  .tip-dot.sage  { background: var(--sage); }
+  .tip-content {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .tip-content strong { font-weight: 600; }
+
+  /* ─── DIALOGUE STRIP ─── */
+  .dialogue-section {
+    padding: 0 64px 56px;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(31,26,20,0.12);
+  }
+  .dialogues {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .dialogue-card {
+    background: white;
+    border-radius: 8px;
+    border: 1px solid rgba(31,26,20,0.08);
+    box-shadow: 0 2px 12px rgba(31,26,20,0.06);
+    overflow: hidden;
+  }
+  .dialogue-head {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .dialogue-head.bus    { background: var(--sage); }
+  .dialogue-head.train  { background: var(--night); }
+  .dialogue-head.air    { background: var(--ochre); }
+  .dialogue-head.prob   { background: var(--terra); }
+  .dialogue-head-icon { font-size: 20px; }
+  .dialogue-head-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+  .dialogue-body {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .dline {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .dline-speaker {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .dline-es {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .dline-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    grid-column: 2;
+    margin-top: -3px;
+    line-height: 1.4;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--ink);
+    padding: 28px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--paper);
+  }
+  .footer-brand span { color: var(--ochre); }
+  .footer-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(250,246,238,0.35);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div>
+    <div class="header-label">Español con Diana · A1 · Topic 14</div>
+    <h1 class="header-title">Travel &amp; <em>Transport</em></h1>
+    <p class="header-sub">Vocabulary · Phrases · Grammar Notes — English Edition</p>
+  </div>
+  <div class="header-badge">🇬🇧 EN</div>
+</header>
+
+<!-- DEPARTURE BOARD -->
+<section class="board-section">
+  <div class="board-title">Departure Board — Key Phrases</div>
+  <div class="departure-board">
+    <div class="board-head">
+      <span>PHRASE</span>
+      <span>SPANISH</span>
+      <span>ENGLISH</span>
+      <span>NOTE</span>
+      <span style="text-align:right">MODE</span>
+    </div>
+    <div class="board-row">
+      <div class="board-time">A1</div>
+      <div class="board-es">Voy en autobús.</div>
+      <div class="board-en">I go by bus.</div>
+      <div class="board-note">en + vehicle, always</div>
+      <div class="board-icon">🚌</div>
+    </div>
+    <div class="board-row">
+      <div class="board-time">B1</div>
+      <div class="board-es">La estación de tren.</div>
+      <div class="board-en">The train station.</div>
+      <div class="board-note">estación = "station"</div>
+      <div class="board-icon">🏛️</div>
+    </div>
+    <div class="board-row">
+      <div class="board-time">F1</div>
+      <div class="board-es">¿A qué hora sale?</div>
+      <div class="board-en">What time does it leave?</div>
+      <div class="board-note">sale ← salir</div>
+      <div class="board-icon">🕐</div>
+    </div>
+    <div class="board-row">
+      <div class="board-time">F2</div>
+      <div class="board-es">¿A qué hora llega?</div>
+      <div class="board-en">What time does it arrive?</div>
+      <div class="board-note">llega ← llegar</div>
+      <div class="board-icon">🕑</div>
+    </div>
+    <div class="board-row">
+      <div class="board-time">F3</div>
+      <div class="board-es">¿Cuánto tarda?</div>
+      <div class="board-en">How long does it take?</div>
+      <div class="board-note">tarda ← tardar</div>
+      <div class="board-icon">⏱️</div>
+    </div>
+    <div class="board-row">
+      <div class="board-time">G1</div>
+      <div class="board-es">Un billete para Madrid, por favor.</div>
+      <div class="board-en">A ticket to Madrid, please.</div>
+      <div class="board-note">billete = ticket (Spain)</div>
+      <div class="board-icon">🎫</div>
+    </div>
+    <div class="board-row">
+      <div class="board-time">G2</div>
+      <div class="board-es">¿Cuánto cuesta?</div>
+      <div class="board-en">How much does it cost?</div>
+      <div class="board-note">cuesta ← costar</div>
+      <div class="board-icon">💶</div>
+    </div>
+    <div class="board-row">
+      <div class="board-time">H1</div>
+      <div class="board-es">Hay un retraso.</div>
+      <div class="board-en">There is a delay.</div>
+      <div class="board-note">hay = there is/are</div>
+      <div class="board-icon">⚠️</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSPORT ICON STRIP -->
+<div class="transport-strip">
+  <div class="strip-item">
+    <div class="strip-icon">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="14" width="40" height="22" rx="4" fill="#1F1A14" opacity="0.85"/>
+        <rect x="8" y="18" width="8" height="6" rx="1.5" fill="#FAF6EE" opacity="0.7"/>
+        <rect x="20" y="18" width="8" height="6" rx="1.5" fill="#FAF6EE" opacity="0.7"/>
+        <rect x="32" y="18" width="8" height="6" rx="1.5" fill="#FAF6EE" opacity="0.7"/>
+        <rect x="2" y="28" width="44" height="6" rx="2" fill="#1F1A14"/>
+        <circle cx="13" cy="37" r="4" fill="#1F1A14"/><circle cx="13" cy="37" r="2" fill="#FAF6EE"/>
+        <circle cx="35" cy="37" r="4" fill="#1F1A14"/><circle cx="35" cy="37" r="2" fill="#FAF6EE"/>
+      </svg>
+    </div>
+    <div class="strip-es">el autobús</div>
+    <div class="strip-en">bus</div>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <div class="strip-icon">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="12" width="36" height="20" rx="3" fill="#1F1A14" opacity="0.85"/>
+        <rect x="10" y="16" width="7" height="5" rx="1" fill="#FAF6EE" opacity="0.7"/>
+        <rect x="21" y="16" width="7" height="5" rx="1" fill="#FAF6EE" opacity="0.7"/>
+        <rect x="32" y="16" width="7" height="5" rx="1" fill="#FAF6EE" opacity="0.7"/>
+        <rect x="4" y="32" width="40" height="4" rx="2" fill="#1F1A14"/>
+        <circle cx="14" cy="39" r="3.5" fill="#1F1A14"/><circle cx="14" cy="39" r="1.8" fill="#FAF6EE"/>
+        <circle cx="34" cy="39" r="3.5" fill="#1F1A14"/><circle cx="34" cy="39" r="1.8" fill="#FAF6EE"/>
+        <rect x="20" y="32" width="8" height="4" fill="#1F1A14"/>
+      </svg>
+    </div>
+    <div class="strip-es">el metro</div>
+    <div class="strip-en">subway</div>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <div class="strip-icon">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="16" width="42" height="16" rx="3" fill="#1F1A14" opacity="0.85"/>
+        <rect x="6" y="19" width="8" height="6" rx="1" fill="#FAF6EE" opacity="0.7"/>
+        <rect x="18" y="19" width="8" height="6" rx="1" fill="#FAF6EE" opacity="0.7"/>
+        <rect x="30" y="19" width="8" height="6" rx="1" fill="#FAF6EE" opacity="0.7"/>
+        <rect x="0" y="30" width="48" height="3" rx="1.5" fill="#1F1A14"/>
+        <circle cx="11" cy="36" r="3" fill="#1F1A14"/><circle cx="11" cy="36" r="1.5" fill="#FAF6EE"/>
+        <circle cx="37" cy="36" r="3" fill="#1F1A14"/><circle cx="37" cy="36" r="1.5" fill="#FAF6EE"/>
+      </svg>
+    </div>
+    <div class="strip-es">el tren</div>
+    <div class="strip-en">train</div>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <div class="strip-icon">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 28 Q12 16 24 18 Q36 20 44 28" stroke="#1F1A14" stroke-width="2.5" fill="none" opacity="0.85"/>
+        <ellipse cx="24" cy="26" rx="18" ry="7" fill="#1F1A14" opacity="0.85"/>
+        <path d="M6 26 Q24 10 42 26" fill="#1F1A14" opacity="0.7"/>
+        <ellipse cx="24" cy="24" rx="6" ry="5" fill="#FAF6EE" opacity="0.6"/>
+        <path d="M8 28 L4 34 L12 32 Z" fill="#1F1A14" opacity="0.8"/>
+        <path d="M40 28 L44 34 L36 32 Z" fill="#1F1A14" opacity="0.8"/>
+      </svg>
+    </div>
+    <div class="strip-es">el avión</div>
+    <div class="strip-en">plane</div>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <div class="strip-icon">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 32 Q6 22 12 20 L30 18 Q38 18 42 24 L44 32Z" fill="#1F1A14" opacity="0.85"/>
+        <rect x="8" y="23" width="10" height="7" rx="1.5" fill="#FAF6EE" opacity="0.65"/>
+        <rect x="22" y="23" width="10" height="7" rx="1.5" fill="#FAF6EE" opacity="0.65"/>
+        <circle cx="14" cy="36" r="4" fill="#1F1A14"/><circle cx="14" cy="36" r="2" fill="#FAF6EE"/>
+        <circle cx="36" cy="36" r="4" fill="#1F1A14"/><circle cx="36" cy="36" r="2" fill="#FAF6EE"/>
+      </svg>
+    </div>
+    <div class="strip-es">el coche</div>
+    <div class="strip-en">car</div>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <div class="strip-icon">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="18" width="32" height="16" rx="4" fill="#C4593A" opacity="0.9"/>
+        <rect x="10" y="20" width="9" height="7" rx="1.5" fill="#FAF6EE" opacity="0.7"/>
+        <rect x="23" y="20" width="9" height="7" rx="1.5" fill="#FAF6EE" opacity="0.7"/>
+        <rect x="8" y="12" width="14" height="8" rx="2" fill="#C4593A" opacity="0.7"/>
+        <circle cx="15" cy="38" r="4" fill="#1F1A14"/><circle cx="15" cy="38" r="2" fill="#FAF6EE"/>
+        <circle cx="33" cy="38" r="4" fill="#1F1A14"/><circle cx="33" cy="38" r="2" fill="#FAF6EE"/>
+      </svg>
+    </div>
+    <div class="strip-es">el taxi</div>
+    <div class="strip-en">taxi</div>
+  </div>
+</div>
+
+<!-- MAIN GRID -->
+<div class="main">
+  <div class="mosaic-grid">
+
+    <!-- Ticket phrases -->
+    <div class="phrase-card wide">
+      <div class="card-color-bar"></div>
+      <div class="card-body">
+        <div class="card-context">Block G · Buying a Ticket</div>
+        <div class="card-es">Un billete de ida y vuelta para Sevilla.</div>
+        <div class="card-en">A round-trip ticket to Seville.</div>
+        <div class="card-tip">
+          <span class="tip-marker">Tip</span>
+          <span class="tip-text">Ida = one-way (→). Ida y vuelta = round-trip (↔). Picture the arrows and you'll never mix them up.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phrase-card">
+      <div class="card-color-bar terra"></div>
+      <div class="card-body">
+        <div class="card-context">Block C · Travel Verbs</div>
+        <div class="card-es">El tren sale a las nueve.</div>
+        <div class="card-en">The train leaves at nine.</div>
+        <div class="card-tip">
+          <span class="tip-marker">Tip</span>
+          <span class="tip-text">Sale = it leaves. "The train has a SALE on departures." Silly? Yes. Sticky? Very.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phrase-card">
+      <div class="card-color-bar sage"></div>
+      <div class="card-body">
+        <div class="card-context">Block C · Travel Verbs</div>
+        <div class="card-es">El autobús llega a las dos.</div>
+        <div class="card-en">The bus arrives at two.</div>
+        <div class="card-tip">
+          <span class="tip-marker">Tip</span>
+          <span class="tip-text">Llega: the double-ll sounds like a soft English "y" — "ye-GA". Practice aloud.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phrase-card">
+      <div class="card-color-bar night"></div>
+      <div class="card-body">
+        <div class="card-context">Block D · Prepositions</div>
+        <div class="card-es">De Madrid a Barcelona en tren.</div>
+        <div class="card-en">From Madrid to Barcelona by train.</div>
+        <div class="card-tip">
+          <span class="tip-marker">Tip</span>
+          <span class="tip-text">de = from · a = to · en = by (mode). One rule, three words.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phrase-card">
+      <div class="card-color-bar"></div>
+      <div class="card-body">
+        <div class="card-context">Block H · Problems</div>
+        <div class="card-es">Estoy perdido / perdida.</div>
+        <div class="card-en">I am lost.</div>
+        <div class="card-tip">
+          <span class="tip-marker">Tip</span>
+          <span class="tip-text">Match your gender: male = perdido, female = perdida. Only the last vowel changes.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phrase-card">
+      <div class="card-color-bar terra"></div>
+      <div class="card-body">
+        <div class="card-context">Block B · Key Places</div>
+        <div class="card-es">Tome el metro hasta la parada Aeropuerto.</div>
+        <div class="card-en">Take the metro to the Airport stop.</div>
+        <div class="card-tip">
+          <span class="tip-marker">Tip</span>
+          <span class="tip-text">Aeropuerto = aero (air) + puerto (port) = airport. Same logic as English "air-port."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phrase-card wide">
+      <div class="card-color-bar sage"></div>
+      <div class="card-body">
+        <div class="card-context">Block G · Buying a Ticket</div>
+        <div class="card-es">Un billete para Toledo, por favor. ¿Cuánto cuesta?</div>
+        <div class="card-en">A ticket to Toledo, please. How much does it cost?</div>
+        <div class="card-tip">
+          <span class="tip-marker">Tip</span>
+          <span class="tip-text">Lead with "para" (purpose) not "a" when buying. Cuesta ← costar = to cost. Near-twin of English "cost."</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Preposition guide -->
+    <div class="sidebar-block">
+      <div class="sidebar-head">
+        <span class="sidebar-head-icon">🧭</span>
+        <span class="sidebar-head-label">Preposition Map</span>
+      </div>
+      <div class="sidebar-body">
+        <div class="prep-row">
+          <div class="prep-pill">en</div>
+          <div class="prep-desc">
+            <strong>Mode of transport</strong> — how you travel.
+            <span class="prep-example">Voy en tren / en avión / en taxi.</span>
+            Exception: <em>a pie</em> (on foot — no vehicle).
+          </div>
+        </div>
+        <div class="prep-row">
+          <div class="prep-pill terra">a</div>
+          <div class="prep-desc">
+            <strong>Destination</strong> — where you're going.
+            <span class="prep-example">El tren de Madrid a Barcelona.</span>
+          </div>
+        </div>
+        <div class="prep-row">
+          <div class="prep-pill sage">de</div>
+          <div class="prep-desc">
+            <strong>Origin</strong> — where it starts.
+            <span class="prep-example">El autobús de Sevilla a Málaga.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gender agreement -->
+    <div class="sidebar-block">
+      <div class="sidebar-head">
+        <span class="sidebar-head-icon">🔤</span>
+        <span class="sidebar-head-label">Gender: perdido / perdida</span>
+      </div>
+      <div class="sidebar-body">
+        <div class="gender-block">
+          <div class="gender-cell masc">
+            <div class="gender-cell-label">Masculine</div>
+            <div class="gender-cell-word">perdido</div>
+            <div class="gender-cell-en">male speaker</div>
+          </div>
+          <div class="gender-cell fem">
+            <div class="gender-cell-label">Feminine</div>
+            <div class="gender-cell-word">perdida</div>
+            <div class="gender-cell-en">female speaker</div>
+          </div>
+        </div>
+        <div style="font-family:'Inter',sans-serif;font-size:12px;color:var(--muted);line-height:1.5;margin-top:4px;">
+          Use <strong>estoy</strong> (not soy) — temporary state. Being lost is temporary.
+        </div>
+      </div>
+    </div>
+
+    <!-- Power tips -->
+    <div class="sidebar-block">
+      <div class="sidebar-head">
+        <span class="sidebar-head-icon">💡</span>
+        <span class="sidebar-head-label">Power Tips</span>
+      </div>
+      <div class="sidebar-body">
+        <div class="tip-list">
+          <div class="tip-item">
+            <div class="tip-dot"></div>
+            <div class="tip-content"><strong>billete</strong> (Spain) vs <strong>boleto</strong> (Latin America) — both mean ticket. Diana = Spain → use billete.</div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-dot terra"></div>
+            <div class="tip-content"><strong>¿A qué hora…?</strong> always starts with <em>a</em>, never <em>en</em>. Resist the reflex.</div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-dot sage"></div>
+            <div class="tip-content"><strong>Hay un retraso</strong> — "HAY rhymes with 'hey, we're late!'" Drill as one chunk.</div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-dot"></div>
+            <div class="tip-content"><strong>Autobús</strong> stress: au-to-<strong>BÚS</strong>. The accent mark is your stress guide.</div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-dot terra"></div>
+            <div class="tip-content"><strong>Andén</strong> → an-<strong>DÉN</strong>. Without the written accent you'd flatten it and sound unsure.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- DIALOGUE SECTION -->
+<section class="dialogue-section">
+  <h2 class="section-title">Context Dialogues</h2>
+  <div class="dialogues">
+
+    <div class="dialogue-card">
+      <div class="dialogue-head bus">
+        <span class="dialogue-head-icon">🚌</span>
+        <span class="dialogue-head-label">At the Bus Stop</span>
+      </div>
+      <div class="dialogue-body">
+        <div class="dline">
+          <span class="dline-speaker">A</span>
+          <span class="dline-es">Perdona, ¿a qué hora sale el autobús para Córdoba?</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">Excuse me, what time does the bus to Córdoba leave?</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">B</span>
+          <span class="dline-es">Sale a las tres y cuarto.</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">It leaves at quarter past three.</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">A</span>
+          <span class="dline-es">¿Cuánto tarda?</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">How long does it take?</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">B</span>
+          <span class="dline-es">Unas dos horas.</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">About two hours.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialogue-card">
+      <div class="dialogue-head train">
+        <span class="dialogue-head-icon">🚆</span>
+        <span class="dialogue-head-label">At the Train Station</span>
+      </div>
+      <div class="dialogue-body">
+        <div class="dline">
+          <span class="dline-speaker">A</span>
+          <span class="dline-es">Buenos días. Un billete para Sevilla, por favor.</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">Good morning. A ticket to Seville, please.</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">B</span>
+          <span class="dline-es">¿Ida o ida y vuelta?</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">One-way or round-trip?</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">A</span>
+          <span class="dline-es">Ida y vuelta. ¿Cuánto cuesta?</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">Round-trip. How much does it cost?</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">B</span>
+          <span class="dline-es">Cuarenta euros.</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">Forty euros.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialogue-card">
+      <div class="dialogue-head air">
+        <span class="dialogue-head-icon">✈️</span>
+        <span class="dialogue-head-label">At the Airport</span>
+      </div>
+      <div class="dialogue-body">
+        <div class="dline">
+          <span class="dline-speaker">A</span>
+          <span class="dline-es">Disculpe, ¿dónde está el aeropuerto de Málaga?</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">Excuse me, where is Málaga airport?</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">B</span>
+          <span class="dline-es">Tome el metro hasta la parada Aeropuerto.</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">Take the metro to the Airport stop.</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">A</span>
+          <span class="dline-es">¿A qué hora llega el próximo metro?</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">What time does the next metro arrive?</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">B</span>
+          <span class="dline-es">Llega en diez minutos.</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">It arrives in ten minutes.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dialogue-card">
+      <div class="dialogue-head prob">
+        <span class="dialogue-head-icon">⚠️</span>
+        <span class="dialogue-head-label">Problem Scenario</span>
+      </div>
+      <div class="dialogue-body">
+        <div class="dline">
+          <span class="dline-speaker">A</span>
+          <span class="dline-es">Perdona, estoy perdido. ¿Hay un retraso?</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">Excuse me, I'm lost. Is there a delay?</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">B</span>
+          <span class="dline-es">Sí, el tren llega con veinte minutos de retraso.</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">Yes, the train arrives 20 minutes late.</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">A</span>
+          <span class="dline-es">¿En qué andén?</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">Which platform?</span>
+        </div>
+        <div class="dline">
+          <span class="dline-speaker">B</span>
+          <span class="dline-es">En el andén dos.</span>
+        </div>
+        <div class="dline">
+          <span></span>
+          <span class="dline-en">Platform two.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">Español <span>con Diana</span></div>
+  <div class="footer-tag">A1 · Topic 14 · Travel &amp; Transport · English Edition</div>
+</footer>
+
+</body>
+</html>

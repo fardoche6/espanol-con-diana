@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1280" />
+<title>In the City & Directions — Español con Diana (EN)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&family=Inter:wght@400;600;700&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #FAF6EE;
+    --ink:   #1F1A14;
+    --ochre: #C99A3D;
+    --terra: #C4593A;
+    --sage:  #6B8E6B;
+    --night: #2A2540;
+    --muted: #7B736B;
+    --road:  #D8D0C4;
+    --road-center: #E8E2D8;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    padding: 0;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--night);
+    color: var(--paper);
+    padding: 28px 60px 24px;
+    display: flex;
+    align-items: flex-end;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: 0.18;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 200px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: var(--terra);
+    opacity: 0.14;
+  }
+  .header-badge {
+    background: var(--ochre);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+  .header-title {
+    font-family: 'Fraunces', serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .header-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: rgba(250,246,238,0.55);
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+  }
+  .header-lang {
+    margin-left: auto;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--ochre);
+    flex-shrink: 0;
+  }
+
+  /* ── MAP CANVAS ── */
+  .map-section {
+    position: relative;
+    padding: 40px 60px;
+    overflow: hidden;
+  }
+  .map-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  /* SVG city map */
+  .city-map-wrap {
+    position: relative;
+    width: 100%;
+  }
+  .city-map-wrap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ── PHRASE GRID ── */
+  .phrase-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 2px solid var(--ink);
+    border-left: 2px solid var(--ink);
+    margin: 0 60px 0;
+  }
+  .phrase-card {
+    border-right: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding: 22px 20px 18px;
+    position: relative;
+    background: var(--paper);
+    transition: background 0.15s;
+  }
+  .phrase-card:nth-child(4n+1) { background: var(--paper); }
+  .phrase-card.accent-ochre { background: var(--ochre); }
+  .phrase-card.accent-terra { background: var(--terra); color: var(--paper); }
+  .phrase-card.accent-night { background: var(--night); color: var(--paper); }
+  .phrase-card.accent-sage  { background: var(--sage);  color: var(--paper); }
+
+  .pc-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 8px;
+  }
+  .pc-es {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .pc-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 8px;
+    opacity: 0.85;
+  }
+  .pc-tip {
+    font-family: 'Caveat', cursive;
+    font-size: 14px;
+    line-height: 1.4;
+    opacity: 0.75;
+    border-top: 1px dashed currentColor;
+    padding-top: 8px;
+    margin-top: 4px;
+  }
+  .pc-icon {
+    position: absolute;
+    top: 16px; right: 16px;
+    font-size: 22px;
+    opacity: 0.35;
+  }
+
+  /* ── DIRECTION STRIP ── */
+  .dir-strip {
+    margin: 0 60px;
+    background: var(--night);
+    color: var(--paper);
+    display: flex;
+    align-items: stretch;
+    border-top: 2px solid var(--ink);
+    border-left: 2px solid var(--ink);
+    border-right: 2px solid var(--ink);
+  }
+  .dir-strip-label {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    padding: 20px 14px;
+    border-right: 2px solid rgba(250,246,238,0.12);
+    flex-shrink: 0;
+  }
+  .dir-items {
+    display: flex;
+    flex: 1;
+  }
+  .dir-item {
+    flex: 1;
+    padding: 20px 18px;
+    border-right: 1px solid rgba(250,246,238,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .dir-item:last-child { border-right: none; }
+  .dir-arrow {
+    font-size: 28px;
+    line-height: 1;
+  }
+  .dir-es {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .dir-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(250,246,238,0.55);
+    letter-spacing: 0.03em;
+  }
+  .dir-tip {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    color: var(--ochre);
+    margin-top: 2px;
+  }
+
+  /* ── DIALOGUE BOX ── */
+  .dialogue-section {
+    margin: 0 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 2px solid var(--ink);
+    border-top: none;
+  }
+  .dialogue-col {
+    padding: 28px 28px 24px;
+  }
+  .dialogue-col:first-child {
+    border-right: 2px solid var(--ink);
+  }
+  .dialogue-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .dialogue-line {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: baseline;
+  }
+  .dl-speaker {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ochre);
+    flex-shrink: 0;
+    width: 20px;
+  }
+  .dl-es {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .dl-en {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: 30px;
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+
+  /* ── TRAP BOX ── */
+  .trap-section {
+    margin: 0 60px;
+    background: var(--terra);
+    color: var(--paper);
+    padding: 24px 32px;
+    border: 2px solid var(--ink);
+    border-top: none;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  .trap-head {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+    line-height: 1.2;
+    min-width: 160px;
+  }
+  .trap-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    flex: 1;
+  }
+  .trap-item {
+    background: rgba(0,0,0,0.18);
+    border-radius: 6px;
+    padding: 10px 14px;
+    min-width: 200px;
+  }
+  .trap-wrong {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    text-decoration: line-through;
+    opacity: 0.65;
+    margin-bottom: 3px;
+  }
+  .trap-right {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .trap-note {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    opacity: 0.8;
+    margin-top: 3px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin: 0 60px;
+    border: 2px solid var(--ink);
+    border-top: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .footer-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  .footer-topic {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ochre);
+  }
+  .footer-cefr {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(250,246,238,0.45);
+  }
+
+  .spacer { height: 0; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <div class="header-badge">Topic 10 · A1</div>
+  </div>
+  <div>
+    <div class="header-title">In the City &amp; Directions</div>
+    <div class="header-sub">Español con Diana · English Reference Infographic</div>
+  </div>
+  <div class="header-lang">EN 🗺</div>
+</div>
+
+<!-- CITY MAP SVG -->
+<div class="map-section">
+  <div class="map-label">City Map — Annotated Vocabulary</div>
+  <div class="city-map-wrap">
+    <svg viewBox="0 0 1160 420" xmlns="http://www.w3.org/2000/svg" style="font-family:'Inter',sans-serif;">
+      <!-- Background -->
+      <rect width="1160" height="420" fill="#EAE4D8"/>
+
+      <!-- Block color -->
+      <rect x="0" y="0" width="1160" height="420" fill="#E4DDD0"/>
+
+      <!-- Roads -->
+      <!-- Horizontal main road -->
+      <rect x="0" y="185" width="1160" height="50" fill="#C8C0B4"/>
+      <rect x="0" y="207" width="1160" height="6" fill="#B8B0A4" opacity="0.5"/>
+      <!-- Dashed center line -->
+      <line x1="0" y1="210" x2="1160" y2="210" stroke="#FAF6EE" stroke-width="2" stroke-dasharray="24,16" opacity="0.6"/>
+
+      <!-- Vertical road left -->
+      <rect x="170" y="0" width="48" height="420" fill="#C8C0B4"/>
+      <line x1="194" y1="0" x2="194" y2="420" stroke="#FAF6EE" stroke-width="2" stroke-dasharray="24,16" opacity="0.6"/>
+
+      <!-- Vertical road center -->
+      <rect x="560" y="0" width="48" height="420" fill="#C8C0B4"/>
+      <line x1="584" y1="0" x2="584" y2="420" stroke="#FAF6EE" stroke-width="2" stroke-dasharray="24,16" opacity="0.6"/>
+
+      <!-- Vertical road right -->
+      <rect x="950" y="0" width="48" height="420" fill="#C8C0B4"/>
+      <line x1="974" y1="0" x2="974" y2="420" stroke="#FAF6EE" stroke-width="2" stroke-dasharray="24,16" opacity="0.6"/>
+
+      <!-- Sidewalk blocks -->
+      <!-- Row above road -->
+      <!-- Block 1 TL -->
+      <rect x="8" y="8" width="152" height="168" rx="4" fill="#F0EAE0" stroke="#C8C0B4" stroke-width="1.5"/>
+      <!-- Block 2 TC -->
+      <rect x="228" y="8" width="322" height="168" rx="4" fill="#F0EAE0" stroke="#C8C0B4" stroke-width="1.5"/>
+      <!-- Block 3 TC2 -->
+      <rect x="618" y="8" width="322" height="168" rx="4" fill="#F0EAE0" stroke="#C8C0B4" stroke-width="1.5"/>
+      <!-- Block 4 TR -->
+      <rect x="1008" y="8" width="144" height="168" rx="4" fill="#F0EAE0" stroke="#C8C0B4" stroke-width="1.5"/>
+
+      <!-- Row below road -->
+      <rect x="8" y="245" width="152" height="167" rx="4" fill="#F0EAE0" stroke="#C8C0B4" stroke-width="1.5"/>
+      <rect x="228" y="245" width="322" height="167" rx="4" fill="#F0EAE0" stroke="#C8C0B4" stroke-width="1.5"/>
+      <rect x="618" y="245" width="322" height="167" rx="4" fill="#F0EAE0" stroke="#C8C0B4" stroke-width="1.5"/>
+      <rect x="1008" y="245" width="144" height="167" rx="4" fill="#F0EAE0" stroke="#C8C0B4" stroke-width="1.5"/>
+
+      <!-- ── PLACE PINS ── -->
+
+      <!-- 1. el banco -->
+      <g transform="translate(84,88)">
+        <rect x="-38" y="-26" width="76" height="32" rx="16" fill="#2A2540"/>
+        <text x="0" y="-5" text-anchor="middle" fill="#C99A3D" font-family="'Fraunces',serif" font-size="13" font-weight="700">el banco</text>
+        <text x="0" y="18" text-anchor="middle" fill="#FAF6EE" font-family="'Inter',sans-serif" font-size="10">the bank</text>
+        <line x1="0" y1="6" x2="0" y2="24" stroke="#2A2540" stroke-width="2"/>
+        <circle cx="0" cy="28" r="5" fill="#C99A3D"/>
+        <!-- building icon -->
+        <rect x="-18" y="-66" width="36" height="28" rx="2" fill="#C99A3D" opacity="0.9"/>
+        <rect x="-13" y="-58" width="6" height="14" rx="1" fill="#2A2540" opacity="0.7"/>
+        <rect x="-3" y="-58" width="6" height="14" rx="1" fill="#2A2540" opacity="0.7"/>
+        <rect x="7" y="-58" width="6" height="14" rx="1" fill="#2A2540" opacity="0.7"/>
+        <rect x="-20" y="-70" width="40" height="6" rx="1" fill="#2A2540" opacity="0.5"/>
+      </g>
+
+      <!-- 2. la farmacia -->
+      <g transform="translate(389,88)">
+        <rect x="-48" y="-26" width="96" height="32" rx="16" fill="#6B8E6B"/>
+        <text x="0" y="-5" text-anchor="middle" fill="#FAF6EE" font-family="'Fraunces',serif" font-size="13" font-weight="700">la farmacia</text>
+        <text x="0" y="18" text-anchor="middle" fill="#FAF6EE" font-family="'Inter',sans-serif" font-size="10">the pharmacy</text>
+        <line x1="0" y1="6" x2="0" y2="24" stroke="#6B8E6B" stroke-width="2"/>
+        <circle cx="0" cy="28" r="5" fill="#6B8E6B"/>
+        <!-- cross -->
+        <rect x="-10" y="-68" width="20" height="6" rx="2" fill="#6B8E6B" opacity="0.9"/>
+        <rect x="-3" y="-75" width="6" height="20" rx="2" fill="#6B8E6B" opacity="0.9"/>
+      </g>
+
+      <!-- 3. el museo -->
+      <g transform="translate(779,88)">
+        <rect x="-42" y="-26" width="84" height="32" rx="16" fill="#C99A3D"/>
+        <text x="0" y="-5" text-anchor="middle" fill="#1F1A14" font-family="'Fraunces',serif" font-size="13" font-weight="700">el museo</text>
+        <text x="0" y="18" text-anchor="middle" fill="#1F1A14" font-family="'Inter',sans-serif" font-size="10">the museum</text>
+        <line x1="0" y1="6" x2="0" y2="24" stroke="#C99A3D" stroke-width="2"/>
+        <circle cx="0" cy="28" r="5" fill="#C99A3D"/>
+        <!-- columns -->
+        <rect x="-20" y="-66" width="40" height="26" rx="2" fill="#C99A3D" opacity="0.3" stroke="#C99A3D" stroke-width="1"/>
+        <rect x="-16" y="-62" width="4" height="18" fill="#C99A3D" opacity="0.8"/>
+        <rect x="-6"  y="-62" width="4" height="18" fill="#C99A3D" opacity="0.8"/>
+        <rect x="4"   y="-62" width="4" height="18" fill="#C99A3D" opacity="0.8"/>
+        <rect x="14"  y="-62" width="4" height="18" fill="#C99A3D" opacity="0.8"/>
+        <rect x="-22" y="-70" width="44" height="6" rx="1" fill="#C99A3D" opacity="0.9"/>
+      </g>
+
+      <!-- 4. la estación -->
+      <g transform="translate(1080,88)">
+        <rect x="-44" y="-26" width="88" height="32" rx="16" fill="#C4593A"/>
+        <text x="0" y="-5" text-anchor="middle" fill="#FAF6EE" font-family="'Fraunces',serif" font-size="13" font-weight="700">la estación</text>
+        <text x="0" y="18" text-anchor="middle" fill="#FAF6EE" font-family="'Inter',sans-serif" font-size="10">the station</text>
+        <line x1="0" y1="6" x2="0" y2="24" stroke="#C4593A" stroke-width="2"/>
+        <circle cx="0" cy="28" r="5" fill="#C4593A"/>
+        <!-- train shape -->
+        <rect x="-16" y="-72" width="32" height="20" rx="4" fill="#C4593A" opacity="0.8"/>
+        <circle cx="-8" cy="-52" r="4" fill="#C4593A" opacity="0.8"/>
+        <circle cx="8" cy="-52" r="4" fill="#C4593A" opacity="0.8"/>
+      </g>
+
+      <!-- 5. el hospital -->
+      <g transform="translate(84,318)">
+        <rect x="-44" y="-26" width="88" height="32" rx="16" fill="#2A2540"/>
+        <text x="0" y="-5" text-anchor="middle" fill="#FAF6EE" font-family="'Fraunces',serif" font-size="13" font-weight="700">el hospital</text>
+        <text x="0" y="18" text-anchor="middle" fill="#FAF6EE" font-family="'Inter',sans-serif" font-size="10">the hospital</text>
+        <line x1="0" y1="6" x2="0" y2="24" stroke="#2A2540" stroke-width="2"/>
+        <circle cx="0" cy="28" r="5" fill="#C99A3D"/>
+        <!-- H symbol -->
+        <text x="0" y="-44" text-anchor="middle" fill="#FAF6EE" font-family="'Fraunces',serif" font-size="26" font-weight="700" opacity="0.7">H</text>
+      </g>
+
+      <!-- 6. el parque -->
+      <g transform="translate(389,318)">
+        <rect x="-42" y="-26" width="84" height="32" rx="16" fill="#6B8E6B"/>
+        <text x="0" y="-5" text-anchor="middle" fill="#FAF6EE" font-family="'Fraunces',serif" font-size="13" font-weight="700">el parque</text>
+        <text x="0" y="18" text-anchor="middle" fill="#FAF6EE" font-family="'Inter',sans-serif" font-size="10">the park</text>
+        <line x1="0" y1="6" x2="0" y2="24" stroke="#6B8E6B" stroke-width="2"/>
+        <circle cx="0" cy="28" r="5" fill="#6B8E6B"/>
+        <!-- tree -->
+        <circle cx="0" cy="-62" r="14" fill="#6B8E6B" opacity="0.8"/>
+        <rect x="-3" y="-48" width="6" height="12" fill="#6B8E6B" opacity="0.6"/>
+      </g>
+
+      <!-- 7. el supermercado -->
+      <g transform="translate(779,318)">
+        <rect x="-60" y="-26" width="120" height="32" rx="16" fill="#C99A3D"/>
+        <text x="0" y="-5" text-anchor="middle" fill="#1F1A14" font-family="'Fraunces',serif" font-size="12" font-weight="700">el supermercado</text>
+        <text x="0" y="18" text-anchor="middle" fill="#1F1A14" font-family="'Inter',sans-serif" font-size="10">the supermarket</text>
+        <line x1="0" y1="6" x2="0" y2="24" stroke="#C99A3D" stroke-width="2"/>
+        <circle cx="0" cy="28" r="5" fill="#C99A3D"/>
+        <!-- cart symbol -->
+        <text x="0" y="-44" text-anchor="middle" fill="#C99A3D" font-family="'Inter',sans-serif" font-size="22" opacity="0.8">🛒</text>
+      </g>
+
+      <!-- 8. la iglesia -->
+      <g transform="translate(1080,318)">
+        <rect x="-44" y="-26" width="88" height="32" rx="16" fill="#C4593A"/>
+        <text x="0" y="-5" text-anchor="middle" fill="#FAF6EE" font-family="'Fraunces',serif" font-size="13" font-weight="700">la iglesia</text>
+        <text x="0" y="18" text-anchor="middle" fill="#FAF6EE" font-family="'Inter',sans-serif" font-size="10">the church</text>
+        <line x1="0" y1="6" x2="0" y2="24" stroke="#C4593A" stroke-width="2"/>
+        <circle cx="0" cy="28" r="5" fill="#C4593A"/>
+        <!-- cross steeple -->
+        <rect x="-14" y="-66" width="28" height="22" rx="2" fill="#C4593A" opacity="0.7"/>
+        <polygon points="0,-80 -10,-58 10,-58" fill="#C4593A" opacity="0.9"/>
+        <rect x="-2" y="-84" width="4" height="8" fill="#C4593A" opacity="0.9"/>
+        <rect x="-5" y="-80" width="10" height="3" fill="#C4593A" opacity="0.9"/>
+      </g>
+
+      <!-- Street name labels -->
+      <rect x="220" y="198" width="130" height="24" rx="3" fill="#FAF6EE" opacity="0.7"/>
+      <text x="285" y="214" text-anchor="middle" fill="#2A2540" font-family="'DM Mono',monospace" font-size="10" letter-spacing="0.08em">CALLE MAYOR</text>
+
+      <rect x="620" y="198" width="130" height="24" rx="3" fill="#FAF6EE" opacity="0.7"/>
+      <text x="685" y="214" text-anchor="middle" fill="#2A2540" font-family="'DM Mono',monospace" font-size="10" letter-spacing="0.08em">CALLE REAL</text>
+
+      <rect x="410" y="198" width="148" height="24" rx="3" fill="#FAF6EE" opacity="0.7"/>
+      <text x="484" y="214" text-anchor="middle" fill="#2A2540" font-family="'DM Mono',monospace" font-size="10" letter-spacing="0.08em">AVENIDA CENTRAL</text>
+
+      <!-- Direction arrow overlays -->
+      <!-- Straight ahead -->
+      <g transform="translate(584,210)">
+        <polygon points="0,-18 -9,0 9,0" fill="#FAF6EE" opacity="0.9"/>
+      </g>
+      <!-- Turn left -->
+      <g transform="translate(194,210)">
+        <polygon points="-18,0 0,-9 0,9" fill="#FAF6EE" opacity="0.9"/>
+      </g>
+      <!-- Turn right -->
+      <g transform="translate(974,210)">
+        <polygon points="18,0 0,-9 0,9" fill="#FAF6EE" opacity="0.9"/>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<!-- PHRASE GRID -->
+<div class="phrase-grid">
+  <div class="phrase-card accent-night">
+    <div class="pc-tag">Asking</div>
+    <div class="pc-es">Perdón, ¿dónde está el banco?</div>
+    <div class="pc-en">Excuse me, where is the bank?</div>
+    <div class="pc-tip">Stress DON-de. Both syllables short — the accent marks the question word only.</div>
+  </div>
+  <div class="phrase-card">
+    <div class="pc-tag">Polite form</div>
+    <div class="pc-es">¿Me puede decir…?</div>
+    <div class="pc-en">Can you tell me…?</div>
+    <div class="pc-tip">Formal upgrade of ¿dónde está? — infinitive decir never changes here.</div>
+  </div>
+  <div class="phrase-card accent-ochre">
+    <div class="pc-tag">Direction</div>
+    <div class="pc-es">Todo recto</div>
+    <div class="pc-en">Straight ahead</div>
+    <div class="pc-tip">Recto = rectangle → goes forward. Don't confuse with derecha (right).</div>
+  </div>
+  <div class="phrase-card">
+    <div class="pc-tag">Direction</div>
+    <div class="pc-es">A la izquierda</div>
+    <div class="pc-en">To the left</div>
+    <div class="pc-tip">Spelling: iz-QUIER-da. qu = /k/ not /kw/. Hold up your left hand when you say it.</div>
+  </div>
+  <div class="phrase-card">
+    <div class="pc-tag">Direction</div>
+    <div class="pc-es">A la derecha</div>
+    <div class="pc-en">To the right</div>
+    <div class="pc-tip">Derecha → "the right" — both start with D. Hold up your right hand.</div>
+  </div>
+  <div class="phrase-card accent-sage">
+    <div class="pc-tag">Position</div>
+    <div class="pc-es">Al lado del banco</div>
+    <div class="pc-en">Next to the bank</div>
+    <div class="pc-tip">del = de + el (never "de el"). Feminine: al lado de la farmacia — no contraction.</div>
+  </div>
+  <div class="phrase-card">
+    <div class="pc-tag">Distance</div>
+    <div class="pc-es">Está cerca / lejos</div>
+    <div class="pc-en">It's near / far</div>
+    <div class="pc-tip">cerca and lejos never change for gender — works for any noun.</div>
+  </div>
+  <div class="phrase-card accent-terra">
+    <div class="pc-tag">Verb · formal</div>
+    <div class="pc-es">Gire / Siga / Cruce</div>
+    <div class="pc-en">Turn / Continue / Cross (polite)</div>
+    <div class="pc-tip">Informal: gira, sigue, cruza. Use formal (–e) with strangers.</div>
+  </div>
+  <div class="phrase-card">
+    <div class="pc-tag">Ordinal</div>
+    <div class="pc-es">La primera calle</div>
+    <div class="pc-en">The first street</div>
+    <div class="pc-tip">primera = feminine because calle is feminine. La segunda calle = the second street.</div>
+  </div>
+  <div class="phrase-card accent-ochre">
+    <div class="pc-tag">Sequence</div>
+    <div class="pc-es">Después del banco</div>
+    <div class="pc-en">After the bank</div>
+    <div class="pc-tip">Landmark first, then action — "después del banco, gira" is the natural Spanish order.</div>
+  </div>
+  <div class="phrase-card">
+    <div class="pc-tag">Endpoint</div>
+    <div class="pc-es">Al final de la calle</div>
+    <div class="pc-en">At the end of the street</div>
+    <div class="pc-tip">No contraction: de la (not del) because calle is feminine.</div>
+  </div>
+  <div class="phrase-card accent-night">
+    <div class="pc-tag">Time distance</div>
+    <div class="pc-es">A cinco minutos</div>
+    <div class="pc-en">Five minutes away</div>
+    <div class="pc-tip">Spaniards give distance in time — a cinco minutos is natural; "5 km" sounds odd in conversation.</div>
+  </div>
+</div>
+
+<!-- DIRECTION STRIP -->
+<div class="dir-strip">
+  <div class="dir-strip-label">Directions</div>
+  <div class="dir-items">
+    <div class="dir-item">
+      <div class="dir-arrow">↑</div>
+      <div class="dir-es">Todo recto</div>
+      <div class="dir-en">straight ahead</div>
+      <div class="dir-tip">Siga todo recto = keep going straight</div>
+    </div>
+    <div class="dir-item">
+      <div class="dir-arrow">←</div>
+      <div class="dir-es">A la izquierda</div>
+      <div class="dir-en">to the left</div>
+      <div class="dir-tip">Gire / gira a la izquierda</div>
+    </div>
+    <div class="dir-item">
+      <div class="dir-arrow">→</div>
+      <div class="dir-es">A la derecha</div>
+      <div class="dir-en">to the right</div>
+      <div class="dir-tip">Gire / gira a la derecha</div>
+    </div>
+    <div class="dir-item">
+      <div class="dir-arrow">↵</div>
+      <div class="dir-es">Gire / Gira</div>
+      <div class="dir-en">turn (formal / informal)</div>
+      <div class="dir-tip">Gire = polite (usted); gira = casual (tú)</div>
+    </div>
+    <div class="dir-item">
+      <div class="dir-arrow">→→</div>
+      <div class="dir-es">Siga / Sigue</div>
+      <div class="dir-en">continue / keep going</div>
+      <div class="dir-tip">Siga recto = keep going straight</div>
+    </div>
+    <div class="dir-item">
+      <div class="dir-arrow">✕</div>
+      <div class="dir-es">Cruce / Cruza</div>
+      <div class="dir-en">cross (formal / informal)</div>
+      <div class="dir-tip">Cruce la plaza = cross the square</div>
+    </div>
+    <div class="dir-item">
+      <div class="dir-arrow">⇥</div>
+      <div class="dir-es">Al final</div>
+      <div class="dir-en">at the end</div>
+      <div class="dir-tip">al final de la calle</div>
+    </div>
+  </div>
+</div>
+
+<!-- DIALOGUE BOXES -->
+<div class="dialogue-section">
+  <div class="dialogue-col">
+    <div class="dialogue-title">Street Dialogue — Asking</div>
+    <div class="dialogue-line">
+      <span class="dl-speaker">A:</span>
+      <span class="dl-es">Perdón, ¿dónde está el banco?</span>
+    </div>
+    <div class="dl-en">Excuse me, where is the bank?</div>
+    <div class="dialogue-line">
+      <span class="dl-speaker">B:</span>
+      <span class="dl-es">Todo recto, al final de la calle.</span>
+    </div>
+    <div class="dl-en">Straight ahead, at the end of the street.</div>
+    <div class="dialogue-line">
+      <span class="dl-speaker">A:</span>
+      <span class="dl-es">Muchas gracias.</span>
+    </div>
+    <div class="dl-en">Thank you very much.</div>
+    <div class="dialogue-line">
+      <span class="dl-speaker">B:</span>
+      <span class="dl-es">De nada.</span>
+    </div>
+    <div class="dl-en">You're welcome.</div>
+  </div>
+  <div class="dialogue-col">
+    <div class="dialogue-title">Street Dialogue — Polite Request</div>
+    <div class="dialogue-line">
+      <span class="dl-speaker">A:</span>
+      <span class="dl-es">Perdón, ¿me puede decir dónde está la farmacia?</span>
+    </div>
+    <div class="dl-en">Excuse me, can you tell me where the pharmacy is?</div>
+    <div class="dialogue-line">
+      <span class="dl-speaker">B:</span>
+      <span class="dl-es">Sí, claro. Gire a la izquierda y es la segunda calle.</span>
+    </div>
+    <div class="dl-en">Yes, of course. Turn left and it's the second street.</div>
+    <div class="dialogue-line">
+      <span class="dl-speaker">A:</span>
+      <span class="dl-es">¿Está lejos?</span>
+    </div>
+    <div class="dl-en">Is it far?</div>
+    <div class="dialogue-line">
+      <span class="dl-speaker">B:</span>
+      <span class="dl-es">No, está muy cerca, a cinco minutos.</span>
+    </div>
+    <div class="dl-en">No, it's very close, five minutes away.</div>
+  </div>
+</div>
+
+<!-- COMMON TRAPS -->
+<div class="trap-section">
+  <div class="trap-head">Common<br>Traps ⚠</div>
+  <div class="trap-items">
+    <div class="trap-item">
+      <div class="trap-wrong">a el banco</div>
+      <div class="trap-right">al banco</div>
+      <div class="trap-note">a + el always contracts to al</div>
+    </div>
+    <div class="trap-item">
+      <div class="trap-wrong">de el parque</div>
+      <div class="trap-right">del parque</div>
+      <div class="trap-note">de + el always contracts to del</div>
+    </div>
+    <div class="trap-item">
+      <div class="trap-wrong">recto (only)</div>
+      <div class="trap-right">todo recto</div>
+      <div class="trap-note">recto alone is accepted but todo recto is preferred</div>
+    </div>
+    <div class="trap-item">
+      <div class="trap-wrong">gira (to stranger)</div>
+      <div class="trap-right">gire (to stranger)</div>
+      <div class="trap-note">Use formal imperative with people you don't know</div>
+    </div>
+    <div class="trap-item">
+      <div class="trap-wrong">el farmacia</div>
+      <div class="trap-right">la farmacia</div>
+      <div class="trap-note">farmacia, estación, iglesia → la (feminine)</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">Español con Diana</div>
+  <div class="footer-topic">Topic 10 · In the City &amp; Directions · A1</div>
+  <div class="footer-cefr">CEFR A1 · DELE A1 Aligned</div>
+</div>
+
+</body>
+</html>

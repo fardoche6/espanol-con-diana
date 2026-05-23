@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" role="img" aria-label="Español con Diana">
+  <title>Español con Diana</title>
+
+  <defs>
+    <!-- Warm paper bg for light preview — remove when embedding on colored surface -->
+    <!-- Ochre gradient for sun arc -->
+    <linearGradient id="sunGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8B84B"/>
+      <stop offset="100%" stop-color="#C99A3D"/>
+    </linearGradient>
+
+    <!-- Terracotta gradient for tilde arc -->
+    <linearGradient id="tildeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C4593A"/>
+      <stop offset="100%" stop-color="#D4694A"/>
+    </linearGradient>
+
+    <!-- Clip so the sun arc stays inside the mark circle -->
+    <clipPath id="markClip">
+      <circle cx="50" cy="50" r="38"/>
+    </clipPath>
+  </defs>
+
+  <!-- ══════════════════════════════════════════
+       DISTINCTIVE MARK  (left, ~100×100 area)
+       Concept: abstracted sun rising behind a
+       horizon arch — the tilde of ñ becomes the
+       horizon line, warm light radiates up.
+       ══════════════════════════════════════════ -->
+
+  <!-- Outer circle — ochre ring -->
+  <circle cx="50" cy="50" r="40"
+          fill="none"
+          stroke="#C99A3D"
+          stroke-width="2.5"/>
+
+  <!-- Sun disc — sits at lower-center of mark -->
+  <circle cx="50" cy="58" r="16"
+          fill="url(#sunGrad)"
+          clip-path="url(#markClip)"/>
+
+  <!-- Sun rays — 8 rays, clipped to circle -->
+  <g clip-path="url(#markClip)"
+     stroke="#C99A3D"
+     stroke-width="2"
+     stroke-linecap="round"
+     opacity="0.75">
+    <!-- top -->
+    <line x1="50" y1="36" x2="50" y2="28"/>
+    <!-- top-right -->
+    <line x1="61.3" y1="39.7" x2="66.9" y2="34.1"/>
+    <!-- right -->
+    <line x1="66" y1="52" x2="74" y2="52"/>  <!-- shifted up from center of disc -->
+    <!-- bottom-right — hidden behind disc, intentional -->
+    <!-- top-left -->
+    <line x1="38.7" y1="39.7" x2="33.1" y2="34.1"/>
+    <!-- left -->
+    <line x1="34" y1="52" x2="26" y2="52"/>
+  </g>
+
+  <!-- Tilde / horizon arch — the ñ tilde reimagined as
+       a sinuous brush stroke crossing the sun at midpoint.
+       Hand-drawn feel via cubic bezier. -->
+  <path d="M 18 52 C 27 44, 35 60, 50 52 C 65 44, 73 60, 82 52"
+        fill="none"
+        stroke="url(#tildeGrad)"
+        stroke-width="3.5"
+        stroke-linecap="round"
+        clip-path="url(#markClip)"/>
+
+  <!-- Small "D" letterform under tilde — Diana's initial,
+       minimal arc suggesting an open door or arch -->
+  <path d="M 44 68 L 44 78 Q 56 78 56 73 Q 56 68 44 68"
+        fill="none"
+        stroke="#2A2540"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+
+  <!-- ══════════════════════════════════════════
+       WORDMARK  (right of mark, starting x=105)
+       Three-line stacked layout:
+         Line 1: "Español"  — Fraunces display
+         Line 2: "con"      — Caveat, lighter
+         Line 3: "Diana"    — Fraunces, wider tracking
+       ══════════════════════════════════════════ -->
+
+  <!-- "Español" — large, warm ink, Fraunces weight 400 -->
+  <!-- SVG embeds system fallback serif; live site will render Fraunces -->
+  <text x="108" y="46"
+        font-family="'Fraunces', 'Playfair Display', Georgia, serif"
+        font-size="36"
+        font-weight="400"
+        fill="#1F1A14"
+        letter-spacing="-0.5"
+        dominant-baseline="auto">Espa&#xF1;ol</text>
+
+  <!-- Decorative ochre underline accent on the ñ area -->
+  <!-- Approximate position under the ñ in "Español" at ~font-size 36 -->
+  <line x1="108" y1="52" x2="278" y2="52"
+        stroke="#C99A3D"
+        stroke-width="1"
+        opacity="0.35"/>
+
+  <!-- "con" — Caveat handwritten, terracotta, smaller, italic feel -->
+  <text x="109" y="68"
+        font-family="'Caveat', 'Segoe Script', cursive"
+        font-size="18"
+        font-weight="400"
+        fill="#C4593A"
+        letter-spacing="1">con</text>
+
+  <!-- "Diana" — Fraunces, slightly spaced, night color for gravitas -->
+  <text x="147" y="68"
+        font-family="'Fraunces', 'Playfair Display', Georgia, serif"
+        font-size="24"
+        font-weight="600"
+        fill="#2A2540"
+        letter-spacing="2">Diana</text>
+
+  <!-- Tagline (optional, 9pt, muted) — comment out if too small at small sizes -->
+  <text x="108" y="85"
+        font-family="'DM Mono', 'Courier New', monospace"
+        font-size="8.5"
+        font-weight="400"
+        fill="#7B736B"
+        letter-spacing="2.5"
+        text-anchor="start">ESPAÑOL A1 · CON DIANA</text>
+
+</svg>

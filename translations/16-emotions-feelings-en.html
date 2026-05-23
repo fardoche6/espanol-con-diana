@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Emotions &amp; Feelings — Spanish A1 (English)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;600;700&family=Caveat:wght@600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:  #FAF6EE;
+    --ink:    #1F1A14;
+    --ochre:  #C99A3D;
+    --terra:  #C4593A;
+    --sage:   #6B8E6B;
+    --night:  #2A2540;
+    --muted:  #7B736B;
+    --paper2: #F3EDE0;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: auto;
+  }
+
+  /* ── HERO HEADER ── */
+  .hero {
+    background: var(--night);
+    padding: 56px 80px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: .12;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 200px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: var(--terra);
+    opacity: .18;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 58px;
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1.05;
+    max-width: 640px;
+  }
+  .hero h1 em {
+    color: var(--ochre);
+    font-style: italic;
+  }
+  .hero-sub {
+    margin-top: 18px;
+    font-size: 15px;
+    color: rgba(250,246,238,.6);
+    max-width: 560px;
+    line-height: 1.6;
+  }
+  .hero-badge {
+    position: absolute;
+    top: 48px; right: 80px;
+    background: var(--terra);
+    color: var(--paper);
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 18px;
+    border-radius: 100px;
+    letter-spacing: .04em;
+  }
+
+  /* ── LAYOUT ── */
+  .page-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 64px 80px;
+  }
+
+  /* ── SECTION TITLES ── */
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 56px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--ink);
+    opacity: .12;
+  }
+
+  /* ── EMOTION PORTRAIT GRID ── */
+  .emotion-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .emotion-card {
+    background: var(--paper2);
+    border-radius: 16px;
+    padding: 28px 24px 22px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .15s;
+    border: 1.5px solid transparent;
+  }
+  .emotion-card:hover { transform: translateY(-3px); }
+
+  .emotion-card .accent-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    border-radius: 16px 16px 0 0;
+  }
+
+  /* colour variants */
+  .c-ochre .accent-bar  { background: var(--ochre); }
+  .c-terra .accent-bar  { background: var(--terra); }
+  .c-sage  .accent-bar  { background: var(--sage); }
+  .c-night .accent-bar  { background: var(--night); }
+
+  .emotion-card .face-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+    margin-bottom: 16px;
+  }
+  .c-ochre .face-icon { background: rgba(201,154,61,.15); }
+  .c-terra .face-icon { background: rgba(196,89,58,.13); }
+  .c-sage  .face-icon { background: rgba(107,142,107,.15); }
+  .c-night .face-icon { background: rgba(42,37,64,.1); }
+
+  .emotion-card .es-phrase {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .emotion-card .en-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 14px;
+    font-family: 'Inter', sans-serif;
+  }
+  .emotion-card .grammar-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  .c-ochre .grammar-tag { background: rgba(201,154,61,.2); color: #8a6620; }
+  .c-terra .grammar-tag { background: rgba(196,89,58,.15); color: #9e3e22; }
+  .c-sage  .grammar-tag { background: rgba(107,142,107,.18); color: #3d6b3d; }
+  .c-night .grammar-tag { background: rgba(42,37,64,.1); color: var(--night); }
+
+  .emotion-card .note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-style: italic;
+    border-top: 1px solid rgba(31,26,20,.1);
+    padding-top: 10px;
+    margin-top: 6px;
+  }
+
+  /* ── ESTAR vs TENER EXPLAINER ── */
+  .explainer {
+    display: grid;
+    grid-template-columns: 1fr 56px 1fr;
+    gap: 0;
+    margin-top: 0;
+    background: var(--night);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .exp-col {
+    padding: 36px 40px;
+  }
+  .exp-col.left  { background: var(--night); }
+  .exp-col.right { background: #342F53; }
+  .exp-divider {
+    display: flex; align-items: center; justify-content: center;
+    background: var(--night);
+    position: relative;
+  }
+  .exp-divider::after {
+    content: 'VS';
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 14px;
+    color: var(--ochre);
+    background: var(--night);
+    padding: 6px 4px;
+    border-radius: 6px;
+    writing-mode: vertical-rl;
+    letter-spacing: .12em;
+  }
+  .exp-col h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--ochre);
+    margin-bottom: 6px;
+  }
+  .exp-col .exp-subtitle {
+    font-size: 12px;
+    color: rgba(250,246,238,.5);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .exp-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .exp-row .es {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--paper);
+  }
+  .exp-row .arr {
+    font-size: 12px;
+    color: var(--ochre);
+    flex-shrink: 0;
+  }
+  .exp-row .en {
+    font-size: 13px;
+    color: rgba(250,246,238,.65);
+    font-family: 'Inter', sans-serif;
+  }
+  .exp-rule {
+    margin-top: 24px;
+    background: rgba(250,246,238,.06);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: rgba(250,246,238,.75);
+    line-height: 1.55;
+    border-left: 3px solid var(--ochre);
+  }
+
+  /* ── TIPS STRIP ── */
+  .tips-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .tip-card {
+    background: var(--paper2);
+    border-radius: 14px;
+    padding: 24px 22px;
+    position: relative;
+  }
+  .tip-card .tip-num {
+    position: absolute;
+    top: 18px; right: 20px;
+    font-family: 'Fraunces', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--ink);
+    opacity: .06;
+    line-height: 1;
+  }
+  .tip-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .tip-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .tip-card .tip-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--terra);
+    background: rgba(196,89,58,.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  /* ── EMPATHY RESPONSE PANEL ── */
+  .empathy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .empathy-card {
+    border-radius: 14px;
+    padding: 26px 28px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .empathy-card.positive { background: rgba(107,142,107,.12); border: 1.5px solid rgba(107,142,107,.3); }
+  .empathy-card.negative { background: rgba(196,89,58,.08); border: 1.5px solid rgba(196,89,58,.2); }
+  .empathy-card .icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .empathy-card .content h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .empathy-card.positive .content h4 { color: var(--sage); }
+  .empathy-card.negative .content h4 { color: var(--terra); }
+  .empathy-card .content .trigger {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 12px;
+  }
+  .response-list {
+    list-style: none;
+  }
+  .response-list li {
+    font-family: 'Caveat', cursive;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    padding: 4px 0;
+    border-bottom: 1px dashed rgba(31,26,20,.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .response-list li:last-child { border-bottom: none; }
+  .response-list li .gloss {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* ── GENDER MINI-TABLE ── */
+  .gender-box {
+    background: var(--ink);
+    border-radius: 18px;
+    padding: 36px 48px;
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+  }
+  .gender-box .gb-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--paper);
+    min-width: 220px;
+    line-height: 1.15;
+  }
+  .gender-box .gb-title span {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(250,246,238,.5);
+    font-family: 'Inter', sans-serif;
+    margin-top: 6px;
+    font-style: italic;
+  }
+  .gender-columns {
+    display: grid;
+    grid-template-columns: 1fr 56px 1fr;
+    gap: 8px;
+    flex: 1;
+  }
+  .g-col h5 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 14px;
+  }
+  .g-col .g-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(250,246,238,.08);
+  }
+  .g-col .g-row:last-child { border-bottom: none; }
+  .g-col .g-row .g-es {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--paper);
+  }
+  .g-col .g-row .g-en {
+    font-size: 12px;
+    color: rgba(250,246,238,.5);
+    font-family: 'Inter', sans-serif;
+  }
+  .g-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .g-divider span {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    color: var(--terra);
+  }
+  .gender-note {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    flex: 1;
+  }
+  .gender-note .note-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .gender-note p {
+    font-size: 13px;
+    color: rgba(250,246,238,.65);
+    line-height: 1.55;
+  }
+  .gender-note strong { color: var(--ochre); }
+
+  /* ── INTENSITY LADDER ── */
+  .intensity-row {
+    display: flex;
+    gap: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1.5px solid rgba(31,26,20,.1);
+  }
+  .intensity-step {
+    flex: 1;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    border-right: 1px solid rgba(31,26,20,.08);
+    position: relative;
+  }
+  .intensity-step:last-child { border-right: none; }
+  .intensity-step.i1 { background: rgba(107,142,107,.08); }
+  .intensity-step.i2 { background: rgba(201,154,61,.1); }
+  .intensity-step.i3 { background: rgba(196,89,58,.1); }
+  .intensity-step .i-bar {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    margin-bottom: 4px;
+  }
+  .i1 .i-bar { background: var(--sage); }
+  .i2 .i-bar { background: var(--ochre); }
+  .i3 .i-bar { background: var(--terra); }
+  .intensity-step .i-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .intensity-step .i-es {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .intensity-step .i-ex {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .intensity-step .i-register {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .intensity-step .i-arrow {
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--muted);
+    opacity: .4;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--ink);
+    padding: 28px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer .f-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--paper);
+  }
+  .footer .f-brand span { color: var(--ochre); }
+  .footer .f-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(250,246,238,.35);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-label">Español con Diana · A1 · Topic 16</div>
+  <h1>Emotions &<br><em>Feelings</em></h1>
+  <p class="hero-sub">Master how to express how you feel, ask about others, and respond with empathy — using <strong style="color:var(--ochre)">estar + adjective</strong> and <strong style="color:var(--ochre)">tener + noun</strong> patterns.</p>
+  <div class="hero-badge">English Edition</div>
+</header>
+
+<div class="page-wrap">
+
+  <!-- EMOTION PORTRAIT GRID -->
+  <div class="section-title">Core Emotion Phrases</div>
+  <div class="emotion-grid">
+
+    <div class="emotion-card c-ochre">
+      <div class="accent-bar"></div>
+      <div class="face-icon">😊</div>
+      <span class="grammar-tag">estar + adjective</span>
+      <div class="es-phrase">Estoy feliz</div>
+      <div class="en-label">I am happy</div>
+      <div class="note">"Feliz" never changes ending — same for men and women. Think: "fe-LEES."</div>
+    </div>
+
+    <div class="emotion-card c-terra">
+      <div class="accent-bar"></div>
+      <div class="face-icon">😢</div>
+      <span class="grammar-tag">estar + adjective</span>
+      <div class="es-phrase">Estoy triste</div>
+      <div class="en-label">I am sad</div>
+      <div class="note">"Triste" is invariable — no -a ending ever. It ends in -e, not -o.</div>
+    </div>
+
+    <div class="emotion-card c-sage">
+      <div class="accent-bar"></div>
+      <div class="face-icon">😴</div>
+      <span class="grammar-tag">tener + noun</span>
+      <div class="es-phrase">Tengo sueño</div>
+      <div class="en-label">I am sleepy</div>
+      <div class="note">"Sueño" = sleepiness (or dream). "Tener" because sleepiness is treated as a thing you "have."</div>
+    </div>
+
+    <div class="emotion-card c-night">
+      <div class="accent-bar"></div>
+      <div class="face-icon">😨</div>
+      <span class="grammar-tag">tener + noun</span>
+      <div class="es-phrase">Tengo miedo</div>
+      <div class="en-label">I am afraid</div>
+      <div class="note">Fear is a noun in Spanish — you "have" it. Never: ~~estoy miedo~~.</div>
+    </div>
+
+    <div class="emotion-card c-ochre">
+      <div class="accent-bar"></div>
+      <div class="face-icon">😌</div>
+      <span class="grammar-tag">estar + adjective</span>
+      <div class="es-phrase">Estoy tranquilo/a</div>
+      <div class="en-label">I am calm</div>
+      <div class="note">Think of English "tranquil" — nearly identical. -o for men, -a for women.</div>
+    </div>
+
+    <div class="emotion-card c-terra">
+      <div class="accent-bar"></div>
+      <div class="face-icon">🤩</div>
+      <span class="grammar-tag">estar + adjective</span>
+      <div class="es-phrase">Estoy emocionado/a</div>
+      <div class="en-label">I am excited</div>
+      <div class="note">Stress 4th syllable: e-mo-cio-NA-do. Changes to -a for women.</div>
+    </div>
+
+    <div class="emotion-card c-sage">
+      <div class="accent-bar"></div>
+      <div class="face-icon">🍽️</div>
+      <span class="grammar-tag">tener + noun</span>
+      <div class="es-phrase">Tengo hambre</div>
+      <div class="en-label">I am hungry</div>
+      <div class="note">"Hambre" is a noun — you "have hunger." Classic error: ~~Estoy hambre.~~</div>
+    </div>
+
+    <div class="emotion-card c-night">
+      <div class="accent-bar"></div>
+      <div class="face-icon">😠</div>
+      <span class="grammar-tag">estar + adjective</span>
+      <div class="es-phrase">Estoy enfadado/a</div>
+      <div class="en-label">I am angry</div>
+      <div class="note">Chunk it: en-fa-DA-do. -a ending for women. In Latin America: "enojado/a."</div>
+    </div>
+
+    <div class="emotion-card c-ochre">
+      <div class="accent-bar"></div>
+      <div class="face-icon">😟</div>
+      <span class="grammar-tag">estar + adjective</span>
+      <div class="es-phrase">Estoy preocupado/a</div>
+      <div class="en-label">I am worried</div>
+      <div class="note">Chunk it: preo-cu-PA-do. Stress on penultimate syllable, like enfadado.</div>
+    </div>
+
+    <div class="emotion-card c-terra">
+      <div class="accent-bar"></div>
+      <div class="face-icon">🥱</div>
+      <span class="grammar-tag">estar + adjective</span>
+      <div class="es-phrase">Estoy aburrido/a</div>
+      <div class="en-label">I am bored</div>
+      <div class="note">"Aburrido" = how you feel (bored), not what something is (boring). Different meaning!</div>
+    </div>
+
+    <div class="emotion-card c-sage">
+      <div class="accent-bar"></div>
+      <div class="face-icon">🥶</div>
+      <span class="grammar-tag">tener + noun</span>
+      <div class="es-phrase">Tengo frío</div>
+      <div class="en-label">I am cold</div>
+      <div class="note">Two syllables: frí-o. Never: ~~Estoy frío.~~ Frío/calor always use tener.</div>
+    </div>
+
+    <div class="emotion-card c-night">
+      <div class="accent-bar"></div>
+      <div class="face-icon">😊</div>
+      <span class="grammar-tag">estar + adjective</span>
+      <div class="es-phrase">Estoy contento/a</div>
+      <div class="en-label">I am pleased / content</div>
+      <div class="note">"Contento" sounds warmer and more conversational than "feliz" in daily speech.</div>
+    </div>
+
+  </div>
+
+  <!-- ESTAR vs TENER EXPLAINER -->
+  <div class="section-title">The Key Concept — Estar vs Tener</div>
+  <div class="explainer">
+    <div class="exp-col left">
+      <h3>ESTAR</h3>
+      <div class="exp-subtitle">+ Adjective · changes gender</div>
+      <div class="exp-row">
+        <span class="es">Estoy cansado/a</span>
+        <span class="arr">→</span>
+        <span class="en">I am tired</span>
+      </div>
+      <div class="exp-row">
+        <span class="es">Estoy feliz</span>
+        <span class="arr">→</span>
+        <span class="en">I am happy</span>
+      </div>
+      <div class="exp-row">
+        <span class="es">Estoy triste</span>
+        <span class="arr">→</span>
+        <span class="en">I am sad</span>
+      </div>
+      <div class="exp-row">
+        <span class="es">Estoy preocupado/a</span>
+        <span class="arr">→</span>
+        <span class="en">I am worried</span>
+      </div>
+      <div class="exp-rule">
+        After <strong style="color:var(--ochre)">estar</strong>, the word describes <em>how you are</em> — it's an adjective that agrees with your gender.
+      </div>
+    </div>
+    <div class="exp-divider"></div>
+    <div class="exp-col right">
+      <h3>TENER</h3>
+      <div class="exp-subtitle">+ Noun · never changes</div>
+      <div class="exp-row">
+        <span class="es">Tengo sueño</span>
+        <span class="arr">→</span>
+        <span class="en">I am sleepy</span>
+      </div>
+      <div class="exp-row">
+        <span class="es">Tengo hambre</span>
+        <span class="arr">→</span>
+        <span class="en">I am hungry</span>
+      </div>
+      <div class="exp-row">
+        <span class="es">Tengo miedo</span>
+        <span class="arr">→</span>
+        <span class="en">I am afraid</span>
+      </div>
+      <div class="exp-row">
+        <span class="es">Tengo frío / calor</span>
+        <span class="arr">→</span>
+        <span class="en">I am cold / hot</span>
+      </div>
+      <div class="exp-rule">
+        After <strong style="color:var(--ochre)">tener</strong>, the word is a thing (noun) — Spanish thinks of hunger, fear, and cold as things you "have." The noun never changes.
+      </div>
+    </div>
+  </div>
+
+  <!-- GENDER AGREEMENT -->
+  <div class="section-title">Gender Agreement — Adjective Endings</div>
+  <div class="gender-box">
+    <div>
+      <div class="gb-title">
+        Gender<br>Agreement
+        <span>Adjectives after estar<br>change with the speaker.</span>
+      </div>
+      <div class="gender-note" style="margin-top:24px;">
+        <span class="note-icon">💡</span>
+        <p><strong>-o / -a words change</strong> · enfadado → enfadada<br>
+        <strong>-e / -z words stay</strong> · triste · feliz (no change ever)<br>
+        Nouns after tener <strong>never change</strong> at all.</p>
+      </div>
+    </div>
+    <div class="gender-columns">
+      <div class="g-col">
+        <h5>Male speaker (-o)</h5>
+        <div class="g-row"><span class="g-es">cansado</span><span class="g-en">tired</span></div>
+        <div class="g-row"><span class="g-es">contento</span><span class="g-en">pleased</span></div>
+        <div class="g-row"><span class="g-es">emocionado</span><span class="g-en">excited</span></div>
+        <div class="g-row"><span class="g-es">aburrido</span><span class="g-en">bored</span></div>
+        <div class="g-row"><span class="g-es">tranquilo</span><span class="g-en">calm</span></div>
+      </div>
+      <div class="g-divider"><span>→</span></div>
+      <div class="g-col">
+        <h5>Female speaker (-a)</h5>
+        <div class="g-row"><span class="g-es">cansada</span><span class="g-en">tired</span></div>
+        <div class="g-row"><span class="g-es">contenta</span><span class="g-en">pleased</span></div>
+        <div class="g-row"><span class="g-es">emocionada</span><span class="g-en">excited</span></div>
+        <div class="g-row"><span class="g-es">aburrida</span><span class="g-en">bored</span></div>
+        <div class="g-row"><span class="g-es">tranquila</span><span class="g-en">calm</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTENSITY LADDER -->
+  <div class="section-title">Intensity — Soft → Strong</div>
+  <div class="intensity-row">
+    <div class="intensity-step i1">
+      <div class="i-bar"></div>
+      <div class="i-label">Softening</div>
+      <div class="i-es">un poco</div>
+      <div class="i-ex">"Estoy un poco triste."</div>
+      <div class="i-register">polite / understated</div>
+      <div class="i-arrow">›</div>
+    </div>
+    <div class="intensity-step i2">
+      <div class="i-bar"></div>
+      <div class="i-label">Neutral</div>
+      <div class="i-es">muy</div>
+      <div class="i-ex">"Estoy muy cansado."</div>
+      <div class="i-register">standard / all contexts</div>
+      <div class="i-arrow">›</div>
+    </div>
+    <div class="intensity-step i3">
+      <div class="i-bar"></div>
+      <div class="i-label">Emphatic</div>
+      <div class="i-es">super</div>
+      <div class="i-ex">"Estoy super emocionado."</div>
+      <div class="i-register">informal / friends only</div>
+    </div>
+  </div>
+
+  <!-- EMPATHETIC RESPONSES -->
+  <div class="section-title">Empathetic Responses</div>
+  <div class="empathy-grid">
+    <div class="empathy-card positive">
+      <div class="icon">🌿</div>
+      <div class="content">
+        <h4>To Good News</h4>
+        <div class="trigger">When someone says: "Estoy muy feliz / emocionado..."</div>
+        <ul class="response-list">
+          <li>¡Qué bien! <span class="gloss">How great!</span></li>
+          <li>¡Me alegra! <span class="gloss">I'm glad! (lit. "it gladdens me")</span></li>
+          <li>¡Genial! <span class="gloss">Fantastic!</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="empathy-card negative">
+      <div class="icon">🍂</div>
+      <div class="content">
+        <h4>To Bad News / Struggles</h4>
+        <div class="trigger">When someone says: "Estoy muy triste / preocupado..."</div>
+        <ul class="response-list">
+          <li>Lo siento. <span class="gloss">I'm sorry / I feel for you.</span></li>
+          <li>¡Vaya! <span class="gloss">Oh no! (European Sp.)</span></li>
+          <li>¡Ánimo! <span class="gloss">Cheer up! / Come on!</span></li>
+          <li>No te preocupes. <span class="gloss">Don't worry.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS STRIP -->
+  <div class="section-title">Key Tips & Tricks</div>
+  <div class="tips-strip">
+
+    <div class="tip-card">
+      <div class="tip-num">1</div>
+      <span class="tip-tag">pronunciation</span>
+      <h4>Stress the right syllable</h4>
+      <p>emo-cio-<strong>NA</strong>-do · en-fa-<strong>DA</strong>-do · preo-cu-<strong>PA</strong>-do — all stress the penultimate syllable. Clap it out until it's automatic. "Muy" rhymes with English "mwee" — one tight syllable.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-num">2</div>
+      <span class="tip-tag">grammar trap</span>
+      <h4>The Estar / Tener Switch</h4>
+      <p>English says "I AM hungry / cold / sleepy." Spanish says "I HAVE hunger / cold / sleepiness." When your English sentence uses a physical sensation adjective, switch to <strong>tener + noun</strong>. Test: does it name a physical state? → tener.</p>
+    </div>
+
+    <div class="tip-card">
+      <div class="tip-num">3</div>
+      <span class="tip-tag">register</span>
+      <h4>Lo siento ≠ Perdón</h4>
+      <p>"Lo siento" expresses <em>empathy</em> (I feel for you), not apology. Use it when a friend is sad. For actual apologies, use "perdón" or "disculpa." Using the wrong one can confuse your listener.</p>
+    </div>
+
+  </div>
+
+</div><!-- end page-wrap -->
+
+<footer class="footer">
+  <div class="f-brand">Español con <span>Diana</span></div>
+  <div class="f-meta">A1 · Topic 16 · Emotions &amp; Feelings · English Edition</div>
+</footer>
+
+</body>
+</html>

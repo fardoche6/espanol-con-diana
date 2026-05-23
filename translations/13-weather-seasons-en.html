@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Español con Diana — Weather &amp; Seasons · English</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&family=Caveat:wght@600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:      #FAF6EE;
+    --ink:        #1F1A14;
+    --ochre:      #C99A3D;
+    --terra:      #C4593A;
+    --sage:       #6B8E6B;
+    --night:      #2A2540;
+    --muted:      #7B736B;
+    --paper-dark: #EDE8DC;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: auto;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--night);
+    color: var(--paper);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 32px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: .12;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 200px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: var(--terra);
+    opacity: .15;
+  }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ochre);
+  }
+  .header-title {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .header-title span { color: var(--ochre); }
+  .header-sub {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--ochre);
+    text-align: right;
+  }
+  .header-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* ── DASHBOARD GRID ── */
+  .dashboard {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0;
+    padding: 0;
+  }
+
+  /* ── HERO FORECAST PANEL ── */
+  .hero-forecast {
+    background: var(--night);
+    padding: 48px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-forecast::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(201,154,61,.04) 40px,
+      rgba(201,154,61,.04) 41px
+    );
+  }
+  .forecast-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 28px;
+  }
+  .forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .forecast-card {
+    background: rgba(250,246,238,.06);
+    border: 1px solid rgba(201,154,61,.18);
+    border-radius: 16px;
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+  }
+  .forecast-card:hover { background: rgba(250,246,238,.1); }
+  .weather-icon {
+    font-size: 52px;
+    line-height: 1;
+  }
+  .phrase-es {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--paper);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .phrase-en {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    color: var(--ochre);
+    text-align: center;
+  }
+  .temp-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: rgba(201,154,61,.2);
+    color: var(--ochre);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .callout-tag {
+    position: absolute;
+    top: -10px; right: -10px;
+    background: var(--terra);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  /* ── SIDEBAR PANEL ── */
+  .sidebar {
+    background: var(--ochre);
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .sidebar-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--night);
+    line-height: 1.1;
+  }
+  .trap-block {
+    background: var(--night);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .trap-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 10px;
+  }
+  .trap-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .trap-wrong {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    color: var(--terra);
+    text-decoration: line-through;
+    opacity: .8;
+  }
+  .trap-right {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--sage);
+  }
+  .trap-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .season-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .season-pill {
+    border-radius: 10px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .season-pill .s-icon { font-size: 26px; }
+  .season-pill .s-es {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 15px;
+    display: block;
+    margin-top: 4px;
+  }
+  .season-pill .s-en {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    display: block;
+    opacity: .85;
+  }
+  .sp-spring { background: var(--sage); color: var(--paper); }
+  .sp-summer { background: var(--terra); color: var(--paper); }
+  .sp-autumn { background: #8B5A2B; color: var(--paper); }
+  .sp-winter { background: #3A5F8A; color: var(--paper); }
+
+  /* ── PHRASE TABLE SECTION ── */
+  .phrase-section {
+    background: var(--paper-dark);
+    padding: 48px 56px;
+    border-top: 3px solid var(--ink);
+  }
+  .section-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-heading::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: var(--ochre);
+    opacity: .4;
+  }
+
+  .phrase-table {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .pt-card {
+    background: var(--paper);
+    border-left: 4px solid var(--ochre);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pt-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 8px; right: 12px;
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--paper-dark);
+    line-height: 1;
+  }
+  .pt-card.accent-terra { border-color: var(--terra); }
+  .pt-card.accent-sage  { border-color: var(--sage); }
+  .pt-card.accent-night { border-color: var(--night); }
+  .pt-es {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .pt-en {
+    font-family: 'Caveat', cursive;
+    font-size: 17px;
+    color: var(--ochre);
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .pt-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+    font-style: italic;
+  }
+
+  /* ── TIPS STRIP ── */
+  .tips-strip {
+    background: var(--terra);
+    padding: 36px 56px;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .tips-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--paper);
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    letter-spacing: .05em;
+  }
+  .tip-item {
+    border-top: 2px solid rgba(250,246,238,.3);
+    padding-top: 16px;
+  }
+  .tip-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+  .tip-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,.7);
+    margin-bottom: 6px;
+  }
+  .tip-body {
+    font-size: 14px;
+    color: var(--paper);
+    line-height: 1.6;
+  }
+  .tip-body strong {
+    color: var(--paper);
+    font-weight: 600;
+  }
+  .mono-inline {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    background: rgba(0,0,0,.2);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  /* ── CLOTHING ROW ── */
+  .clothing-row {
+    background: var(--night);
+    padding: 36px 56px;
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    border-top: 3px solid var(--ochre);
+  }
+  .clothing-scene {
+    flex: 1;
+    border-right: 1px solid rgba(250,246,238,.1);
+    padding: 0 32px 0 0;
+    margin-right: 32px;
+  }
+  .clothing-scene:last-child {
+    border-right: none;
+    padding-right: 0;
+    margin-right: 0;
+  }
+  .cs-weather {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 12px;
+  }
+  .cs-icon { font-size: 42px; margin-bottom: 14px; display: block; }
+  .cs-condition {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 16px;
+  }
+  .cs-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cs-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(250,246,238,.06);
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+  .ci-es {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--paper);
+  }
+  .ci-en {
+    font-family: 'Caveat', cursive;
+    font-size: 14px;
+    color: var(--ochre);
+    margin-left: auto;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--ink);
+    color: var(--muted);
+    padding: 20px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .06em;
+  }
+  .footer-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    color: var(--ochre);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div>
+    <div class="header-eyebrow">Español con Diana · A1 · Topic 13</div>
+    <div class="header-meta">English Translation Reference</div>
+  </div>
+  <div class="header-title">El <span>Tiempo</span><br>&amp; Las Estaciones</div>
+  <div>
+    <div class="header-sub">Weather &amp; Seasons</div>
+    <div class="header-meta" style="text-align:right; color:var(--muted); margin-top:6px;">¿Qué tiempo hace?</div>
+  </div>
+</header>
+
+<!-- DASHBOARD -->
+<div class="dashboard">
+
+  <!-- HERO FORECAST -->
+  <div class="hero-forecast">
+    <div class="forecast-label">Live Vocabulary Forecast — 8 Core Phrases</div>
+    <div class="forecast-grid">
+
+      <div class="forecast-card">
+        <div class="weather-icon">☀️</div>
+        <div class="phrase-es">Hace sol</div>
+        <div class="phrase-en">It is sunny</div>
+        <div class="temp-badge">hace + noun</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">🌡️</div>
+        <div class="phrase-es">Hace calor</div>
+        <div class="phrase-en">It is hot</div>
+        <div class="temp-badge">hace + noun</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">🌧️</div>
+        <div class="phrase-es">Llueve</div>
+        <div class="phrase-en">It is raining</div>
+        <div class="temp-badge">verb form</div>
+        <div class="callout-tag">≠ hace</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">❄️</div>
+        <div class="phrase-es">Nieva</div>
+        <div class="phrase-en">It is snowing</div>
+        <div class="temp-badge">verb form</div>
+        <div class="callout-tag">≠ hace</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">🧊</div>
+        <div class="phrase-es">Hace frío</div>
+        <div class="phrase-en">It is cold</div>
+        <div class="temp-badge">hace + noun</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">🌬️</div>
+        <div class="phrase-es">Hace viento</div>
+        <div class="phrase-en">It is windy</div>
+        <div class="temp-badge">hace + noun</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">☁️</div>
+        <div class="phrase-es">Está nublado</div>
+        <div class="phrase-en">It is cloudy</div>
+        <div class="temp-badge">estar (trap!)</div>
+        <div class="callout-tag">ESTAR</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">🌫️</div>
+        <div class="phrase-es">Hay niebla</div>
+        <div class="phrase-en">There is fog</div>
+        <div class="temp-badge">hay + noun</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-heading">Grammar<br>Trap &amp;<br>Seasons</div>
+
+    <!-- TRAP -->
+    <div class="trap-block">
+      <div class="trap-label">⚠ The Verb Trap</div>
+      <div class="trap-row">
+        <span class="trap-wrong">Es nublado ✗</span>
+        <span class="trap-right">Está nublado ✓</span>
+      </div>
+      <div class="trap-note">Cloud cover is <em>temporary</em> → use <strong>estar</strong>, never ser. This is the #1 A1 DELE error.</div>
+    </div>
+
+    <!-- SEASONS -->
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--night); margin-bottom:12px;">Las Estaciones</div>
+      <div class="season-strip">
+        <div class="season-pill sp-spring">
+          <span class="s-icon">🌸</span>
+          <span class="s-es">La Primavera</span>
+          <span class="s-en">Spring</span>
+        </div>
+        <div class="season-pill sp-summer">
+          <span class="s-icon">🌞</span>
+          <span class="s-es">El Verano</span>
+          <span class="s-en">Summer</span>
+        </div>
+        <div class="season-pill sp-autumn">
+          <span class="s-icon">🍂</span>
+          <span class="s-es">El Otoño</span>
+          <span class="s-en">Autumn</span>
+        </div>
+        <div class="season-pill sp-winter">
+          <span class="s-icon">🌨️</span>
+          <span class="s-es">El Invierno</span>
+          <span class="s-en">Winter</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MNEMONIC -->
+    <div style="background:var(--night); border-radius:10px; padding:16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:.15em; text-transform:uppercase; color:var(--ochre); margin-bottom:8px;">Mnemonic</div>
+      <div style="font-family:'Caveat',cursive; font-size:19px; color:var(--paper); line-height:1.4;"><strong style="color:var(--ochre);">P-V-O-I</strong><br>"Poor Viking On Ice"</div>
+      <div style="font-size:11px; color:var(--muted); margin-top:8px; line-height:1.5;">Primavera · Verano · Otoño · Invierno</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- PHRASE TABLE -->
+<div class="phrase-section">
+  <div class="section-heading">Full Phrase Reference — Spanish → English</div>
+  <div class="phrase-table">
+
+    <div class="pt-card" data-num="1">
+      <div class="pt-es">¿Qué tiempo hace?</div>
+      <div class="pt-en">What is the weather like?</div>
+      <div class="pt-note">The essential question. Stress: TIEM-po. Never confuse with ¿Qué hora es? (What time is it?)</div>
+    </div>
+
+    <div class="pt-card accent-terra" data-num="2">
+      <div class="pt-es">¿Qué tiempo hace en Madrid?</div>
+      <div class="pt-en">What is the weather like in Madrid?</div>
+      <div class="pt-note">Add any city to extend the question. Opens natural small-talk.</div>
+    </div>
+
+    <div class="pt-card accent-sage" data-num="3">
+      <div class="pt-es">Hace buen tiempo</div>
+      <div class="pt-en">The weather is nice / It is fine</div>
+      <div class="pt-note">Catch-all for pleasant weather. Opposite: hace mal tiempo.</div>
+    </div>
+
+    <div class="pt-card accent-night" data-num="4">
+      <div class="pt-es">Hace mal tiempo</div>
+      <div class="pt-en">The weather is bad</div>
+      <div class="pt-note">Useful catch-all — no need to specify exactly what is wrong.</div>
+    </div>
+
+    <div class="pt-card" data-num="5">
+      <div class="pt-es">Hace veinte grados</div>
+      <div class="pt-en">It is twenty degrees (Celsius)</div>
+      <div class="pt-note">Always Celsius in Spanish-speaking world. "Hace menos diez" = -10°C.</div>
+    </div>
+
+    <div class="pt-card accent-terra" data-num="6">
+      <div class="pt-es">Hay tormenta</div>
+      <div class="pt-en">There is a storm</div>
+      <div class="pt-note">Hay (there is/are) + noun. Pattern: hay niebla, hay tormenta, hay hielo.</div>
+    </div>
+
+    <div class="pt-card accent-sage" data-num="7">
+      <div class="pt-es">Hoy llueve. Mañana hace sol.</div>
+      <div class="pt-en">Today it is raining. Tomorrow it will be sunny.</div>
+      <div class="pt-note">Spanish uses present tense for near-future forecasts — no "will" equivalent needed.</div>
+    </div>
+
+    <div class="pt-card accent-night" data-num="8">
+      <div class="pt-es">En verano hace calor.</div>
+      <div class="pt-en">In summer it is hot.</div>
+      <div class="pt-note">En + season pattern. No article before the season in this construction.</div>
+    </div>
+
+    <div class="pt-card" data-num="9">
+      <div class="pt-es">Está despejado</div>
+      <div class="pt-en">It is clear / cloudless</div>
+      <div class="pt-note">Forecast register. Uses estar — sky state is temporary. Root: despejar (to clear out).</div>
+    </div>
+
+    <div class="pt-card accent-terra" data-num="10">
+      <div class="pt-es">Hay chubascos</div>
+      <div class="pt-en">There are showers</div>
+      <div class="pt-note">Formal forecast term. In conversation you'd say "llueve." Know both registers.</div>
+    </div>
+
+    <div class="pt-card accent-sage" data-num="11">
+      <div class="pt-es">¿Qué temperatura hace?</div>
+      <div class="pt-en">What is the temperature?</div>
+      <div class="pt-note">Stress: tem-pe-ra-TU-ra. Default stress rule: penultimate syllable.</div>
+    </div>
+
+    <div class="pt-card accent-night" data-num="12">
+      <div class="pt-es">Está parcialmente nublado</div>
+      <div class="pt-en">It is partly cloudy</div>
+      <div class="pt-note">5-syllable word: par-cial-MEN-te. Clap each syllable to lock the stress.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TIPS STRIP -->
+<div class="tips-strip">
+  <div class="tips-heading">Tips &amp; Tricks</div>
+
+  <div class="tip-item">
+    <span class="tip-icon">🎯</span>
+    <div class="tip-title">The Hacer Rule</div>
+    <div class="tip-body">Spanish treats weather as something the sky <strong>does</strong>. <span class="mono-inline">Hace</span> = "it makes/does." Never say <span class="mono-inline">es calor</span> — that would mean "it is heat" (a thing, not a condition).</div>
+  </div>
+
+  <div class="tip-item">
+    <span class="tip-icon">🌍</span>
+    <div class="tip-title">Hemisphere Flip</div>
+    <div class="tip-body">Buenos Aires, Santiago, and Lima have <strong>inverted seasons</strong>. December = summer, June = winter. Always ask which hemisphere when talking weather with Latin Americans.</div>
+  </div>
+
+  <div class="tip-item">
+    <span class="tip-icon">🔊</span>
+    <div class="tip-title">Pronunciation</div>
+    <div class="tip-body"><strong>Frío</strong> = 2 syllables (FRI-o). <strong>Llueve</strong> = Latin America: yoo-EH-veh. <strong>Otoño</strong> — ñ sounds like "ny" in canyon: oh-TOH-nyo.</div>
+  </div>
+
+</div>
+
+<!-- CLOTHING ROW -->
+<div class="clothing-row">
+
+  <div class="clothing-scene">
+    <div class="cs-weather">Cold / Frío</div>
+    <span class="cs-icon">🥶</span>
+    <div class="cs-condition">Hace frío + nieva</div>
+    <div class="cs-items">
+      <div class="cs-item">
+        <span class="ci-es">El abrigo</span>
+        <span class="ci-en">The coat</span>
+      </div>
+      <div class="cs-item">
+        <span class="ci-es">La bufanda</span>
+        <span class="ci-en">The scarf</span>
+      </div>
+      <div class="cs-item">
+        <span class="ci-es">El invierno</span>
+        <span class="ci-en">Winter</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="clothing-scene">
+    <div class="cs-weather">Rain / Lluvia</div>
+    <span class="cs-icon">☔</span>
+    <div class="cs-condition">Llueve + hay tormenta</div>
+    <div class="cs-items">
+      <div class="cs-item">
+        <span class="ci-es">El paraguas</span>
+        <span class="ci-en">The umbrella</span>
+      </div>
+      <div class="cs-item">
+        <span class="ci-es">El impermeable</span>
+        <span class="ci-en">The raincoat</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="clothing-scene">
+    <div class="cs-weather">Hot &amp; Sunny / Calor</div>
+    <span class="cs-icon">😎</span>
+    <div class="cs-condition">Hace sol + hace calor</div>
+    <div class="cs-items">
+      <div class="cs-item">
+        <span class="ci-es">La camiseta</span>
+        <span class="ci-en">The t-shirt</span>
+      </div>
+      <div class="cs-item">
+        <span class="ci-es">El sombrero</span>
+        <span class="ci-en">The hat</span>
+      </div>
+      <div class="cs-item">
+        <span class="ci-es">Las gafas de sol</span>
+        <span class="ci-en">Sunglasses</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">Español con Diana</div>
+  <div>A1 · Topic 13 · Weather &amp; Seasons · English Reference</div>
+  <div>¿Qué tiempo hace? → Hace sol y hace calor.</div>
+</footer>
+
+</body>
+</html>

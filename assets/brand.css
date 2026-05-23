@@ -1,0 +1,167 @@
+/* ============================================================
+   Español con Diana — Brand Tokens
+   ============================================================ */
+
+/* Google Fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,144,300;0,144,400;0,144,600;0,144,700;1,144,300;1,144,400;1,144,600&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+
+:root {
+
+  /* ── Colors ─────────────────────────────────────────────── */
+  --color-paper:      #FAF6EE;  /* warm off-white, default bg    */
+  --color-ink:        #1F1A14;  /* deep warm black, body text    */
+  --color-ochre:      #C99A3D;  /* golden accent, highlights     */
+  --color-terracotta: #C4593A;  /* warm red, primary actions     */
+  --color-sage:       #6B8E6B;  /* earthy green, success/nature  */
+  --color-night:      #2A2540;  /* deep indigo, dark surfaces    */
+  --color-muted:      #7B736B;  /* warm grey, secondary text     */
+
+  /* Derived / semantic aliases */
+  --color-bg:         var(--color-paper);
+  --color-bg-dark:    var(--color-night);
+  --color-text:       var(--color-ink);
+  --color-text-muted: var(--color-muted);
+  --color-accent:     var(--color-terracotta);
+  --color-accent-alt: var(--color-ochre);
+  --color-success:    var(--color-sage);
+
+  /* Surface tints (ink at low opacity over paper) */
+  --color-surface-100: color-mix(in srgb, var(--color-ink) 4%,  var(--color-paper));
+  --color-surface-200: color-mix(in srgb, var(--color-ink) 8%,  var(--color-paper));
+  --color-surface-300: color-mix(in srgb, var(--color-ink) 14%, var(--color-paper));
+
+  /* ── Typography ─────────────────────────────────────────── */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-accent:  'Caveat', cursive;
+  --font-data:    'DM Mono', 'Menlo', monospace;
+
+  /* Optical size hint (Fraunces variable axis) */
+  --font-display-opsz: 144;
+
+  /* Scale (Major Third, 1.25) */
+  --text-xs:   0.64rem;   /*  ~10px */
+  --text-sm:   0.8rem;    /*  ~13px */
+  --text-base: 1rem;      /*  ~16px */
+  --text-md:   1.25rem;   /*  ~20px */
+  --text-lg:   1.563rem;  /*  ~25px */
+  --text-xl:   1.953rem;  /*  ~31px */
+  --text-2xl:  2.441rem;  /*  ~39px */
+  --text-3xl:  3.052rem;  /*  ~49px */
+  --text-4xl:  3.815rem;  /*  ~61px */
+
+  /* Line heights */
+  --leading-tight:  1.2;
+  --leading-snug:   1.35;
+  --leading-normal: 1.55;
+  --leading-loose:  1.75;
+
+  /* Letter spacing */
+  --tracking-tight: -0.02em;
+  --tracking-base:  0;
+  --tracking-wide:  0.04em;
+  --tracking-wider: 0.08em;
+  --tracking-caps:  0.12em;
+
+  /* ── Spacing ─────────────────────────────────────────────── */
+  /* 4-point base grid */
+  --space-0:   0;
+  --space-1:   0.25rem;   /*  4px */
+  --space-2:   0.5rem;    /*  8px */
+  --space-3:   0.75rem;   /* 12px */
+  --space-4:   1rem;      /* 16px */
+  --space-5:   1.25rem;   /* 20px */
+  --space-6:   1.5rem;    /* 24px */
+  --space-8:   2rem;      /* 32px */
+  --space-10:  2.5rem;    /* 40px */
+  --space-12:  3rem;      /* 48px */
+  --space-16:  4rem;      /* 64px */
+  --space-20:  5rem;      /* 80px */
+  --space-24:  6rem;      /* 96px */
+  --space-32:  8rem;      /* 128px */
+
+  /* ── Radii ───────────────────────────────────────────────── */
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --radius-md:   6px;
+  --radius-lg:   12px;
+  --radius-xl:   20px;
+  --radius-2xl:  32px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ─────────────────────────────────────────────── */
+  /* Warm-tinted, elevation-based */
+  --shadow-xs:  0 1px 2px 0 color-mix(in srgb, var(--color-ink) 8%, transparent);
+  --shadow-sm:  0 1px 4px 0 color-mix(in srgb, var(--color-ink) 10%, transparent),
+                0 1px 2px -1px color-mix(in srgb, var(--color-ink) 6%, transparent);
+  --shadow-md:  0 4px 12px -2px color-mix(in srgb, var(--color-ink) 12%, transparent),
+                0 2px 4px -2px color-mix(in srgb, var(--color-ink) 8%, transparent);
+  --shadow-lg:  0 10px 28px -4px color-mix(in srgb, var(--color-ink) 14%, transparent),
+                0 4px 8px -4px color-mix(in srgb, var(--color-ink) 8%, transparent);
+  --shadow-xl:  0 20px 48px -8px color-mix(in srgb, var(--color-ink) 18%, transparent),
+                0 8px 16px -8px color-mix(in srgb, var(--color-ink) 10%, transparent);
+
+  /* Ochre glow — hero/CTA accent ring */
+  --shadow-glow-ochre: 0 0 0 3px color-mix(in srgb, var(--color-ochre) 30%, transparent);
+  /* Terracotta focus ring */
+  --shadow-focus: 0 0 0 3px color-mix(in srgb, var(--color-terracotta) 35%, transparent);
+
+  /* ── Transitions ─────────────────────────────────────────── */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:    cubic-bezier(0, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast:   120ms;
+  --duration-base:   220ms;
+  --duration-slow:   380ms;
+
+  /* ── Layout ──────────────────────────────────────────────── */
+  --max-width-prose:  68ch;
+  --max-width-layout: 1200px;
+  --container-px:     var(--space-6);
+
+  /* ── Z-index ─────────────────────────────────────────────── */
+  --z-base:    0;
+  --z-raised:  10;
+  --z-overlay: 100;
+  --z-modal:   200;
+  --z-toast:   300;
+}
+
+/* Dark-mode overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:         var(--color-night);
+    --color-bg-dark:    #1A1730;          /* deeper than night */
+    --color-text:       #EDE8E0;          /* warm near-white   */
+    --color-text-muted: #A89F98;
+
+    --color-surface-100: color-mix(in srgb, #EDE8E0 5%,  var(--color-night));
+    --color-surface-200: color-mix(in srgb, #EDE8E0 10%, var(--color-night));
+    --color-surface-300: color-mix(in srgb, #EDE8E0 18%, var(--color-night));
+
+    --shadow-xs: 0 1px 2px 0 rgba(0,0,0,0.3);
+    --shadow-sm: 0 1px 4px 0 rgba(0,0,0,0.35), 0 1px 2px -1px rgba(0,0,0,0.2);
+    --shadow-md: 0 4px 12px -2px rgba(0,0,0,0.4), 0 2px 4px -2px rgba(0,0,0,0.25);
+    --shadow-lg: 0 10px 28px -4px rgba(0,0,0,0.45), 0 4px 8px -4px rgba(0,0,0,0.3);
+  }
+}
+
+/* ── Base resets ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Información Personal — Comic Strip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:      #FAF6EE;
+      --ink:        #1F1A14;
+      --ochre:      #C99A3D;
+      --terracotta: #C4593A;
+      --sage:       #6B8E6B;
+      --night:      #2A2540;
+      --muted:      #7B736B;
+      --panel-border: 2.5px;
+    }
+
+    body {
+      background-color: var(--paper);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 64px;
+      font-family: 'Caveat', cursive;
+    }
+
+    .strip-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    /* Banner badge */
+    .topic-badge {
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .badge-burst {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .badge-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 200px;
+      line-height: 1.6;
+    }
+
+    /* Comic strip */
+    .comic-strip {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: nowrap;
+      max-width: 1340px;
+      width: 100%;
+    }
+
+    .panel-wrap {
+      flex: 1;
+      min-width: 240px;
+      max-width: 320px;
+      position: relative;
+    }
+
+    .panel-wrap:nth-child(1) { transform: rotate(-2.1deg) translateY(8px);  z-index: 2; }
+    .panel-wrap:nth-child(2) { transform: rotate(1.4deg)  translateY(-5px); z-index: 3; }
+    .panel-wrap:nth-child(3) { transform: rotate(-0.8deg) translateY(6px);  z-index: 2; }
+    .panel-wrap:nth-child(4) { transform: rotate(2.4deg)  translateY(-3px); z-index: 1; }
+
+    .panel {
+      background: var(--paper);
+      border: var(--panel-border) solid var(--ink);
+      border-radius: 3px;
+      box-shadow:
+        4px 4px 0 var(--ink),
+        7px 7px 14px rgba(31,26,20,0.16);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .panel-scene {
+      width: 100%;
+      display: block;
+    }
+
+    .caption {
+      background: #F0EBE1;
+      border-top: var(--panel-border) solid var(--ink);
+      padding: 10px 14px 14px;
+    }
+    .phrase {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 28px;
+      color: var(--ink);
+      line-height: 1;
+      display: block;
+    }
+    .hint {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      display: block;
+    }
+
+    .panel-num {
+      position: absolute;
+      top: 7px;
+      left: 9px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      color: var(--ink);
+      opacity: 0.30;
+      z-index: 20;
+    }
+
+    /* Reference card below strip */
+    .ref-card {
+      margin-top: 52px;
+      max-width: 960px;
+      width: 100%;
+      border: 2px solid var(--ink);
+      border-radius: 4px;
+      background: var(--paper);
+      box-shadow: 3px 3px 0 var(--ink);
+      padding: 22px 28px 20px;
+    }
+    .ref-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .ref-item {
+      border: 1.5px solid var(--ink);
+      border-radius: 3px;
+      padding: 10px 12px;
+      background: #F7F2EA;
+    }
+    .ref-q {
+      font-family: 'Caveat', cursive;
+      font-size: 16px;
+      color: var(--terracotta);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .ref-a {
+      font-family: 'Caveat', cursive;
+      font-size: 15px;
+      color: var(--ink);
+      display: block;
+    }
+
+    .strip-footer {
+      margin-top: 36px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      color: var(--muted);
+      opacity: 0.55;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="strip-title">Español con Diana &nbsp;·&nbsp; A1 &nbsp;·&nbsp; Información Personal</p>
+
+  <!-- Topic badge -->
+  <div class="topic-badge">
+    <svg class="badge-burst" width="120" height="120" viewBox="0 0 120 120">
+      <defs>
+        <filter id="inkBadge">
+          <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="7" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+      <!-- Hexagonal form card shape -->
+      <polygon
+        points="60,4 100,22 110,62 88,100 32,100 10,62 20,22"
+        fill="var(--night)"
+        stroke="var(--ink)"
+        stroke-width="2"
+        filter="url(#inkBadge)"
+      />
+      <text x="60" y="52" font-family="'Caveat', cursive" font-size="13" font-weight="700" fill="var(--ochre)" text-anchor="middle">¿Cómo te</text>
+      <text x="60" y="68" font-family="'Caveat', cursive" font-size="13" font-weight="700" fill="var(--ochre)" text-anchor="middle">llamas?</text>
+      <text x="60" y="88" font-family="'Inter', sans-serif" font-size="9" fill="rgba(255,255,255,0.6)" text-anchor="middle">A1 · Lección 02</text>
+    </svg>
+    <div class="badge-sub">
+      Five questions.<br>One minute.<br>You've got this.
+    </div>
+  </div>
+
+  <!-- Comic Strip — 4 panels -->
+  <div class="comic-strip">
+
+    <!-- PANEL 1: Name exchange at a class -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">1</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink1" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="3" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="classWall" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#EDE7DB"/>
+              <stop offset="100%" stop-color="#D9D2C5"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Room background -->
+          <rect width="280" height="340" fill="url(#classWall)"/>
+
+          <!-- Chalkboard on wall -->
+          <rect x="18" y="18" width="244" height="110" rx="3" fill="#3D5A3D" stroke="#1F1A14" stroke-width="2.5" filter="url(#ink1)"/>
+          <!-- Chalk writing -->
+          <text x="140" y="55" font-family="'Caveat', cursive" font-size="20" font-weight="700" fill="#FAF6EE" text-anchor="middle" opacity="0.9">¿Cómo te llamas?</text>
+          <text x="140" y="82" font-family="'Caveat', cursive" font-size="16" fill="var(--ochre)" text-anchor="middle" opacity="0.85">Me llamo ___.</text>
+          <!-- Chalk ledge -->
+          <rect x="18" y="128" width="244" height="8" rx="1" fill="#C8A97E" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Chalk piece -->
+          <rect x="190" y="125" width="20" height="7" rx="2" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1"/>
+
+          <!-- Floor line -->
+          <line x1="0" y1="270" x2="280" y2="270" stroke="#1F1A14" stroke-width="2"/>
+          <rect y="270" width="280" height="70" fill="#C8A97E" opacity="0.35"/>
+
+          <!-- Left person (asking) -->
+          <!-- Body -->
+          <path d="M30,340 Q30,285 55,265 Q65,258 70,258 Q75,258 85,265 Q110,285 110,340 Z" fill="var(--sage)" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="70" cy="245" rx="24" ry="26" fill="#F0C8A0" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Short hair -->
+          <path d="M47,235 Q49,215 70,218 Q91,215 93,235" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Glasses -->
+          <rect x="56" y="240" width="12" height="8" rx="2" fill="none" stroke="#1F1A14" stroke-width="1.8"/>
+          <rect x="72" y="240" width="12" height="8" rx="2" fill="none" stroke="#1F1A14" stroke-width="1.8"/>
+          <line x1="68" y1="244" x2="72" y2="244" stroke="#1F1A14" stroke-width="1.5"/>
+          <line x1="56" y1="244" x2="50" y2="243" stroke="#1F1A14" stroke-width="1.5"/>
+          <line x1="84" y1="244" x2="90" y2="243" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Smile -->
+          <path d="M60,256 Q70,263 80,256" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Arm pointing at board -->
+          <path d="M93,275 Q115,260 140,145" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- Speech bubble LEFT (bottom) -->
+          <path d="M8,155 Q8,140 28,140 L145,140 Q165,140 165,158 Q165,176 145,176 L90,176 L78,192 L82,176 L28,176 Q8,176 8,158 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2" filter="url(#ink1)"/>
+          <text x="86" y="162" font-family="'Caveat', cursive" font-size="17" font-weight="700" fill="#1F1A14" text-anchor="middle">¿Cómo te llamas?</text>
+
+          <!-- Right person (answering) -->
+          <!-- Body -->
+          <path d="M170,340 Q170,285 195,265 Q205,258 210,258 Q215,258 225,265 Q250,285 250,340 Z" fill="var(--terracotta)" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="210" cy="245" rx="24" ry="26" fill="#FDDBA0" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Long hair -->
+          <path d="M186,232 Q188,208 210,212 Q232,208 234,232 Q234,255 225,260 Q218,265 210,265 Q202,265 195,260 Q186,255 186,232 Z" fill="#1F1A14" stroke="#1F1A14" stroke-width="1"/>
+          <path d="M186,232 Q188,208 210,212 Q232,208 234,232" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Face on dark hair background -->
+          <ellipse cx="210" cy="245" rx="22" ry="22" fill="#FDDBA0" stroke="none"/>
+          <!-- Eyes happy -->
+          <path d="M200,242 Q205,238 210,242" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <path d="M210,242 Q215,238 220,242" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Smile big -->
+          <path d="M200,256 Q210,264 220,256" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Speech bubble RIGHT -->
+          <path d="M120,195 Q120,178 142,178 L262,178 Q272,178 272,195 Q272,212 262,212 L180,212 L175,228 L178,212 L142,212 Q120,212 120,195 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2" filter="url(#ink1)"/>
+          <text x="196" y="200" font-family="'Caveat', cursive" font-size="17" font-weight="700" fill="var(--terracotta)" text-anchor="middle">Me llamo</text>
+          <text x="196" y="217" font-family="'Caveat', cursive" font-size="17" font-weight="700" fill="#1F1A14" text-anchor="middle">Valentina. ¿Y tú?</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">¿Cómo te llamas?</span>
+          <span class="hint">asking a name</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: Origin — map on wall -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">2</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink2" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="11"/>
+              <feDisplacementMap in="SourceGraphic" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+
+          <!-- Background warm wall -->
+          <rect width="280" height="340" fill="#EDE4D4"/>
+
+          <!-- World map (simplified silhouette) on wall — framed -->
+          <rect x="14" y="14" width="252" height="140" rx="3" fill="#D4CCB8" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Simplified continent blobs -->
+          <!-- Americas -->
+          <path d="M38,40 Q50,32 58,50 Q62,65 55,90 Q50,110 42,115 Q34,118 32,100 Q28,75 38,40 Z"
+            fill="var(--sage)" stroke="#1F1A14" stroke-width="1.5" opacity="0.75"/>
+          <!-- South America -->
+          <path d="M52,100 Q62,95 68,115 Q72,135 65,148 Q58,155 50,145 Q44,128 52,100 Z"
+            fill="var(--sage)" stroke="#1F1A14" stroke-width="1.5" opacity="0.75"/>
+          <!-- Europe+Africa -->
+          <path d="M110,28 Q128,24 132,42 Q135,58 125,70 Q118,80 108,75 Q98,68 102,48 Q104,34 110,28 Z"
+            fill="var(--ochre)" stroke="#1F1A14" stroke-width="1.5" opacity="0.7"/>
+          <path d="M112,78 Q124,75 130,92 Q136,115 128,138 Q122,148 112,145 Q100,138 100,115 Q100,88 112,78 Z"
+            fill="var(--ochre)" stroke="#1F1A14" stroke-width="1.5" opacity="0.7"/>
+          <!-- Asia -->
+          <path d="M148,25 Q185,20 205,35 Q220,50 215,70 Q205,88 185,88 Q165,88 152,72 Q140,55 148,25 Z"
+            fill="#C4A882" stroke="#1F1A14" stroke-width="1.5" opacity="0.7"/>
+          <!-- Australia -->
+          <path d="M190,115 Q210,108 220,122 Q228,138 218,148 Q205,155 193,145 Q182,130 190,115 Z"
+            fill="#C4A882" stroke="#1F1A14" stroke-width="1.5" opacity="0.65"/>
+
+          <!-- Pin on Mexico -->
+          <circle cx="46" cy="78" r="5" fill="var(--terracotta)" stroke="#1F1A14" stroke-width="1.5"/>
+          <line x1="46" y1="83" x2="46" y2="98" stroke="var(--terracotta)" stroke-width="2" stroke-linecap="round"/>
+          <!-- Mexico label -->
+          <text x="62" y="82" font-family="'Caveat', cursive" font-size="12" fill="#1F1A14">México</text>
+
+          <!-- Pin on Spain -->
+          <circle cx="113" cy="44" r="5" fill="var(--night)" stroke="#1F1A14" stroke-width="1.5"/>
+          <line x1="113" y1="49" x2="113" y2="62" stroke="var(--night)" stroke-width="2" stroke-linecap="round"/>
+          <text x="118" y="52" font-family="'Caveat', cursive" font-size="12" fill="#1F1A14">España</text>
+
+          <!-- Frame -->
+          <rect x="14" y="14" width="252" height="140" rx="3" fill="none" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Frame hanging nail -->
+          <line x1="140" y1="8" x2="140" y2="16" stroke="#1F1A14" stroke-width="2"/>
+          <circle cx="140" cy="7" r="3" fill="#C8A97E" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Floor -->
+          <line x1="0" y1="278" x2="280" y2="278" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect y="278" width="280" height="62" fill="#BBA87A" opacity="0.3"/>
+
+          <!-- Person with suitcase -->
+          <!-- Suitcase -->
+          <rect x="185" y="218" width="52" height="44" rx="4" fill="var(--terracotta)" stroke="#1F1A14" stroke-width="2"/>
+          <rect x="197" y="211" width="28" height="12" rx="4" fill="none" stroke="#1F1A14" stroke-width="2.5"/>
+          <!-- Suitcase stripes -->
+          <line x1="211" y1="218" x2="211" y2="262" stroke="#1F1A14" stroke-width="1.5"/>
+          <line x1="185" y1="235" x2="237" y2="235" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Suitcase lock -->
+          <rect x="206" y="237" width="10" height="8" rx="2" fill="var(--ochre)" stroke="#1F1A14" stroke-width="1"/>
+          <!-- Handle grab arm -->
+          <path d="M182,240 Q170,240 165,260" fill="none" stroke="#F0C8A0" stroke-width="12" stroke-linecap="round"/>
+          <path d="M182,240 Q170,240 165,260" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Person body -->
+          <path d="M100,340 Q100,288 128,265 Q140,255 145,255 Q150,255 162,265 Q190,288 190,340 Z" fill="var(--night)" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="145" cy="242" rx="25" ry="27" fill="#E8BC90" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hat / cap -->
+          <path d="M120,236 Q122,218 145,222 Q168,218 170,236" fill="#1F1A14" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="116" y="234" width="58" height="7" rx="3" fill="#1F1A14" stroke="#1F1A14" stroke-width="1"/>
+          <!-- Eyes curious -->
+          <ellipse cx="136" cy="242" rx="4" ry="4.5" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+          <ellipse cx="154" cy="242" rx="4" ry="4.5" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+          <circle cx="137" cy="243" r="2" fill="#1F1A14"/>
+          <circle cx="155" cy="243" r="2" fill="#1F1A14"/>
+          <!-- Smile -->
+          <path d="M135,256 Q145,264 155,256" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Speech bubble -->
+          <path d="M10,158 Q10,142 32,142 L240,142 Q262,142 262,160 Q262,178 240,178 L100,178 L88,196 L92,178 L32,178 Q10,178 10,160 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2" filter="url(#ink2)"/>
+          <text x="136" y="164" font-family="'Caveat', cursive" font-size="17" font-weight="700" fill="var(--terracotta)" text-anchor="middle">Soy de México.</text>
+          <text x="136" y="181" font-family="'Caveat', cursive" font-size="15" fill="#1F1A14" text-anchor="middle">Soy mexicano.</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">¿De dónde eres?</span>
+          <span class="hint">origin + nationality</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: Age — café scene -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">3</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink3" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="17"/>
+              <feDisplacementMap in="SourceGraphic" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="cafeWall" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#E8DFD0"/>
+              <stop offset="100%" stop-color="#D4C8B0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Café interior -->
+          <rect width="280" height="340" fill="url(#cafeWall)"/>
+
+          <!-- Window with birthday vibe -->
+          <rect x="20" y="20" width="100" height="90" rx="3" fill="#A8C8E8" stroke="#1F1A14" stroke-width="2"/>
+          <line x1="70" y1="20" x2="70" y2="110" stroke="#1F1A14" stroke-width="1.5"/>
+          <line x1="20" y1="65" x2="120" y2="65" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Clouds in window -->
+          <ellipse cx="40" cy="38" rx="15" ry="9" fill="#FAF6EE" opacity="0.8"/>
+          <ellipse cx="55" cy="35" rx="12" ry="8" fill="#FAF6EE" opacity="0.8"/>
+          <ellipse cx="95" cy="45" rx="14" ry="8" fill="#FAF6EE" opacity="0.8"/>
+
+          <!-- Birthday cake on table -->
+          <!-- Table -->
+          <rect x="140" y="195" width="128" height="12" rx="2" fill="#C8A97E" stroke="#1F1A14" stroke-width="2"/>
+          <rect x="148" y="207" width="10" height="38" rx="2" fill="#C8A97E" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="248" y="207" width="10" height="38" rx="2" fill="#C8A97E" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Cake base -->
+          <rect x="162" y="162" width="78" height="34" rx="4" fill="#FAF6EE" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Cake layer 2 -->
+          <rect x="172" y="142" width="58" height="22" rx="3" fill="#FDE68A" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Frosting drip on top layer -->
+          <path d="M172,142 Q181,136 190,142 Q199,136 210,142 Q219,136 230,142" fill="none" stroke="#FAF6EE" stroke-width="3" stroke-linecap="round"/>
+          <!-- Candle -->
+          <rect x="198" y="125" width="6" height="18" rx="2" fill="var(--terracotta)" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Flame -->
+          <path d="M201,122 Q198,115 201,110 Q204,115 201,122 Z" fill="var(--ochre)" stroke="#1F1A14" stroke-width="1"/>
+          <path d="M201,119 Q200,115 201,112 Q202,115 201,119 Z" fill="#FAF6EE"/>
+          <!-- 26 on cake -->
+          <text x="200" y="182" font-family="'Caveat', cursive" font-size="22" font-weight="700" fill="var(--terracotta)" text-anchor="middle">26</text>
+          <!-- años label -->
+          <text x="200" y="194" font-family="'Caveat', cursive" font-size="12" fill="var(--muted)" text-anchor="middle">años</text>
+
+          <!-- Floor -->
+          <line x1="0" y1="280" x2="280" y2="280" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Person (happy, arms open) -->
+          <path d="M50,340 Q50,285 78,265 Q90,256 96,256 Q102,256 114,265 Q142,285 142,340 Z" fill="var(--ochre)" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="96" cy="242" rx="26" ry="28" fill="#F5CBA7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Curly hair -->
+          <path d="M70,230 Q72,205 96,210 Q120,205 122,230" fill="#6B4020" stroke="#1F1A14" stroke-width="1.5"/>
+          <circle cx="76" cy="222" r="8" fill="#6B4020" stroke="#1F1A14" stroke-width="1"/>
+          <circle cx="116" cy="222" r="8" fill="#6B4020" stroke="#1F1A14" stroke-width="1"/>
+          <circle cx="96" cy="212" r="8" fill="#6B4020" stroke="#1F1A14" stroke-width="1"/>
+          <!-- Big happy eyes -->
+          <ellipse cx="86" cy="241" rx="5" ry="6" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+          <ellipse cx="106" cy="241" rx="5" ry="6" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+          <circle cx="87" cy="242" r="2.5" fill="#1F1A14"/>
+          <circle cx="107" cy="242" r="2.5" fill="#1F1A14"/>
+          <!-- Big smile -->
+          <path d="M82,256 Q96,268 110,256" fill="none" stroke="#1F1A14" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Party hat -->
+          <path d="M76,222 Q96,190 116,222" fill="var(--terracotta)" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Arms up celebratory -->
+          <path d="M72,278 Q55,265 48,248" fill="none" stroke="#1F1A14" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M120,278 Q137,265 144,248" fill="none" stroke="#1F1A14" stroke-width="3.5" stroke-linecap="round"/>
+
+          <!-- Speech bubble -->
+          <path d="M130,130 Q130,112 152,112 L262,112 Q272,112 272,130 Q272,148 262,148 L190,148 L182,166 L186,148 L152,148 Q130,148 130,130 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2" filter="url(#ink3)"/>
+          <text x="200" y="132" font-family="'Caveat', cursive" font-size="16" fill="var(--muted)" text-anchor="middle">¡Tengo</text>
+          <text x="200" y="150" font-family="'Caveat', cursive" font-size="20" font-weight="700" fill="#1F1A14" text-anchor="middle">26 años!</text>
+
+          <!-- TRAP label -->
+          <path d="M14,115 Q14,102 28,102 L118,102 Q130,102 130,115 Q130,126 118,126 L28,126 Q14,126 14,115 Z"
+            fill="var(--terracotta)" stroke="#1F1A14" stroke-width="1.5" filter="url(#ink3)"/>
+          <text x="72" y="119" font-family="'Caveat', cursive" font-size="13" fill="#FAF6EE" text-anchor="middle">NO: "Soy 26 años"</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">Tengo 26 años</span>
+          <span class="hint">age uses "tener", not "ser"</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 4: Profession + form fill -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">4</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink4" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="23"/>
+              <feDisplacementMap in="SourceGraphic" scale="1.3" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+
+          <!-- Office / desk background -->
+          <rect width="280" height="340" fill="#E8E0D5"/>
+
+          <!-- Desk surface -->
+          <rect x="0" y="195" width="280" height="20" rx="2" fill="#C8A97E" stroke="#1F1A14" stroke-width="2"/>
+          <rect y="215" width="280" height="125" fill="#B89870" opacity="0.4"/>
+
+          <!-- Form / registration paper on desk -->
+          <rect x="20" y="22" width="185" height="175" rx="3" fill="#FAF6EE" stroke="#1F1A14" stroke-width="2" filter="url(#ink4)" transform="rotate(-1.5, 112, 110)"/>
+          <!-- Form header -->
+          <rect x="22" y="24" width="181" height="22" rx="2" fill="var(--night)" transform="rotate(-1.5, 112, 110)"/>
+          <text x="112" y="39" font-family="'Caveat', cursive" font-size="13" font-weight="700" fill="#FAF6EE" text-anchor="middle" transform="rotate(-1.5, 112, 110)">FICHA PERSONAL</text>
+          <!-- Form lines -->
+          <g font-family="'Caveat', cursive" font-size="12" fill="#1F1A14" transform="rotate(-1.5, 112, 110)">
+            <text x="30" y="68">Nombre:</text>
+            <line x1="82" y1="70" x2="196" y2="70" stroke="#1F1A14" stroke-width="1"/>
+            <text x="83" y="68" fill="var(--terracotta)">Sofía Torres</text>
+
+            <text x="30" y="92">País:</text>
+            <line x1="62" y1="94" x2="196" y2="94" stroke="#1F1A14" stroke-width="1"/>
+            <text x="63" y="92" fill="var(--terracotta)">Argentina</text>
+
+            <text x="30" y="116">Edad:</text>
+            <line x1="66" y1="118" x2="196" y2="118" stroke="#1F1A14" stroke-width="1"/>
+            <text x="67" y="116" fill="var(--terracotta)">29 años</text>
+
+            <text x="30" y="140">Profesión:</text>
+            <line x1="93" y1="142" x2="196" y2="142" stroke="#1F1A14" stroke-width="1"/>
+            <text x="94" y="140" fill="var(--terracotta)">arquitecta</text>
+
+            <text x="30" y="164">Ciudad:</text>
+            <line x1="77" y1="166" x2="196" y2="166" stroke="#1F1A14" stroke-width="1"/>
+            <text x="78" y="164" fill="var(--terracotta)">Buenos Aires</text>
+
+            <text x="30" y="188">Teléfono:</text>
+            <line x1="88" y1="190" x2="196" y2="190" stroke="#1F1A14" stroke-width="1"/>
+            <text x="89" y="188" fill="var(--terracotta)">11 42 38 65</text>
+          </g>
+
+          <!-- Pencil on desk -->
+          <path d="M210,195 Q212,170 215,145" stroke="#C99A3D" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <path d="M215,145 L218,138 L212,142 Z" fill="#1F1A14"/>
+          <!-- Pencil eraser -->
+          <rect x="207" y="193" width="8" height="7" rx="2" fill="#FFC0CB" stroke="#1F1A14" stroke-width="1"/>
+
+          <!-- Person sitting at desk reading -->
+          <!-- Chair -->
+          <rect x="190" y="250" width="80" height="10" rx="3" fill="#7B736B" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="205" y="260" width="10" height="40" rx="2" fill="#7B736B" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="245" y="260" width="10" height="40" rx="2" fill="#7B736B" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="200" y="298" width="60" height="8" rx="2" fill="#7B736B" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Person (seated, side view reading form) -->
+          <path d="M200,310 Q200,260 220,248 Q228,244 230,244 Q240,248 248,262 Q258,278 255,310 Z" fill="var(--sage)" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="228" cy="232" rx="22" ry="24" fill="#FDDBA0" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Bun hair -->
+          <path d="M206,222 Q208,205 228,208 Q246,205 248,222" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <circle cx="228" cy="207" r="12" fill="#3A2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Glasses (professional) -->
+          <rect x="215" y="228" width="11" height="8" rx="2" fill="none" stroke="#1F1A14" stroke-width="1.8"/>
+          <rect x="228" y="228" width="11" height="8" rx="2" fill="none" stroke="#1F1A14" stroke-width="1.8"/>
+          <line x1="226" y1="232" x2="228" y2="232" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Looking down at form -->
+          <path d="M218,238 Q222,234 226,238" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M230,238 Q234,234 238,238" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Focused expression / small smile -->
+          <path d="M220,246 Q228,252 236,246" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Arm on desk writing -->
+          <path d="M210,260 Q200,240 205,210" fill="none" stroke="#FDDBA0" stroke-width="10" stroke-linecap="round"/>
+          <path d="M210,260 Q200,240 205,210" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Speech bubble — top right -->
+          <path d="M28,202 Q28,186 50,186 L195,186 Q215,186 215,202 Q215,218 195,218 L100,218 L88,234 L92,218 L50,218 Q28,218 28,202 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2" filter="url(#ink4)"/>
+          <text x="120" y="204" font-family="'Caveat', cursive" font-size="14" fill="var(--muted)" text-anchor="middle">¿A qué te dedicas?</text>
+          <text x="120" y="220" font-family="'Caveat', cursive" font-size="16" font-weight="700" fill="#1F1A14" text-anchor="middle">Soy arquitecta.</text>
+
+          <!-- NO article annotation -->
+          <path d="M160,220 Q168,228 172,235" fill="none" stroke="var(--terracotta)" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <text x="172" y="242" font-family="'Caveat', cursive" font-size="11" fill="var(--terracotta)">sin "una" ✓</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">Soy arquitecta</span>
+          <span class="hint">profession — no article needed</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Quick-reference card -->
+  <div class="ref-card">
+    <div class="ref-label">Las 5 preguntas clave — A1 · Personal Information</div>
+    <div class="ref-grid">
+      <div class="ref-item">
+        <span class="ref-q">¿Cómo te llamas?</span>
+        <span class="ref-a">Me llamo Ana.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-q">¿De dónde eres?</span>
+        <span class="ref-a">Soy de Colombia. / Soy colombiano.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-q">¿Cuántos años tienes?</span>
+        <span class="ref-a">Tengo 31 años.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-q">¿A qué te dedicas?</span>
+        <span class="ref-a">Soy médica.</span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-q">¿Dónde vives?</span>
+        <span class="ref-a">Vivo en Bogotá.</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="strip-footer">Español con Diana &nbsp;·&nbsp; Lección A1-02</p>
+
+</body>
+</html>

@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phrases de Survie — Espagnol vers Français</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:      #FAF6EE;
+    --ink:        #1F1A14;
+    --ochre:      #C99A3D;
+    --terra:      #C4593A;
+    --sage:       #6B8E6B;
+    --night:      #2A2540;
+    --muted:      #7B736B;
+    --paper-dark: #EDE8DF;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ─────────────────────────────────────────────── */
+  .hero {
+    background: var(--night);
+    color: var(--paper);
+    padding: 56px 80px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: 0.14;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: 200px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: var(--sage);
+    opacity: 0.16;
+  }
+  .hero-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--sage);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 3px;
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 span { color: var(--ochre); }
+  .hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: rgba(250,246,238,0.6);
+    margin-top: 12px;
+    max-width: 560px;
+    position: relative;
+    z-index: 1;
+    line-height: 1.6;
+  }
+  .hero-fr-badge {
+    position: absolute;
+    right: 80px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Fraunces', serif;
+    font-size: 100px;
+    font-weight: 900;
+    color: var(--sage);
+    opacity: 0.2;
+    letter-spacing: -0.03em;
+    user-select: none;
+  }
+
+  /* ── LAYOUT ──────────────────────────────────────────────── */
+  .page { max-width: 1440px; margin: 0 auto; padding: 0 64px 80px; }
+
+  /* ── SECTION LABELS ──────────────────────────────────────── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 52px 0 20px;
+  }
+  .section-label .icon-circle {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-label h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-label .block-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: 6px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── PHRASE CARD ──────────────────────────────────────────── */
+  .phrase-grid { display: grid; gap: 16px; }
+  .phrase-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .phrase-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .phrase-grid.cols-4 { grid-template-columns: repeat(4,1fr); }
+
+  .phrase-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1.5px solid var(--paper-dark);
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phrase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px; height: 100%;
+    border-radius: 12px 0 0 12px;
+  }
+  .phrase-card.color-terra::before  { background: var(--terra); }
+  .phrase-card.color-ochre::before  { background: var(--ochre); }
+  .phrase-card.color-sage::before   { background: var(--sage); }
+  .phrase-card.color-night::before  { background: var(--night); }
+  .phrase-card.color-muted::before  { background: var(--muted); }
+
+  .phrase-card .es {
+    font-family: 'Fraunces', serif;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .phrase-card .fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sage);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .phrase-card .note {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .phrase-card .register-badge {
+    position: absolute;
+    top: 16px; right: 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .badge-formal   { background: var(--night);  color: var(--paper); }
+  .badge-informal { background: var(--sage);   color: #fff; }
+  .badge-both     { background: var(--ochre);  color: #fff; }
+  .badge-urgent   { background: var(--terra);  color: #fff; }
+  .badge-fr       { background: var(--muted);  color: #fff; }
+
+  /* ── URGENCE BANNER ─────────────────────────────────────── */
+  .urgence-banner {
+    background: var(--terra);
+    border-radius: 14px;
+    padding: 36px 48px;
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr;
+    gap: 20px 40px;
+    align-items: center;
+    margin: 32px 0 16px;
+  }
+  .urgence-banner .sos-icon {
+    width: 64px; height: 64px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+  }
+  .urgence-banner .urg-es {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .urgence-banner .urg-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* ── TRIO BLOCK ─────────────────────────────────────────── */
+  .trio-block {
+    background: var(--night);
+    border-radius: 14px;
+    padding: 40px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    margin: 32px 0;
+  }
+  .trio-item {
+    padding: 0 32px;
+    border-right: 1px solid rgba(250,246,238,0.12);
+  }
+  .trio-item:first-child { padding-left: 0; }
+  .trio-item:last-child { border-right: none; }
+  .trio-word {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+  .t-ochre { color: var(--ochre); }
+  .t-terra { color: var(--terra); }
+  .t-sage  { color: var(--sage); }
+  .trio-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,0.5);
+    margin-bottom: 12px;
+  }
+  .trio-rule {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: rgba(250,246,238,0.8);
+    line-height: 1.55;
+  }
+  .trio-example {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: rgba(250,246,238,0.55);
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* ── COMPARAISON TABLEAU ─────────────────────────────────── */
+  .compare-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 24px 0;
+    border: 1.5px solid var(--paper-dark);
+  }
+  .compare-table thead tr {
+    background: var(--night);
+    color: var(--paper);
+  }
+  .compare-table thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    text-align: left;
+  }
+  .compare-table tbody tr:nth-child(even) { background: var(--paper-dark); }
+  .compare-table tbody tr:nth-child(odd)  { background: #fff; }
+  .compare-table tbody td {
+    padding: 14px 20px;
+    vertical-align: top;
+  }
+  .compare-table .td-es {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .compare-table .td-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--sage);
+    font-weight: 600;
+  }
+  .compare-table .td-note {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--muted);
+  }
+  .compare-table .td-reg {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  /* ── TIPS CALLOUT ─────────────────────────────────────────── */
+  .tips-callout {
+    background: var(--paper-dark);
+    border-left: 4px solid var(--ochre);
+    border-radius: 0 10px 10px 0;
+    padding: 20px 24px;
+    margin-top: 16px;
+  }
+  .tips-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 10px;
+  }
+  .tips-callout ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .tips-callout ul li {
+    font-family: 'Caveat', cursive;
+    font-size: 17px;
+    color: var(--ink);
+    padding-left: 18px;
+    position: relative;
+  }
+  .tips-callout ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--ochre);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+  }
+
+  /* ── PRONUNC ROW ─────────────────────────────────────────── */
+  .pronunc-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .pronunc-chip {
+    background: #fff;
+    border: 1.5px solid var(--paper-dark);
+    border-radius: 8px;
+    padding: 12px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 180px;
+  }
+  .pword   { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 700; color: var(--ink); }
+  .pphonet { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ochre); font-weight: 500; }
+  .ptrans  { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted); }
+
+  /* ── REGIONAL BAR ─────────────────────────────────────────── */
+  .regional-bar {
+    background: var(--sage);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-top: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .map-icon { font-size: 32px; flex-shrink: 0; margin-top: 2px; }
+  .rb-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 8px;
+  }
+  .rb-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.6;
+  }
+  .rb-text strong { color: rgba(255,255,255,0.95); }
+
+  /* ── DIVIDER ─────────────────────────────────────────────── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--ochre) 0%, transparent 100%);
+    margin: 40px 0 0;
+    opacity: 0.3;
+  }
+
+  /* ── FOOTER ─────────────────────────────────────────────── */
+  .footer-band {
+    background: var(--night);
+    border-radius: 12px;
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 60px;
+  }
+  .fb-left {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--paper);
+  }
+  .fb-pills { display: flex; gap: 8px; }
+  .pill {
+    background: rgba(250,246,238,0.08);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+  }
+  .fb-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-flag">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="rgba(255,255,255,0.5)" stroke-width="1"/><path d="M4 7l2 2 4-4" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Español con Diana · A1 · Thème 18
+  </div>
+  <h1>Phrases de<br><span>Survie</span></h1>
+  <p class="hero-sub">L'espagnol d'urgence — infographie de traduction espagnol–français. Chaque phrase dont tu as besoin quand la situation devient réelle.</p>
+  <div class="hero-fr-badge">AU SECOURS</div>
+</div>
+
+<div class="page">
+
+  <!-- ══ URGENCES ═════════════════════════════════════════ -->
+  <div class="section-label" style="margin-top:48px;">
+    <div class="icon-circle" style="background:var(--terra);">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 4v14M4 11h14" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+    </div>
+    <h2>Cris d'urgence <span class="block-code">Bloc F</span></h2>
+  </div>
+
+  <div class="urgence-banner">
+    <div class="sos-icon">🚨</div>
+    <div>
+      <div class="urg-es">¡Socorro!</div>
+      <div class="urg-fr">Au secours ! (cri classique, bien articulé)</div>
+    </div>
+    <div class="sos-icon">🆘</div>
+    <div>
+      <div class="urg-es">¡Ayuda!</div>
+      <div class="urg-fr">À l'aide ! (également très courant)</div>
+    </div>
+  </div>
+
+  <div class="phrase-grid cols-2">
+    <div class="phrase-card color-terra">
+      <span class="register-badge badge-urgent">Urgent</span>
+      <div class="es">¡Llamen a la policía!</div>
+      <div class="fr">Appelez la police !</div>
+      <div class="note">Llamen = impératif pluriel (à la foule). À une seule personne : ¡Llame! (formel) / ¡Llama! (familier)</div>
+    </div>
+    <div class="phrase-card color-terra">
+      <span class="register-badge badge-urgent">Urgent</span>
+      <div class="es">¡Llamen a una ambulancia!</div>
+      <div class="fr">Appelez une ambulance !</div>
+      <div class="note">Même impératif pluriel. À utiliser en cas d'urgence médicale.</div>
+    </div>
+    <div class="phrase-card color-terra">
+      <span class="register-badge badge-urgent">Genre</span>
+      <div class="es">Estoy perdido / perdida.</div>
+      <div class="fr">Je suis perdu(e).</div>
+      <div class="note">Accorde avec ton genre : -o si masculin, -a si féminin.</div>
+    </div>
+    <div class="phrase-card color-muted">
+      <span class="register-badge badge-fr">Régional</span>
+      <div class="es">¡Auxilio!</div>
+      <div class="fr">Au secours ! (Mexique, Amérique centrale)</div>
+      <div class="note">Moins fréquent mais compris partout. Un troisième cri à connaître.</div>
+    </div>
+  </div>
+
+  <!-- ══ JE NE COMPRENDS PAS ════════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:var(--night);">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8.5" stroke="white" stroke-width="1.5"/><path d="M10 6.5c1.5 0 2.5.9 2.5 2.2 0 1.8-2.5 2-2.5 4m0 1.5v.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <h2>Je ne comprends pas <span class="block-code">Bloc A</span></h2>
+  </div>
+
+  <div class="phrase-grid cols-3">
+    <div class="phrase-card color-night">
+      <span class="register-badge badge-both">Les deux</span>
+      <div class="es">No entiendo.</div>
+      <div class="fr">Je ne comprends pas.</div>
+      <div class="note">Accent : no en-TIEN-do. Dominant en Amérique latine.</div>
+    </div>
+    <div class="phrase-card color-muted">
+      <span class="register-badge badge-formal">Soutenu</span>
+      <div class="es">No comprendo.</div>
+      <div class="fr">Je ne comprends pas.</div>
+      <div class="note">Registre plus formel ou écrit. Correct partout.</div>
+    </div>
+    <div class="phrase-card color-ochre">
+      <span class="register-badge badge-both">Urgent</span>
+      <div class="es">No entiendo nada.</div>
+      <div class="fr">Je ne comprends rien.</div>
+      <div class="note">À utiliser quand on est complètement perdu.</div>
+    </div>
+  </div>
+
+  <!-- ══ POURRIEZ-VOUS RÉPÉTER ══════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:var(--ochre);">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10a6 6 0 0 1 6-6h4l-2-2m-2 12H8l2 2" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>Pourriez-vous répéter ? <span class="block-code">Bloc B</span></h2>
+  </div>
+
+  <div class="phrase-grid cols-2">
+    <div class="phrase-card color-ochre">
+      <span class="register-badge badge-formal">Formel</span>
+      <div class="es">¿Puede repetir, por favor?</div>
+      <div class="fr">Pouvez-vous répéter, s'il vous plaît ?</div>
+      <div class="note">Intonation montante à la fin. Avec des inconnus, fonctionnaires, commerçants.</div>
+    </div>
+    <div class="phrase-card color-sage">
+      <span class="register-badge badge-informal">Familier</span>
+      <div class="es">Repite, por favor.</div>
+      <div class="fr">Répète, s'il te plaît.</div>
+      <div class="note">Tutoiement (tú). Avec des amis, des jeunes, des pairs.</div>
+    </div>
+  </div>
+
+  <!-- ══ PLUS LENTEMENT ════════════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:var(--sage);">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 8h8M6 12h5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <h2>Parlez plus lentement <span class="block-code">Bloc C</span></h2>
+  </div>
+
+  <div class="phrase-grid cols-3">
+    <div class="phrase-card color-sage">
+      <span class="register-badge badge-both">+ Geste</span>
+      <div class="es">Más despacio, por favor.</div>
+      <div class="fr">Plus lentement, s'il vous plaît.</div>
+      <div class="note">Geste : paume à plat qui descend lentement. Associe toujours le geste à la phrase.</div>
+    </div>
+    <div class="phrase-card color-sage">
+      <span class="register-badge badge-formal">Formel</span>
+      <div class="es">Hable más despacio.</div>
+      <div class="fr">Parlez plus lentement. (usted)</div>
+      <div class="note">Terminaison -e = usted (impératif formel)</div>
+    </div>
+    <div class="phrase-card color-sage">
+      <span class="register-badge badge-informal">Familier</span>
+      <div class="es">Habla más despacio.</div>
+      <div class="fr">Parle plus lentement. (tú)</div>
+      <div class="note">Terminaison -a = tú (impératif familier). Variante caraïbe : más lento.</div>
+    </div>
+  </div>
+
+  <!-- ══ QUE SIGNIFIE / COMMENT DIT-ON ════════════════════ -->
+  <div class="divider"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:var(--terra);">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10h14M10 3l7 7-7 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>Que signifie… / Comment dit-on… ? <span class="block-code">Bloc D</span></h2>
+  </div>
+
+  <div class="phrase-grid cols-2">
+    <div class="phrase-card color-terra">
+      <div class="es">¿Qué significa...?</div>
+      <div class="fr">Que signifie … ?</div>
+      <div class="note">Pour un mot que tu vois ou entends. Pointe + dis ¿Qué significa esto?</div>
+    </div>
+    <div class="phrase-card color-muted">
+      <div class="es">¿Cómo se dice... en español?</div>
+      <div class="fr">Comment dit-on … en espagnol ?</div>
+      <div class="note">Pour un mot que tu as en tête (FR→ES). Remplace les points par le mot français.</div>
+    </div>
+  </div>
+
+  <!-- ══ POUVEZ-VOUS M'AIDER ════════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:var(--night);">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M14 6a4 4 0 1 1-8 0 4 4 0 0 1 8 0zm-8 6h8a4 4 0 0 1 4 4H2a4 4 0 0 1 4-4z" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <h2>Pouvez-vous m'aider ? <span class="block-code">Bloc E</span></h2>
+  </div>
+
+  <div class="phrase-grid cols-3">
+    <div class="phrase-card color-night">
+      <span class="register-badge badge-formal">Formel</span>
+      <div class="es">¿Me puede ayudar?</div>
+      <div class="fr">Pouvez-vous m'aider ?</div>
+      <div class="note">Me (complément indirect) précède toujours le verbe en espagnol.</div>
+    </div>
+    <div class="phrase-card color-sage">
+      <span class="register-badge badge-informal">Familier</span>
+      <div class="es">¿Puedes ayudarme?</div>
+      <div class="fr">Tu peux m'aider ?</div>
+      <div class="note">Pronom attaché à l'infinitif. Sens identique.</div>
+    </div>
+    <div class="phrase-card color-ochre">
+      <span class="register-badge badge-both">Rapide</span>
+      <div class="es">Ayuda, por favor.</div>
+      <div class="fr">À l'aide, s'il vous plaît.</div>
+      <div class="note">Ayuda = nom utilisé comme appel doux. Ajoute toujours por favor.</div>
+    </div>
+  </div>
+
+  <!-- ══ MONTREZ-MOI / ÉCRIVEZ-LE ═══════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:var(--ochre);">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 14l2-2 2 2 6-6m-2 8H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>Montrez-moi / Écrivez-le <span class="block-code">Bloc I</span></h2>
+  </div>
+
+  <div class="phrase-grid cols-3">
+    <div class="phrase-card color-ochre">
+      <div class="es">¿Puede escribirlo?</div>
+      <div class="fr">Pouvez-vous l'écrire ?</div>
+      <div class="note">escribirlo = écrire + le (lo). Indispensable quand l'audio est difficile.</div>
+    </div>
+    <div class="phrase-card color-night">
+      <span class="register-badge badge-formal">Formel</span>
+      <div class="es">Muéstreme.</div>
+      <div class="fr">Montrez-moi.</div>
+      <div class="note">Montre une carte, un panneau, un menu tout en le disant.</div>
+    </div>
+    <div class="phrase-card color-sage">
+      <span class="register-badge badge-informal">Familier</span>
+      <div class="es">Muéstrame.</div>
+      <div class="fr">Montre-moi.</div>
+      <div class="note">Seule la voyelle change : Muéstr-e-me → Muéstr-a-me</div>
+    </div>
+  </div>
+
+  <!-- ══ JE NE PARLE PAS BIEN ESPAGNOL ════════════════════ -->
+  <div class="divider"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:var(--muted);">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 8a3 3 0 1 1 6 0c0 2-3 3-3 5m0 2v.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <h2>Je ne parle pas bien espagnol <span class="block-code">Bloc G</span></h2>
+  </div>
+
+  <div class="phrase-grid cols-2">
+    <div class="phrase-card color-muted">
+      <div class="es">Hablo poco español.</div>
+      <div class="fr">Je parle peu espagnol.</div>
+      <div class="note">Phrase d'ouverture stratégique — provoque des réponses plus lentes et plus simples de la part des natifs.</div>
+    </div>
+    <div class="phrase-card color-muted">
+      <div class="es">Soy principiante.</div>
+      <div class="fr">Je suis débutant(e).</div>
+      <div class="note">Prononciation : prin-see-PYAN-te. Invite à la patience.</div>
+    </div>
+  </div>
+
+  <!-- ══ PERDÓN / DISCULPE / LO SIENTO ════════════════════ -->
+  <div class="divider"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:var(--night);">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v4M10 13v4M3 10h4m6 0h4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <h2>Perdón vs Disculpe vs Lo siento <span class="block-code">Blocs H + K</span></h2>
+  </div>
+
+  <div class="trio-block">
+    <div class="trio-item">
+      <div class="trio-word t-ochre">Perdón</div>
+      <div class="trio-fr">Pardon / Excusez-moi</div>
+      <div class="trio-rule">Familier. Double usage : (1) excuse après avoir bousculé quelqu'un — ton descendant ; (2) attirer l'attention — ton montant.</div>
+      <div class="trio-example">"Perdón, ¿me puede ayudar?"</div>
+    </div>
+    <div class="trio-item">
+      <div class="trio-word t-terra">Disculpe</div>
+      <div class="trio-fr">Excusez-moi (formel)</div>
+      <div class="trio-rule">Pour attirer l'attention poliment. En boutique, bureau, restaurant. JAMAIS pour exprimer des remords.</div>
+      <div class="trio-example">"Disculpe, señora."</div>
+    </div>
+    <div class="trio-item">
+      <div class="trio-word t-sage">Lo siento</div>
+      <div class="trio-fr">Je suis vraiment désolé(e)</div>
+      <div class="trio-rule">Excuse émotionnelle pour une vraie erreur ou un tort causé. Condoléances, fautes sérieuses. PAS pour attirer l'attention.</div>
+      <div class="trio-example">"Lo siento mucho."</div>
+    </div>
+  </div>
+
+  <!-- ══ GUIDE DE PRONONCIATION ════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:var(--terra);">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 10c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm4 0a6 6 0 1 1-12 0 6 6 0 0 1 12 0z" stroke="white" stroke-width="1.5"/></svg>
+    </div>
+    <h2>Guide de prononciation rapide</h2>
+  </div>
+
+  <div class="pronunc-row">
+    <div class="pronunc-chip">
+      <div class="pword">No entiendo</div>
+      <div class="pphonet">no en-TIEN-do</div>
+      <div class="ptrans">Je ne comprends pas</div>
+    </div>
+    <div class="pronunc-chip">
+      <div class="pword">Más despacio</div>
+      <div class="pphonet">mas des-PA-syo</div>
+      <div class="ptrans">Plus lentement</div>
+    </div>
+    <div class="pronunc-chip">
+      <div class="pword">principiante</div>
+      <div class="pphonet">prin-see-PYAN-te</div>
+      <div class="ptrans">Débutant(e)</div>
+    </div>
+    <div class="pronunc-chip">
+      <div class="pword">¿Puede repetir?</div>
+      <div class="pphonet">PWEH-de re-pe-TEER</div>
+      <div class="ptrans">Pouvez-vous répéter ?</div>
+    </div>
+    <div class="pronunc-chip">
+      <div class="pword">¡Socorro!</div>
+      <div class="pphonet">so-KO-rro</div>
+      <div class="ptrans">Au secours !</div>
+    </div>
+    <div class="pronunc-chip">
+      <div class="pword">¿Qué significa?</div>
+      <div class="pphonet">ke sig-NI-fi-ka</div>
+      <div class="ptrans">Que signifie … ?</div>
+    </div>
+    <div class="pronunc-chip">
+      <div class="pword">Muéstreme</div>
+      <div class="pphonet">MWES-tre-me</div>
+      <div class="ptrans">Montrez-moi</div>
+    </div>
+    <div class="pronunc-chip">
+      <div class="pword">escribirlo</div>
+      <div class="pphonet">es-kree-BEER-lo</div>
+      <div class="ptrans">l'écrire</div>
+    </div>
+  </div>
+
+  <!-- ══ TABLEAU COMPARATIF ════════════════════════════════ -->
+  <div class="divider"></div>
+  <div class="section-label">
+    <div class="icon-circle" style="background:var(--sage);">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <h2>Tableau comparatif — phrases clés</h2>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Espagnol</th>
+        <th>Français</th>
+        <th>Registre</th>
+        <th>Astuce</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-es">¡Socorro!</td>
+        <td class="td-fr">Au secours !</td>
+        <td><span class="td-reg badge-urgent">Urgent</span></td>
+        <td class="td-note">Consonnes dures — porte bien dans le bruit</td>
+      </tr>
+      <tr>
+        <td class="td-es">No entiendo</td>
+        <td class="td-fr">Je ne comprends pas</td>
+        <td><span class="td-reg badge-both">Les deux</span></td>
+        <td class="td-note">en-TIEN-do — accentue la 2e syllabe</td>
+      </tr>
+      <tr>
+        <td class="td-es">¿Puede repetir?</td>
+        <td class="td-fr">Pouvez-vous répéter ?</td>
+        <td><span class="td-reg badge-formal">Formel</span></td>
+        <td class="td-note">Intonation montante sur «favor»</td>
+      </tr>
+      <tr>
+        <td class="td-es">Más despacio</td>
+        <td class="td-fr">Plus lentement</td>
+        <td><span class="td-reg badge-both">Les deux</span></td>
+        <td class="td-note">Associe le geste main–paume à chaque fois</td>
+      </tr>
+      <tr>
+        <td class="td-es">Perdón</td>
+        <td class="td-fr">Pardon / Excusez-moi</td>
+        <td><span class="td-reg badge-informal">Familier</span></td>
+        <td class="td-note">Ton descendant = excuse · ton montant = appel</td>
+      </tr>
+      <tr>
+        <td class="td-es">Disculpe</td>
+        <td class="td-fr">Excusez-moi</td>
+        <td><span class="td-reg badge-formal">Formel</span></td>
+        <td class="td-note">Boutiques, bureaux, restaurants</td>
+      </tr>
+      <tr>
+        <td class="td-es">Lo siento</td>
+        <td class="td-fr">Je suis désolé(e)</td>
+        <td><span class="td-reg badge-both">Remords</span></td>
+        <td class="td-note">Jamais pour attirer l'attention</td>
+      </tr>
+      <tr>
+        <td class="td-es">¿Qué significa?</td>
+        <td class="td-fr">Que signifie … ?</td>
+        <td><span class="td-reg badge-both">Les deux</span></td>
+        <td class="td-note">Pour un mot qu'on voit/entend</td>
+      </tr>
+      <tr>
+        <td class="td-es">¿Cómo se dice?</td>
+        <td class="td-fr">Comment dit-on … ?</td>
+        <td><span class="td-reg badge-both">Les deux</span></td>
+        <td class="td-note">Pour un mot qu'on a en tête</td>
+      </tr>
+      <tr>
+        <td class="td-es">¿Me puede ayudar?</td>
+        <td class="td-fr">Pouvez-vous m'aider ?</td>
+        <td><span class="td-reg badge-formal">Formel</span></td>
+        <td class="td-note">Me avant le verbe — ordre des mots</td>
+      </tr>
+      <tr>
+        <td class="td-es">¿Puede escribirlo?</td>
+        <td class="td-fr">Pouvez-vous l'écrire ?</td>
+        <td><span class="td-reg badge-formal">Formel</span></td>
+        <td class="td-note">-lo = pronom «le» attaché à l'infinitif</td>
+      </tr>
+      <tr>
+        <td class="td-es">Hablo poco español</td>
+        <td class="td-fr">Je parle peu espagnol</td>
+        <td><span class="td-reg badge-both">Les deux</span></td>
+        <td class="td-note">Phrase stratégique d'ouverture</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ══ NOTES RÉGIONALES ══════════════════════════════════ -->
+  <div class="regional-bar">
+    <div class="map-icon">🗺</div>
+    <div>
+      <div class="rb-label">Variations régionales</div>
+      <div class="rb-text">
+        <strong>Amérique latine :</strong> entender domine sur comprender dans le langage courant. &nbsp;|&nbsp;
+        <strong>Mexique / Amérique centrale :</strong> ¡Auxilio! = troisième cri d'urgence. &nbsp;|&nbsp;
+        <strong>Caraïbes :</strong> más lento à la place de más despacio. &nbsp;|&nbsp;
+        <strong>Río de la Plata (Argentine/Uruguay) :</strong> no entendí (passé) adoucit poliment. &nbsp;|&nbsp;
+        <strong>Espagne :</strong> perdona / perdone (formes verbales) fréquentes aux côtés du nom perdón.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ASTUCES ════════════════════════════════════════════ -->
+  <div class="tips-callout">
+    <div class="tips-label">Astuces</div>
+    <ul>
+      <li>Enchaîne les phrases pour un maximum de clarté : <em>Perdón — hablo poco español. ¿Puede repetir más despacio?</em></li>
+      <li>¡Socorro! porte mieux dans le bruit grâce à ses consonnes dures — préfère-le à ¡Ayuda! si tu dois crier fort.</li>
+      <li>Associe toujours un geste à Muéstreme / Muéstrame — tu supprimes toute ambiguïté.</li>
+      <li>Lo siento n'est JAMAIS utilisé pour attirer l'attention — cette erreur sonne très bizarre aux oreilles natives.</li>
+      <li>Ton montant sur Perdón = « excusez-moi » (appeler un serveur) ; ton descendant = « je suis désolé(e) » (avoir bousculé quelqu'un).</li>
+    </ul>
+  </div>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════ -->
+  <div class="footer-band">
+    <div class="fb-left">Español con Diana — A1 · Thème 18</div>
+    <div class="fb-pills">
+      <span class="pill">Trad. FR</span>
+      <span class="pill">12 blocs</span>
+      <span class="pill">~30 étapes</span>
+      <span class="pill">CECRL A1</span>
+    </div>
+    <div class="fb-right">translation-fr.html</div>
+  </div>
+
+</div>
+</body>
+</html>

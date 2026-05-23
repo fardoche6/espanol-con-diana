@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Routines Quotidiennes — Espagnol / Français · Español con Diana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;600;700&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:      #FAF6EE;
+    --ink:        #1F1A14;
+    --ochre:      #C99A3D;
+    --terracotta: #C4593A;
+    --sage:       #6B8E6B;
+    --night:      #2A2540;
+    --muted:      #7B736B;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ──────────────────────────────────────── */
+  header {
+    background: var(--sage);
+    color: var(--paper);
+    padding: 36px 80px 32px;
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: var(--night);
+    opacity: 0.15;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: 38%;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: 0.1;
+  }
+  .header-badge {
+    background: var(--ochre);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 6px;
+  }
+  .header-text h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--paper);
+  }
+  .header-text h1 span { color: var(--ochre); }
+  .header-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: rgba(250,246,238,0.65);
+    margin-top: 8px;
+    letter-spacing: 0.3px;
+  }
+  .header-lang-flag {
+    margin-left: auto;
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--paper);
+    padding: 12px 24px;
+    border: 2px solid rgba(250,246,238,0.5);
+    border-radius: 8px;
+    flex-shrink: 0;
+    align-self: center;
+    letter-spacing: 3px;
+  }
+
+  /* ── BRIDGE NOTE (bilingual only) ────────────────── */
+  .bridge-note {
+    background: var(--ochre);
+    color: var(--ink);
+    padding: 14px 80px;
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .bridge-note em { font-style: italic; font-weight: 500; opacity: 0.8; }
+
+  /* ── MAIN GRID ────────────────────────────────────── */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 0;
+    padding: 56px 80px 80px;
+    align-items: start;
+  }
+
+  /* ── PHRASE STACK ─────────────────────────────────── */
+  .phrase-stack { display: flex; flex-direction: column; gap: 16px; padding-right: 48px; }
+
+  .phrase-card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1.5px solid rgba(31,26,20,0.06);
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: 68px 1fr 1fr;
+    gap: 0 22px;
+    align-items: start;
+    box-shadow: 0 2px 12px rgba(31,26,20,0.05);
+  }
+  .phrase-card.morning  { border-left: 5px solid var(--ochre); }
+  .phrase-card.work     { border-left: 5px solid var(--terracotta); }
+  .phrase-card.midday   { border-left: 5px solid var(--sage); }
+  .phrase-card.evening  { border-left: 5px solid var(--night); }
+
+  .card-icon {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+  .morning  .card-icon { background: #FFF5DD; }
+  .work     .card-icon { background: #FCEEE9; }
+  .midday   .card-icon { background: #EDF3ED; }
+  .evening  .card-icon { background: #EDEAF5; }
+
+  .card-es h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .card-es .verb-highlight { color: var(--terracotta); }
+  .card-es .subphrase {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    display: block;
+  }
+  .card-es .grammar-tag {
+    display: inline-block;
+    margin-top: 7px;
+    background: var(--paper);
+    border: 1px solid rgba(31,26,20,0.12);
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  .card-fr {
+    border-left: 1.5px solid rgba(31,26,20,0.07);
+    padding-left: 22px;
+  }
+  .card-fr .translation {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .card-fr .note-fr {
+    font-family: 'Caveat', cursive;
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 9px;
+    line-height: 1.5;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .card-fr .note-fr::before {
+    content: '→';
+    color: var(--sage);
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  /* Section labels */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0 4px;
+  }
+  .section-label span {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .section-label.morning span  { color: var(--ochre); }
+  .section-label.work span     { color: var(--terracotta); }
+  .section-label.midday span   { color: var(--sage); }
+  .section-label.evening span  { color: var(--night); }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.15;
+  }
+
+  /* ── SIDEBAR ──────────────────────────────────────── */
+  .sidebar {
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .sidebar-block {
+    border-radius: 14px;
+    padding: 20px 20px 18px;
+  }
+  .sidebar-block.conjugation {
+    background: var(--night);
+    color: var(--paper);
+  }
+  .sidebar-block.vocab {
+    background: var(--paper);
+    border: 1.5px solid rgba(31,26,20,0.1);
+  }
+  .sidebar-block.culture {
+    background: var(--terracotta);
+    color: #fff;
+  }
+
+  .sidebar-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .conjugation .sidebar-title { color: var(--ochre); }
+  .vocab .sidebar-title        { color: var(--muted); }
+  .culture .sidebar-title      { color: rgba(255,255,255,0.65); }
+
+  .conj-table { width: 100%; border-collapse: collapse; }
+  .conj-table td {
+    padding: 5px 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .conj-table td:first-child { color: var(--ochre); width: 48%; }
+  .conj-table td:last-child  { color: rgba(250,246,238,0.85); }
+  .conj-table tr + tr td { border-top: 1px solid rgba(250,246,238,0.06); }
+
+  .vocab-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 5px 0;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(31,26,20,0.06);
+  }
+  .vocab-row:last-child { border-bottom: none; }
+  .vocab-es { font-family: 'Fraunces', serif; font-weight: 700; color: var(--terracotta); font-size: 14px; }
+  .vocab-fr { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink); }
+
+  .culture-text {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.92);
+  }
+  .culture-text strong { color: #fff; font-weight: 700; }
+
+  /* ── FREQUENCY STRIP ─────────────────────────────── */
+  .freq-strip {
+    padding: 0 80px 60px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  .freq-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 16px 14px;
+    border: 1.5px solid rgba(31,26,20,0.07);
+    text-align: center;
+  }
+  .freq-es {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .freq-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .freq-bar {
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 10px;
+    background: var(--ochre);
+  }
+
+  /* ── FOOTER ───────────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: rgba(250,246,238,0.4);
+    text-align: center;
+    padding: 20px 80px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  footer span { color: var(--sage); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">A1 · Thème 07</div>
+  <div class="header-text">
+    <h1>La <span>Rutina</span> Diaria</h1>
+    <p class="header-sub">Routines Quotidiennes · Espagnol → Français · Español con Diana</p>
+  </div>
+  <div class="header-lang-flag">FR</div>
+</header>
+
+<div class="bridge-note">
+  ✦ Note pour les francophones : L'espagnol a des <strong>verbes réfléchis</strong> qui fonctionnent comme en français (<em>se lever, se doucher</em>) — mais la prononce est différente et la place du pronom aussi. <em>Me levanto ≠ je me lève… faites attention à l'ordre !</em>
+</div>
+
+<div class="main-grid">
+
+  <!-- PHRASE STACK -->
+  <div class="phrase-stack">
+
+    <div class="section-label morning"><span>Matin · La Mañana</span></div>
+
+    <div class="phrase-card morning">
+      <div class="card-icon">☀️</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Me levanto</span> a las siete.</h2>
+        <span class="subphrase">levantarse · réfléchi</span>
+        <span class="grammar-tag">Verbe Réfléchi</span>
+      </div>
+      <div class="card-fr">
+        <p class="translation">Je me lève à sept heures.</p>
+        <p class="note-fr">En espagnol : <strong>me levanto</strong> (pronom avant le verbe conjugué, jamais après).</p>
+      </div>
+    </div>
+
+    <div class="phrase-card morning">
+      <div class="card-icon">🚿</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Me ducho</span> y <span class="verb-highlight">me visto</span>.</h2>
+        <span class="subphrase">ducharse · vestirse · paire réfléchie</span>
+        <span class="grammar-tag">Chaîne Réfléchie</span>
+      </div>
+      <div class="card-fr">
+        <p class="translation">Je me douche et je m'habille.</p>
+        <p class="note-fr">Chaque verbe réfléchi garde son propre <strong>me</strong> dans la chaîne.</p>
+      </div>
+    </div>
+
+    <div class="phrase-card morning">
+      <div class="card-icon">☕</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Desayuno</span> y <span class="verb-highlight">tomo</span> el café.</h2>
+        <span class="subphrase">desayunar · tomar · non réfléchis</span>
+        <span class="grammar-tag">Verbes en -ar</span>
+      </div>
+      <div class="card-fr">
+        <p class="translation">Je prends mon petit-déjeuner et un café.</p>
+        <p class="note-fr">Pas de <strong>me</strong> — l'action touche la nourriture, pas vous-même.</p>
+      </div>
+    </div>
+
+    <div class="section-label work"><span>Travail · El Trabajo</span></div>
+
+    <div class="phrase-card work">
+      <div class="card-icon">🏃</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Salgo</span> de casa a las ocho.</h2>
+        <span class="subphrase">salir · yo irrégulier</span>
+        <span class="grammar-tag">Irrégulier yo</span>
+      </div>
+      <div class="card-fr">
+        <p class="translation">Je quitte la maison à huit heures.</p>
+        <p class="note-fr"><strong>Salgo</strong> = irrégulier seulement au singulier première personne (yo).</p>
+      </div>
+    </div>
+
+    <div class="phrase-card work">
+      <div class="card-icon">💼</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Empiezo</span> a trabajar a las nueve.</h2>
+        <span class="subphrase">empezar · e→ie diphtongue</span>
+        <span class="grammar-tag">Verbe à diphtongue</span>
+      </div>
+      <div class="card-fr">
+        <p class="translation">Je commence à travailler à neuf heures.</p>
+        <p class="note-fr"><strong>Empezar + a + infinitif</strong> — ne jamais oublier le <em>a</em>.</p>
+      </div>
+    </div>
+
+    <div class="section-label midday"><span>Midi · El Mediodía</span></div>
+
+    <div class="phrase-card midday">
+      <div class="card-icon">🍽️</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Como</span> a las dos de la tarde.</h2>
+        <span class="subphrase">comer · verbe en -er régulier</span>
+        <span class="grammar-tag">Note Culturelle</span>
+      </div>
+      <div class="card-fr">
+        <p class="translation">Je déjeune à deux heures de l'après-midi.</p>
+        <p class="note-fr">En Espagne, le repas principal est à 14h — bien plus tard qu'en France.</p>
+      </div>
+    </div>
+
+    <div class="phrase-card midday">
+      <div class="card-icon">🏠</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Vuelvo</span> a casa a las seis.</h2>
+        <span class="subphrase">volver · o→ue diphtongue</span>
+        <span class="grammar-tag">Verbe à diphtongue</span>
+      </div>
+      <div class="card-fr">
+        <p class="translation">Je rentre à la maison à six heures.</p>
+        <p class="note-fr"><strong>Vuelvo, vuelves, vuelve</strong> — mais <em>volvemos</em> reste régulier.</p>
+      </div>
+    </div>
+
+    <div class="section-label evening"><span>Soir et Nuit · La Noche</span></div>
+
+    <div class="phrase-card evening">
+      <div class="card-icon">🌙</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Ceno</span> a las nueve de la noche.</h2>
+        <span class="subphrase">cenar · verbe en -ar régulier</span>
+        <span class="grammar-tag">Note Culturelle</span>
+      </div>
+      <div class="card-fr">
+        <p class="translation">Je dîne à neuf heures du soir.</p>
+        <p class="note-fr">Dîner à 21h–22h est tout à fait normal en Espagne. Pas en retard !</p>
+      </div>
+    </div>
+
+    <div class="phrase-card evening">
+      <div class="card-icon">📖</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Me relajo</span> y <span class="verb-highlight">leo</span> un poco.</h2>
+        <span class="subphrase">relajarse (réfléchi) · leer (non-réfléchi)</span>
+        <span class="grammar-tag">Paire Mixte</span>
+      </div>
+      <div class="card-fr">
+        <p class="translation">Je me relaxe et je lis un peu.</p>
+        <p class="note-fr"><strong>Relajarse</strong> est réfléchi ; <strong>leer</strong> ne l'est pas — apprenez le contraste.</p>
+      </div>
+    </div>
+
+    <div class="phrase-card evening">
+      <div class="card-icon">😴</div>
+      <div class="card-es">
+        <h2><span class="verb-highlight">Me acuesto</span> y <span class="verb-highlight">me duermo</span>.</h2>
+        <span class="subphrase">acostarse · dormirse · réfléchis + diphtongue</span>
+        <span class="grammar-tag">Réfléchi + Diphtongue</span>
+      </div>
+      <div class="card-fr">
+        <p class="translation">Je me couche et je m'endors.</p>
+        <p class="note-fr"><strong>Me duermo</strong> = je m'endors (début). <em>Duermo</em> seul = je dors (état).</p>
+      </div>
+    </div>
+
+  </div><!-- /phrase-stack -->
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sidebar-block conjugation">
+      <div class="sidebar-title">Levantarse — Conjugaison</div>
+      <table class="conj-table">
+        <tr><td>yo</td><td>me levanto</td></tr>
+        <tr><td>tú</td><td>te levantas</td></tr>
+        <tr><td>él/ella</td><td>se levanta</td></tr>
+        <tr><td>nosotros</td><td>nos levantamos</td></tr>
+        <tr><td>ellos</td><td>se levantan</td></tr>
+      </table>
+    </div>
+
+    <div class="sidebar-block vocab">
+      <div class="sidebar-title">Vocabulaire Clé</div>
+      <div class="vocab-row"><span class="vocab-es">siempre</span><span class="vocab-fr">toujours</span></div>
+      <div class="vocab-row"><span class="vocab-es">normalmente</span><span class="vocab-fr">normalement</span></div>
+      <div class="vocab-row"><span class="vocab-es">a veces</span><span class="vocab-fr">parfois</span></div>
+      <div class="vocab-row"><span class="vocab-es">nunca</span><span class="vocab-fr">jamais</span></div>
+      <div class="vocab-row"><span class="vocab-es">por la mañana</span><span class="vocab-fr">le matin</span></div>
+      <div class="vocab-row"><span class="vocab-es">por la tarde</span><span class="vocab-fr">l'après-midi / le soir</span></div>
+      <div class="vocab-row"><span class="vocab-es">por la noche</span><span class="vocab-fr">la nuit / le soir (tard)</span></div>
+      <div class="vocab-row"><span class="vocab-es">a las ocho</span><span class="vocab-fr">à huit heures</span></div>
+      <div class="vocab-row"><span class="vocab-es">y media</span><span class="vocab-fr">et demie</span></div>
+      <div class="vocab-row"><span class="vocab-es">menos cuarto</span><span class="vocab-fr">moins le quart</span></div>
+    </div>
+
+    <div class="sidebar-block culture">
+      <div class="sidebar-title">Culture Espagnole</div>
+      <p class="culture-text">
+        En Espagne, <strong>la tarde</strong> dure jusqu'à ~21h — bien plus tard qu'en France. Ne traduisez pas directement "après-midi" : <em>por la tarde</em> peut couvrir 14h–21h. Le repas principal est à <strong>14h</strong>, pas à midi.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!-- FREQUENCY STRIP -->
+<div class="freq-strip">
+  <div class="freq-card">
+    <div class="freq-es">siempre</div>
+    <div class="freq-fr">toujours</div>
+    <div class="freq-bar" style="width:100%"></div>
+  </div>
+  <div class="freq-card">
+    <div class="freq-es">normalmente</div>
+    <div class="freq-fr">normalement</div>
+    <div class="freq-bar" style="width:80%"></div>
+  </div>
+  <div class="freq-card">
+    <div class="freq-es">a veces</div>
+    <div class="freq-fr">parfois</div>
+    <div class="freq-bar" style="width:55%"></div>
+  </div>
+  <div class="freq-card">
+    <div class="freq-es">casi nunca</div>
+    <div class="freq-fr">presque jamais</div>
+    <div class="freq-bar" style="width:25%"></div>
+  </div>
+  <div class="freq-card">
+    <div class="freq-es">nunca</div>
+    <div class="freq-fr">jamais</div>
+    <div class="freq-bar" style="width:5%"></div>
+  </div>
+</div>
+
+<footer>Español con Diana · A1 · Thème 07 · Routines Quotidiennes · <span>FR</span> · infographie</footer>
+</body>
+</html>

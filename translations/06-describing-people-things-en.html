@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1280" />
+<title>Describing People &amp; Things — Spanish A1 (EN)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;600;700&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:      #FAF6EE;
+    --ink:        #1F1A14;
+    --ochre:      #C99A3D;
+    --terra:      #C4593A;
+    --sage:       #6B8E6B;
+    --night:      #2A2540;
+    --muted:      #7B736B;
+    --fraunces:   'Fraunces', Georgia, serif;
+    --inter:      'Inter', sans-serif;
+    --caveat:     'Caveat', cursive;
+    --mono:       'DM Mono', monospace;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--inter);
+    min-width: 1280px;
+    overflow-x: auto;
+  }
+
+  /* ─── HERO HEADER ─── */
+  .hero {
+    background: var(--night);
+    color: var(--paper);
+    padding: 56px 80px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: .12;
+    top: -160px; right: -80px;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: var(--terra);
+    opacity: .15;
+    bottom: -100px; left: 60px;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-family: var(--fraunces);
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.0;
+    max-width: 700px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-title em { color: var(--ochre); font-style: italic; }
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 16px;
+    color: rgba(250,246,238,.65);
+    max-width: 520px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--ochre);
+    color: var(--night);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-top: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── LAYOUT ─── */
+  .canvas {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 60px 80px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 48px;
+  }
+
+  /* ─── SECTION LABELS ─── */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(31,26,20,.12);
+  }
+
+  /* ─── PHRASE CARD ─── */
+  .phrase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .phrase-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px 18px 16px;
+    position: relative;
+    border: 1.5px solid rgba(31,26,20,.07);
+    box-shadow: 0 2px 8px rgba(31,26,20,.05);
+    overflow: hidden;
+  }
+  .phrase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .phrase-card.c-ochre::before  { background: var(--ochre); }
+  .phrase-card.c-terra::before  { background: var(--terra); }
+  .phrase-card.c-sage::before   { background: var(--sage); }
+  .phrase-card.c-night::before  { background: var(--night); }
+
+  .phrase-es {
+    font-family: var(--fraunces);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .phrase-en {
+    font-family: var(--inter);
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .phrase-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-top: 10px;
+    background: var(--paper);
+    color: var(--muted);
+    border: 1px solid rgba(31,26,20,.12);
+  }
+  .phrase-illus {
+    position: absolute;
+    right: 14px; top: 16px;
+    font-size: 30px;
+    opacity: .55;
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* ─── FIGURE BLOCK ─── */
+  .figure-block {
+    grid-column: span 2;
+    background: var(--night);
+    border-radius: 12px;
+    padding: 40px 48px;
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+  }
+  .figure-block::after {
+    content: '';
+    position: absolute;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: var(--terra);
+    opacity: .08;
+    bottom: -120px; right: -80px;
+  }
+  .figure-svg-wrap {
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .figure-label {
+    font-family: var(--caveat);
+    font-size: 18px;
+    color: var(--ochre);
+    text-align: center;
+  }
+  .figure-annots {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .figure-annots h3 {
+    font-family: var(--fraunces);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 4px;
+  }
+  .annot-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .annot-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .annot-dot.o  { background: var(--ochre); }
+  .annot-dot.t  { background: var(--terra); }
+  .annot-dot.s  { background: var(--sage); }
+  .annot-es   { font-family: var(--fraunces); font-size: 18px; font-weight: 700; color: var(--paper); }
+  .annot-en   { font-size: 13px; color: rgba(250,246,238,.6); margin-top: 2px; }
+
+  /* ─── COLOR SWATCH BLOCK ─── */
+  .swatch-block {
+    grid-column: span 2;
+  }
+  .swatch-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .swatch-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 110px;
+  }
+  .swatch-circle {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 3px solid rgba(31,26,20,.08);
+    box-shadow: 0 2px 8px rgba(31,26,20,.10);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .swatch-circle.inv::after {
+    content: '≡';
+    font-size: 22px;
+    color: rgba(255,255,255,.55);
+    font-weight: 700;
+  }
+  .swatch-es { font-family: var(--fraunces); font-size: 15px; font-weight: 700; text-align: center; }
+  .swatch-en { font-family: var(--inter); font-size: 11px; color: var(--muted); text-align: center; }
+  .swatch-badge {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: .1em;
+    padding: 2px 6px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .swatch-badge.changes { background: #e8f0e8; color: var(--sage); border: 1px solid var(--sage); }
+  .swatch-badge.fixed   { background: #fff0e8; color: var(--terra); border: 1px solid var(--terra); }
+
+  /* ─── RULES PANEL ─── */
+  .rules-panel {
+    background: var(--ochre);
+    border-radius: 10px;
+    padding: 32px 36px;
+    color: var(--night);
+  }
+  .rules-panel h3 {
+    font-family: var(--fraunces);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .rule-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .rule-pill {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--night);
+    color: var(--ochre);
+    padding: 4px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    min-width: 90px;
+    text-align: center;
+  }
+  .rule-arrow { font-size: 18px; color: var(--night); opacity: .5; }
+  .rule-pill-b {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    background: rgba(42,37,64,.12);
+    color: var(--night);
+    padding: 4px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    min-width: 90px;
+    text-align: center;
+  }
+  .rule-note {
+    font-size: 12px;
+    color: rgba(42,37,64,.65);
+    margin-left: 4px;
+  }
+
+  /* ─── TIPS PANEL ─── */
+  .tips-panel {
+    background: var(--paper);
+    border: 2px solid var(--sage);
+    border-radius: 10px;
+    padding: 28px 32px;
+  }
+  .tips-panel h3 {
+    font-family: var(--fraunces);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--sage);
+    margin-bottom: 16px;
+  }
+  .tip-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+  .tip-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--sage);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tip-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .tip-text strong { color: var(--terra); }
+
+  /* ─── OPPOSITES STRIP ─── */
+  .opposites-strip {
+    grid-column: span 2;
+    display: flex;
+    gap: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1.5px solid rgba(31,26,20,.10);
+  }
+  .opp-half {
+    flex: 1;
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .opp-half.left  { background: var(--night); color: var(--paper); }
+  .opp-half.right { background: var(--paper); color: var(--ink); }
+  .opp-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    opacity: .5;
+    margin-bottom: 4px;
+  }
+  .opp-pair {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .opp-es { font-family: var(--fraunces); font-size: 22px; font-weight: 700; }
+  .opp-slash { font-size: 15px; opacity: .4; }
+  .opp-en { font-size: 13px; opacity: .6; }
+  .opp-divider {
+    width: 3px;
+    background: linear-gradient(to bottom, var(--ochre), var(--terra));
+  }
+
+  /* ─── QUESTION BLOCK ─── */
+  .question-block {
+    background: var(--terra);
+    border-radius: 10px;
+    padding: 32px 36px;
+    color: var(--paper);
+  }
+  .question-block h3 {
+    font-family: var(--fraunces);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    opacity: .85;
+  }
+  .q-main {
+    font-family: var(--fraunces);
+    font-size: 38px;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .q-pron {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .12em;
+    opacity: .65;
+    margin-bottom: 20px;
+  }
+  .q-example {
+    background: rgba(250,246,238,.12);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  .q-es { font-family: var(--fraunces); font-size: 18px; font-weight: 700; }
+  .q-en { font-size: 13px; opacity: .7; margin-top: 4px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: rgba(250,246,238,.35);
+    padding: 24px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+  }
+  footer span { color: var(--ochre); }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="hero-eyebrow">Español con Diana · A1 · Topic 06</div>
+  <h1 class="hero-title">Describing<br /><em>People &amp;<br />Things</em></h1>
+  <p class="hero-sub">Master adjective agreement — gender, number, and the invariable exceptions — so you can describe anyone or anything clearly in Spanish.</p>
+  <div class="hero-badge">English Reference</div>
+</header>
+
+<!-- ══════════ MAIN CANVAS ══════════ -->
+<main class="canvas">
+
+  <!-- ── SECTION: KEY PHRASES ── -->
+  <section style="grid-column: span 2;">
+    <div class="section-label">Key Phrase Reference — 8 focal pairs</div>
+    <div class="phrase-grid">
+
+      <div class="phrase-card c-ochre">
+        <div class="phrase-illus">🧍</div>
+        <div class="phrase-es">Él es alto y delgado.</div>
+        <div class="phrase-en">He is tall and thin.</div>
+        <span class="phrase-tag">Height · Build · Masculine</span>
+      </div>
+
+      <div class="phrase-card c-ochre">
+        <div class="phrase-illus">🧍‍♀️</div>
+        <div class="phrase-es">Ella es baja y morena.</div>
+        <div class="phrase-en">She is short and dark-haired.</div>
+        <span class="phrase-tag">Height · Hair · Feminine</span>
+      </div>
+
+      <div class="phrase-card c-terra">
+        <div class="phrase-illus">📖</div>
+        <div class="phrase-es">El libro es pequeño y rojo.</div>
+        <div class="phrase-en">The book is small and red.</div>
+        <span class="phrase-tag">Object · Size · Color</span>
+      </div>
+
+      <div class="phrase-card c-terra">
+        <div class="phrase-illus">🏠</div>
+        <div class="phrase-es">La casa es grande y blanca.</div>
+        <div class="phrase-en">The house is big and white.</div>
+        <span class="phrase-tag">Object · Size · Color · Feminine</span>
+      </div>
+
+      <div class="phrase-card c-sage">
+        <div class="phrase-illus">🚗</div>
+        <div class="phrase-es">El coche es azul y grande.</div>
+        <div class="phrase-en">The car is blue and big.</div>
+        <span class="phrase-tag">Invariable: azul, grande</span>
+      </div>
+
+      <div class="phrase-card c-sage">
+        <div class="phrase-illus">👜</div>
+        <div class="phrase-es">El bolso es pequeño y negro.</div>
+        <div class="phrase-en">The bag is small and black.</div>
+        <span class="phrase-tag">Object · Full agreement</span>
+      </div>
+
+      <div class="phrase-card c-night">
+        <div class="phrase-illus">👩‍🦰</div>
+        <div class="phrase-es">María es pelirroja y alta.</div>
+        <div class="phrase-en">María is red-haired and tall.</div>
+        <span class="phrase-tag">Hair · Height · Compound adj.</span>
+      </div>
+
+      <div class="phrase-card c-night">
+        <div class="phrase-illus">🧒</div>
+        <div class="phrase-es">Los niños son rubios y altos.</div>
+        <div class="phrase-en">The children are blond and tall.</div>
+        <span class="phrase-tag">Plural agreement · -os ending</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FIGURE ANNOTATION BLOCK ── -->
+  <div class="figure-block">
+    <div class="figure-svg-wrap">
+      <!-- Simple SVG figure illustration -->
+      <svg width="140" height="200" viewBox="0 0 140 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Body silhouette -->
+        <ellipse cx="70" cy="36" rx="24" ry="24" fill="#C99A3D" opacity=".85"/>
+        <!-- Hair -->
+        <ellipse cx="70" cy="20" rx="26" ry="14" fill="#2A2540"/>
+        <!-- Torso -->
+        <rect x="44" y="58" width="52" height="72" rx="8" fill="#6B8E6B" opacity=".8"/>
+        <!-- Arms -->
+        <rect x="22" y="60" width="20" height="56" rx="8" fill="#6B8E6B" opacity=".7"/>
+        <rect x="98" y="60" width="20" height="56" rx="8" fill="#6B8E6B" opacity=".7"/>
+        <!-- Legs -->
+        <rect x="46" y="128" width="20" height="56" rx="8" fill="#C99A3D" opacity=".5"/>
+        <rect x="74" y="128" width="20" height="56" rx="8" fill="#C99A3D" opacity=".5"/>
+        <!-- Height marker -->
+        <line x1="8" y1="18" x2="8" y2="190" stroke="#C99A3D" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="2" y="16" font-size="8" fill="#C99A3D" font-family="DM Mono, monospace">↑</text>
+        <text x="2" y="196" font-size="8" fill="#C99A3D" font-family="DM Mono, monospace">↓</text>
+      </svg>
+      <div class="figure-label">alto / alta<br />"tall"</div>
+    </div>
+
+    <div class="figure-annots">
+      <h3>Anatomy of a Description</h3>
+
+      <div class="annot-row">
+        <div class="annot-dot o"></div>
+        <div>
+          <div class="annot-es">alto / alta</div>
+          <div class="annot-en">tall (m) / tall (f) — swap -o → -a for feminine subjects</div>
+        </div>
+      </div>
+      <div class="annot-row">
+        <div class="annot-dot t"></div>
+        <div>
+          <div class="annot-es">moreno / morena</div>
+          <div class="annot-en">dark-haired or dark-skinned — context clarifies which meaning</div>
+        </div>
+      </div>
+      <div class="annot-row">
+        <div class="annot-dot s"></div>
+        <div>
+          <div class="annot-es">grande</div>
+          <div class="annot-en">big — INVARIABLE: no -a ending, ever. Plural: grandes.</div>
+        </div>
+      </div>
+      <div class="annot-row">
+        <div class="annot-dot o"></div>
+        <div>
+          <div class="annot-es">pelirrojo / pelirroja</div>
+          <div class="annot-en">red-haired — compound: pelo (hair) + rojo (red). Changes for gender.</div>
+        </div>
+      </div>
+      <div class="annot-row">
+        <div class="annot-dot t"></div>
+        <div>
+          <div class="annot-es">azul · verde · marrón</div>
+          <div class="annot-en">blue · green · brown — all INVARIABLE for gender; add -es in plural</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COLOR SWATCHES ── -->
+  <section class="swatch-block">
+    <div class="section-label">Color Agreement at a Glance</div>
+    <div class="swatch-row">
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#d63a2a;"></div>
+        <div class="swatch-es">rojo / roja</div>
+        <div class="swatch-en">red</div>
+        <span class="swatch-badge changes">changes</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#2a5ca8;"></div>
+        <div class="swatch-es">azul</div>
+        <div class="swatch-en">blue</div>
+        <span class="swatch-badge fixed">invariable</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#3a7a3a;"></div>
+        <div class="swatch-es">verde</div>
+        <div class="swatch-en">green</div>
+        <span class="swatch-badge fixed">invariable</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#d4b800;"></div>
+        <div class="swatch-es">amarillo / amarilla</div>
+        <div class="swatch-en">yellow</div>
+        <span class="swatch-badge changes">changes</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#1a1a1a;"></div>
+        <div class="swatch-es">negro / negra</div>
+        <div class="swatch-en">black</div>
+        <span class="swatch-badge changes">changes</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#f8f8f8; border: 2px solid #ccc;"></div>
+        <div class="swatch-es">blanco / blanca</div>
+        <div class="swatch-en">white</div>
+        <span class="swatch-badge changes">changes</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#8B4513;"></div>
+        <div class="swatch-es">marrón</div>
+        <div class="swatch-en">brown</div>
+        <span class="swatch-badge fixed">invariable</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#ff7c00;"></div>
+        <div class="swatch-es">naranja</div>
+        <div class="swatch-en">orange</div>
+        <span class="swatch-badge fixed">invariable</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#9b59b6;"></div>
+        <div class="swatch-es">morado / morada</div>
+        <div class="swatch-en">purple</div>
+        <span class="swatch-badge changes">changes</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── GENDER RULES + PLURAL RULES ── -->
+  <div class="rules-panel">
+    <h3>Gender Agreement Rules</h3>
+
+    <div class="rule-row">
+      <div class="rule-pill">-o ending</div>
+      <div class="rule-arrow">→</div>
+      <div class="rule-pill-b">swap -o → -a</div>
+      <div class="rule-note">alto → alta</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-pill">-e ending</div>
+      <div class="rule-arrow">→</div>
+      <div class="rule-pill-b">no change</div>
+      <div class="rule-note">grande stays grande</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-pill">consonant</div>
+      <div class="rule-arrow">→</div>
+      <div class="rule-pill-b">no change</div>
+      <div class="rule-note">azul stays azul</div>
+    </div>
+
+    <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(42,37,64,.15);">
+      <div style="font-family: var(--fraunces); font-size: 16px; font-weight: 700; margin-bottom: 14px;">Plural Rules</div>
+      <div class="rule-row">
+        <div class="rule-pill">vowel end</div>
+        <div class="rule-arrow">→</div>
+        <div class="rule-pill-b">add -s</div>
+        <div class="rule-note">rojo → rojos</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-pill">consonant</div>
+        <div class="rule-arrow">→</div>
+        <div class="rule-pill-b">add -es</div>
+        <div class="rule-note">azul → azules</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-pill">marrón</div>
+        <div class="rule-arrow">→</div>
+        <div class="rule-pill-b">marrones</div>
+        <div class="rule-note">accent drops in plural</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TIPS PANEL ── -->
+  <div class="tips-panel">
+    <h3>Tips &amp; Tricks</h3>
+
+    <div class="tip-row">
+      <div class="tip-icon">1</div>
+      <div class="tip-text"><strong>-o boy, -a girl:</strong> the adjective ending matches the noun's grammatical gender, not a person's gender.</div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon">2</div>
+      <div class="tip-text"><strong>Invariable shortcut:</strong> if the dictionary form ends in -e or a consonant, it almost certainly doesn't change for gender.</div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon">3</div>
+      <div class="tip-text"><strong>pelirrojo mnemonic:</strong> pelo (hair) + rojo (red) = red-haired. Compound words reveal their own meaning.</div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon">4</div>
+      <div class="tip-text"><strong>Ser for descriptions:</strong> always use <em>es / son</em> for permanent physical traits. "Ella <em>es</em> alta" — never <em>está</em> alta.</div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon">5</div>
+      <div class="tip-text"><strong>marrón trap:</strong> no -a ending (invariable), but plural adds -es and drops the accent: marrones.</div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon">6</div>
+      <div class="tip-text"><strong>Adjective after noun:</strong> Spanish defaults to noun-first order — "el coche rojo," not "el rojo coche" at A1.</div>
+    </div>
+  </div>
+
+  <!-- ── OPPOSITES STRIP ── -->
+  <div class="opposites-strip">
+    <div class="opp-half left">
+      <div class="opp-label">Person adjectives</div>
+      <div class="opp-pair">
+        <div class="opp-es">alto / alta</div>
+        <div class="opp-slash">/</div>
+        <div class="opp-en">tall</div>
+      </div>
+      <div class="opp-pair">
+        <div class="opp-es">rubio / rubia</div>
+        <div class="opp-slash">/</div>
+        <div class="opp-en">blond</div>
+      </div>
+      <div class="opp-pair">
+        <div class="opp-es">delgado / delgada</div>
+        <div class="opp-slash">/</div>
+        <div class="opp-en">thin</div>
+      </div>
+    </div>
+    <div class="opp-divider"></div>
+    <div class="opp-half right">
+      <div class="opp-label">Opposites</div>
+      <div class="opp-pair">
+        <div class="opp-es" style="color:var(--terra)">bajo / baja</div>
+        <div class="opp-slash">/</div>
+        <div class="opp-en">short</div>
+      </div>
+      <div class="opp-pair">
+        <div class="opp-es" style="color:var(--terra)">moreno / morena</div>
+        <div class="opp-slash">/</div>
+        <div class="opp-en">dark-haired</div>
+      </div>
+      <div class="opp-pair">
+        <div class="opp-es" style="color:var(--terra)">gordo / gorda</div>
+        <div class="opp-slash">/</div>
+        <div class="opp-en">heavy / fat</div>
+      </div>
+    </div>
+    <div class="opp-divider"></div>
+    <div class="opp-half left">
+      <div class="opp-label">Object adjectives</div>
+      <div class="opp-pair">
+        <div class="opp-es">grande</div>
+        <div class="opp-slash">/</div>
+        <div class="opp-en">big</div>
+      </div>
+      <div class="opp-pair">
+        <div class="opp-es">bonito / bonita</div>
+        <div class="opp-slash">/</div>
+        <div class="opp-en">pretty</div>
+      </div>
+    </div>
+    <div class="opp-divider"></div>
+    <div class="opp-half right">
+      <div class="opp-label">Opposites</div>
+      <div class="opp-pair">
+        <div class="opp-es" style="color:var(--ochre)">pequeño / pequeña</div>
+        <div class="opp-slash">/</div>
+        <div class="opp-en">small</div>
+      </div>
+      <div class="opp-pair">
+        <div class="opp-es" style="color:var(--ochre)">feo / fea</div>
+        <div class="opp-slash">/</div>
+        <div class="opp-en">ugly</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── QUESTION BLOCK ── -->
+  <div class="question-block">
+    <h3>The Key Question</h3>
+    <div class="q-main">¿Cómo es…?</div>
+    <div class="q-pron">CÓ-mo es · "What is … like?"</div>
+    <div class="q-example">
+      <div class="q-es">¿Cómo es tu amigo?</div>
+      <div class="q-en">What is your friend like?</div>
+    </div>
+    <div class="q-example">
+      <div class="q-es">Es alto, moreno y simpático.</div>
+      <div class="q-en">He is tall, dark-haired, and nice.</div>
+    </div>
+    <div class="q-example">
+      <div class="q-es">¿Cómo es el coche? — Es grande y azul.</div>
+      <div class="q-en">What is the car like? — It is big and blue.</div>
+    </div>
+  </div>
+
+  <!-- ── SENTENCE BUILDER PANEL ── -->
+  <div style="background: var(--paper); border: 2px solid var(--night); border-radius: 10px; padding: 32px 36px;">
+    <div class="section-label" style="border-color: var(--night); color: var(--night);">Sentence Builder — Full descriptions</div>
+    <div style="margin-bottom: 16px;">
+      <div style="font-family: var(--fraunces); font-size: 20px; font-weight: 700; margin-bottom: 4px;">María es alta, delgada y rubia.</div>
+      <div style="font-size: 13px; color: var(--muted);">María is tall, thin, and blond. — 3 adjectives, all feminine.</div>
+    </div>
+    <div style="margin-bottom: 16px;">
+      <div style="font-family: var(--fraunces); font-size: 20px; font-weight: 700; margin-bottom: 4px;">El bolso es pequeño, rojo y bonito.</div>
+      <div style="font-size: 13px; color: var(--muted);">The bag is small, red, and pretty. — Object description, masculine noun.</div>
+    </div>
+    <div>
+      <div style="font-family: var(--fraunces); font-size: 20px; font-weight: 700; margin-bottom: 4px;">Los niños son rubios y altos.</div>
+      <div style="font-size: 13px; color: var(--muted);">The children are blond and tall. — Plural agreement, -os endings.</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div>Español con Diana · A1 · Topic 06 · <span>Describing People &amp; Things</span></div>
+  <div>English Reference · Brand: paper/ink/ochre/terra/sage/night</div>
+</footer>
+
+</body>
+</html>

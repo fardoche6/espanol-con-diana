@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1280" />
+<title>Décrire des personnes et des choses — Espagnol A1 (FR)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;600;700&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:      #FAF6EE;
+    --ink:        #1F1A14;
+    --ochre:      #C99A3D;
+    --terra:      #C4593A;
+    --sage:       #6B8E6B;
+    --night:      #2A2540;
+    --muted:      #7B736B;
+    --fraunces:   'Fraunces', Georgia, serif;
+    --inter:      'Inter', sans-serif;
+    --caveat:     'Caveat', cursive;
+    --mono:       'DM Mono', monospace;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--inter);
+    min-width: 1280px;
+    overflow-x: auto;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--terra);
+    color: var(--paper);
+    padding: 56px 80px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 460px; height: 460px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: .18;
+    top: -140px; right: -60px;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: var(--night);
+    opacity: .12;
+    bottom: -80px; left: 80px;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,.7);
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-family: var(--fraunces);
+    font-size: 68px;
+    font-weight: 900;
+    line-height: 1.0;
+    max-width: 720px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-title em { color: var(--ochre); font-style: italic; }
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 16px;
+    color: rgba(250,246,238,.7);
+    max-width: 560px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--ochre);
+    color: var(--night);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-top: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── CANVAS ─── */
+  .canvas {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 60px 80px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 48px;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(31,26,20,.12);
+  }
+
+  /* ─── PHRASE CARDS ─── */
+  .phrase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .phrase-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px 18px 16px;
+    position: relative;
+    border: 1.5px solid rgba(31,26,20,.07);
+    box-shadow: 0 2px 8px rgba(31,26,20,.05);
+    overflow: hidden;
+  }
+  .phrase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .phrase-card.c-ochre::before  { background: var(--ochre); }
+  .phrase-card.c-terra::before  { background: var(--terra); }
+  .phrase-card.c-sage::before   { background: var(--sage); }
+  .phrase-card.c-night::before  { background: var(--night); }
+
+  .phrase-es {
+    font-family: var(--fraunces);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .phrase-fr {
+    font-family: var(--inter);
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .phrase-note {
+    font-family: var(--caveat);
+    font-size: 14px;
+    color: var(--terra);
+    margin-top: 8px;
+    line-height: 1.3;
+  }
+  .phrase-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-top: 10px;
+    background: var(--paper);
+    color: var(--muted);
+    border: 1px solid rgba(31,26,20,.12);
+  }
+  .phrase-illus {
+    position: absolute;
+    right: 14px; top: 16px;
+    font-size: 28px;
+    opacity: .5;
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* ─── CONTRASTIVE NOTE BLOCK ─── */
+  .contrast-block {
+    grid-column: span 2;
+    background: var(--night);
+    border-radius: 12px;
+    padding: 40px 48px;
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+  }
+  .contrast-block::after {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: .07;
+    top: -100px; right: -60px;
+  }
+  .contrast-col h3 {
+    font-family: var(--fraunces);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ochre);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-bottom: 16px;
+  }
+  .contrast-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(250,246,238,.08);
+  }
+  .cr-es { font-family: var(--fraunces); font-size: 18px; font-weight: 700; }
+  .cr-fr { font-size: 13px; opacity: .6; }
+  .cr-note { font-family: var(--caveat); font-size: 13px; color: var(--ochre); margin-top: 2px; }
+
+  /* ─── SWATCH BLOCK ─── */
+  .swatch-block { grid-column: span 2; }
+  .swatch-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .swatch-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 110px;
+  }
+  .swatch-circle {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 3px solid rgba(31,26,20,.08);
+    box-shadow: 0 2px 8px rgba(31,26,20,.10);
+  }
+  .swatch-es { font-family: var(--fraunces); font-size: 15px; font-weight: 700; text-align: center; }
+  .swatch-fr { font-family: var(--inter); font-size: 11px; color: var(--muted); text-align: center; }
+  .swatch-badge {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: .1em;
+    padding: 2px 6px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .swatch-badge.changes { background: #e8f0e8; color: var(--sage); border: 1px solid var(--sage); }
+  .swatch-badge.fixed   { background: #fff0e8; color: var(--terra); border: 1px solid var(--terra); }
+
+  /* ─── RULES PANEL ─── */
+  .rules-panel {
+    background: var(--ochre);
+    border-radius: 10px;
+    padding: 32px 36px;
+    color: var(--night);
+  }
+  .rules-panel h3 {
+    font-family: var(--fraunces);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .rule-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .rule-pill {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--night);
+    color: var(--ochre);
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: center;
+  }
+  .rule-arrow { font-size: 16px; color: var(--night); opacity: .5; }
+  .rule-pill-b {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba(42,37,64,.12);
+    color: var(--night);
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: center;
+  }
+  .rule-note { font-size: 12px; color: rgba(42,37,64,.65); }
+
+  /* ─── TIPS PANEL ─── */
+  .tips-panel {
+    background: var(--paper);
+    border: 2px solid var(--terra);
+    border-radius: 10px;
+    padding: 28px 32px;
+  }
+  .tips-panel h3 {
+    font-family: var(--fraunces);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--terra);
+    margin-bottom: 16px;
+  }
+  .tip-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+  .tip-icon {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--terra);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tip-text { font-size: 13px; line-height: 1.5; color: var(--ink); }
+  .tip-text strong { color: var(--night); }
+  .tip-note { font-family: var(--caveat); font-size: 13px; color: var(--terra); }
+
+  /* ─── FR-ES COMPARISON TABLE ─── */
+  .compare-table {
+    grid-column: span 2;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1.5px solid rgba(31,26,20,.10);
+  }
+  .ct-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.5fr;
+    background: var(--night);
+    color: var(--paper);
+    padding: 12px 24px;
+  }
+  .ct-head div {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    opacity: .65;
+  }
+  .ct-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1.5fr;
+    padding: 12px 24px;
+    border-bottom: 1px solid rgba(31,26,20,.07);
+    align-items: center;
+  }
+  .ct-row:nth-child(even) { background: rgba(31,26,20,.025); }
+  .ct-es { font-family: var(--fraunces); font-size: 16px; font-weight: 700; }
+  .ct-fr { font-size: 13px; color: var(--muted); }
+  .ct-cat { font-family: var(--mono); font-size: 10px; color: var(--ochre); letter-spacing: .08em; text-transform: uppercase; }
+  .ct-trap { font-family: var(--caveat); font-size: 13px; color: var(--terra); line-height: 1.3; }
+
+  /* ─── QUESTION BLOCK ─── */
+  .question-block {
+    background: var(--sage);
+    border-radius: 10px;
+    padding: 32px 36px;
+    color: var(--paper);
+  }
+  .question-block h3 {
+    font-family: var(--fraunces);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    opacity: .85;
+  }
+  .q-main {
+    font-family: var(--fraunces);
+    font-size: 36px;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .q-pron {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    opacity: .65;
+    margin-bottom: 18px;
+  }
+  .q-example {
+    background: rgba(250,246,238,.12);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+  }
+  .q-es { font-family: var(--fraunces); font-size: 17px; font-weight: 700; }
+  .q-fr { font-size: 13px; opacity: .75; margin-top: 4px; }
+
+  /* ─── ACCENT PANEL ─── */
+  .accent-panel {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 10px;
+    padding: 32px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .accent-panel h3 {
+    font-family: var(--fraunces);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ochre);
+    margin-bottom: 4px;
+  }
+  .pron-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(250,246,238,.08);
+  }
+  .pron-word { font-family: var(--fraunces); font-size: 20px; font-weight: 700; }
+  .pron-ipa  { font-family: var(--mono); font-size: 12px; color: var(--ochre); letter-spacing: .04em; }
+  .pron-tip  { font-size: 12px; opacity: .6; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: rgba(250,246,238,.35);
+    padding: 24px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+  }
+  footer span { color: var(--ochre); }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="hero-eyebrow">Español con Diana · A1 · Sujet 06</div>
+  <h1 class="hero-title">Décrire<br /><em>des personnes<br />&amp; des choses</em></h1>
+  <p class="hero-sub">Maîtrisez l'accord des adjectifs en espagnol — genre, nombre, et les exceptions invariables — pour décrire n'importe qui ou n'importe quoi clairement.</p>
+  <div class="hero-badge">Référence française</div>
+</header>
+
+<!-- ══════════ CANVAS ══════════ -->
+<main class="canvas">
+
+  <!-- ── PHRASES CLÉS ── -->
+  <section style="grid-column: span 2;">
+    <div class="section-label">8 phrases clés — Espagnol avec traduction française</div>
+    <div class="phrase-grid">
+
+      <div class="phrase-card c-ochre">
+        <div class="phrase-illus">🧍</div>
+        <div class="phrase-es">Él es alto y delgado.</div>
+        <div class="phrase-fr">Il est grand et mince.</div>
+        <div class="phrase-note">-o = masculin → alto, no alta</div>
+        <span class="phrase-tag">Taille · Corpulence · Masc.</span>
+      </div>
+
+      <div class="phrase-card c-ochre">
+        <div class="phrase-illus">🧍‍♀️</div>
+        <div class="phrase-es">Ella es baja y morena.</div>
+        <div class="phrase-fr">Elle est petite et brune.</div>
+        <div class="phrase-note">-a = féminin → baja, morena</div>
+        <span class="phrase-tag">Taille · Cheveux · Fém.</span>
+      </div>
+
+      <div class="phrase-card c-terra">
+        <div class="phrase-illus">📖</div>
+        <div class="phrase-es">El libro es pequeño y rojo.</div>
+        <div class="phrase-fr">Le livre est petit et rouge.</div>
+        <div class="phrase-note">libro = masc. → pequeño, rojo</div>
+        <span class="phrase-tag">Objet · Taille · Couleur</span>
+      </div>
+
+      <div class="phrase-card c-terra">
+        <div class="phrase-illus">🏠</div>
+        <div class="phrase-es">La casa es grande y blanca.</div>
+        <div class="phrase-fr">La maison est grande et blanche.</div>
+        <div class="phrase-note">grande = invariable (pas d'accord de genre)</div>
+        <span class="phrase-tag">Objet · Fém. · Invariable</span>
+      </div>
+
+      <div class="phrase-card c-sage">
+        <div class="phrase-illus">🚗</div>
+        <div class="phrase-es">El coche es azul y grande.</div>
+        <div class="phrase-fr">La voiture est bleue et grande.</div>
+        <div class="phrase-note">azul &amp; grande = invariables !</div>
+        <span class="phrase-tag">Invariables · Piège fréquent</span>
+      </div>
+
+      <div class="phrase-card c-sage">
+        <div class="phrase-illus">👗</div>
+        <div class="phrase-es">La camisa es verde y bonita.</div>
+        <div class="phrase-fr">La chemise est verte et jolie.</div>
+        <div class="phrase-note">verde = invariable ; bonita = accord fém.</div>
+        <span class="phrase-tag">Vêtement · Couleur · Accord</span>
+      </div>
+
+      <div class="phrase-card c-night">
+        <div class="phrase-illus">👩‍🦰</div>
+        <div class="phrase-es">María es pelirroja y alta.</div>
+        <div class="phrase-fr">María est rousse et grande.</div>
+        <div class="phrase-note">pelo + rojo = pelirrojo/pelirroja</div>
+        <span class="phrase-tag">Cheveux · Composition</span>
+      </div>
+
+      <div class="phrase-card c-night">
+        <div class="phrase-illus">👶</div>
+        <div class="phrase-es">Los niños son rubios y altos.</div>
+        <div class="phrase-fr">Les enfants sont blonds et grands.</div>
+        <div class="phrase-note">pluriel : rubios, altos (-os)</div>
+        <span class="phrase-tag">Accord pluriel · -os</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── BLOC CONTRASTIF FR-ES ── -->
+  <div class="contrast-block">
+    <div class="contrast-col">
+      <h3>Personnes</h3>
+      <div class="contrast-row">
+        <div class="cr-es">alto / alta</div>
+        <div class="cr-fr">grand / grande</div>
+        <div class="cr-note">accord comme en français</div>
+      </div>
+      <div class="contrast-row">
+        <div class="cr-es">bajo / baja</div>
+        <div class="cr-fr">petit / petite</div>
+        <div class="cr-note">petit ≠ pequeño (pour objets)</div>
+      </div>
+      <div class="contrast-row">
+        <div class="cr-es">rubio / rubia</div>
+        <div class="cr-fr">blond / blonde</div>
+        <div class="cr-note">accord identique</div>
+      </div>
+      <div class="contrast-row">
+        <div class="cr-es">moreno / morena</div>
+        <div class="cr-fr">brun / brune</div>
+        <div class="cr-note">aussi : peau foncée en contexte</div>
+      </div>
+    </div>
+
+    <div class="contrast-col">
+      <h3>Objets</h3>
+      <div class="contrast-row">
+        <div class="cr-es">grande</div>
+        <div class="cr-fr">grand / grande</div>
+        <div class="cr-note">ES : invariable ! FR : accord complet</div>
+      </div>
+      <div class="contrast-row">
+        <div class="cr-es">pequeño / pequeña</div>
+        <div class="cr-fr">petit / petite</div>
+        <div class="cr-note">accord complet en ES &amp; FR</div>
+      </div>
+      <div class="contrast-row">
+        <div class="cr-es">bonito / bonita</div>
+        <div class="cr-fr">joli / jolie</div>
+        <div class="cr-note">accord identique</div>
+      </div>
+      <div class="contrast-row">
+        <div class="cr-es">feo / fea</div>
+        <div class="cr-fr">laid / laide</div>
+        <div class="cr-note">accord identique</div>
+      </div>
+    </div>
+
+    <div class="contrast-col">
+      <h3>Pièges pour francophones</h3>
+      <div class="contrast-row">
+        <div class="cr-es">azul</div>
+        <div class="cr-fr">bleu / bleue</div>
+        <div class="cr-note">ES invariable ; FR accordé</div>
+      </div>
+      <div class="contrast-row">
+        <div class="cr-es">verde</div>
+        <div class="cr-fr">vert / verte</div>
+        <div class="cr-note">ES invariable ; FR accordé</div>
+      </div>
+      <div class="contrast-row">
+        <div class="cr-es">marrón</div>
+        <div class="cr-fr">marron</div>
+        <div class="cr-note">invariable dans les deux langues !</div>
+      </div>
+      <div class="contrast-row">
+        <div class="cr-es">delgado / gorda</div>
+        <div class="cr-fr">mince / gros·se</div>
+        <div class="cr-note">ne pas confondre les antonymes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── COULEURS ── -->
+  <section class="swatch-block">
+    <div class="section-label">Couleurs — Accord en genre</div>
+    <div class="swatch-row">
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#d63a2a;"></div>
+        <div class="swatch-es">rojo / roja</div>
+        <div class="swatch-fr">rouge</div>
+        <span class="swatch-badge changes">accordé</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#2a5ca8;"></div>
+        <div class="swatch-es">azul</div>
+        <div class="swatch-fr">bleu</div>
+        <span class="swatch-badge fixed">invariable</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#3a7a3a;"></div>
+        <div class="swatch-es">verde</div>
+        <div class="swatch-fr">vert</div>
+        <span class="swatch-badge fixed">invariable</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#d4b800;"></div>
+        <div class="swatch-es">amarillo / amarilla</div>
+        <div class="swatch-fr">jaune</div>
+        <span class="swatch-badge changes">accordé</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#1a1a1a;"></div>
+        <div class="swatch-es">negro / negra</div>
+        <div class="swatch-fr">noir</div>
+        <span class="swatch-badge changes">accordé</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#f8f8f8; border: 2px solid #ccc;"></div>
+        <div class="swatch-es">blanco / blanca</div>
+        <div class="swatch-fr">blanc</div>
+        <span class="swatch-badge changes">accordé</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#8B4513;"></div>
+        <div class="swatch-es">marrón</div>
+        <div class="swatch-fr">marron</div>
+        <span class="swatch-badge fixed">invariable</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#ff7c00;"></div>
+        <div class="swatch-es">naranja</div>
+        <div class="swatch-fr">orange</div>
+        <span class="swatch-badge fixed">invariable</span>
+      </div>
+
+      <div class="swatch-item">
+        <div class="swatch-circle" style="background:#9b59b6;"></div>
+        <div class="swatch-es">morado / morada</div>
+        <div class="swatch-fr">violet</div>
+        <span class="swatch-badge changes">accordé</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── RÈGLES D'ACCORD ── -->
+  <div class="rules-panel">
+    <h3>Règles d'accord — Genre &amp; Nombre</h3>
+
+    <div style="font-family: var(--fraunces); font-size: 14px; font-weight: 700; margin-bottom: 12px; opacity: .7;">Genre</div>
+    <div class="rule-row">
+      <div class="rule-pill">terminaison -o</div>
+      <div class="rule-arrow">→</div>
+      <div class="rule-pill-b">-o → -a (fém.)</div>
+      <div class="rule-note">alto → alta</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-pill">terminaison -e</div>
+      <div class="rule-arrow">→</div>
+      <div class="rule-pill-b">invariable</div>
+      <div class="rule-note">grande reste grande</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-pill">consonne</div>
+      <div class="rule-arrow">→</div>
+      <div class="rule-pill-b">invariable</div>
+      <div class="rule-note">azul reste azul</div>
+    </div>
+
+    <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(42,37,64,.15);">
+      <div style="font-family: var(--fraunces); font-size: 14px; font-weight: 700; margin-bottom: 12px; opacity: .7;">Nombre (pluriel)</div>
+      <div class="rule-row">
+        <div class="rule-pill">voyelle finale</div>
+        <div class="rule-arrow">→</div>
+        <div class="rule-pill-b">+ -s</div>
+        <div class="rule-note">rojo → rojos</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-pill">consonne finale</div>
+        <div class="rule-arrow">→</div>
+        <div class="rule-pill-b">+ -es</div>
+        <div class="rule-note">azul → azules</div>
+      </div>
+      <div class="rule-row">
+        <div class="rule-pill">marrón</div>
+        <div class="rule-arrow">→</div>
+        <div class="rule-pill-b">marrones</div>
+        <div class="rule-note">accent disparaît au pluriel</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONSEILS ── -->
+  <div class="tips-panel">
+    <h3>Conseils &amp; Astuces</h3>
+
+    <div class="tip-row">
+      <div class="tip-icon">1</div>
+      <div class="tip-text"><strong>Règle d'or -o/-a :</strong> comme en français (grand/grande), mais en espagnol c'est le genre grammatical du nom qui commande, pas le sexe de la personne.</div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon">2</div>
+      <div class="tip-text"><strong>Invariables : votre avantage !</strong> azul, verde, marrón, naranja ne s'accordent pas — moins de flexions à mémoriser que le français "bleu/bleue".</div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon">3</div>
+      <div class="tip-text"><strong>pelirrojo = pelo + rojo :</strong> le mot se décompose comme un mot-valise. Souvenez-vous de la pièce et l'ensemble suit.</div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon">4</div>
+      <div class="tip-text"><strong>Ser, pas estar :</strong> pour les traits physiques permanents, toujours <em>es / son</em>. "Elle <em>est</em> grande" = "Ella <em>es</em> alta" — jamais <em>está</em> alta.</div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon">5</div>
+      <div class="tip-text"><strong>Ordre des mots :</strong> en espagnol l'adjectif se place généralement après le nom — "el coche rojo" (la voiture rouge), contraire à l'anglais, proche du français.</div>
+    </div>
+    <div class="tip-row">
+      <div class="tip-icon">6</div>
+      <div class="tip-text"><strong>Piège marrón :</strong> pas de -a (invariable), mais pluriel marrones avec accent supprimé — notez la différence à l'écrit.</div>
+    </div>
+  </div>
+
+  <!-- ── TABLEAU COMPARATIF ── -->
+  <div class="compare-table">
+    <div class="ct-head">
+      <div>Espagnol</div>
+      <div>Français</div>
+      <div>Catégorie</div>
+      <div>Piège / Note</div>
+    </div>
+
+    <div class="ct-row">
+      <div class="ct-es">alto / alta</div>
+      <div class="ct-fr">grand / grande</div>
+      <div class="ct-cat">taille</div>
+      <div class="ct-trap">Accord identique — mémorisation facile</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-es">bajo / baja</div>
+      <div class="ct-fr">petit / petite (taille)</div>
+      <div class="ct-cat">taille</div>
+      <div class="ct-trap">Attention : pequeño = petit pour les objets</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-es">grande</div>
+      <div class="ct-fr">grand / grande</div>
+      <div class="ct-cat">taille objet</div>
+      <div class="ct-trap">ES invariable : "la casa es grande" pas "granda"</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-es">pequeño / pequeña</div>
+      <div class="ct-fr">petit / petite</div>
+      <div class="ct-cat">taille objet</div>
+      <div class="ct-trap">Prononcez ñ = "gnio" (peh-KAY-nyoh)</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-es">moreno / morena</div>
+      <div class="ct-fr">brun / brune</div>
+      <div class="ct-cat">cheveux / peau</div>
+      <div class="ct-trap">Aussi = peau foncée selon contexte</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-es">rubio / rubia</div>
+      <div class="ct-fr">blond / blonde</div>
+      <div class="ct-cat">cheveux</div>
+      <div class="ct-trap">Accord identique au français</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-es">pelirrojo / pelirroja</div>
+      <div class="ct-fr">roux / rousse</div>
+      <div class="ct-cat">cheveux</div>
+      <div class="ct-trap">Composé : pelo (cheveux) + rojo (rouge)</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-es">azul</div>
+      <div class="ct-fr">bleu / bleue</div>
+      <div class="ct-cat">couleur</div>
+      <div class="ct-trap">ES invariable — FR s'accorde. Ne pas écrire "azula" !</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-es">verde</div>
+      <div class="ct-fr">vert / verte</div>
+      <div class="ct-cat">couleur</div>
+      <div class="ct-trap">ES invariable — aussi = non mûr (fruta verde)</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-es">rojo / roja</div>
+      <div class="ct-fr">rouge</div>
+      <div class="ct-cat">couleur</div>
+      <div class="ct-trap">FR invariable, ES accordé — inverse !</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-es">marrón → marrones</div>
+      <div class="ct-fr">marron (invariable)</div>
+      <div class="ct-cat">couleur</div>
+      <div class="ct-trap">Accent disparaît au pluriel : marrones</div>
+    </div>
+    <div class="ct-row">
+      <div class="ct-es">delgado / delgada</div>
+      <div class="ct-fr">mince</div>
+      <div class="ct-cat">corpulence</div>
+      <div class="ct-trap">Accord ES ; FR invariable — logique inversée</div>
+    </div>
+  </div>
+
+  <!-- ── QUESTION CLÉE + PRONONCIATION ── -->
+  <div class="question-block">
+    <h3>La question essentielle</h3>
+    <div class="q-main">¿Cómo es…?</div>
+    <div class="q-pron">CÓ-mo es · "Comment est… ?" / "C'est comment… ?"</div>
+    <div class="q-example">
+      <div class="q-es">¿Cómo es tu amiga?</div>
+      <div class="q-fr">Comment est ton amie ?</div>
+    </div>
+    <div class="q-example">
+      <div class="q-es">Es alta, rubia y simpática.</div>
+      <div class="q-fr">Elle est grande, blonde et sympa.</div>
+    </div>
+    <div class="q-example">
+      <div class="q-es">¿Cómo son los coches? — Son azules y grandes.</div>
+      <div class="q-fr">Comment sont les voitures ? — Elles sont bleues et grandes.</div>
+    </div>
+  </div>
+
+  <!-- ── PRONONCIATION ── -->
+  <div class="accent-panel">
+    <h3>Prononciation clé</h3>
+
+    <div class="pron-row">
+      <div class="pron-word">alto / alta</div>
+      <div class="pron-ipa">AL-toh / AL-tah</div>
+      <div class="pron-tip">Accent sur la 1re syllabe — comme "ALto" en fr.</div>
+    </div>
+    <div class="pron-row">
+      <div class="pron-word">pequeño</div>
+      <div class="pron-ipa">peh-KAY-nyoh</div>
+      <div class="pron-tip">ñ = "gn" doux, pas "n-y" séparé</div>
+    </div>
+    <div class="pron-row">
+      <div class="pron-word">amarillo</div>
+      <div class="pron-ipa">ah-mah-REE-yo</div>
+      <div class="pron-tip">ll = "y" — ne pas prononcer deux L</div>
+    </div>
+    <div class="pron-row">
+      <div class="pron-word">¿Cómo es…?</div>
+      <div class="pron-ipa">CÓ-mo es</div>
+      <div class="pron-tip">Accent écrit = stress oral sur "CÓ"</div>
+    </div>
+    <div class="pron-row">
+      <div class="pron-word">pelirrojo</div>
+      <div class="pron-ipa">peh-lee-RROh-ho</div>
+      <div class="pron-tip">rr = R roulé fort ; j = "h" aspiré</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div>Español con Diana · A1 · Sujet 06 · <span>Décrire des personnes &amp; des choses</span></div>
+  <div>Référence française · Marque : paper/ink/ochre/terra/sage/night</div>
+</footer>
+
+</body>
+</html>

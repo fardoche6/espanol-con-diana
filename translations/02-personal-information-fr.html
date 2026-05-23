@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informations personnelles — Espagnol → Français</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Inter:wght@400;600;700&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF6EE;
+    --ink: #1F1A14;
+    --ochre: #C99A3D;
+    --terra: #C4593A;
+    --sage: #6B8E6B;
+    --night: #2A2540;
+    --muted: #7B736B;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO HEADER ─────────────────────────────────────────── */
+  .hero {
+    background: var(--terra);
+    color: var(--paper);
+    padding: 48px 80px 40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent, transparent 40px,
+      rgba(0,0,0,0.06) 40px, rgba(0,0,0,0.06) 41px
+    );
+  }
+  .hero-accent-block {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 280px;
+    background: var(--night);
+    opacity: 0.22;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 60px) 100%, 0 100%);
+  }
+  .hero-left { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: rgba(250,246,238,0.7);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1.0;
+    margin-bottom: 12px;
+  }
+  .hero-title em { color: var(--paper); font-style: normal; text-decoration: underline; text-decoration-color: rgba(250,246,238,0.4); text-underline-offset: 6px; }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(250,246,238,0.65);
+    letter-spacing: 0.02em;
+  }
+  .hero-badge {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 3px solid rgba(250,246,238,0.6);
+    background: rgba(250,246,238,0.12);
+  }
+  .hero-badge .badge-lang {
+    font-family: 'Fraunces', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--paper);
+  }
+  .hero-badge .badge-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; color: rgba(250,246,238,0.65);
+    letter-spacing: 0.12em;
+    margin-top: 2px;
+  }
+
+  /* ── LAYOUT ─────────────────────────────────────────────── */
+  .canvas {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+
+  /* ── PHRASE CARD ─────────────────────────────────────────── */
+  .block {
+    padding: 36px 32px 32px;
+    border-right: 1px solid rgba(31,26,20,0.08);
+    border-bottom: 1px solid rgba(31,26,20,0.08);
+    position: relative;
+    background: var(--paper);
+    transition: background 0.15s;
+  }
+  .block:nth-child(3n) { border-right: none; }
+  .block:hover { background: #F5F0E6; }
+
+  .block-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+  }
+  .block-theme-name .block-accent { background: var(--ochre); }
+  .block-theme-origin .block-accent { background: var(--terra); }
+  .block-theme-age .block-accent { background: var(--sage); }
+  .block-theme-job .block-accent { background: var(--night); }
+  .block-theme-city .block-accent { background: var(--muted); }
+
+  .block-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+
+  .block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .block-theme-name .block-label { color: var(--ochre); }
+  .block-theme-origin .block-label { color: var(--terra); }
+  .block-theme-age .block-label { color: var(--sage); }
+  .block-theme-job .block-label { color: var(--night); }
+  .block-theme-city .block-label { color: var(--muted); }
+
+  .phrase-es {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--ink); line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .phrase-es .stress { color: var(--terra); }
+
+  /* Bracket callout — different visual from EN version */
+  .callout-bracket {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-left: 3px solid var(--ochre);
+    background: rgba(201,154,61,0.07);
+    border-radius: 0 4px 4px 0;
+  }
+  .block-theme-origin .callout-bracket { border-left-color: var(--terra); background: rgba(196,89,58,0.07); }
+  .block-theme-age .callout-bracket { border-left-color: var(--sage); background: rgba(107,142,107,0.07); }
+  .block-theme-job .callout-bracket { border-left-color: var(--night); background: rgba(42,37,64,0.06); }
+  .block-theme-city .callout-bracket { border-left-color: var(--muted); background: rgba(123,115,107,0.07); }
+
+  .phrase-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 600;
+    color: var(--night); margin-bottom: 3px;
+  }
+  .phrase-literal {
+    font-family: 'Caveat', cursive;
+    font-size: 13px; color: var(--muted);
+  }
+
+  /* Tip annotation — margin-style vs EN's badge */
+  .tip-margin {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    align-items: flex-start;
+  }
+  .tip-marker {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 2px;
+    text-transform: uppercase;
+  }
+  .tip-margin.note .tip-marker { color: var(--ochre); }
+  .tip-margin.warning .tip-marker { color: var(--terra); }
+  .tip-margin.culture .tip-marker { color: var(--sage); }
+  .tip-margin.memo .tip-marker { color: var(--muted); }
+
+  .tip-content {
+    font-family: 'Caveat', cursive;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  /* ── SECTION HEADERS ─────────────────────────────────────── */
+  .section-header {
+    grid-column: 1 / -1;
+    background: var(--terra);
+    color: var(--paper);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-header.alt { background: var(--night); }
+  .section-header.sage-bg { background: var(--sage); }
+
+  .section-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px; font-weight: 700;
+  }
+  .section-header .section-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.15em;
+    color: rgba(250,246,238,0.75);
+    border: 1px solid rgba(250,246,238,0.35);
+    padding: 2px 8px; border-radius: 2px;
+  }
+  .section-header .section-desc {
+    font-size: 12px;
+    color: rgba(250,246,238,0.55);
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── COMPARISON STRIP (FR-specific: French vs Spanish parallel) */
+  .compare-strip {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--night);
+    padding: 0;
+  }
+  .compare-side {
+    padding: 32px 48px;
+    border-right: 2px solid var(--ochre);
+  }
+  .compare-side:last-child { border-right: none; }
+  .compare-lang {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    color: var(--ochre); text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .compare-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .compare-item:last-child { border-bottom: none; }
+  .compare-es {
+    font-family: 'Fraunces', serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--paper);
+  }
+  .compare-tr {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; color: rgba(250,246,238,0.6);
+    text-align: right;
+  }
+  .compare-note {
+    font-family: 'Caveat', cursive;
+    font-size: 12px; color: var(--ochre);
+    text-align: right;
+    display: block;
+    margin-top: 1px;
+  }
+
+  /* ── NUMBERS BAR ─────────────────────────────────────────── */
+  .numbers-bar {
+    grid-column: 1 / -1;
+    background: var(--night);
+    padding: 28px 80px;
+    display: flex; align-items: center; gap: 0;
+  }
+  .number-cell {
+    flex: 1; text-align: center; padding: 8px 4px;
+    border-right: 1px solid rgba(250,246,238,0.12);
+  }
+  .number-cell:last-child { border-right: none; }
+  .number-digit {
+    font-family: 'Fraunces', serif;
+    font-size: 26px; font-weight: 900;
+    color: var(--ochre); line-height: 1;
+  }
+  .number-word {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: rgba(250,246,238,0.7);
+    margin-top: 4px;
+  }
+
+  /* ── PITFALLS BLOCK (FR-specific: contrastive errors FR→ES) */
+  .pitfalls {
+    grid-column: 1 / -1;
+    background: rgba(196,89,58,0.08);
+    border-top: 3px solid var(--terra);
+    padding: 32px 80px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .pitfall-card {
+    background: var(--paper);
+    border: 1px solid rgba(196,89,58,0.25);
+    border-radius: 4px;
+    padding: 18px 20px;
+  }
+  .pitfall-wrong {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--terra);
+    text-decoration: line-through;
+    margin-bottom: 6px;
+  }
+  .pitfall-right {
+    font-family: 'Fraunces', serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .pitfall-explain {
+    font-family: 'Caveat', cursive;
+    font-size: 13px; color: var(--muted);
+    line-height: 1.4;
+  }
+  .pitfall-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.15em;
+    color: var(--terra); text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* ── FOOTER ──────────────────────────────────────────────── */
+  .footer {
+    grid-column: 1 / -1;
+    background: var(--ink);
+    color: rgba(250,246,238,0.4);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.12em;
+    padding: 18px 80px;
+    display: flex;
+    justify-content: space-between; align-items: center;
+  }
+  .footer strong { color: var(--ochre); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-accent-block"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Español con Diana · A1 · Sujet 02</div>
+    <div class="hero-title">Informations<br><em>personnelles</em></div>
+    <div class="hero-sub">Phrases clés — Espagnol → Français · 15 entrées focales</div>
+  </div>
+  <div class="hero-badge">
+    <span class="badge-lang">FR</span>
+    <span class="badge-sub">FRANÇAIS</span>
+  </div>
+</div>
+
+<div class="canvas">
+
+  <!-- ── BLOC A : LE NOM ─────────────────────────────────── -->
+  <div class="section-header">
+    <span class="section-code">BLOC A</span>
+    <h2>Le nom</h2>
+    <span class="section-desc">me llamo · mi nombre es · ¿cómo te llamas?</span>
+  </div>
+
+  <div class="block block-theme-name">
+    <div class="block-accent"></div>
+    <span class="block-icon">🪪</span>
+    <div class="block-label">Nom — Courant</div>
+    <div class="phrase-es">Me <span class="stress">lla</span>mo…</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">Je m'appelle…</div>
+      <div class="phrase-literal">Litt. « Je me nomme… » (verbe réfléchi)</div>
+    </div>
+    <div class="tip-margin note">
+      <span class="tip-marker">Prononc.</span>
+      <span class="tip-content">Double-L = Y en Amérique latine (« yamo »), SH doux en Espagne</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-name">
+    <div class="block-accent"></div>
+    <span class="block-icon">📋</span>
+    <div class="block-label">Nom — Formel</div>
+    <div class="phrase-es">Mi nombre es…</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">Mon nom est… (registre formel)</div>
+      <div class="phrase-literal">Litt. « Mon nom est… »</div>
+    </div>
+    <div class="tip-margin culture">
+      <span class="tip-marker">Culture</span>
+      <span class="tip-content">Utilisé à l'accueil, en entretien, à l'hôtel — équivalent du vouvoiement</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-name">
+    <div class="block-accent"></div>
+    <span class="block-icon">❓</span>
+    <div class="block-label">Nom — Question</div>
+    <div class="phrase-es">¿Cómo te <span class="stress">lla</span>mas?</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">Comment tu t'appelles ?</div>
+      <div class="phrase-literal">Formel : ¿Cómo se llama usted?</div>
+    </div>
+    <div class="tip-margin note">
+      <span class="tip-marker">Astuce</span>
+      <span class="tip-content">Mémo : la llama (l'animal) → double-L → son Y</span>
+    </div>
+  </div>
+
+  <!-- ── BLOCS C+D : ORIGINE & ÂGE ───────────────────────── -->
+  <div class="section-header alt">
+    <span class="section-code">BLOCS C · D</span>
+    <h2>Origine &amp; Âge</h2>
+    <span class="section-desc">soy de · ¿de dónde eres? · tengo X años</span>
+  </div>
+
+  <div class="block block-theme-origin">
+    <div class="block-accent"></div>
+    <span class="block-icon">🌍</span>
+    <div class="block-label">Origine</div>
+    <div class="phrase-es">Soy de…</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">Je suis de… / Je viens de…</div>
+      <div class="phrase-literal">Litt. « Je suis de… »</div>
+    </div>
+    <div class="tip-margin note">
+      <span class="tip-marker">Ex.</span>
+      <span class="tip-content">Soy de México · Soy de España · Soy de Canadá</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-origin">
+    <div class="block-accent"></div>
+    <span class="block-icon">🗺️</span>
+    <div class="block-label">Origine — Question</div>
+    <div class="phrase-es">¿De <span class="stress">dón</span>de eres?</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">D'où es-tu ? / Tu viens d'où ?</div>
+      <div class="phrase-literal">Accent = syllabe accentuée : DE DÓNDE</div>
+    </div>
+    <div class="tip-margin warning">
+      <span class="tip-marker">Attention</span>
+      <span class="tip-content">Le « de » est déjà dans la question — répondre « Soy de… » sans répéter « de de »</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-age">
+    <div class="block-accent"></div>
+    <span class="block-icon">🎂</span>
+    <div class="block-label">Âge — Règle absolue</div>
+    <div class="phrase-es">Tengo X años</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">J'ai X ans</div>
+      <div class="phrase-literal">Litt. « J'ai X années » (verbe AVOIR, pas ÊTRE)</div>
+    </div>
+    <div class="tip-margin warning">
+      <span class="tip-marker">⚠ Piège</span>
+      <span class="tip-content">JAMAIS « Soy 30 años » — comme en français « j'ai 30 ans », pas « je suis 30 ans »</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-age">
+    <div class="block-accent"></div>
+    <span class="block-icon">🔢</span>
+    <div class="block-label">Âge — Question</div>
+    <div class="phrase-es">¿<span class="stress">Cuán</span>tos años tienes?</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">Tu as quel âge ?</div>
+      <div class="phrase-literal">Litt. « Combien d'années as-tu ? »</div>
+    </div>
+    <div class="tip-margin note">
+      <span class="tip-marker">Prononc.</span>
+      <span class="tip-content">Accent tonique : CUÁN-tos (première syllabe)</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-origin">
+    <div class="block-accent"></div>
+    <span class="block-icon">🏷️</span>
+    <div class="block-label">Nationalité</div>
+    <div class="phrase-es">Soy mexicano / mexicana</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">Je suis mexicain / mexicaine</div>
+      <div class="phrase-literal">-o = masculin · -a = féminin</div>
+    </div>
+    <div class="tip-margin culture">
+      <span class="tip-marker">Culture</span>
+      <span class="tip-content">canadiense = même forme pour les deux genres (comme en français : canadien/canadienne)</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-origin">
+    <div class="block-accent"></div>
+    <span class="block-icon">🇫🇷</span>
+    <div class="block-label">Nationalité — Paire de genre</div>
+    <div class="phrase-es">francés / francesa</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">français / française</div>
+      <div class="phrase-literal">L'adjectif s'accorde avec le locuteur</div>
+    </div>
+    <div class="tip-margin note">
+      <span class="tip-marker">Ex.</span>
+      <span class="tip-content">español/española · argentino/argentina · inglés/inglesa</span>
+    </div>
+  </div>
+
+  <!-- ── BLOCS E+F : MÉTIER & VILLE ──────────────────────── -->
+  <div class="section-header">
+    <span class="section-code">BLOCS E · F</span>
+    <h2>Profession &amp; Lieu de vie</h2>
+    <span class="section-desc">soy + profesión · vivo en · ¿dónde vives?</span>
+  </div>
+
+  <div class="block block-theme-job">
+    <div class="block-accent"></div>
+    <span class="block-icon">💼</span>
+    <div class="block-label">Profession — Sans article</div>
+    <div class="phrase-es">Soy estudiante</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">Je suis étudiant(e)</div>
+      <div class="phrase-literal">Pas d'article « un/una » après « soy »</div>
+    </div>
+    <div class="tip-margin warning">
+      <span class="tip-marker">⚠ Piège</span>
+      <span class="tip-content">Contrairement au français, PAS d'article : « Soy médico », pas « Soy un médico »</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-job">
+    <div class="block-accent"></div>
+    <span class="block-icon">🏥</span>
+    <div class="block-label">Profession — Paire de genre</div>
+    <div class="phrase-es">médico / médica</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">médecin (masc. / fém.)</div>
+      <div class="phrase-literal">maestro/maestra · enfermero/enfermera</div>
+    </div>
+    <div class="tip-margin note">
+      <span class="tip-marker">Astuce</span>
+      <span class="tip-content">artista / cantante = invariable (comme en français : artiste, chanteur/chanteuse)</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-job">
+    <div class="block-accent"></div>
+    <span class="block-icon">🤔</span>
+    <div class="block-label">Profession — Question (2 formes)</div>
+    <div class="phrase-es">¿A qué te dedicas?</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">Tu fais quoi dans la vie ?</div>
+      <div class="phrase-literal">Aussi : ¿Qué haces? (informel)</div>
+    </div>
+    <div class="tip-margin culture">
+      <span class="tip-marker">Culture</span>
+      <span class="tip-content">Formel (entretien, formulaire) : ¿Cuál es su profesión?</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-city">
+    <div class="block-accent"></div>
+    <span class="block-icon">🏙️</span>
+    <div class="block-label">Résidence</div>
+    <div class="phrase-es">Vivo en…</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">J'habite à… / Je vis à…</div>
+      <div class="phrase-literal">vivo en Madrid · vivo en Montréal</div>
+    </div>
+    <div class="tip-margin memo">
+      <span class="tip-marker">Exception</span>
+      <span class="tip-content">« en los Estados Unidos » garde l'article (les États-Unis)</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-city">
+    <div class="block-accent"></div>
+    <span class="block-icon">📍</span>
+    <div class="block-label">Résidence — Question</div>
+    <div class="phrase-es">¿Dónde vives?</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">Où habites-tu ?</div>
+      <div class="phrase-literal">≠ ¿De dónde eres? (origine ≠ résidence)</div>
+    </div>
+    <div class="tip-margin warning">
+      <span class="tip-marker">⚠ Confusion</span>
+      <span class="tip-content">dónde vives = où tu vis maintenant / de dónde eres = d'où tu viens (origine)</span>
+    </div>
+  </div>
+
+  <div class="block block-theme-city">
+    <div class="block-accent"></div>
+    <span class="block-icon">🔄</span>
+    <div class="block-label">Relancer la conversation</div>
+    <div class="phrase-es">¿Y tú?</div>
+    <div class="callout-bracket">
+      <div class="phrase-fr">Et toi ?</div>
+      <div class="phrase-literal">Maintient le dialogue naturellement</div>
+    </div>
+    <div class="tip-margin note">
+      <span class="tip-marker">Astuce</span>
+      <span class="tip-content">Ajoute ¿Y tú? après CHAQUE réponse — identique à « et toi ? » en français</span>
+    </div>
+  </div>
+
+  <!-- ── TABLEAU COMPARATIF FR→ES ──────────────────────────── -->
+  <div class="section-header alt">
+    <span class="section-code">CONTRASTE</span>
+    <h2>Français vs Espagnol — Parallèles et pièges</h2>
+    <span class="section-desc">ce qui est similaire · ce qui change</span>
+  </div>
+
+  <div class="compare-strip">
+    <div class="compare-side">
+      <div class="compare-lang">Français (ce que tu connais déjà)</div>
+      <div class="compare-item">
+        <span class="compare-es" style="font-family:'Inter',sans-serif;font-size:16px;color:var(--paper)">J'ai 30 ans</span>
+        <span class="compare-tr">→ même logique en espagnol !<span class="compare-note">Tengo 30 años (avoir, pas être)</span></span>
+      </div>
+      <div class="compare-item">
+        <span class="compare-es" style="font-family:'Inter',sans-serif;font-size:16px;color:var(--paper)">Je suis médecin</span>
+        <span class="compare-tr">→ similaire mais...<span class="compare-note">Soy médico (pas d'article !)</span></span>
+      </div>
+      <div class="compare-item">
+        <span class="compare-es" style="font-family:'Inter',sans-serif;font-size:16px;color:var(--paper)">D'où tu viens ?</span>
+        <span class="compare-tr">→ direct en espagnol<span class="compare-note">¿De dónde eres?</span></span>
+      </div>
+      <div class="compare-item">
+        <span class="compare-es" style="font-family:'Inter',sans-serif;font-size:16px;color:var(--paper)">Et toi ?</span>
+        <span class="compare-tr">→ identique !<span class="compare-note">¿Y tú?</span></span>
+      </div>
+    </div>
+    <div class="compare-side">
+      <div class="compare-lang">Espagnol → Traduction française</div>
+      <div class="compare-item">
+        <span class="compare-es">Me llamo…</span>
+        <span class="compare-tr">Je m'appelle…<span class="compare-note">verbe réfléchi, comme en français</span></span>
+      </div>
+      <div class="compare-item">
+        <span class="compare-es">Soy de Francia</span>
+        <span class="compare-tr">Je suis de France / Je viens de France<span class="compare-note">pas « je viens depuis »</span></span>
+      </div>
+      <div class="compare-item">
+        <span class="compare-es">Tengo 25 años</span>
+        <span class="compare-tr">J'ai 25 ans<span class="compare-note">tener = avoir (pour l'âge)</span></span>
+      </div>
+      <div class="compare-item">
+        <span class="compare-es">Vivo en París</span>
+        <span class="compare-tr">J'habite à Paris / Je vis à Paris<span class="compare-note">« en » = « à » pour les villes</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NUMBERS BAR ──────────────────────────────────────── -->
+  <div class="section-header sage-bg">
+    <span class="section-code">BLOC G</span>
+    <h2>Les chiffres (0–10 et jalons)</h2>
+    <span class="section-desc">pour les numéros de téléphone, l'âge, les coordonnées</span>
+  </div>
+
+  <div class="numbers-bar">
+    <div class="number-cell"><div class="number-digit">0</div><div class="number-word">cero</div></div>
+    <div class="number-cell"><div class="number-digit">1</div><div class="number-word">uno</div></div>
+    <div class="number-cell"><div class="number-digit">2</div><div class="number-word">dos</div></div>
+    <div class="number-cell"><div class="number-digit">3</div><div class="number-word">tres</div></div>
+    <div class="number-cell"><div class="number-digit">4</div><div class="number-word">cuatro</div></div>
+    <div class="number-cell"><div class="number-digit">5</div><div class="number-word">cinco</div></div>
+    <div class="number-cell"><div class="number-digit">6</div><div class="number-word">seis</div></div>
+    <div class="number-cell"><div class="number-digit">7</div><div class="number-word">siete</div></div>
+    <div class="number-cell"><div class="number-digit">8</div><div class="number-word">ocho</div></div>
+    <div class="number-cell"><div class="number-digit">9</div><div class="number-word">nueve</div></div>
+    <div class="number-cell"><div class="number-digit">10</div><div class="number-word">diez</div></div>
+    <div class="number-cell"><div class="number-digit">20</div><div class="number-word">veinte</div></div>
+    <div class="number-cell"><div class="number-digit">30</div><div class="number-word">treinta</div></div>
+    <div class="number-cell"><div class="number-digit">100</div><div class="number-word">cien</div></div>
+  </div>
+
+  <!-- ── PIÈGES FRÉQUENTS (FR speakers) ─────────────────── -->
+  <div class="section-header" style="background:var(--terra)">
+    <span class="section-code">PIÈGES</span>
+    <h2>Erreurs fréquentes des francophones</h2>
+    <span class="section-desc">interference du français · à mémoriser absolument</span>
+  </div>
+
+  <div class="pitfalls">
+    <div class="pitfall-card">
+      <div class="pitfall-label">Erreur n°1 — Âge</div>
+      <div class="pitfall-wrong">Soy 30 años</div>
+      <div class="pitfall-right">Tengo 30 años ✓</div>
+      <div class="pitfall-explain">Le français dit « j'ai X ans » → l'espagnol aussi ! Utilise tener (avoir), jamais ser (être).</div>
+    </div>
+    <div class="pitfall-card">
+      <div class="pitfall-label">Erreur n°2 — Profession</div>
+      <div class="pitfall-wrong">Soy una médica</div>
+      <div class="pitfall-right">Soy médica ✓</div>
+      <div class="pitfall-explain">L'espagnol supprime l'article indéfini avec les professions. Pas de « un/una » après soy.</div>
+    </div>
+    <div class="pitfall-card">
+      <div class="pitfall-label">Erreur n°3 — Origine/Résidence</div>
+      <div class="pitfall-wrong">¿De dónde vives?</div>
+      <div class="pitfall-right">¿Dónde vives? ✓</div>
+      <div class="pitfall-explain">« De dónde » = d'où tu viens (origine). « Dónde » seul = où tu habites. Un « de » de trop change tout.</div>
+    </div>
+    <div class="pitfall-card">
+      <div class="pitfall-label">Erreur n°4 — Épellation</div>
+      <div class="pitfall-wrong">H se prononce « hache »</div>
+      <div class="pitfall-right">H est toujours muet ✓</div>
+      <div class="pitfall-explain">En espagnol, H ne se prononce jamais. Hotel = oh-TEL. Différent du français où H aspiré/muet varie.</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>Español con Diana · <strong>A1 · Sujet 02</strong> · Informations personnelles</span>
+    <span>Espagnol → <strong>Français</strong> · translation-fr.html</span>
+  </div>
+
+</div><!-- /canvas -->
+</body>
+</html>

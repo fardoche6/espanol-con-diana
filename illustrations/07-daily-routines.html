@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La rutina diaria — Español con Diana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,wght@0,300;0,700;1,300&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:      #FAF6EE;
+      --paper-dark: #EDE8DC;
+      --ink:        #1F1A14;
+      --ink-soft:   #3a3228;
+      --ochre:      #C99A3D;
+      --terracotta: #C4593A;
+      --sage:       #6B8E6B;
+      --night:      #2A2540;
+      --muted:      #7B736B;
+      --panel-border: 2.5px;
+    }
+
+    body {
+      background-color: var(--paper-dark);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 44px 20px 64px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ── Page header ── */
+    .strip-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .strip-headline {
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 32px;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .strip-sub {
+      font-family: 'Caveat', cursive;
+      font-size: 17px;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* ── Comic strip container ── */
+    .comic-strip {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: nowrap;
+      max-width: 1340px;
+      width: 100%;
+    }
+
+    /* ── Individual panels ── */
+    .panel-wrap {
+      flex: 1;
+      min-width: 240px;
+      max-width: 320px;
+      position: relative;
+    }
+
+    .panel-wrap:nth-child(1) { transform: rotate(-2.1deg) translateY(8px);  z-index: 2; }
+    .panel-wrap:nth-child(2) { transform: rotate(1.4deg)  translateY(-5px); z-index: 3; }
+    .panel-wrap:nth-child(3) { transform: rotate(-0.8deg) translateY(10px); z-index: 2; }
+    .panel-wrap:nth-child(4) { transform: rotate(1.9deg)  translateY(-3px); z-index: 1; }
+
+    .panel {
+      background: var(--paper);
+      border: var(--panel-border) solid var(--ink);
+      border-radius: 3px;
+      box-shadow:
+        4px 4px 0 var(--ink),
+        7px 7px 14px rgba(31,26,20,0.16);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .panel-scene {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── Caption bar ── */
+    .caption {
+      background: var(--paper-dark);
+      border-top: var(--panel-border) solid var(--ink);
+      padding: 10px 14px 13px;
+    }
+    .caption-verb {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 27px;
+      color: var(--ink);
+      line-height: 1;
+      display: block;
+    }
+    .caption-hint {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      display: block;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Panel number ── */
+    .panel-num {
+      position: absolute;
+      top: 7px;
+      left: 9px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--ink);
+      opacity: 0.3;
+      z-index: 20;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Timeline bar below comic ── */
+    .timeline-wrap {
+      margin-top: 52px;
+      max-width: 1000px;
+      width: 100%;
+    }
+    .timeline-card {
+      border: 2px solid var(--ink);
+      border-radius: 4px;
+      background: var(--paper);
+      padding: 20px 24px 18px;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .timeline-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .timeline-bar {
+      display: flex;
+      height: 30px;
+      border: 2px solid var(--ink);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .tl-morning {
+      flex: 2;
+      background: var(--ochre);
+      display: flex; align-items: center; justify-content: center;
+      border-right: 2px solid var(--ink);
+    }
+    .tl-afternoon {
+      flex: 2.5;
+      background: var(--terracotta);
+      display: flex; align-items: center; justify-content: center;
+      border-right: 2px solid var(--ink);
+    }
+    .tl-evening {
+      flex: 1.5;
+      background: var(--night);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tl-text {
+      font-family: 'Caveat', cursive;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--paper);
+      white-space: nowrap;
+    }
+    .tl-text.dark { color: var(--paper); }
+    .timeline-hours {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      color: var(--muted);
+      padding: 0 2px;
+      margin-bottom: 14px;
+    }
+    .verbs-row {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin-top: 6px;
+    }
+    .verb-chip {
+      font-family: 'Caveat', cursive;
+      font-size: 15px;
+      color: var(--ink);
+      padding: 2px 10px;
+      border: 1.5px solid var(--ink-soft);
+      border-radius: 20px;
+      background: var(--paper);
+      white-space: nowrap;
+    }
+
+    /* ── Footer ── */
+    .strip-footer {
+      margin-top: 40px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="strip-title">Español con Diana &nbsp;·&nbsp; A1 &nbsp;·&nbsp; Topic 07</p>
+  <h1 class="strip-headline">La rutina diaria</h1>
+  <p class="strip-sub">Un día normal — from sunrise to sleep</p>
+
+  <!-- Comic Strip -->
+  <div class="comic-strip">
+
+    <!-- PANEL 1: Me levanto — morning -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">01</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink1" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.042" numOctaves="3" seed="3" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="morningSky1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#b8e8f8"/>
+              <stop offset="100%" stop-color="#fde68a"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Background: warm morning room -->
+          <rect width="280" height="220" fill="url(#morningSky1)"/>
+          <rect y="220" width="280" height="120" fill="#FAF6EE"/>
+          <line x1="0" y1="220" x2="280" y2="220" stroke="#1F1A14" stroke-width="2"/>
+
+          <!-- Window -->
+          <rect x="12" y="18" width="96" height="88" rx="4" fill="#e8f4fb" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink1)"/>
+          <line x1="60" y1="18" x2="60" y2="106" stroke="#1F1A14" stroke-width="1.8"/>
+          <line x1="12" y1="62" x2="108" y2="62" stroke="#1F1A14" stroke-width="1.8"/>
+
+          <!-- Sun -->
+          <circle cx="60" cy="48" r="20" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.5"/>
+          <g stroke="#C99A3D" stroke-width="2.5" stroke-linecap="round">
+            <line x1="60" y1="22" x2="60" y2="16"/>
+            <line x1="78" y1="30" x2="83" y2="25"/>
+            <line x1="86" y1="48" x2="92" y2="48"/>
+            <line x1="78" y1="66" x2="83" y2="71"/>
+            <line x1="60" y1="74" x2="60" y2="80"/>
+            <line x1="42" y1="66" x2="37" y2="71"/>
+            <line x1="34" y1="48" x2="28" y2="48"/>
+            <line x1="42" y1="30" x2="37" y2="25"/>
+          </g>
+          <!-- Curtain left -->
+          <path d="M12,18 Q22,52 16,106" fill="#C4593A" stroke="#1F1A14" stroke-width="1.5" opacity="0.85"/>
+          <!-- Curtain right -->
+          <path d="M108,18 Q98,52 104,106" fill="#C4593A" stroke="#1F1A14" stroke-width="1.5" opacity="0.85"/>
+
+          <!-- Bed -->
+          <rect x="130" y="195" width="138" height="80" rx="4" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Pillow -->
+          <rect x="138" y="200" width="60" height="40" rx="7" fill="#FAF6EE" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Blanket fold line -->
+          <path d="M130,240 Q200,232 268,238" fill="none" stroke="#1F1A14" stroke-width="2"/>
+
+          <!-- Person sitting up in bed -->
+          <!-- Body/torso -->
+          <rect x="148" y="225" width="38" height="55" rx="6" fill="#2A2540" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="167" cy="213" rx="22" ry="23" fill="#f5cba7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Messy sleep hair -->
+          <path d="M145,206 Q148,185 165,190 Q173,181 183,190 Q188,182 191,200" fill="#3a2e18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Cowlick / messy bit -->
+          <path d="M182,185 Q188,179 192,183" fill="none" stroke="#1F1A14" stroke-width="1.3" stroke-linecap="round"/>
+          <!-- Eyes (sleepy half-open) -->
+          <path d="M156,210 Q160,206 164,210" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <path d="M170,210 Q174,206 178,210" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Smile -->
+          <path d="M160,222 Q167,228 174,222" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Stretch arm -->
+          <path d="M186,238 Q210,228 225,215" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <!-- Hand open -->
+          <g stroke="#1F1A14" stroke-width="1.4" stroke-linecap="round">
+            <line x1="225" y1="215" x2="232" y2="208"/>
+            <line x1="225" y1="215" x2="233" y2="215"/>
+            <line x1="225" y1="215" x2="230" y2="222"/>
+          </g>
+
+          <!-- ZZZ fading -->
+          <text x="200" y="200" font-family="'Caveat', cursive" font-size="13" fill="#2A2540" opacity="0.45" transform="rotate(14,200,200)">z</text>
+          <text x="214" y="188" font-family="'Caveat', cursive" font-size="17" fill="#2A2540" opacity="0.3" transform="rotate(10,214,188)">z</text>
+
+          <!-- Alarm clock on nightstand -->
+          <rect x="116" y="208" width="16" height="12" rx="2" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Bell -->
+          <circle cx="120" cy="207" r="3" fill="#C99A3D" stroke="#1F1A14" stroke-width="1"/>
+          <circle cx="128" cy="207" r="3" fill="#C99A3D" stroke="#1F1A14" stroke-width="1"/>
+          <!-- Clock face lines -->
+          <line x1="124" y1="211" x2="124" y2="214" stroke="#1F1A14" stroke-width="1"/>
+          <line x1="122" y1="212" x2="125" y2="212" stroke="#1F1A14" stroke-width="1"/>
+          <!-- Ring lines -->
+          <g stroke="#C99A3D" stroke-width="1.2" stroke-linecap="round">
+            <line x1="112" y1="204" x2="110" y2="200"/>
+            <line x1="114" y1="202" x2="112" y2="198"/>
+          </g>
+
+          <!-- Speech bubble -->
+          <path d="M108,28 Q108,12 130,12 L255,12 Q270,12 270,30 Q270,52 255,52 L190,52 L178,68 L181,52 L130,52 Q108,52 108,30 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink1)"/>
+          <text x="190" y="38" font-family="'Caveat', cursive" font-size="21" font-weight="700" fill="#1F1A14" text-anchor="middle">Me levanto</text>
+          <text x="190" y="52" font-family="'Caveat', cursive" font-size="13" fill="#7B736B" text-anchor="middle">I get up</text>
+        </svg>
+        <div class="caption">
+          <span class="caption-verb">Me levanto</span>
+          <span class="caption-hint">reflexive · por la manana</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: Desayuno — breakfast -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">02</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink2" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.038" numOctaves="3" seed="7" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.3" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="kitchenBg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e8f0e4"/>
+              <stop offset="100%" stop-color="#FAF6EE"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Kitchen scene background -->
+          <rect width="280" height="340" fill="url(#kitchenBg)"/>
+
+          <!-- Wall tiles suggestion -->
+          <g stroke="#d4cfc6" stroke-width="0.8" opacity="0.5">
+            <line x1="0" y1="40" x2="280" y2="40"/>
+            <line x1="0" y1="80" x2="280" y2="80"/>
+            <line x1="0" y1="120" x2="280" y2="120"/>
+            <line x1="40" y1="0" x2="40" y2="120"/>
+            <line x1="80" y1="0" x2="80" y2="120"/>
+            <line x1="120" y1="0" x2="120" y2="120"/>
+            <line x1="160" y1="0" x2="160" y2="120"/>
+            <line x1="200" y1="0" x2="200" y2="120"/>
+            <line x1="240" y1="0" x2="240" y2="120"/>
+          </g>
+
+          <!-- Kitchen counter -->
+          <rect x="0" y="155" width="280" height="18" rx="2" fill="#7B736B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Counter top surface -->
+          <rect x="0" y="170" width="280" height="170" fill="#EDE8DC"/>
+          <line x1="0" y1="170" x2="280" y2="170" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Cabinet -->
+          <rect x="10" y="15" width="120" height="95" rx="3" fill="#c8b99a" stroke="#1F1A14" stroke-width="2"/>
+          <line x1="70" y1="15" x2="70" y2="110" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Cabinet handles -->
+          <rect x="56" y="58" width="10" height="4" rx="2" fill="#7B736B" stroke="#1F1A14" stroke-width="1"/>
+          <rect x="74" y="58" width="10" height="4" rx="2" fill="#7B736B" stroke="#1F1A14" stroke-width="1"/>
+
+          <!-- Mug (coffee) -->
+          <rect x="18" y="135" width="34" height="22" rx="4" fill="#FAF6EE" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Handle -->
+          <path d="M52,140 Q64,140 64,150 Q64,158 52,158" fill="none" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Coffee fill -->
+          <rect x="22" y="140" width="26" height="8" rx="2" fill="#6f4e37"/>
+          <!-- Steam wisps -->
+          <path d="M28,132 Q30,122 28,114" fill="none" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M36,130 Q38,119 36,111" fill="none" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M44,132 Q46,122 44,114" fill="none" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+
+          <!-- Toast on plate -->
+          <ellipse cx="120" cy="158" rx="30" ry="7" fill="#EDE8DC" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Toast slice -->
+          <rect x="94" y="130" width="52" height="30" rx="4" fill="#C99A3D" stroke="#1F1A14" stroke-width="2"/>
+          <rect x="94" y="130" width="52" height="8" rx="4" fill="#a0785a"/>
+          <!-- Bite marks suggestion -->
+          <path d="M130,130 Q136,124 142,130" fill="#EDE8DC" stroke="none"/>
+          <path d="M130,130 Q136,124 142,130" fill="none" stroke="#1F1A14" stroke-width="1.2"/>
+
+          <!-- Orange juice glass -->
+          <path d="M190,152 L184,124 L218,124 L212,152 Z" fill="#f9a825" stroke="#1F1A14" stroke-width="1.8"/>
+          <rect x="188" y="150" width="20" height="6" rx="2" fill="#e8960f" stroke="#1F1A14" stroke-width="1.2"/>
+
+          <!-- Person at table (standing, eating) -->
+          <!-- Lower body -->
+          <rect x="120" y="260" width="40" height="80" rx="6" fill="#2A2540" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Torso -->
+          <rect x="116" y="215" width="48" height="50" rx="6" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="140" cy="200" rx="22" ry="22" fill="#f5cba7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair — tidy now (dressed for day) -->
+          <path d="M118,192 Q122,176 140,180 Q158,176 162,192" fill="#3a2e18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyes (open, happy) -->
+          <circle cx="132" cy="199" r="3.5" fill="#1F1A14"/>
+          <circle cx="148" cy="199" r="3.5" fill="#1F1A14"/>
+          <circle cx="133" cy="198" r="1.2" fill="#fff"/>
+          <circle cx="149" cy="198" r="1.2" fill="#fff"/>
+          <!-- Smile -->
+          <path d="M133,209 Q140,216 147,209" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Arm holding toast -->
+          <path d="M164,235 Q190,220 208,210" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <!-- Toast in hand -->
+          <rect x="202" y="196" width="22" height="16" rx="3" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.8"/>
+
+          <!-- Speech bubble -->
+          <path d="M10,12 Q10,0 30,0 L230,0 Q252,0 252,20 Q252,40 230,40 L170,40 L158,56 L161,40 L30,40 Q10,40 10,20 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink2)"/>
+          <text x="131" y="25" font-family="'Caveat', cursive" font-size="21" font-weight="700" fill="#1F1A14" text-anchor="middle">Desayuno</text>
+          <text x="131" y="38" font-family="'Caveat', cursive" font-size="13" fill="#7B736B" text-anchor="middle">I have breakfast</text>
+        </svg>
+        <div class="caption">
+          <span class="caption-verb">Desayuno</span>
+          <span class="caption-hint">not reflexive · a las ocho</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: Trabajo — afternoon -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">03</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink3" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.036" numOctaves="3" seed="11" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="officeBg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#dde8f0"/>
+              <stop offset="100%" stop-color="#FAF6EE"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Office scene -->
+          <rect width="280" height="340" fill="url(#officeBg)"/>
+
+          <!-- Window (large, bright afternoon) -->
+          <rect x="150" y="10" width="118" height="120" rx="4" fill="#b8d8f0" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink3)"/>
+          <line x1="209" y1="10" x2="209" y2="130" stroke="#1F1A14" stroke-width="1.8"/>
+          <line x1="150" y1="70" x2="268" y2="70" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Sun through window (afternoon, high) -->
+          <circle cx="240" cy="40" r="22" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.3" opacity="0.8"/>
+          <!-- Light rays through window -->
+          <g fill="#C99A3D" opacity="0.1">
+            <polygon points="150,130 180,130 220,240 150,240"/>
+            <polygon points="268,130 240,130 260,240 268,240"/>
+          </g>
+
+          <!-- Desk -->
+          <rect x="10" y="200" width="210" height="16" rx="3" fill="#c8a97e" stroke="#1F1A14" stroke-width="2"/>
+          <rect x="18" y="216" width="12" height="60" rx="2" fill="#c8a97e" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="192" y="216" width="12" height="60" rx="2" fill="#c8a97e" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Laptop on desk -->
+          <!-- Screen -->
+          <rect x="50" y="158" width="110" height="44" rx="4" fill="#2A2540" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Screen glow / content -->
+          <rect x="55" y="163" width="100" height="34" rx="2" fill="#1a3a5c"/>
+          <!-- Fake document lines on screen -->
+          <g stroke="#6B8E6B" stroke-width="1.5" stroke-linecap="round" opacity="0.8">
+            <line x1="62" y1="170" x2="148" y2="170"/>
+            <line x1="62" y1="177" x2="135" y2="177"/>
+            <line x1="62" y1="184" x2="142" y2="184"/>
+            <line x1="62" y1="191" x2="128" y2="191"/>
+          </g>
+          <!-- Keyboard/base -->
+          <rect x="40" y="200" width="130" height="6" rx="2" fill="#7B736B" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Hinge line -->
+          <line x1="40" y1="200" x2="170" y2="200" stroke="#1F1A14" stroke-width="1"/>
+
+          <!-- Coffee mug on desk -->
+          <rect x="190" y="178" width="24" height="20" rx="3" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.8"/>
+          <path d="M214,183 Q222,183 222,190 Q222,196 214,197" fill="none" stroke="#1F1A14" stroke-width="1.8"/>
+          <rect x="194" y="183" width="16" height="6" rx="1" fill="#6f4e37"/>
+
+          <!-- Clock on wall -->
+          <circle cx="50" cy="55" r="28" fill="#FAF6EE" stroke="#1F1A14" stroke-width="2"/>
+          <circle cx="50" cy="55" r="2.5" fill="#1F1A14"/>
+          <!-- Hour markers -->
+          <g stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round">
+            <line x1="50" y1="31" x2="50" y2="35"/>
+            <line x1="50" y1="75" x2="50" y2="79"/>
+            <line x1="26" y1="55" x2="30" y2="55"/>
+            <line x1="70" y1="55" x2="74" y2="55"/>
+          </g>
+          <!-- Clock hands (showing ~10am) -->
+          <line x1="50" y1="55" x2="50" y2="36" stroke="#1F1A14" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="50" y1="55" x2="64" y2="50" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Person at desk -->
+          <!-- Chair back -->
+          <rect x="70" y="255" width="80" height="60" rx="6" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Chair seat -->
+          <rect x="62" y="300" width="96" height="16" rx="4" fill="#5a7a5a" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Body -->
+          <rect x="86" y="230" width="48" height="72" rx="6" fill="#C4593A" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="110" cy="215" rx="22" ry="22" fill="#f5cba7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair (tied back — focused work mode) -->
+          <path d="M88,207 Q94,190 110,193 Q126,190 132,207" fill="#3a2e18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Bun -->
+          <circle cx="110" cy="191" r="9" fill="#3a2e18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Focused eyes -->
+          <path d="M100,214 Q104,210 108,214" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <path d="M112,214 Q116,210 120,214" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Concentration line between brows -->
+          <line x1="108" y1="208" x2="112" y2="208" stroke="#1F1A14" stroke-width="1.2" stroke-linecap="round"/>
+          <!-- Neutral/focused mouth -->
+          <line x1="105" y1="223" x2="115" y2="223" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Arms typing -->
+          <path d="M134,252 Q155,240 160,225" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <path d="M86,252 Q65,240 60,225" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- Speech bubble -->
+          <path d="M10,12 Q10,0 32,0 L228,0 Q248,0 248,20 Q248,40 228,40 L170,40 L158,56 L161,40 L32,40 Q10,40 10,20 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink3)"/>
+          <text x="129" y="25" font-family="'Caveat', cursive" font-size="21" font-weight="700" fill="#1F1A14" text-anchor="middle">Trabajo</text>
+          <text x="129" y="38" font-family="'Caveat', cursive" font-size="13" fill="#7B736B" text-anchor="middle">I work · por la manana</text>
+        </svg>
+        <div class="caption">
+          <span class="caption-verb">Trabajo</span>
+          <span class="caption-hint">not reflexive · regular -ar</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 4: Me acuesto — bedtime -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">04</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink4" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="17" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="nightBg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0e1224"/>
+              <stop offset="60%" stop-color="#2A2540"/>
+              <stop offset="100%" stop-color="#1a1830"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Deep night background -->
+          <rect width="280" height="340" fill="url(#nightBg)"/>
+
+          <!-- Stars scattered -->
+          <g fill="#fde68a" opacity="0.7">
+            <circle cx="30"  cy="18"  r="1.5"/>
+            <circle cx="68"  cy="10"  r="2"/>
+            <circle cx="110" cy="22"  r="1"/>
+            <circle cx="158" cy="8"   r="1.5"/>
+            <circle cx="200" cy="20"  r="1"/>
+            <circle cx="245" cy="12"  r="2"/>
+            <circle cx="262" cy="35"  r="1"/>
+            <circle cx="20"  cy="50"  r="1"/>
+            <circle cx="90"  cy="45"  r="1.5"/>
+            <circle cx="230" cy="48"  r="1.5"/>
+          </g>
+
+          <!-- Crescent moon top-right -->
+          <circle cx="235" cy="58" r="28" fill="#C99A3D" opacity="0.9"/>
+          <circle cx="247" cy="50" r="24" fill="#2A2540"/>
+
+          <!-- Window frame showing night -->
+          <rect x="12" y="14" width="100" height="100" rx="4" fill="#0b1020" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink4)"/>
+          <line x1="62" y1="14" x2="62" y2="114" stroke="#1F1A14" stroke-width="1.8"/>
+          <line x1="12" y1="64" x2="112" y2="64" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Stars in window -->
+          <g fill="#fde68a" opacity="0.8">
+            <circle cx="28" cy="28" r="1.5"/>
+            <circle cx="45" cy="22" r="1"/>
+            <circle cx="88" cy="30" r="1.5"/>
+            <circle cx="96" cy="20" r="1"/>
+            <circle cx="38" cy="48" r="1"/>
+            <circle cx="78" cy="90" r="1"/>
+            <circle cx="22" cy="88" r="1.5"/>
+          </g>
+
+          <!-- Nightstand lamp -->
+          <rect x="190" y="150" width="12" height="55" rx="2" fill="#c8a97e" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M175,118 Q196,116 218,118 L211,150 L181,150 Z" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Soft lamp glow -->
+          <ellipse cx="196" cy="152" rx="50" ry="35" fill="#C99A3D" opacity="0.08"/>
+
+          <!-- Nightstand -->
+          <rect x="170" y="205" width="90" height="55" rx="3" fill="#7B736B" stroke="#1F1A14" stroke-width="2"/>
+          <rect x="178" y="222" width="30" height="18" rx="2" fill="#5a5450" stroke="#1F1A14" stroke-width="1.5"/>
+          <circle cx="193" cy="231" r="3" fill="#1F1A14"/>
+
+          <!-- Book on nightstand -->
+          <rect x="180" y="195" width="38" height="12" rx="2" fill="#C4593A" stroke="#1F1A14" stroke-width="1.5"/>
+          <line x1="199" y1="195" x2="199" y2="207" stroke="#1F1A14" stroke-width="1"/>
+
+          <!-- Bed frame -->
+          <rect x="8" y="240" width="248" height="88" rx="5" fill="#2A2540" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Headboard -->
+          <rect x="8" y="224" width="248" height="22" rx="4" fill="#3a3258" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Blanket -->
+          <rect x="8" y="264" width="248" height="64" rx="3" fill="#6B8E6B" stroke="none"/>
+          <path d="M8,268 Q140,260 256,266" fill="none" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Pillow -->
+          <rect x="18" y="244" width="88" height="46" rx="9" fill="#FAF6EE" stroke="#1F1A14" stroke-width="2"/>
+          <path d="M28,262 Q62,256 98,262" fill="none" stroke="#1F1A14" stroke-width="1" stroke-dasharray="3,3"/>
+
+          <!-- Character lying in bed -->
+          <ellipse cx="62" cy="267" rx="30" ry="24" fill="#f5cba7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair on pillow -->
+          <path d="M32,256 Q38,240 62,245 Q86,240 92,256" fill="#3a2e18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Closed eyes (sleeping) -->
+          <path d="M48,265 Q53,261 58,265" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <path d="M66,265 Q71,261 76,265" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Peaceful smile -->
+          <path d="M54,277 Q62,283 70,277" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+
+          <!-- ZZZ floating -->
+          <text x="102" y="258" font-family="'Caveat', cursive" font-size="14" fill="#C99A3D" opacity="0.65" transform="rotate(-10,102,258)">z</text>
+          <text x="118" y="244" font-family="'Caveat', cursive" font-size="19" fill="#C99A3D" opacity="0.5" transform="rotate(-7,118,244)">z</text>
+          <text x="136" y="228" font-family="'Caveat', cursive" font-size="24" fill="#C99A3D" opacity="0.35" transform="rotate(-5,136,228)">z</text>
+
+          <!-- Speech bubble on dark — yellow fill -->
+          <path d="M112,25 Q112,10 134,10 L258,10 Q272,10 272,28 Q272,48 258,48 L188,48 L176,64 L179,48 L134,48 Q112,48 112,28 Z"
+            fill="#C99A3D" stroke="#1F1A14" stroke-width="2" filter="url(#ink4)"/>
+          <text x="193" y="34" font-family="'Caveat', cursive" font-size="19" font-weight="700" fill="#1F1A14" text-anchor="middle">Me acuesto</text>
+          <text x="193" y="46" font-family="'Caveat', cursive" font-size="12" fill="#1F1A14" text-anchor="middle" opacity="0.8">I go to bed</text>
+        </svg>
+        <div class="caption">
+          <span class="caption-verb">Me acuesto</span>
+          <span class="caption-hint">reflexive · stem-change o→ue</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Timeline + verb chips below comic -->
+  <div class="timeline-wrap">
+    <div class="timeline-card">
+      <p class="timeline-label">Un dia tipico — A typical day</p>
+      <div class="timeline-bar">
+        <div class="tl-morning">
+          <span class="tl-text">manana · morning</span>
+        </div>
+        <div class="tl-afternoon">
+          <span class="tl-text">tarde · afternoon</span>
+        </div>
+        <div class="tl-evening">
+          <span class="tl-text">noche</span>
+        </div>
+      </div>
+      <div class="timeline-hours">
+        <span>6:00</span>
+        <span>8:00</span>
+        <span>12:00</span>
+        <span>14:00</span>
+        <span>18:00</span>
+        <span>21:00</span>
+        <span>23:00</span>
+      </div>
+      <div class="verbs-row">
+        <span class="verb-chip">me levanto</span>
+        <span class="verb-chip">me ducho</span>
+        <span class="verb-chip">desayuno</span>
+        <span class="verb-chip">salgo</span>
+        <span class="verb-chip">trabajo</span>
+        <span class="verb-chip">como</span>
+        <span class="verb-chip">vuelvo</span>
+        <span class="verb-chip">ceno</span>
+        <span class="verb-chip">me acuesto</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="strip-footer">Espanol con Diana &nbsp;·&nbsp; Leccion A1-07</p>
+
+</body>
+</html>

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Español con Diana — Météo &amp; Saisons · Français</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&family=Caveat:wght@600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:      #FAF6EE;
+    --ink:        #1F1A14;
+    --ochre:      #C99A3D;
+    --terra:      #C4593A;
+    --sage:       #6B8E6B;
+    --night:      #2A2540;
+    --muted:      #7B736B;
+    --paper-dark: #EDE8DC;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: auto;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--sage);
+    color: var(--paper);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 32px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: var(--night);
+    opacity: .12;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; right: 180px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: .18;
+  }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,.75);
+  }
+  .header-title {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .header-title span { color: var(--ochre); }
+  .header-sub {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--paper);
+    text-align: right;
+    opacity: .9;
+  }
+  .header-meta {
+    font-size: 12px;
+    color: rgba(250,246,238,.6);
+    margin-top: 6px;
+  }
+
+  /* ── BULLETIN MÉTÉO HERO ── */
+  .bulletin {
+    background: var(--night);
+    padding: 48px 56px;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .bulletin::before {
+    content: 'BULLETIN\00A0MÉTÉO';
+    position: absolute;
+    top: 24px; right: 56px;
+    font-family: 'Fraunces', serif;
+    font-size: 80px;
+    font-weight: 900;
+    color: rgba(201,154,61,.06);
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .bulletin-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 28px;
+  }
+  .forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .forecast-card {
+    background: rgba(250,246,238,.06);
+    border: 1px solid rgba(201,154,61,.2);
+    border-radius: 14px;
+    padding: 22px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+  .weather-icon { font-size: 46px; line-height: 1; }
+  .phrase-es {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--paper);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .phrase-fr {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--sage);
+    text-align: center;
+    line-height: 1.3;
+  }
+  .verb-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: rgba(201,154,61,.18);
+    color: var(--ochre);
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .trap-flag {
+    position: absolute;
+    top: -9px; right: -9px;
+    background: var(--terra);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 4px;
+  }
+
+  /* ── RIGHT PANEL ── */
+  .bulletin-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .aside-block {
+    background: rgba(250,246,238,.07);
+    border-radius: 12px;
+    padding: 18px;
+    border-left: 3px solid var(--ochre);
+  }
+  .aside-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 10px;
+  }
+  .aside-content {
+    font-size: 13px;
+    color: var(--paper);
+    line-height: 1.6;
+  }
+  .aside-content strong { color: var(--ochre); }
+  .aside-block.danger { border-color: var(--terra); }
+  .aside-block.danger .aside-label { color: var(--terra); }
+
+  /* ── PHRASE TABLE ── */
+  .phrase-section {
+    background: var(--paper-dark);
+    padding: 48px 56px;
+    border-top: 3px solid var(--ink);
+  }
+  .section-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-heading::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: var(--sage);
+    opacity: .4;
+  }
+  .phrase-table {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .pt-card {
+    background: var(--paper);
+    border-left: 4px solid var(--sage);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pt-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 8px; right: 12px;
+    font-family: 'Fraunces', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--paper-dark);
+    line-height: 1;
+  }
+  .pt-card.c-ochre  { border-color: var(--ochre); }
+  .pt-card.c-terra  { border-color: var(--terra); }
+  .pt-card.c-night  { border-color: var(--night); }
+  .pt-es {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 5px;
+    position: relative; z-index: 1;
+    line-height: 1.2;
+  }
+  .pt-fr {
+    font-family: 'Caveat', cursive;
+    font-size: 17px;
+    color: var(--sage);
+    margin-bottom: 8px;
+    position: relative; z-index: 1;
+  }
+  .pt-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-style: italic;
+    position: relative; z-index: 1;
+  }
+
+  /* ── SEASONS PANEL ── */
+  .seasons-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .season-block {
+    padding: 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .sb-spring { background: var(--sage); }
+  .sb-summer { background: var(--terra); }
+  .sb-autumn { background: #7A4A1A; }
+  .sb-winter { background: #2D4A70; }
+  .season-block::before {
+    content: attr(data-es);
+    position: absolute;
+    bottom: -10px; right: -10px;
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: rgba(0,0,0,.12);
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .sb-icon { font-size: 52px; display: block; margin-bottom: 12px; }
+  .sb-es {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .sb-article {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(250,246,238,.6);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .sb-fr {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: rgba(250,246,238,.9);
+    margin-bottom: 12px;
+  }
+  .sb-weather {
+    font-size: 13px;
+    color: rgba(250,246,238,.75);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* ── TIPS PANEL ── */
+  .tips-panel {
+    background: var(--ochre);
+    padding: 48px 56px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    align-items: start;
+    border-top: 3px solid var(--ink);
+  }
+  .tips-header {
+    grid-column: 1 / -1;
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--night);
+    border-bottom: 2px solid rgba(42,37,64,.2);
+    padding-bottom: 16px;
+    margin-bottom: 4px;
+  }
+  .tip-card {
+    background: var(--night);
+    border-radius: 14px;
+    padding: 24px;
+  }
+  .tip-icon-big { font-size: 32px; display: block; margin-bottom: 12px; }
+  .tip-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 8px;
+  }
+  .tip-body {
+    font-size: 14px;
+    color: var(--paper);
+    line-height: 1.7;
+  }
+  .tip-body strong { color: var(--ochre); }
+  .tip-example {
+    margin-top: 12px;
+    background: rgba(201,154,61,.12);
+    border-left: 3px solid var(--ochre);
+    padding: 10px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--paper);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* ── CLOTHING ROW ── */
+  .clothing-row {
+    background: var(--paper-dark);
+    padding: 40px 56px;
+    border-top: 3px solid var(--sage);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .clo-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .clo-icon { font-size: 40px; display: block; margin-bottom: 12px; }
+  .clo-condition {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--ochre);
+    padding-bottom: 10px;
+  }
+  .clo-items { display: flex; flex-direction: column; gap: 8px; }
+  .clo-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    background: var(--paper);
+    border-radius: 8px;
+    padding: 10px 14px;
+    align-items: center;
+  }
+  .ci-es {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .ci-fr {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--sage);
+    text-align: right;
+  }
+
+  /* ── COMPARISON ASIDE ── */
+  .comparison {
+    background: var(--night);
+    padding: 36px 56px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 48px;
+    align-items: center;
+    border-top: 3px solid var(--terra);
+  }
+  .comp-heading {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--paper);
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+  }
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .comp-card {
+    background: rgba(250,246,238,.06);
+    border-radius: 10px;
+    padding: 18px;
+    border-top: 3px solid var(--ochre);
+  }
+  .comp-card.c-sage { border-color: var(--sage); }
+  .comp-card.c-terra { border-color: var(--terra); }
+  .comp-lang {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .comp-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .comp-flag {
+    font-size: 18px;
+    line-height: 1;
+  }
+  .comp-text {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--paper);
+    line-height: 1.3;
+  }
+  .comp-note {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--ink);
+    color: var(--muted);
+    padding: 20px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .06em;
+  }
+  .footer-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    color: var(--ochre);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div>
+    <div class="header-eyebrow">Español con Diana · A1 · Thème 13</div>
+    <div class="header-meta" style="margin-top:4px;">Référence Traduction Française</div>
+  </div>
+  <div class="header-title">El <span>Tiempo</span><br>&amp; Las Estaciones</div>
+  <div>
+    <div class="header-sub">Météo &amp; Saisons</div>
+    <div class="header-meta" style="text-align:right; margin-top:6px;">¿Qué tiempo hace?</div>
+  </div>
+</header>
+
+<!-- BULLETIN MÉTÉO -->
+<div class="bulletin">
+  <div>
+    <div class="bulletin-label">Bulletin Météo — 8 Phrases Essentielles</div>
+    <div class="forecast-grid">
+
+      <div class="forecast-card">
+        <div class="weather-icon">☀️</div>
+        <div class="phrase-es">Hace sol</div>
+        <div class="phrase-fr">Il fait soleil</div>
+        <div class="verb-badge">hace + nom</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">🌡️</div>
+        <div class="phrase-es">Hace calor</div>
+        <div class="phrase-fr">Il fait chaud</div>
+        <div class="verb-badge">hacer ≈ faire</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">🧊</div>
+        <div class="phrase-es">Hace frío</div>
+        <div class="phrase-fr">Il fait froid</div>
+        <div class="verb-badge">hacer ≈ faire</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">🌬️</div>
+        <div class="phrase-es">Hace viento</div>
+        <div class="phrase-fr">Il y a du vent</div>
+        <div class="verb-badge">hace + nom</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">🌧️</div>
+        <div class="phrase-es">Llueve</div>
+        <div class="phrase-fr">Il pleut</div>
+        <div class="verb-badge">verbe seul</div>
+        <div class="trap-flag">≠ hace</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">❄️</div>
+        <div class="phrase-es">Nieva</div>
+        <div class="phrase-fr">Il neige</div>
+        <div class="verb-badge">verbe seul</div>
+        <div class="trap-flag">≠ hace</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">☁️</div>
+        <div class="phrase-es">Está nublado</div>
+        <div class="phrase-fr">C'est nuageux</div>
+        <div class="verb-badge">estar ≠ ser</div>
+        <div class="trap-flag">ESTAR</div>
+      </div>
+
+      <div class="forecast-card">
+        <div class="weather-icon">🌫️</div>
+        <div class="phrase-es">Hay niebla</div>
+        <div class="phrase-fr">Il y a du brouillard</div>
+        <div class="verb-badge">hay = il y a</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bulletin-aside">
+    <div class="aside-block danger">
+      <div class="aside-label">⚠ Piège Grammatical</div>
+      <div class="aside-content">
+        <strong>Estar vs. Ser</strong><br>
+        L'état du ciel est temporaire → <strong>estar</strong>.<br>
+        <em>Está nublado</em> ✓<br>
+        <em>Es nublado</em> ✗<br><br>
+        Même logique qu'en français : « c'est nuageux » décrit un état passager.
+      </div>
+    </div>
+    <div class="aside-block">
+      <div class="aside-label">Analogie FR/ES</div>
+      <div class="aside-content">
+        FR : <strong>Il fait</strong> chaud<br>
+        ES : <strong>Hace</strong> calor<br><br>
+        Les deux langues utilisent le verbe « faire » pour la météo. Seule différence : en espagnol, pas d'article (<em>calor</em>, pas <em>el calor</em>).
+      </div>
+    </div>
+    <div class="aside-block">
+      <div class="aside-label">Astuce</div>
+      <div class="aside-content">
+        <strong>P-V-O-I</strong><br>
+        « <em>Pauvre Viking Ou Inuit</em> »<br>
+        Primavera · Verano · Otoño · Invierno
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHRASE TABLE -->
+<div class="phrase-section">
+  <div class="section-heading">Référence Complète — Espagnol → Français</div>
+  <div class="phrase-table">
+
+    <div class="pt-card" data-num="1">
+      <div class="pt-es">¿Qué tiempo hace?</div>
+      <div class="pt-fr">Quel temps fait-il ?</div>
+      <div class="pt-note">Question fondamentale. Accent sur TIEM-po. Ne pas confondre avec ¿Qué hora es? (Quelle heure est-il ?)</div>
+    </div>
+
+    <div class="pt-card c-ochre" data-num="2">
+      <div class="pt-es">¿Qué tiempo hace en Madrid?</div>
+      <div class="pt-fr">Quel temps fait-il à Madrid ?</div>
+      <div class="pt-note">Ajouter n'importe quelle ville. Parfait pour la conversation naturelle.</div>
+    </div>
+
+    <div class="pt-card c-terra" data-num="3">
+      <div class="pt-es">Hace buen tiempo</div>
+      <div class="pt-fr">Il fait beau</div>
+      <div class="pt-note">Expression générale. Contraire : hace mal tiempo (il fait mauvais).</div>
+    </div>
+
+    <div class="pt-card c-night" data-num="4">
+      <div class="pt-es">Hace mal tiempo</div>
+      <div class="pt-fr">Il fait mauvais temps</div>
+      <div class="pt-note">Utile quand on ne veut pas préciser le type de mauvais temps.</div>
+    </div>
+
+    <div class="pt-card" data-num="5">
+      <div class="pt-es">Hace veinte grados</div>
+      <div class="pt-fr">Il fait vingt degrés</div>
+      <div class="pt-note">Toujours Celsius. Sous zéro : hace menos cinco grados = -5°C.</div>
+    </div>
+
+    <div class="pt-card c-ochre" data-num="6">
+      <div class="pt-es">Hay tormenta</div>
+      <div class="pt-fr">Il y a un orage</div>
+      <div class="pt-note">Hay (il y a) + nom. Même structure : hay niebla, hay hielo (il y a du givre).</div>
+    </div>
+
+    <div class="pt-card c-terra" data-num="7">
+      <div class="pt-es">Hoy llueve. Mañana hace sol.</div>
+      <div class="pt-fr">Aujourd'hui il pleut. Demain il fera soleil.</div>
+      <div class="pt-note">L'espagnol utilise le présent pour les prévisions proches — pas de futur obligatoire.</div>
+    </div>
+
+    <div class="pt-card c-night" data-num="8">
+      <div class="pt-es">En verano hace calor.</div>
+      <div class="pt-fr">En été il fait chaud.</div>
+      <div class="pt-note">En + saison, sans article. Même forme pour les quatre saisons.</div>
+    </div>
+
+    <div class="pt-card" data-num="9">
+      <div class="pt-es">Está despejado</div>
+      <div class="pt-fr">Le ciel est dégagé</div>
+      <div class="pt-note">Langage météo formel. Racine : despejar (dégager). Utilise estar (état temporaire).</div>
+    </div>
+
+    <div class="pt-card c-ochre" data-num="10">
+      <div class="pt-es">Hay chubascos</div>
+      <div class="pt-fr">Il y a des averses</div>
+      <div class="pt-note">Terme de bulletin météo. À l'oral on dira plutôt llueve. Connaître les deux registres.</div>
+    </div>
+
+    <div class="pt-card c-terra" data-num="11">
+      <div class="pt-es">¿Qué temperatura hace?</div>
+      <div class="pt-fr">Quelle est la température ?</div>
+      <div class="pt-note">5 syllabes : tem-pe-ra-TU-ra. Règle par défaut : accent sur l'avant-dernière syllabe.</div>
+    </div>
+
+    <div class="pt-card c-night" data-num="12">
+      <div class="pt-es">Está parcialmente nublado</div>
+      <div class="pt-fr">C'est partiellement nuageux</div>
+      <div class="pt-note">5 syllabes : par-cial-MEN-te. Frapper les syllabes pour fixer l'accent.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SEASONS PANEL -->
+<div class="seasons-panel">
+  <div class="season-block sb-spring" data-es="Primavera">
+    <span class="sb-icon">🌸</span>
+    <div class="sb-es">La Primavera</div>
+    <div class="sb-article">féminin · la</div>
+    <div class="sb-fr">Le Printemps</div>
+    <div class="sb-weather">Hace buen tiempo · Llueve a veces<br><em>Il fait bon · Il pleut parfois</em></div>
+  </div>
+  <div class="season-block sb-summer" data-es="Verano">
+    <span class="sb-icon">🌞</span>
+    <div class="sb-es">El Verano</div>
+    <div class="sb-article">masculin · el</div>
+    <div class="sb-fr">L'Été</div>
+    <div class="sb-weather">Hace calor · Hace sol<br><em>Il fait chaud · Il fait soleil</em></div>
+  </div>
+  <div class="season-block sb-autumn" data-es="Otoño">
+    <span class="sb-icon">🍂</span>
+    <div class="sb-es">El Otoño</div>
+    <div class="sb-article">masculin · el</div>
+    <div class="sb-fr">L'Automne</div>
+    <div class="sb-weather">Hace viento · Llueve<br><em>Il y a du vent · Il pleut</em></div>
+  </div>
+  <div class="season-block sb-winter" data-es="Invierno">
+    <span class="sb-icon">🌨️</span>
+    <div class="sb-es">El Invierno</div>
+    <div class="sb-article">masculin · el</div>
+    <div class="sb-fr">L'Hiver</div>
+    <div class="sb-weather">Hace frío · Nieva<br><em>Il fait froid · Il neige</em></div>
+  </div>
+</div>
+
+<!-- TIPS -->
+<div class="tips-panel">
+  <div class="tips-header">Conseils &amp; Astuces</div>
+
+  <div class="tip-card">
+    <span class="tip-icon-big">🇫🇷🔄🇪🇸</span>
+    <div class="tip-title">Analogie Directe FR→ES</div>
+    <div class="tip-body">Le verbe <strong>hacer</strong> fonctionne comme le français <strong>faire</strong> en météo : <em>il fait froid = hace frío</em>. La différence clé : en espagnol, pas d'article devant le nom (<em>calor</em>, pas <em>el calor</em>).</div>
+    <div class="tip-example">FR : Il fait chaud → ES : Hace calor ✓</div>
+  </div>
+
+  <div class="tip-card">
+    <span class="tip-icon-big">⚡</span>
+    <div class="tip-title">Ser vs. Estar — Piège N°1</div>
+    <div class="tip-body">En espagnol, les états temporaires utilisent <strong>estar</strong>, pas <strong>ser</strong>. Le ciel nuageux est un état passager : <em>está nublado</em>. Pensez : « il <em>est</em> (en ce moment) nuageux. »</div>
+    <div class="tip-example">Está nublado ✓ · Es nublado ✗</div>
+  </div>
+
+  <div class="tip-card">
+    <span class="tip-icon-big">🌎</span>
+    <div class="tip-title">Hémisphère Sud Inversé</div>
+    <div class="tip-body">Buenos Aires, Santiago, Lima : décembre = été, juin = hiver. Les noms des saisons restent les mêmes mais les mois sont <strong>inversés</strong>. Toujours vérifier avec un interlocuteur latino-américain.</div>
+  </div>
+
+  <div class="tip-card">
+    <span class="tip-icon-big">🔊</span>
+    <div class="tip-title">Prononciation</div>
+    <div class="tip-body"><strong>Frío</strong> = 2 syllabes (FRI-o). <strong>Llueve</strong> en Amérique latine : le « ll » se prononce comme « y » — yoo-EH-veh. <strong>Otoño</strong> : le « ñ » se prononce « gn » à la française — oh-TOH-gnyo.</div>
+  </div>
+
+</div>
+
+<!-- CLOTHING -->
+<div class="clothing-row">
+
+  <div>
+    <div class="clo-label">Froid / Frío</div>
+    <span class="clo-icon">🥶</span>
+    <div class="clo-condition">Hace frío · Nieva</div>
+    <div class="clo-items">
+      <div class="clo-item">
+        <span class="ci-es">El abrigo</span>
+        <span class="ci-fr">Le manteau</span>
+      </div>
+      <div class="clo-item">
+        <span class="ci-es">La bufanda</span>
+        <span class="ci-fr">L'écharpe</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="clo-label">Pluie / Lluvia</div>
+    <span class="clo-icon">☔</span>
+    <div class="clo-condition">Llueve · Hay tormenta</div>
+    <div class="clo-items">
+      <div class="clo-item">
+        <span class="ci-es">El paraguas</span>
+        <span class="ci-fr">Le parapluie</span>
+      </div>
+      <div class="clo-item">
+        <span class="ci-es">El impermeable</span>
+        <span class="ci-fr">L'imperméable</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="clo-label">Chaud &amp; Ensoleillé / Calor</div>
+    <span class="clo-icon">😎</span>
+    <div class="clo-condition">Hace sol · Hace calor</div>
+    <div class="clo-items">
+      <div class="clo-item">
+        <span class="ci-es">La camiseta</span>
+        <span class="ci-fr">Le t-shirt</span>
+      </div>
+      <div class="clo-item">
+        <span class="ci-es">El sombrero</span>
+        <span class="ci-fr">Le chapeau</span>
+      </div>
+      <div class="clo-item">
+        <span class="ci-es">Las gafas de sol</span>
+        <span class="ci-fr">Les lunettes de soleil</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- COMPARISON PANEL -->
+<div class="comparison">
+  <div class="comp-heading">Comparaison linguistique</div>
+  <div class="comp-grid">
+
+    <div class="comp-card">
+      <div class="comp-lang">Phrase clé — météo</div>
+      <div class="comp-row">
+        <span class="comp-flag">🇪🇸</span>
+        <span class="comp-text">¿Qué tiempo hace?</span>
+      </div>
+      <div class="comp-row">
+        <span class="comp-flag">🇫🇷</span>
+        <span class="comp-text">Quel temps fait-il ?</span>
+      </div>
+      <div class="comp-note">Structure miroir : verbe + mot météo + conjugaison impersonnelle. Les deux langues romanes fonctionnent pareil.</div>
+    </div>
+
+    <div class="comp-card c-sage">
+      <div class="comp-lang">Il y a = hay</div>
+      <div class="comp-row">
+        <span class="comp-flag">🇪🇸</span>
+        <span class="comp-text">Hay niebla / tormenta</span>
+      </div>
+      <div class="comp-row">
+        <span class="comp-flag">🇫🇷</span>
+        <span class="comp-text">Il y a du brouillard / un orage</span>
+      </div>
+      <div class="comp-note">Hay est l'exact équivalent de « il y a ». Invariable — jamais accordé.</div>
+    </div>
+
+    <div class="comp-card c-terra">
+      <div class="comp-lang">Verbes impersonnels</div>
+      <div class="comp-row">
+        <span class="comp-flag">🇪🇸</span>
+        <span class="comp-text">Llueve · Nieva</span>
+      </div>
+      <div class="comp-row">
+        <span class="comp-flag">🇫🇷</span>
+        <span class="comp-text">Il pleut · Il neige</span>
+      </div>
+      <div class="comp-note">Verbes sans sujet apparent — même structure. En espagnol, pas de pronom sujet explicite.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">Español con Diana</div>
+  <div>A1 · Thème 13 · Météo &amp; Saisons · Référence Française</div>
+  <div>¿Qué tiempo hace? → Hace sol y hace calor.</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,406 @@
+{
+  "topic_id": "01-greetings-introductions",
+  "note": "Ordered longest-phrase-first so multi-word expressions match before their substrings.",
+  "translations": [
+    {
+      "es": "¿En qué puedo ayudarle?",
+      "en": "How can I help you?",
+      "fr": "Comment puis-je vous aider ?"
+    },
+    {
+      "es": "¿Cuántos años tienes?",
+      "en": "How old are you?",
+      "fr": "Quel âge as-tu ?"
+    },
+    {
+      "es": "Me llamo Carlos Ruiz",
+      "en": "My name is Carlos Ruiz",
+      "fr": "Je m'appelle Carlos Ruiz"
+    },
+    {
+      "es": "Buenos días, señora",
+      "en": "Good morning, ma'am",
+      "fr": "Bonjour madame"
+    },
+    {
+      "es": "¿Cómo está usted?",
+      "en": "How are you? (formal)",
+      "fr": "Comment allez-vous ?"
+    },
+    {
+      "es": "Me llamo [Nombre]",
+      "en": "My name is [Name]",
+      "fr": "Je m'appelle [Prénom]"
+    },
+    {
+      "es": "Que te vaya bien",
+      "en": "Take care / All the best",
+      "fr": "Bonne continuation / Prends soin de toi"
+    },
+    {
+      "es": "Soy de Argentina",
+      "en": "I'm from Argentina",
+      "fr": "Je suis d'Argentine"
+    },
+    {
+      "es": "¿Cómo te llamas?",
+      "en": "What's your name?",
+      "fr": "Comment tu t'appelles ?"
+    },
+    {
+      "es": "¿De dónde eres?",
+      "en": "Where are you from?",
+      "fr": "D'où tu es ? / Tu viens d'où ?"
+    },
+    {
+      "es": "Soy estudiante",
+      "en": "I am a student",
+      "fr": "Je suis étudiant(e)"
+    },
+    {
+      "es": "Soy de [Lugar]",
+      "en": "I am from [Place]",
+      "fr": "Je suis de [Lieu]"
+    },
+    {
+      "es": "Tengo [X] años",
+      "en": "I am [X] years old",
+      "fr": "J'ai [X] ans"
+    },
+    {
+      "es": "Soy de España",
+      "en": "I'm from Spain",
+      "fr": "Je suis d'Espagne"
+    },
+    {
+      "es": "Soy de México",
+      "en": "I'm from Mexico",
+      "fr": "Je suis du Mexique"
+    },
+    {
+      "es": "Buenas noches",
+      "en": "Good evening / Good night",
+      "fr": "Bonsoir / Bonne nuit"
+    },
+    {
+      "es": "Buenas tardes",
+      "en": "Good afternoon",
+      "fr": "Bon après-midi / Bonjour"
+    },
+    {
+      "es": "Soy ingeniero",
+      "en": "I am an engineer (male)",
+      "fr": "Je suis ingénieur"
+    },
+    {
+      "es": "Soy ingeniera",
+      "en": "I am an engineer (female)",
+      "fr": "Je suis ingénieure"
+    },
+    {
+      "es": "Soy profesora",
+      "en": "I am a teacher (female)",
+      "fr": "Je suis professeure"
+    },
+    {
+      "es": "Bien, gracias",
+      "en": "Fine, thank you",
+      "fr": "Bien, merci"
+    },
+    {
+      "es": "Hasta mañana",
+      "en": "See you tomorrow",
+      "fr": "À demain"
+    },
+    {
+      "es": "Hasta pronto",
+      "en": "See you soon",
+      "fr": "À bientôt"
+    },
+    {
+      "es": "¿Cómo estás?",
+      "en": "How are you? (informal)",
+      "fr": "Comment vas-tu ?"
+    },
+    {
+      "es": "Soy profesor",
+      "en": "I am a teacher (male)",
+      "fr": "Je suis professeur"
+    },
+    {
+      "es": "Mucho gusto",
+      "en": "Pleased to meet you",
+      "fr": "Enchanté(e) / Ravi(e) de vous rencontrer"
+    },
+    {
+      "es": "Más o menos",
+      "en": "More or less / So-so",
+      "fr": "Comme ci comme ça / Plus ou moins"
+    },
+    {
+      "es": "Hasta luego",
+      "en": "See you later / Goodbye",
+      "fr": "À tout à l'heure / Au revoir"
+    },
+    {
+      "es": "Buenos días",
+      "en": "Good morning",
+      "fr": "Bonjour (le matin)"
+    },
+    {
+      "es": "¿Cómo está?",
+      "en": "How are you? (formal)",
+      "fr": "Comment allez-vous ?"
+    },
+    {
+      "es": "Soy artista",
+      "en": "I am an artist",
+      "fr": "Je suis artiste"
+    },
+    {
+      "es": "Soy médico",
+      "en": "I am a doctor (male)",
+      "fr": "Je suis médecin"
+    },
+    {
+      "es": "Soy médica",
+      "en": "I am a doctor (female)",
+      "fr": "Je suis médecin"
+    },
+    {
+      "es": "Igualmente",
+      "en": "Likewise / Same to you",
+      "fr": "De même / Pareillement"
+    },
+    {
+      "es": "Estoy bien",
+      "en": "I'm fine",
+      "fr": "Je vais bien"
+    },
+    {
+      "es": "estudiante",
+      "en": "student",
+      "fr": "étudiant(e)"
+    },
+    {
+      "es": "Por favor",
+      "en": "Please",
+      "fr": "S'il vous plaît / S'il te plaît"
+    },
+    {
+      "es": "Encantada",
+      "en": "Delighted to meet you (female speaker)",
+      "fr": "Enchantée"
+    },
+    {
+      "es": "Encantado",
+      "en": "Delighted to meet you (male speaker)",
+      "fr": "Enchanté"
+    },
+    {
+      "es": "Nos vemos",
+      "en": "See you around",
+      "fr": "On se voit / À plus"
+    },
+    {
+      "es": "ingeniero",
+      "en": "engineer (male)",
+      "fr": "ingénieur"
+    },
+    {
+      "es": "ingeniera",
+      "en": "engineer (female)",
+      "fr": "ingénieure"
+    },
+    {
+      "es": "profesora",
+      "en": "teacher (female)",
+      "fr": "professeure"
+    },
+    {
+      "es": "Muy bien",
+      "en": "Very well",
+      "fr": "Très bien"
+    },
+    {
+      "es": "Disculpe",
+      "en": "Excuse me (formal)",
+      "fr": "Excusez-moi"
+    },
+    {
+      "es": "profesor",
+      "en": "teacher (male)",
+      "fr": "professeur"
+    },
+    {
+      "es": "De nada",
+      "en": "You're welcome",
+      "fr": "De rien"
+    },
+    {
+      "es": "Gracias",
+      "en": "Thank you",
+      "fr": "Merci"
+    },
+    {
+      "es": "artista",
+      "en": "artist",
+      "fr": "artiste"
+    },
+    {
+      "es": "Señora",
+      "en": "Ma'am / Mrs.",
+      "fr": "Madame"
+    },
+    {
+      "es": "Perdón",
+      "en": "Sorry / Excuse me",
+      "fr": "Pardon / Excusez-moi"
+    },
+    {
+      "es": "¿Y tú?",
+      "en": "And you?",
+      "fr": "Et toi ?"
+    },
+    {
+      "es": "médico",
+      "en": "doctor",
+      "fr": "médecin"
+    },
+    {
+      "es": "médica",
+      "en": "doctor (female)",
+      "fr": "médecin (femme)"
+    },
+    {
+      "es": "llamas",
+      "en": "(you) call yourself",
+      "fr": "tu t'appelles"
+    },
+    {
+      "es": "tienes",
+      "en": "you have",
+      "fr": "tu as"
+    },
+    {
+      "es": "mañana",
+      "en": "tomorrow / morning",
+      "fr": "demain / matin"
+    },
+    {
+      "es": "tardes",
+      "en": "afternoons",
+      "fr": "après-midis"
+    },
+    {
+      "es": "noches",
+      "en": "nights / evenings",
+      "fr": "nuits / soirées"
+    },
+    {
+      "es": "pronto",
+      "en": "soon",
+      "fr": "bientôt"
+    },
+    {
+      "es": "Señor",
+      "en": "Sir / Mr.",
+      "fr": "Monsieur"
+    },
+    {
+      "es": "Adiós",
+      "en": "Goodbye",
+      "fr": "Au revoir / Adieu"
+    },
+    {
+      "es": "llamo",
+      "en": "(I) call myself",
+      "fr": "je m'appelle"
+    },
+    {
+      "es": "tengo",
+      "en": "I have",
+      "fr": "j'ai"
+    },
+    {
+      "es": "estás",
+      "en": "you are (state, informal)",
+      "fr": "tu es (état)"
+    },
+    {
+      "es": "luego",
+      "en": "later",
+      "fr": "plus tard"
+    },
+    {
+      "es": "gusto",
+      "en": "pleasure / taste",
+      "fr": "plaisir / goût"
+    },
+    {
+      "es": "mucho",
+      "en": "much / a lot",
+      "fr": "beaucoup"
+    },
+    {
+      "es": "favor",
+      "en": "favour",
+      "fr": "faveur"
+    },
+    {
+      "es": "usted",
+      "en": "you (formal)",
+      "fr": "vous (politesse)"
+    },
+    {
+      "es": "Hola",
+      "en": "Hello / Hi",
+      "fr": "Salut / Bonjour"
+    },
+    {
+      "es": "está",
+      "en": "you are (state, formal) / he/she is",
+      "fr": "vous êtes (état) / il/elle est"
+    },
+    {
+      "es": "eres",
+      "en": "you are (identity, informal)",
+      "fr": "tu es (identité)"
+    },
+    {
+      "es": "aquí",
+      "en": "here",
+      "fr": "ici"
+    },
+    {
+      "es": "años",
+      "en": "years (age)",
+      "fr": "ans"
+    },
+    {
+      "es": "días",
+      "en": "days",
+      "fr": "jours"
+    },
+    {
+      "es": "bien",
+      "en": "well / good",
+      "fr": "bien"
+    },
+    {
+      "es": "nada",
+      "en": "nothing",
+      "fr": "rien"
+    },
+    {
+      "es": "soy",
+      "en": "I am (permanent)",
+      "fr": "je suis (permanent)"
+    },
+    {
+      "es": "tú",
+      "en": "you (informal)",
+      "fr": "tu"
+    }
+  ]
+}

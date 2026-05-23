@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Nourriture, Boissons &amp; Commander — Espagnol → Français</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:  #FAF6EE;
+    --ink:    #1F1A14;
+    --ochre:  #C99A3D;
+    --terra:  #C4593A;
+    --sage:   #6B8E6B;
+    --night:  #2A2540;
+    --muted:  #7B736B;
+    --paper-warm: #F5EFE3;
+    --ochre-pale: #FDF4DC;
+    --sage-pale:  #EDF3ED;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ───────────────────────────────────────────── */
+  .hero {
+    background: var(--terra);
+    color: var(--paper);
+    display: grid;
+    grid-template-columns: 480px 1fr;
+    min-height: 220px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent 0px, transparent 30px,
+      rgba(250,246,238,0.06) 30px, rgba(250,246,238,0.06) 31px
+    );
+    pointer-events: none;
+  }
+  .hero-left {
+    background: var(--night);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-right {
+    padding: 48px 56px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,0.6);
+    margin-bottom: 14px;
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 50px;
+    font-weight: 900;
+    line-height: 1.06;
+    margin-bottom: 16px;
+  }
+  .hero-title em { color: #FAD89A; font-style: normal; }
+  .hero-subtitle {
+    font-size: 14px;
+    color: rgba(250,246,238,0.75);
+    max-width: 440px;
+    line-height: 1.65;
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: var(--ochre);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    padding: 6px 12px;
+    border-radius: 2px;
+    z-index: 2;
+  }
+
+  /* ─── TAPAS VISUAL (hero left) ───────────────────────── */
+  .tapas-svg { width: 220px; height: 200px; }
+
+  /* ─── LAYOUT ──────────────────────────────────────────── */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 0;
+  }
+
+  /* ─── PHRASE CANVAS ──────────────────────────────────── */
+  .canvas {
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  /* ─── SIDEBAR ────────────────────────────────────────── */
+  .sidebar {
+    background: var(--night);
+    color: var(--paper);
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .sidebar-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .tip-box {
+    background: rgba(255,255,255,0.05);
+    border-left: 3px solid var(--terra);
+    padding: 13px 15px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 10px;
+  }
+  .tip-box:last-child { margin-bottom: 0; }
+  .tip-box.sage-border { border-left-color: var(--sage); }
+  .tip-box.ochre-border { border-left-color: var(--ochre); }
+  .tip-title {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--terra);
+    margin-bottom: 5px;
+  }
+  .tip-box.sage-border .tip-title { color: #8bb88b; }
+  .tip-box.ochre-border .tip-title { color: var(--ochre); }
+  .tip-box p {
+    font-size: 12px;
+    line-height: 1.55;
+    color: rgba(250,246,238,0.78);
+  }
+  .tip-box strong { color: var(--paper); }
+  .sidebar-divider { height: 1px; background: rgba(255,255,255,0.09); }
+  .faux-parallel {
+    background: rgba(201,154,61,0.1);
+    border: 1px solid rgba(201,154,61,0.25);
+    border-radius: 6px;
+    padding: 16px;
+    font-size: 12px;
+    line-height: 1.65;
+    color: rgba(250,246,238,0.75);
+  }
+  .faux-parallel strong { color: var(--ochre); }
+  .faux-parallel .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .faux-parallel .lang { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: var(--ochre); }
+  .faux-parallel .val { font-size: 12px; margin-top: 2px; }
+
+  /* ─── BLOCK ELEMENTS ─────────────────────────────────── */
+  .block-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 4px;
+  }
+  .block-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 5px 12px;
+    border-radius: 2px;
+    color: var(--paper);
+  }
+  .tag-night  { background: var(--night); }
+  .tag-terra  { background: var(--terra); }
+  .tag-sage   { background: var(--sage); }
+  .tag-ochre  { background: var(--ochre); color: var(--ink); }
+  .block-title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  /* ─── PHRASE CARDS ───────────────────────────────────── */
+  .phrase-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: white;
+    border-radius: 8px;
+    border: 1.5px solid rgba(31,26,20,0.07);
+    padding: 18px 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .card::before {
+    content: attr(data-block);
+    position: absolute;
+    top: -1px; left: -1px;
+    background: var(--card-color, var(--terra));
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 3px 7px;
+    border-radius: 8px 0 6px 0;
+  }
+  .card.c-terra { --card-color: var(--terra); }
+  .card.c-sage  { --card-color: var(--sage); }
+  .card.c-night { --card-color: var(--night); }
+  .card.c-ochre { --card-color: var(--ochre); color: var(--ink); }
+  .card .es {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    padding-top: 8px;
+  }
+  .card .fr {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .card .note {
+    font-family: 'Caveat', cursive;
+    font-size: 13.5px;
+    color: var(--terra);
+    margin-top: 2px;
+  }
+  .card.c-sage .note { color: var(--sage); }
+  .card.c-night .note { color: #7a7ea8; }
+
+  /* ─── COMPARISON TABLE ───────────────────────────────── */
+  .compare-table {
+    background: var(--paper-warm);
+    border-radius: 10px;
+    border: 1.5px solid rgba(31,26,20,0.08);
+    overflow: hidden;
+  }
+  .compare-table-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 20px;
+  }
+  .compare-table-header span {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .compare-table-header span:nth-child(2) { color: var(--ochre); }
+  .compare-table-header span:nth-child(3) { color: #8bb8d4; }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(31,26,20,0.06);
+    align-items: center;
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row:nth-child(even) { background: rgba(255,255,255,0.5); }
+  .compare-row .c-es {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .compare-row .c-fr { font-size: 13px; color: var(--muted); }
+  .compare-row .c-note {
+    font-family: 'Caveat', cursive;
+    font-size: 12.5px;
+    color: var(--terra);
+  }
+
+  /* ─── GUSTA TABLE ────────────────────────────────────── */
+  .gusta-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 24px;
+    background: var(--sage-pale);
+    border-radius: 10px;
+    border: 1.5px solid rgba(107,142,107,0.2);
+  }
+  .gusta-col {
+    background: white;
+    border-radius: 8px;
+    padding: 18px;
+    border-top: 4px solid var(--terra);
+  }
+  .gusta-col.g-plural { border-top-color: var(--sage); }
+  .gusta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .gusta-es {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .gusta-fr { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .gusta-rule {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--muted);
+    border-top: 1px solid rgba(31,26,20,0.07);
+    padding-top: 8px;
+    margin-top: 4px;
+  }
+  .gusta-rule em { color: var(--terra); font-style: normal; font-weight: 600; }
+  .gusta-col.g-plural .gusta-rule em { color: var(--sage); }
+
+  /* ─── PAYING CALLOUT ─────────────────────────────────── */
+  .paying-callout {
+    background: var(--night);
+    color: var(--paper);
+    border-radius: 10px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+  .paying-icon-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .paying-icon-area svg { width: 64px; height: 64px; }
+  .paying-icon-label {
+    font-family: 'Caveat', cursive;
+    font-size: 14px;
+    color: var(--ochre);
+    text-align: center;
+  }
+  .paying-phrases {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .paying-phrase {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 6px;
+  }
+  .paying-phrase .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--ochre);
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .paying-phrase .esp {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .paying-phrase .frc {
+    font-size: 12px;
+    color: rgba(250,246,238,0.6);
+  }
+
+  /* ─── FOOTER ─────────────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: rgba(250,246,238,0.5);
+    text-align: center;
+    padding: 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+  footer strong { color: var(--ochre); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HERO ════════════════════════════════ -->
+<header class="hero">
+  <div class="hero-left">
+    <!-- Tapas plate SVG -->
+    <svg class="tapas-svg" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- large plate -->
+      <ellipse cx="110" cy="165" rx="88" ry="16" fill="rgba(0,0,0,0.2)"/>
+      <circle cx="110" cy="150" r="80" fill="#F5EFE3"/>
+      <circle cx="110" cy="150" r="68" fill="white"/>
+      <!-- tapa 1: bread slice -->
+      <ellipse cx="88" cy="148" rx="28" ry="16" fill="#C99A3D" opacity="0.8"/>
+      <ellipse cx="88" cy="144" rx="22" ry="10" fill="#FAD89A"/>
+      <!-- tapa 2: prawn -->
+      <path d="M130 140 Q140 130 148 140 Q152 150 144 155 Q136 160 130 155 Z" fill="#C4593A" opacity="0.85"/>
+      <circle cx="148" cy="138" r="4" fill="#C4593A"/>
+      <!-- tapa 3: olive -->
+      <circle cx="110" cy="160" r="8" fill="#6B8E6B"/>
+      <circle cx="110" cy="160" r="4" fill="#2A2540"/>
+      <circle cx="110" cy="160" r="2" fill="#C99A3D"/>
+      <!-- toothpick on tapa 2 -->
+      <line x1="145" y1="125" x2="138" y2="148" stroke="rgba(31,26,20,0.5)" stroke-width="1.5"/>
+      <circle cx="145" cy="124" r="3" fill="#C99A3D"/>
+      <!-- fork -->
+      <rect x="32" y="82" width="5" height="48" rx="2.5" fill="#C99A3D"/>
+      <rect x="30" y="74" width="2" height="18" rx="1" fill="#C99A3D"/>
+      <rect x="34" y="74" width="2" height="18" rx="1" fill="#C99A3D"/>
+      <rect x="38" y="74" width="2" height="18" rx="1" fill="#C99A3D"/>
+      <!-- knife -->
+      <rect x="183" y="74" width="5" height="56" rx="2.5" fill="#C99A3D"/>
+      <path d="M183 74 Q179 82 183 90" stroke="#C99A3D" stroke-width="2.5" fill="none"/>
+    </svg>
+    <div class="hero-badge">ES → FR</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-eyebrow">Español con Diana · A1 · Topic 08</div>
+    <h1 class="hero-title">Nourriture, Boissons<br>&amp; <em>Commander</em></h1>
+    <p class="hero-subtitle">Maîtrisez le café espagnol. Commandez, demandez l'addition, exprimez vos goûts — sans passer à l'anglais ni au français. Vocabulaire essentiel avec notes culturelles.</p>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════ MAIN ════════════════════════════════ -->
+<div class="main">
+
+  <!-- ─── CANVAS ───────────────────────────────────────────────────── -->
+  <main class="canvas">
+
+    <!-- BLOCK A — DRINKS -->
+    <section>
+      <div class="block-header">
+        <span class="block-tag tag-night">Bloc A</span>
+        <h2 class="block-title">Les boissons — Las bebidas</h2>
+      </div>
+      <div class="phrase-row">
+        <div class="card c-night" data-block="A1">
+          <div class="es">El agua</div>
+          <div class="fr">L'eau</div>
+          <div class="note">article masculin el agua — même règle qu'en français pour "le" devant voyelle</div>
+        </div>
+        <div class="card c-night" data-block="A1">
+          <div class="es">Un café con leche</div>
+          <div class="fr">Un café au lait (moitié expresso, moitié lait chaud)</div>
+          <div class="note">La commande matinale par défaut en Espagne</div>
+        </div>
+        <div class="card c-terra" data-block="A2">
+          <div class="es">El vino tinto / blanco</div>
+          <div class="fr">Le vin rouge / blanc</div>
+          <div class="note">tinto = rouge · blanco = blanc</div>
+        </div>
+        <div class="card c-terra" data-block="A2">
+          <div class="es">La cerveza</div>
+          <div class="fr">La bière</div>
+          <div class="note">una caña = un demi pression · ser-VEH-sah</div>
+        </div>
+        <div class="card c-sage" data-block="A3">
+          <div class="es">El zumo de naranja</div>
+          <div class="fr">Le jus d'orange</div>
+          <div class="note">zumo (Espagne) · jugo (Amérique latine)</div>
+        </div>
+        <div class="card c-sage" data-block="A3">
+          <div class="es">El té / un refresco</div>
+          <div class="fr">Le thé / une boisson gazeuse</div>
+          <div class="note">refresco = toute boisson fraîche gazeuse</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARISON TABLE — ordering phrases -->
+    <section>
+      <div class="block-header">
+        <span class="block-tag tag-ochre">Bloc D</span>
+        <h2 class="block-title">Commander — Verbes et formules</h2>
+      </div>
+      <div class="compare-table">
+        <div class="compare-table-header">
+          <span>Espagnol</span>
+          <span>Français</span>
+          <span>Contexte &amp; registre</span>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">Quiero un café</div>
+          <div class="c-fr">Je veux un café</div>
+          <div class="c-note">Direct, neutre — pas impoli en Espagne</div>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">Me trae la carta</div>
+          <div class="c-fr">Apportez-moi la carte</div>
+          <div class="c-note">Plus formel · restaurant assis</div>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">Me pone una cerveza</div>
+          <div class="c-fr">Donnez-moi une bière</div>
+          <div class="c-note">Standard en bar · très naturel</div>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">Para mí, la sopa</div>
+          <div class="c-fr">Pour moi, la soupe</div>
+          <div class="c-note">Commander à table avec d'autres</div>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">La carta, por favor</div>
+          <div class="c-fr">La carte, s'il vous plaît</div>
+          <div class="c-note">La carta = carte à la pièce (≠ menú del día)</div>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">¿Qué recomienda?</div>
+          <div class="c-fr">Qu'est-ce que vous recommandez ?</div>
+          <div class="c-note">Très utile pour un menu inconnu</div>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">¿Cuánto es?</div>
+          <div class="c-fr">C'est combien ?</div>
+          <div class="c-note">¿Cuánto cuesta? = également correct</div>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">Son cinco euros</div>
+          <div class="c-fr">C'est cinq euros</div>
+          <div class="c-note">Son (pluriel) même pour un seul article — réfère aux euros</div>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">La cuenta, por favor</div>
+          <div class="c-fr">L'addition, s'il vous plaît</div>
+          <div class="c-note">La phrase la plus utile après la commande</div>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">¿Está incluido el servicio?</div>
+          <div class="c-fr">Le service est-il compris ?</div>
+          <div class="c-note">Utile : le pourboire n'est pas automatique en Espagne</div>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">Pago yo</div>
+          <div class="c-fr">C'est moi qui paie</div>
+          <div class="c-note">Court, décisif — bien mémoriser</div>
+        </div>
+        <div class="compare-row">
+          <div class="c-es">Vamos a dividir</div>
+          <div class="c-fr">On partage</div>
+          <div class="c-note">Partager l'addition entre convives</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOCK C — DISHES -->
+    <section>
+      <div class="block-header">
+        <span class="block-tag tag-sage">Bloc C</span>
+        <h2 class="block-title">Plats typiques — Platos típicos</h2>
+      </div>
+      <div class="phrase-row">
+        <div class="card c-sage" data-block="C1">
+          <div class="es">La paella</div>
+          <div class="fr">La paella (riz au fruits de mer ou à la viande)</div>
+          <div class="note">¿Tienen paella? = Vous avez de la paella ?</div>
+        </div>
+        <div class="card c-sage" data-block="C1">
+          <div class="es">La tortilla española</div>
+          <div class="fr">L'omelette aux pommes de terre (PAS une galette mexicaine !)</div>
+          <div class="note">tortilla de patata · faux ami contextuel majeur</div>
+        </div>
+        <div class="card c-terra" data-block="C2">
+          <div class="es">¿Tienen tapas?</div>
+          <div class="fr">Vous avez des tapas ?</div>
+          <div class="note">Petites assiettes · souvent offertes avec la boisson</div>
+        </div>
+        <div class="card c-terra" data-block="C2">
+          <div class="es">Los pinchos</div>
+          <div class="fr">Tapas sur pain fixées par un cure-dent</div>
+          <div class="note">PEEN-chos · spécialité du Pays Basque</div>
+        </div>
+        <div class="card c-night" data-block="B2">
+          <div class="es">Quiero sopa y pescado</div>
+          <div class="fr">Je veux de la soupe et du poisson</div>
+          <div class="note">Repas espagnol classique : entrée + plat</div>
+        </div>
+        <div class="card c-night" data-block="B3">
+          <div class="es">El pollo / la ternera / las gambas</div>
+          <div class="fr">Le poulet / le veau / les crevettes</div>
+          <div class="note">ternera = tair-NEH-rah · stress sur la 2e syllabe</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUSTA PANEL -->
+    <section>
+      <div class="block-header">
+        <span class="block-tag tag-sage">Bloc G</span>
+        <h2 class="block-title">Me gusta / Me gustan — Le piège n°1</h2>
+      </div>
+      <div class="gusta-panel">
+        <div class="gusta-col">
+          <div class="gusta-label">Nom singulier → gusta</div>
+          <div class="gusta-es">Me gusta el café</div>
+          <div class="gusta-fr">J'aime le café (litt. « le café me plaît »)</div>
+          <div class="gusta-rule">Le verbe s'accorde avec <em>el café</em> (singulier) — pas avec la personne</div>
+        </div>
+        <div class="gusta-col g-plural">
+          <div class="gusta-label">Nom pluriel → gustan</div>
+          <div class="gusta-es">Me gustan las gambas</div>
+          <div class="gusta-fr">J'aime les crevettes (litt. « les crevettes me plaisent »)</div>
+          <div class="gusta-rule">Le verbe s'accorde avec <em>las gambas</em> (pluriel) — comme en français « elles me plaisent »</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAYING CALLOUT -->
+    <div class="paying-callout">
+      <div class="paying-icon-area">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="18" width="52" height="34" rx="7" fill="rgba(255,255,255,0.08)" stroke="rgba(201,154,61,0.5)" stroke-width="1.5"/>
+          <rect x="6" y="26" width="52" height="10" fill="rgba(201,154,61,0.15)"/>
+          <circle cx="46" cy="43" r="7" fill="#C99A3D"/>
+          <text x="46" y="47" font-size="10" text-anchor="middle" fill="white" font-weight="bold">€</text>
+          <rect x="14" y="41" width="16" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+        </svg>
+        <div class="paying-icon-label">Payer<br>l'addition</div>
+      </div>
+      <div class="paying-phrases">
+        <div class="paying-phrase">
+          <div class="dot"></div>
+          <div>
+            <div class="esp">La cuenta, por favor</div>
+            <div class="frc">L'addition, s'il vous plaît</div>
+          </div>
+        </div>
+        <div class="paying-phrase">
+          <div class="dot"></div>
+          <div>
+            <div class="esp">¿Está incluido el servicio?</div>
+            <div class="frc">Le service est-il compris ?</div>
+          </div>
+        </div>
+        <div class="paying-phrase">
+          <div class="dot"></div>
+          <div>
+            <div class="esp">Pago yo / Vamos a dividir</div>
+            <div class="frc">C'est moi qui paie / On partage</div>
+          </div>
+        </div>
+        <div class="paying-phrase">
+          <div class="dot"></div>
+          <div>
+            <div class="esp">Son doce euros con cincuenta</div>
+            <div class="frc">C'est douze euros cinquante</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ─── SIDEBAR ──────────────────────────────────────────────────── -->
+  <aside class="sidebar">
+    <div>
+      <span class="sidebar-label">Astuces &amp; Pièges</span>
+      <div class="tip-box ochre-border">
+        <div class="tip-title">El agua — genre ambigu</div>
+        <p>Comme en français « l'eau » (féminin mais l' devant voyelle), en espagnol <strong>el agua</strong> prend un article masculin pour éviter le choc de voyelles. C'est toujours féminin : <em>el agua fría</em>.</p>
+      </div>
+      <div class="tip-box">
+        <div class="tip-title">Quiero n'est pas impoli</div>
+        <p>En Espagne, <strong>Quiero un café</strong> est parfaitement naturel. Les francophones sur-formalisent — gardez <em>por favor</em> à la fin, c'est suffisant.</p>
+      </div>
+      <div class="tip-box sage-border">
+        <div class="tip-title">La carta vs El menú</div>
+        <p><strong>La carta</strong> = carte à la pièce. <strong>El menú del día</strong> = formule du jour (2 plats + boisson, ~10-15€). Demandez toujours <em>¿Tienen menú del día?</em> le midi.</p>
+      </div>
+      <div class="tip-box ochre-border">
+        <div class="tip-title">Faux ami : tortilla</div>
+        <p>En Espagne, <strong>la tortilla española</strong> = omelette aux pommes de terre. Rien à voir avec la galette mexicaine. Précisez <em>tortilla mexicana</em> si vous cherchez l'autre.</p>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div>
+      <span class="sidebar-label">Parallèles Français / Espagnol</span>
+      <div class="faux-parallel">
+        <strong>Structures similaires — à retenir</strong>
+        <div class="row">
+          <div><div class="lang">ES</div><div class="val">Me gusta el vino</div></div>
+          <div><div class="lang">FR</div><div class="val">Le vin me plaît</div></div>
+        </div>
+        <div class="row">
+          <div><div class="lang">ES</div><div class="val">¿Cuánto es?</div></div>
+          <div><div class="lang">FR</div><div class="val">C'est combien ?</div></div>
+        </div>
+        <div class="row">
+          <div><div class="lang">ES</div><div class="val">Para mí, la sopa</div></div>
+          <div><div class="lang">FR</div><div class="val">Pour moi, la soupe</div></div>
+        </div>
+        <div class="row">
+          <div><div class="lang">ES</div><div class="val">¿Tienen tapas?</div></div>
+          <div><div class="lang">FR</div><div class="val">Vous avez des tapas ?</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div>
+      <span class="sidebar-label">Notes culturelles</span>
+      <div class="tip-box sage-border">
+        <div class="tip-title">Les tapas gratuites</div>
+        <p>En Andalousie et au Pays Basque, une tapa accompagne souvent chaque boisson. Ne skipper pas la boisson en espérant juste manger — la tapa est le bonus.</p>
+      </div>
+      <div class="tip-box">
+        <div class="tip-title">Pourboire</div>
+        <p>En Espagne, arrondir à l'euro supérieur est la norme. 15-20% comme aux États-Unis paraît excessif. <strong>¿Está incluido el servicio?</strong> — posez toujours la question.</p>
+      </div>
+      <div class="tip-box ochre-border">
+        <div class="tip-title">Le menú del día</div>
+        <p>Le déjeuner du jour est la meilleure affaire en Espagne : 2 plats + pain + boisson pour ~12€. Ne le confondez pas avec <em>la carta</em> (la carte à la pièce).</p>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- ═══════════════════════════════ FOOTER ══════════════════════════════ -->
+<footer>
+  <strong>Español con Diana</strong> · A1 Topic 08 · Nourriture, Boissons &amp; Commander · Référence Traduction FR
+</footer>
+
+</body>
+</html>

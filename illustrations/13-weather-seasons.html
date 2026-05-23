@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Tiempo — Comic Strip · Español con Diana A1-13</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:      #FAF6EE;
+      --ink:        #1F1A14;
+      --ochre:      #C99A3D;
+      --terracotta: #C4593A;
+      --sage:       #6B8E6B;
+      --night:      #2A2540;
+      --muted:      #7B736B;
+    }
+
+    body {
+      background: var(--paper);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 64px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ── Page header ── */
+    .strip-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .strip-heading {
+      font-family: 'Fraunces', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 6px;
+      line-height: 1.1;
+    }
+
+    .strip-sub {
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* ── Comic strip container ── */
+    .comic-strip {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: nowrap;
+      max-width: 1360px;
+      width: 100%;
+    }
+
+    /* ── Individual panels ── */
+    .panel-wrap {
+      flex: 1;
+      min-width: 240px;
+      max-width: 340px;
+      position: relative;
+    }
+
+    .panel-wrap:nth-child(1) { transform: rotate(-2deg) translateY(8px); z-index: 2; }
+    .panel-wrap:nth-child(2) { transform: rotate(1.5deg) translateY(-5px); z-index: 3; }
+    .panel-wrap:nth-child(3) { transform: rotate(-0.8deg) translateY(10px); z-index: 2; }
+    .panel-wrap:nth-child(4) { transform: rotate(2.2deg) translateY(-3px); z-index: 1; }
+
+    .panel {
+      background: var(--paper);
+      border: 2.5px solid var(--ink);
+      border-radius: 3px;
+      box-shadow:
+        5px 5px 0 var(--ink),
+        7px 7px 14px rgba(31,26,20,0.16);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .panel-scene {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── Caption bar ── */
+    .caption {
+      background: #F0EBE0;
+      border-top: 2.5px solid var(--ink);
+      padding: 10px 14px 13px;
+    }
+    .phrase {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 26px;
+      color: var(--ink);
+      line-height: 1;
+      display: block;
+    }
+    .hint {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 4px;
+      display: block;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Panel number ── */
+    .panel-num {
+      position: absolute;
+      top: 7px;
+      left: 9px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--ink);
+      opacity: 0.3;
+      z-index: 20;
+    }
+
+    /* ── Reference bar below comics ── */
+    .ref-bar {
+      margin-top: 48px;
+      max-width: 1000px;
+      width: 100%;
+      border: 2.5px solid var(--ink);
+      border-radius: 3px;
+      background: var(--paper);
+      box-shadow: 4px 4px 0 var(--ink);
+      padding: 20px 24px 18px;
+    }
+
+    .ref-bar-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .vocab-card {
+      border: 1.5px solid var(--ink);
+      border-radius: 3px;
+      padding: 10px 12px;
+      background: #FFFDF8;
+    }
+
+    .vocab-es {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--ink);
+      display: block;
+      line-height: 1.1;
+    }
+
+    .vocab-en {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 3px;
+      display: block;
+    }
+
+    /* ── Footer ── */
+    .strip-footer {
+      margin-top: 36px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      opacity: 0.55;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="strip-title">Español con Diana &nbsp;·&nbsp; A1-13</p>
+  <h1 class="strip-heading">El tiempo y las estaciones</h1>
+  <p class="strip-sub">Weather &amp; Seasons</p>
+
+  <!-- Comic Strip — 4 panels -->
+  <div class="comic-strip">
+
+    <!-- PANEL 1: Hace sol / summer -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">1</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink1" x="-6%" y="-6%" width="112%" height="112%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.038" numOctaves="3" seed="3" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="skySun" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#87CEEB"/>
+              <stop offset="100%" stop-color="#FDE68A" stop-opacity="0.5"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Sky -->
+          <rect width="290" height="230" fill="url(#skySun)"/>
+          <!-- Ground -->
+          <rect y="230" width="290" height="110" fill="#E8E0CC"/>
+          <line x1="0" y1="230" x2="290" y2="230" stroke="#1F1A14" stroke-width="2.2"/>
+
+          <!-- Big sun -->
+          <circle cx="68" cy="58" r="32" fill="#C99A3D" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Sun rays -->
+          <g stroke="#C99A3D" stroke-width="3" stroke-linecap="round">
+            <line x1="68" y1="18" x2="68" y2="8"/>
+            <line x1="93" y1="33" x2="100" y2="26"/>
+            <line x1="108" y1="58" x2="118" y2="58"/>
+            <line x1="93" y1="83" x2="100" y2="90"/>
+            <line x1="68" y1="98" x2="68" y2="108"/>
+            <line x1="43" y1="83" x2="36" y2="90"/>
+            <line x1="28" y1="58" x2="18" y2="58"/>
+            <line x1="43" y1="33" x2="36" y2="26"/>
+          </g>
+          <!-- Sun face (happy) -->
+          <path d="M56,56 Q62,62 70,56" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="60" cy="51" r="2.5" fill="#1F1A14"/>
+          <circle cx="76" cy="51" r="2.5" fill="#1F1A14"/>
+
+          <!-- Clouds (small, gentle) -->
+          <g filter="url(#ink1)">
+            <ellipse cx="190" cy="45" rx="35" ry="18" fill="white" opacity="0.9"/>
+            <ellipse cx="210" cy="38" rx="22" ry="14" fill="white" opacity="0.9"/>
+            <ellipse cx="168" cy="48" rx="18" ry="12" fill="white" opacity="0.85"/>
+            <path d="M155,55 Q190,65 225,55" fill="white" opacity="0.9" stroke="none"/>
+          </g>
+
+          <!-- Beach towel on ground -->
+          <rect x="60" y="225" width="140" height="14" rx="3" fill="#C4593A" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Stripes -->
+          <line x1="80" y1="225" x2="80" y2="239" stroke="#FAF6EE" stroke-width="4"/>
+          <line x1="110" y1="225" x2="110" y2="239" stroke="#FAF6EE" stroke-width="4"/>
+          <line x1="140" y1="225" x2="140" y2="239" stroke="#FAF6EE" stroke-width="4"/>
+          <line x1="170" y1="225" x2="170" y2="239" stroke="#FAF6EE" stroke-width="4"/>
+
+          <!-- Character (lying on towel) -->
+          <!-- Body lying down -->
+          <ellipse cx="130" cy="280" rx="55" ry="16" fill="#C4593A" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="196" cy="275" rx="22" ry="22" fill="#D4A574" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M175,260 Q196,252 217,260" fill="#1F1A14" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Sunglasses -->
+          <path d="M182,274 L193,274 L193,280 L182,280 Z" fill="#2A2540" stroke="#1F1A14" stroke-width="1"/>
+          <path d="M197,274 L208,274 L208,280 L197,280 Z" fill="#2A2540" stroke="#1F1A14" stroke-width="1"/>
+          <line x1="193" y1="277" x2="197" y2="277" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Smile -->
+          <path d="M185,285 Q196,293 207,285" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Arm holding sombrero -->
+          <path d="M175,278 Q155,268 148,260" fill="none" stroke="#D4A574" stroke-width="10" stroke-linecap="round"/>
+          <path d="M175,278 Q155,268 148,260" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Sombrero -->
+          <ellipse cx="142" cy="256" rx="28" ry="7" fill="#C99A3D" stroke="#1F1A14" stroke-width="2"/>
+          <path d="M128,257 Q142,238 156,257" fill="#C99A3D" stroke="#1F1A14" stroke-width="2"/>
+
+          <!-- Speech bubble -->
+          <path d="M108,25 Q108,8 130,8 L255,8 Q272,8 272,26 Q272,44 255,44 L175,44 L165,58 L168,44 L130,44 Q108,44 108,26 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink1)"/>
+          <text x="190" y="30" font-family="'Caveat', cursive" font-size="20" font-weight="700" fill="#1F1A14" text-anchor="middle">Hace sol</text>
+          <text x="190" y="44" font-family="'Caveat', cursive" font-size="15" fill="#C99A3D" text-anchor="middle">y hace calor</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">Hace sol · Hace calor</span>
+          <span class="hint">it is sunny · it is hot</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: Llueve / rain -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">2</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink2" x="-6%" y="-6%" width="112%" height="112%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="7" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="skyRain" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6B7FA0"/>
+              <stop offset="100%" stop-color="#9BABB8"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Dark rainy sky -->
+          <rect width="290" height="220" fill="url(#skyRain)"/>
+          <!-- Ground (wet, darker) -->
+          <rect y="220" width="290" height="120" fill="#D4CEBD"/>
+          <line x1="0" y1="220" x2="290" y2="220" stroke="#1F1A14" stroke-width="2.2"/>
+
+          <!-- Storm cloud big -->
+          <g filter="url(#ink2)">
+            <ellipse cx="145" cy="52" rx="70" ry="30" fill="#4A5568" opacity="0.92"/>
+            <ellipse cx="105" cy="60" rx="45" ry="24" fill="#4A5568" opacity="0.88"/>
+            <ellipse cx="185" cy="58" rx="50" ry="22" fill="#4A5568" opacity="0.9"/>
+            <ellipse cx="120" cy="70" rx="30" ry="18" fill="#4A5568"/>
+            <ellipse cx="165" cy="68" rx="35" ry="16" fill="#4A5568"/>
+          </g>
+
+          <!-- Rain drops (lots of them) -->
+          <g stroke="#7B9BC8" stroke-width="1.8" stroke-linecap="round" opacity="0.85">
+            <line x1="30" y1="90" x2="24" y2="112"/>
+            <line x1="55" y1="85" x2="49" y2="110"/>
+            <line x1="80" y1="92" x2="74" y2="116"/>
+            <line x1="110" y1="88" x2="104" y2="112"/>
+            <line x1="140" y1="84" x2="134" y2="108"/>
+            <line x1="168" y1="90" x2="162" y2="114"/>
+            <line x1="198" y1="86" x2="192" y2="110"/>
+            <line x1="225" y1="92" x2="219" y2="116"/>
+            <line x1="255" y1="88" x2="249" y2="112"/>
+            <line x1="18" y1="120" x2="12" y2="145"/>
+            <line x1="45" y1="116" x2="39" y2="141"/>
+            <line x1="72" y1="122" x2="66" y2="147"/>
+            <line x1="100" y1="118" x2="94" y2="143"/>
+            <line x1="128" y1="114" x2="122" y2="139"/>
+            <line x1="155" y1="120" x2="149" y2="145"/>
+            <line x1="183" y1="116" x2="177" y2="141"/>
+            <line x1="210" y1="122" x2="204" y2="147"/>
+            <line x1="240" y1="118" x2="234" y2="143"/>
+            <line x1="268" y1="110" x2="262" y2="135"/>
+            <line x1="35" y1="155" x2="29" y2="178"/>
+            <line x1="62" y1="152" x2="56" y2="175"/>
+            <line x1="90" y1="158" x2="84" y2="180"/>
+            <line x1="120" y1="150" x2="114" y2="174"/>
+            <line x1="150" y1="155" x2="144" y2="178"/>
+            <line x1="180" y1="152" x2="174" y2="176"/>
+            <line x1="210" y1="158" x2="204" y2="180"/>
+            <line x1="245" y1="154" x2="239" y2="178"/>
+            <line x1="272" y1="148" x2="266" y2="172"/>
+          </g>
+
+          <!-- Puddle on ground -->
+          <ellipse cx="145" cy="228" rx="60" ry="10" fill="#A8BDD0" stroke="#1F1A14" stroke-width="1.2" opacity="0.6"/>
+
+          <!-- Character with umbrella -->
+          <!-- Umbrella canopy -->
+          <path d="M90,180 Q145,145 200,180" fill="#C4593A" stroke="#1F1A14" stroke-width="2.5"/>
+          <path d="M90,180 Q95,192 90,188 Q95,180 100,188 Q105,192 110,188 Q115,180 120,188 Q125,192 130,188 Q135,180 140,188 Q145,192 150,188 Q155,180 160,188 Q165,192 170,188 Q175,180 180,188 Q185,192 190,188 Q195,180 200,180" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.2"/>
+          <!-- Umbrella handle -->
+          <path d="M145,180 L145,260 Q145,270 138,270 Q132,270 132,263" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- Character body -->
+          <!-- Impermeable / raincoat -->
+          <path d="M115,340 Q115,290 130,270 Q138,260 145,255 Q152,260 160,270 Q175,290 175,340 Z" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="145" cy="244" rx="22" ry="23" fill="#D4A574" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hood of raincoat over head -->
+          <path d="M123,235 Q135,218 145,220 Q155,218 167,235" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Eyes (squinting against rain) -->
+          <path d="M135,242 Q140,238 145,242" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <path d="M145,242 Q150,238 155,242" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Grimace -->
+          <path d="M138,254 Q145,250 152,254" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Speech bubble -->
+          <path d="M8,18 Q8,4 28,4 L185,4 Q205,4 205,22 Q205,40 185,40 L95,40 L85,54 L88,40 L28,40 Q8,40 8,22 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink2)"/>
+          <text x="107" y="26" font-family="'Caveat', cursive" font-size="22" font-weight="700" fill="#1F1A14" text-anchor="middle">Llueve</text>
+          <text x="107" y="40" font-family="'Caveat', cursive" font-size="14" fill="#7B736B" text-anchor="middle">Necesito el paraguas</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">Llueve · Está nublado</span>
+          <span class="hint">it rains · it is cloudy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: Nieva / winter -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">3</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink3" x="-6%" y="-6%" width="112%" height="112%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.042" numOctaves="3" seed="11" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="skySnow" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#C8D8E8"/>
+              <stop offset="100%" stop-color="#E8EDF2"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Pale winter sky -->
+          <rect width="290" height="215" fill="url(#skySnow)"/>
+          <!-- Snow ground -->
+          <rect y="215" width="290" height="125" fill="#EEF2F7"/>
+          <line x1="0" y1="215" x2="290" y2="215" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Snow drift on ground edge -->
+          <path d="M0,215 Q40,205 80,215 Q120,225 160,215 Q200,205 240,215 Q265,220 290,215 L290,230 L0,230 Z" fill="white" stroke="none"/>
+
+          <!-- Light cloud -->
+          <g filter="url(#ink3)" opacity="0.8">
+            <ellipse cx="100" cy="38" rx="55" ry="22" fill="#D8E4EE"/>
+            <ellipse cx="70" cy="44" rx="32" ry="18" fill="#D8E4EE"/>
+            <ellipse cx="130" cy="42" rx="38" ry="16" fill="#D8E4EE"/>
+          </g>
+
+          <!-- Snowflakes -->
+          <g fill="#2A2540" opacity="0.35" font-family="'Caveat', cursive" font-size="18">
+            <text x="22" y="80">*</text>
+            <text x="55" y="100">*</text>
+            <text x="85" y="72">*</text>
+            <text x="120" y="95">*</text>
+            <text x="155" y="78">*</text>
+            <text x="190" y="100">*</text>
+            <text x="220" y="75">*</text>
+            <text x="255" y="92">*</text>
+            <text x="38" y="135">*</text>
+            <text x="70" y="148">*</text>
+            <text x="105" y="130">*</text>
+            <text x="140" y="145">*</text>
+            <text x="175" y="132">*</text>
+            <text x="210" y="148">*</text>
+            <text x="245" y="138">*</text>
+            <text x="10" y="168">*</text>
+            <text x="50" y="178">*</text>
+            <text x="95" y="165">*</text>
+            <text x="165" y="172">*</text>
+            <text x="235" y="168">*</text>
+            <text x="268" y="158">*</text>
+          </g>
+
+          <!-- Snowman on right -->
+          <g filter="url(#ink3)">
+            <!-- Bottom -->
+            <circle cx="228" cy="282" r="28" fill="white" stroke="#1F1A14" stroke-width="2"/>
+            <!-- Middle -->
+            <circle cx="228" cy="242" r="20" fill="white" stroke="#1F1A14" stroke-width="2"/>
+            <!-- Head -->
+            <circle cx="228" cy="212" r="15" fill="white" stroke="#1F1A14" stroke-width="2"/>
+            <!-- Carrot nose -->
+            <path d="M228,212 L244,216 L240,220 Z" fill="#C4593A" stroke="#1F1A14" stroke-width="1"/>
+            <!-- Eyes -->
+            <circle cx="222" cy="207" r="2.5" fill="#1F1A14"/>
+            <circle cx="234" cy="207" r="2.5" fill="#1F1A14"/>
+            <!-- Button mouth -->
+            <circle cx="222" cy="218" r="2" fill="#1F1A14"/>
+            <circle cx="228" cy="221" r="2" fill="#1F1A14"/>
+            <circle cx="234" cy="218" r="2" fill="#1F1A14"/>
+            <!-- Scarf (bufanda) -->
+            <path d="M213,224 Q228,220 243,224" fill="none" stroke="#C4593A" stroke-width="5" stroke-linecap="round"/>
+            <!-- Arms (sticks) -->
+            <path d="M208,245 Q192,232 182,220" fill="none" stroke="#1F1A14" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M248,245 Q262,235 272,225" fill="none" stroke="#1F1A14" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+
+          <!-- Character bundled up (left) -->
+          <!-- Body / big coat -->
+          <path d="M65,340 Q62,285 78,265 Q88,252 100,248 Q112,252 122,265 Q138,285 135,340 Z" fill="#2A2540" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Head -->
+          <ellipse cx="100" cy="238" rx="22" ry="23" fill="#D4A574" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Wool hat (gorro) -->
+          <path d="M78,232 Q82,210 100,210 Q118,210 122,232 Z" fill="#C4593A" stroke="#1F1A14" stroke-width="2"/>
+          <circle cx="100" cy="208" r="8" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Hat band -->
+          <rect x="78" y="228" width="44" height="8" rx="2" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.2"/>
+          <!-- Scarf wrapped around -->
+          <path d="M80,248 Q100,242 120,248" fill="none" stroke="#6B8E6B" stroke-width="6" stroke-linecap="round"/>
+          <path d="M80,256 Q90,262 82,272" fill="none" stroke="#6B8E6B" stroke-width="5" stroke-linecap="round"/>
+          <!-- Eyes (happy squint) -->
+          <path d="M88,235 Q94,230 100,235" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <path d="M100,235 Q106,230 112,235" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Rosy cheeks -->
+          <circle cx="84" cy="245" r="7" fill="#C4593A" opacity="0.25"/>
+          <circle cx="116" cy="245" r="7" fill="#C4593A" opacity="0.25"/>
+          <!-- Happy smile -->
+          <path d="M90,248 Q100,256 110,248" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Gloved hand pointing at snowman -->
+          <path d="M120,272 Q145,268 168,260" fill="none" stroke="#2A2540" stroke-width="8" stroke-linecap="round"/>
+          <path d="M120,272 Q145,268 168,260" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Speech bubble -->
+          <path d="M12,18 Q12,4 32,4 L190,4 Q210,4 210,22 Q210,40 190,40 L105,40 L95,54 L98,40 L32,40 Q12,40 12,22 Z"
+            fill="#EEF2F7" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink3)"/>
+          <text x="111" y="27" font-family="'Caveat', cursive" font-size="21" font-weight="700" fill="#1F1A14" text-anchor="middle">Nieva</text>
+          <text x="111" y="41" font-family="'Caveat', cursive" font-size="14" fill="#7B736B" text-anchor="middle">Hace mucho frío</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">Nieva · Hace frío</span>
+          <span class="hint">it snows · it is cold</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 4: ¿Qué tiempo hace? / forecast -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">4</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink4" x="-6%" y="-6%" width="112%" height="112%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.036" numOctaves="3" seed="15" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+
+          <!-- Indoor scene: living room watching TV forecast -->
+          <rect width="290" height="340" fill="#F0EAD8"/>
+
+          <!-- Wall -->
+          <rect width="290" height="200" fill="#E8DFD0"/>
+          <!-- Floor -->
+          <rect y="200" width="290" height="140" fill="#C8BFA8"/>
+          <line x1="0" y1="200" x2="290" y2="200" stroke="#1F1A14" stroke-width="2"/>
+
+          <!-- TV / weather screen on wall -->
+          <rect x="35" y="25" width="175" height="120" rx="6" fill="#2A2540" stroke="#1F1A14" stroke-width="3" filter="url(#ink4)"/>
+          <!-- Screen content -->
+          <rect x="42" y="32" width="161" height="106" rx="3" fill="#1A1F3A"/>
+          <!-- Screen header "El Tiempo" -->
+          <rect x="42" y="32" width="161" height="22" rx="3" fill="#C4593A"/>
+          <text x="122" y="47" font-family="'Caveat', cursive" font-size="13" font-weight="700" fill="white" text-anchor="middle">El Tiempo</text>
+          <!-- TV legs -->
+          <rect x="100" y="145" width="10" height="18" rx="2" fill="#1F1A14"/>
+          <rect x="178" y="145" width="10" height="18" rx="2" fill="#1F1A14"/>
+          <rect x="88" y="160" width="112" height="6" rx="2" fill="#1F1A14"/>
+
+          <!-- Forecast in screen: HOY -->
+          <text x="65" y="76" font-family="'Caveat', cursive" font-size="11" fill="#C99A3D">HOY</text>
+          <!-- Sun icon -->
+          <circle cx="72" cy="96" r="9" fill="#C99A3D"/>
+          <g stroke="#C99A3D" stroke-width="1.5" stroke-linecap="round">
+            <line x1="72" y1="82" x2="72" y2="78"/>
+            <line x1="82" y1="86" x2="85" y2="83"/>
+            <line x1="86" y1="96" x2="90" y2="96"/>
+            <line x1="82" y1="106" x2="85" y2="109"/>
+            <line x1="72" y1="110" x2="72" y2="114"/>
+            <line x1="62" y1="106" x2="59" y2="109"/>
+            <line x1="58" y1="96" x2="54" y2="96"/>
+            <line x1="62" y1="86" x2="59" y2="83"/>
+          </g>
+          <text x="72" y="126" font-family="'DM Mono', monospace" font-size="9" fill="white" text-anchor="middle">28°</text>
+
+          <!-- Forecast MAÑANA -->
+          <text x="145" y="76" font-family="'Caveat', cursive" font-size="11" fill="#C99A3D">MAÑANA</text>
+          <!-- Rain cloud icon -->
+          <ellipse cx="155" cy="90" rx="14" ry="9" fill="#7B9BC8"/>
+          <ellipse cx="148" cy="94" rx="10" ry="7" fill="#7B9BC8"/>
+          <ellipse cx="162" cy="93" rx="10" ry="7" fill="#7B9BC8"/>
+          <line x1="148" y1="104" x2="145" y2="112" stroke="#7B9BC8" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="155" y1="106" x2="152" y2="114" stroke="#7B9BC8" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="162" y1="104" x2="159" y2="112" stroke="#7B9BC8" stroke-width="1.5" stroke-linecap="round"/>
+          <text x="155" y="126" font-family="'DM Mono', monospace" font-size="9" fill="white" text-anchor="middle">16°</text>
+
+          <!-- Couch (sofa) -->
+          <rect x="20" y="230" width="240" height="70" rx="8" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2.5"/>
+          <!-- Cushions -->
+          <rect x="30" y="215" width="80" height="50" rx="6" fill="#7B9E7B" stroke="#1F1A14" stroke-width="2"/>
+          <rect x="120" y="215" width="80" height="50" rx="6" fill="#7B9E7B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Couch back -->
+          <rect x="20" y="205" width="240" height="30" rx="6" fill="#5A7A5A" stroke="#1F1A14" stroke-width="2"/>
+
+          <!-- Character sitting on couch with remote -->
+          <!-- Body -->
+          <ellipse cx="195" cy="228" rx="30" ry="18" fill="#C4593A" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="195" cy="200" rx="22" ry="22" fill="#D4A574" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M174,195 Q185,180 195,182 Q205,180 216,195" fill="#1F1A14" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyes looking at TV -->
+          <circle cx="187" cy="197" r="3" fill="#1F1A14"/>
+          <circle cx="203" cy="197" r="3" fill="#1F1A14"/>
+          <!-- Eyebrow (curious) -->
+          <path d="M184,190 Q187,186 190,190" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Mouth (open, curious) -->
+          <ellipse cx="195" cy="210" rx="5" ry="4" fill="#1F1A14"/>
+          <!-- Arm with remote control -->
+          <path d="M170,225 Q155,220 148,215" fill="none" stroke="#D4A574" stroke-width="8" stroke-linecap="round"/>
+          <path d="M170,225 Q155,220 148,215" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="138" y="208" width="16" height="26" rx="4" fill="#1F1A14" stroke="#1F1A14" stroke-width="1"/>
+          <circle cx="146" cy="218" r="3" fill="#C99A3D"/>
+
+          <!-- Speech bubble (thought bubble style - dotted) -->
+          <path d="M55,180 Q55,165 72,165 L210,165 Q230,165 230,182 Q230,198 210,198 L130,198 L120,212 L123,198 L72,198 Q55,198 55,182 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2" stroke-dasharray="none" filter="url(#ink4)"/>
+          <text x="143" y="179" font-family="'Caveat', cursive" font-size="16" font-weight="700" fill="#1F1A14" text-anchor="middle">¿Qué tiempo hace?</text>
+          <text x="143" y="196" font-family="'Caveat', cursive" font-size="13" fill="#7B736B" text-anchor="middle">What is the weather like?</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">¿Qué tiempo hace?</span>
+          <span class="hint">hoy / mañana — today / tomorrow</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Quick vocab reference bar -->
+  <div class="ref-bar">
+    <p class="ref-bar-title">Vocabulario esencial — Essential vocab</p>
+    <div class="vocab-grid">
+      <div class="vocab-card">
+        <span class="vocab-es">hace viento</span>
+        <span class="vocab-en">it is windy</span>
+      </div>
+      <div class="vocab-card">
+        <span class="vocab-es">hay niebla</span>
+        <span class="vocab-en">there is fog</span>
+      </div>
+      <div class="vocab-card">
+        <span class="vocab-es">despejado</span>
+        <span class="vocab-en">clear / sunny skies</span>
+      </div>
+      <div class="vocab-card">
+        <span class="vocab-es">la primavera</span>
+        <span class="vocab-en">spring</span>
+      </div>
+      <div class="vocab-card">
+        <span class="vocab-es">el verano</span>
+        <span class="vocab-en">summer</span>
+      </div>
+      <div class="vocab-card">
+        <span class="vocab-es">el otoño</span>
+        <span class="vocab-en">autumn / fall</span>
+      </div>
+      <div class="vocab-card">
+        <span class="vocab-es">el invierno</span>
+        <span class="vocab-en">winter</span>
+      </div>
+      <div class="vocab-card">
+        <span class="vocab-es">hace X grados</span>
+        <span class="vocab-en">it is X degrees</span>
+      </div>
+      <div class="vocab-card">
+        <span class="vocab-es">el abrigo</span>
+        <span class="vocab-en">coat</span>
+      </div>
+      <div class="vocab-card">
+        <span class="vocab-es">el paraguas</span>
+        <span class="vocab-en">umbrella</span>
+      </div>
+      <div class="vocab-card">
+        <span class="vocab-es">la bufanda</span>
+        <span class="vocab-en">scarf</span>
+      </div>
+      <div class="vocab-card">
+        <span class="vocab-es">las gafas de sol</span>
+        <span class="vocab-en">sunglasses</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="strip-footer">Español con Diana &nbsp;·&nbsp; Lección A1-13 &nbsp;·&nbsp; El tiempo y las estaciones</p>
+
+</body>
+</html>

@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Faire les courses en espagnol — Infographie française</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:      #FAF6EE;
+    --ink:        #1F1A14;
+    --ochre:      #C99A3D;
+    --terra:      #C4593A;
+    --sage:       #6B8E6B;
+    --night:      #2A2540;
+    --muted:      #7B736B;
+    --paper-dark: #EDE8DC;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────────── */
+  .header {
+    background: var(--terra);
+    padding: 48px 80px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 360px; height: 360px;
+    background: var(--night);
+    border-radius: 50%;
+    opacity: 0.12;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 300px;
+    width: 200px; height: 200px;
+    background: var(--ochre);
+    border-radius: 50%;
+    opacity: 0.18;
+  }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(250,246,238,0.7);
+    margin-bottom: 12px;
+  }
+  .header-title {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1.0;
+    margin-bottom: 8px;
+  }
+  .header-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 300;
+    color: rgba(250,246,238,0.85);
+    margin-bottom: 20px;
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--night);
+    color: var(--ochre);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+  }
+
+  /* ─── SCENE ─────────────────────────────────────────── */
+  .scene-wrapper {
+    background: var(--paper-dark);
+    padding: 60px 80px;
+    border-bottom: 4px solid var(--terra);
+    position: relative;
+  }
+  .scene-title {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+  .shop-window {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* ─── SECTION LABEL ──────────────────────────────────── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--paper-dark);
+  }
+
+  /* ─── PHRASE CARDS ───────────────────────────────────── */
+  .phrases-section { padding: 60px 80px; }
+  .phrases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .phrase-card {
+    background: #fff;
+    border-radius: 4px;
+    border: 1.5px solid var(--paper-dark);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phrase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--ochre);
+  }
+  .phrase-card.terra::before { background: var(--terra); }
+  .phrase-card.sage::before  { background: var(--sage); }
+  .phrase-card.night::before { background: var(--night); }
+
+  .phrase-context {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--paper-dark);
+    color: var(--muted);
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 8px;
+  }
+  .phrase-es {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .phrase-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--terra);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .phrase-phonetic {
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    color: var(--ochre);
+    margin-bottom: 0;
+  }
+  .phrase-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px dashed var(--paper-dark);
+    margin-top: 12px;
+    padding-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* ─── ÉTIQUETTES DE PRIX ─────────────────────────────── */
+  .price-section {
+    background: var(--night);
+    padding: 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .price-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 300px; height: 300px;
+    background: var(--ochre);
+    border-radius: 50%;
+    opacity: 0.05;
+    transform: translate(-100px, -100px);
+  }
+  .price-section .section-label { color: var(--ochre); }
+  .price-section .section-label::after { background: rgba(255,255,255,0.1); }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .price-tag {
+    background: var(--paper);
+    border-radius: 4px;
+    padding: 20px 20px 16px;
+    border-top: 4px solid var(--terra);
+  }
+  .price-tag-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .price-tag-es {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+  .price-tag-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--terra);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .price-tag-phonetic {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ─── REÇU + NOTES ───────────────────────────────────── */
+  .receipt-section {
+    padding: 60px 80px;
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 60px;
+    align-items: start;
+  }
+  .receipt {
+    background: #fff;
+    border: 1.5px solid var(--paper-dark);
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    overflow: hidden;
+  }
+  .receipt-header {
+    background: var(--terra);
+    color: #fff;
+    padding: 16px 24px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .receipt-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 12px 24px;
+    border-bottom: 1px dashed var(--paper-dark);
+    font-size: 13px;
+    align-items: center;
+  }
+  .receipt-row:last-child { border-bottom: none; }
+  .receipt-es { color: var(--ink); font-weight: 500; }
+  .receipt-fr { color: var(--terra); font-size: 12px; font-weight: 600; }
+  .receipt-total {
+    background: var(--terra);
+    color: #fff;
+    padding: 16px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Notes culturelles */
+  .notes-panel { }
+  .notes-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .notes-sub {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: var(--sage);
+    margin-bottom: 24px;
+  }
+  .note-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+  .note-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    font-family: 'DM Mono', monospace;
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+  .note-icon.terra { background: var(--terra); color: #fff; }
+  .note-icon.sage  { background: var(--sage);  color: #fff; }
+  .note-icon.ochre { background: var(--ochre); color: #fff; }
+  .note-icon.night { background: var(--night); color: #fff; }
+  .note-heading {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .note-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ─── COULEURS + TAILLES ─────────────────────────────── */
+  .color-size-section {
+    background: var(--paper-dark);
+    padding: 48px 80px;
+    border-top: 4px solid var(--ochre);
+  }
+  .color-size-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 32px;
+  }
+  .color-strip { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+  .color-chip { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .color-swatch { width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.08); }
+  .color-es { font-family: 'Fraunces', serif; font-size: 13px; font-weight: 700; color: var(--ink); }
+  .color-fr { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--terra); font-weight: 600; }
+
+  .size-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .size-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); text-align: left;
+    padding: 8px 12px; border-bottom: 2px solid var(--ink);
+  }
+  .size-table td {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; padding: 10px 12px;
+    border-bottom: 1px dashed var(--paper); color: var(--ink);
+  }
+  .size-table tr:last-child td { border-bottom: none; }
+  .size-es { font-family: 'Fraunces', serif; font-weight: 700; }
+  .size-fr { color: var(--terra); font-weight: 600; font-size: 12px; }
+
+  /* ─── DIALOGUE ───────────────────────────────────────── */
+  .dialogue-section {
+    padding: 60px 80px;
+    background: var(--night);
+    color: var(--paper);
+  }
+  .dialogue-section .section-label { color: var(--ochre); }
+  .dialogue-section .section-label::after { background: rgba(255,255,255,0.1); }
+  .dialogue-bubbles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 40px;
+  }
+  .dialogue-col-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--terra); margin-bottom: 16px;
+  }
+  .bubble { margin-bottom: 14px; }
+  .bubble-es {
+    background: var(--terra);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 4px 4px 4px 0;
+    font-family: 'Fraunces', serif;
+    font-size: 15px; font-weight: 700;
+    margin-bottom: 3px;
+    display: inline-block;
+  }
+  .bubble-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: rgba(250,246,238,0.65);
+    padding-left: 4px;
+    display: block;
+  }
+
+  /* ─── AIDE-MÉMOIRE ───────────────────────────────────── */
+  .cheat-section {
+    padding: 48px 80px;
+    background: var(--paper);
+  }
+  .cheat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .cheat-card {
+    background: #fff;
+    border: 1.5px solid var(--paper-dark);
+    border-radius: 4px;
+    padding: 20px 24px;
+    border-left: 4px solid var(--ochre);
+  }
+  .cheat-card.terra { border-left-color: var(--terra); }
+  .cheat-card.sage  { border-left-color: var(--sage); }
+  .cheat-card.night { border-left-color: var(--night); }
+  .cheat-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 12px;
+  }
+  .cheat-pair {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--paper-dark);
+    gap: 12px;
+  }
+  .cheat-pair:last-child { border-bottom: none; }
+  .cheat-es { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink); }
+  .cheat-fr { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--terra); font-weight: 600; }
+
+  /* ─── FOOTER ─────────────────────────────────────────── */
+  .footer {
+    background: var(--ink);
+    padding: 24px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-brand { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; color: var(--paper); }
+  .footer-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+  .footer-lang { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--terra); }
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ──────────────────────────────────────────── -->
+<header class="header">
+  <p class="header-eyebrow">Español con Diana · A1 · Thème 11</p>
+  <h1 class="header-title">Faire les courses</h1>
+  <p class="header-sub">De compras — référence visuelle</p>
+  <span class="header-badge">Édition Française</span>
+</header>
+
+<!-- ─── VITRINE ─────────────────────────────────────────── -->
+<section class="scene-wrapper">
+  <p class="scene-title">Vitrine du magasin — Phrases clés d'un coup d'œil</p>
+
+  <svg class="shop-window" viewBox="0 0 1120 520" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+    <rect x="0" y="0" width="1120" height="520" fill="#EDE8DC"/>
+
+    <!-- store awning -->
+    <polygon points="60,60 1060,60 1020,120 100,120" fill="#C4593A"/>
+    <line x1="100" y1="60" x2="100" y2="120" stroke="#FAF6EE" stroke-width="1.5" opacity="0.4"/>
+    <line x1="280" y1="60" x2="260" y2="120" stroke="#FAF6EE" stroke-width="1.5" opacity="0.4"/>
+    <line x1="460" y1="60" x2="440" y2="120" stroke="#FAF6EE" stroke-width="1.5" opacity="0.4"/>
+    <line x1="640" y1="60" x2="620" y2="120" stroke="#FAF6EE" stroke-width="1.5" opacity="0.4"/>
+    <line x1="820" y1="60" x2="800" y2="120" stroke="#FAF6EE" stroke-width="1.5" opacity="0.4"/>
+    <line x1="1000" y1="60" x2="980" y2="120" stroke="#FAF6EE" stroke-width="1.5" opacity="0.4"/>
+    <text x="560" y="100" text-anchor="middle" font-family="Fraunces, serif" font-size="26" font-weight="900" fill="#FAF6EE" letter-spacing="6">EL MERCADO</text>
+
+    <!-- window frame -->
+    <rect x="80" y="120" width="960" height="340" rx="2" fill="#fff" stroke="#1F1A14" stroke-width="3"/>
+
+    <!-- left window: clothing -->
+    <rect x="100" y="140" width="420" height="300" rx="1" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+
+    <!-- shoe display -->
+    <ellipse cx="200" cy="300" rx="60" ry="20" fill="#2A2540" opacity="0.85"/>
+    <path d="M140 300 Q160 250 220 260 Q260 270 260 300" fill="#2A2540" opacity="0.85"/>
+    <text x="200" y="310" text-anchor="middle" font-size="10" fill="white">zapato negro</text>
+
+    <!-- callout: quería -->
+    <rect x="280" y="210" width="220" height="60" rx="3" fill="#2A2540"/>
+    <text x="390" y="235" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="#FAF6EE">Quería unos zapatos</text>
+    <text x="390" y="256" text-anchor="middle" font-size="12" fill="#C99A3D">Je voudrais des chaussures</text>
+    <line x1="280" y1="240" x2="260" y2="290" stroke="#2A2540" stroke-width="1" stroke-dasharray="3,3"/>
+
+    <!-- callout: número -->
+    <rect x="100" y="390" width="200" height="52" rx="3" fill="#C4593A"/>
+    <text x="200" y="412" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="white">¿Qué número tiene?</text>
+    <text x="200" y="430" text-anchor="middle" font-size="11" fill="#FAF6EE">Quelle pointure ?</text>
+
+    <!-- callout: busco -->
+    <rect x="320" y="390" width="190" height="52" rx="3" fill="#6B8E6B"/>
+    <text x="415" y="412" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="white">Busco algo más barato.</text>
+    <text x="415" y="430" text-anchor="middle" font-size="11" fill="#EDE8DC">Je cherche moins cher.</text>
+
+    <!-- right window: market stall -->
+    <rect x="600" y="140" width="420" height="300" rx="1" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+
+    <!-- basket -->
+    <ellipse cx="760" cy="300" rx="80" ry="30" fill="#C99A3D" opacity="0.7"/>
+    <path d="M680 300 Q680 240 760 240 Q840 240 840 300" fill="none" stroke="#C99A3D" stroke-width="8" opacity="0.7"/>
+    <text x="760" y="285" text-anchor="middle" font-size="10" fill="#1F1A14">la cesta · le panier</text>
+
+    <!-- price tag floating -->
+    <rect x="860" y="180" width="140" height="64" rx="3" fill="#C99A3D"/>
+    <text x="930" y="207" text-anchor="middle" font-family="Fraunces, serif" font-size="22" font-weight="900" fill="#1F1A14">3,50 €</text>
+    <text x="930" y="228" text-anchor="middle" font-size="11" fill="#1F1A14">tres euros cincuenta</text>
+    <line x1="930" y1="244" x2="840" y2="295" stroke="#C99A3D" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+    <!-- callout: me lo llevo -->
+    <rect x="600" y="390" width="200" height="52" rx="3" fill="#1F1A14"/>
+    <text x="700" y="412" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="#FAF6EE">¡Me lo llevo!</text>
+    <text x="700" y="430" text-anchor="middle" font-size="11" fill="#C99A3D">Je le prends !</text>
+
+    <!-- callout: efectivo -->
+    <rect x="820" y="390" width="200" height="52" rx="3" fill="#6B8E6B"/>
+    <text x="920" y="412" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="white">Pago en efectivo.</text>
+    <text x="920" y="430" text-anchor="middle" font-size="11" fill="#EDE8DC">Je paie en espèces.</text>
+
+    <!-- door -->
+    <rect x="490" y="200" width="140" height="260" rx="2" fill="#EDE8DC" stroke="#1F1A14" stroke-width="1.5"/>
+    <circle cx="610" cy="335" r="6" fill="#C4593A"/>
+    <text x="560" y="315" text-anchor="middle" font-family="Fraunces, serif" font-size="11" fill="#7B736B">ABIERTO</text>
+    <text x="560" y="333" text-anchor="middle" font-size="10" fill="#7B736B">Ouvert</text>
+  </svg>
+</section>
+
+<!-- ─── PHRASES ──────────────────────────────────────────── -->
+<section class="phrases-section">
+  <p class="section-label">Phrases essentielles — annotées</p>
+  <div class="phrases-grid">
+
+    <div class="phrase-card">
+      <span class="phrase-context">Salutations</span>
+      <p class="phrase-es">Buenos días.</p>
+      <p class="phrase-fr">Bonjour. (le matin)</p>
+      <p class="phrase-phonetic">BWE-nos DEE-as</p>
+      <p class="phrase-note">Utilisé jusqu'à midi. <em>Buenas tardes</em> dès 12 h. Incertain ? <em>Buenas</em> seul fonctionne à toute heure.</p>
+    </div>
+
+    <div class="phrase-card terra">
+      <span class="phrase-context">Le vendeur vous dit</span>
+      <p class="phrase-es">¿En qué puedo ayudarle?</p>
+      <p class="phrase-fr">Comment puis-je vous aider ?</p>
+      <p class="phrase-phonetic">en ke PWE-do a-yu-DAR-le</p>
+      <p class="phrase-note">Forme formelle (usted). Si le vendeur dit <em>ayudarte</em>, c'est la forme familière — même sens.</p>
+    </div>
+
+    <div class="phrase-card sage">
+      <span class="phrase-context">Je regarde</span>
+      <p class="phrase-es">Estoy mirando, gracias.</p>
+      <p class="phrase-fr">Je regarde seulement, merci.</p>
+      <p class="phrase-phonetic">es-TOY mi-RAN-do, GRA-syas</p>
+      <p class="phrase-note">La phrase la plus utile avant un voyage. Coupe poliment la conversation.</p>
+    </div>
+
+    <div class="phrase-card night">
+      <span class="phrase-context">Demande polie</span>
+      <p class="phrase-es">Quería una camisa azul.</p>
+      <p class="phrase-fr">Je voudrais une chemise bleue.</p>
+      <p class="phrase-phonetic">ke-RI-a OO-na ka-MI-sa a-SOUL</p>
+      <p class="phrase-note"><em>Quería</em> (imparfait) = équivalent espagnol de « je voudrais ». Plus doux que <em>Quiero</em>.</p>
+    </div>
+
+    <div class="phrase-card">
+      <span class="phrase-context">Vérifier le stock</span>
+      <p class="phrase-es">¿Tiene talla M?</p>
+      <p class="phrase-fr">Avez-vous la taille M ?</p>
+      <p class="phrase-phonetic">TYE-ne TAL-ya EME</p>
+      <p class="phrase-note">Pour les chaussures : <em>¿Tiene número 42?</em> — on dit <em>número</em>, pas <em>talla</em>.</p>
+    </div>
+
+    <div class="phrase-card terra">
+      <span class="phrase-context">Chercher</span>
+      <p class="phrase-es">Busco una bolsa verde.</p>
+      <p class="phrase-fr">Je cherche un sac vert.</p>
+      <p class="phrase-phonetic">BUS-ko OO-na BOL-sa BER-de</p>
+      <p class="phrase-note">Plus ouvert que <em>¿Tiene?</em> — idéal quand vous n'êtes pas sûr qu'ils ont l'article.</p>
+    </div>
+
+    <div class="phrase-card sage">
+      <span class="phrase-context">Prix</span>
+      <p class="phrase-es">¿Cuánto cuesta?</p>
+      <p class="phrase-fr">Combien ça coûte ?</p>
+      <p class="phrase-phonetic">KWAN-to KWES-ta</p>
+      <p class="phrase-note">Plusieurs articles → <em>¿Cuánto cuestan?</em> Les centimes se disent avec <em>con</em> : 5,50 € = cinco euros <em>con</em> cincuenta.</p>
+    </div>
+
+    <div class="phrase-card night">
+      <span class="phrase-context">Négocier</span>
+      <p class="phrase-es">¿Tiene algo más barato?</p>
+      <p class="phrase-fr">Vous avez quelque chose de moins cher ?</p>
+      <p class="phrase-phonetic">TYE-ne AL-go mas ba-RA-to</p>
+      <p class="phrase-note">Fonctionne en magasin. Aux marchés ouverts, ajoutez <em>¿Me hace un precio?</em> pour négocier.</p>
+    </div>
+
+    <div class="phrase-card">
+      <span class="phrase-context">Conclure l'achat</span>
+      <p class="phrase-es">Me lo llevo. Pago con tarjeta.</p>
+      <p class="phrase-fr">Je le prends. Je paie par carte.</p>
+      <p class="phrase-phonetic">me lo YE-vo. PA-go kon tar-HE-ta</p>
+      <p class="phrase-note"><em>Me lo llevo</em> (m.) / <em>Me la llevo</em> (f.) — le pronom s'accorde avec le genre du nom.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── ÉTIQUETTES ───────────────────────────────────────── -->
+<section class="price-section">
+  <p class="section-label">Phrases de prix — Référence étiquette</p>
+  <div class="price-grid">
+
+    <div class="price-tag">
+      <p class="price-tag-label">Le vendeur dit</p>
+      <p class="price-tag-es">Son veinte euros.</p>
+      <p class="price-tag-fr">Ça fait vingt euros.</p>
+      <p class="price-tag-phonetic">son BEIN-te EW-ros</p>
+    </div>
+
+    <div class="price-tag">
+      <p class="price-tag-label">Avec centimes</p>
+      <p class="price-tag-es">Son tres euros con cincuenta.</p>
+      <p class="price-tag-fr">Ça fait 3,50 €.</p>
+      <p class="price-tag-phonetic">…kon sin-KWEN-ta</p>
+    </div>
+
+    <div class="price-tag">
+      <p class="price-tag-label">Payer en espèces</p>
+      <p class="price-tag-es">Pago en efectivo.</p>
+      <p class="price-tag-fr">Je paie en espèces.</p>
+      <p class="price-tag-phonetic">PA-go en e-fek-TI-vo</p>
+    </div>
+
+    <div class="price-tag">
+      <p class="price-tag-label">Payer par carte</p>
+      <p class="price-tag-es">Pago con tarjeta.</p>
+      <p class="price-tag-fr">Je paie par carte.</p>
+      <p class="price-tag-phonetic">PA-go kon tar-HE-ta</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── REÇU + NOTES CULTURELLES ────────────────────────── -->
+<section class="receipt-section">
+
+  <div>
+    <p class="section-label" style="margin-bottom:24px">Reçu type — Achat complet</p>
+    <div class="receipt">
+      <div class="receipt-header">
+        <span>TIENDA DE ROPA</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.6)">AUJOURD'HUI</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">Buenos días.</span>
+        <span class="receipt-fr">Bonjour.</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">¿En qué puedo ayudarle?</span>
+        <span class="receipt-fr">Comment puis-je vous aider ?</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">Quería una camisa azul, talla M.</span>
+        <span class="receipt-fr">Je voudrais une chemise bleue, taille M.</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">Sí, aquí tiene.</span>
+        <span class="receipt-fr">Oui, voilà.</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">¿Cuánto cuesta?</span>
+        <span class="receipt-fr">Combien ça coûte ?</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">Son veintidós euros.</span>
+        <span class="receipt-fr">Ça fait vingt-deux euros.</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">Me la llevo. Pago con tarjeta.</span>
+        <span class="receipt-fr">Je la prends. Je paie par carte.</span>
+      </div>
+      <div class="receipt-row">
+        <span class="receipt-es">¡Hasta luego!</span>
+        <span class="receipt-fr">Au revoir !</span>
+      </div>
+      <div class="receipt-total">
+        <span>TOTAL</span>
+        <span>22,00 €</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes-panel">
+    <h2 class="notes-title">Notes culturelles</h2>
+    <p class="notes-sub">Faire ses courses avec confiance</p>
+
+    <div class="note-item">
+      <div class="note-icon terra">!</div>
+      <div>
+        <p class="note-heading">Toujours saluer en entrant</p>
+        <p class="note-text">En Espagne, entrer dans un petit commerce sans saluer est impoli. Dites <em>Buenos días</em> ou <em>Buenas</em> avant toute chose.</p>
+      </div>
+    </div>
+
+    <div class="note-item">
+      <div class="note-icon ochre">€</div>
+      <div>
+        <p class="note-heading">Marchander ou non ?</p>
+        <p class="note-text">Les magasins à prix fixes (Espagne, grandes villes d'Amérique latine) ne négocient pas. Les marchés ouverts (ferias, mercados) accueillent <em>¿Me hace un precio?</em></p>
+      </div>
+    </div>
+
+    <div class="note-item">
+      <div class="note-icon sage">G</div>
+      <div>
+        <p class="note-heading">Accord du genre</p>
+        <p class="note-text">Les couleurs en -o/-a s'accordent : <em>zapato rojo / camisa roja</em>. Les couleurs en -e ou consonne sont invariables : <em>verde, azul, gris</em>.</p>
+      </div>
+    </div>
+
+    <div class="note-item">
+      <div class="note-icon night">T</div>
+      <div>
+        <p class="note-heading">Taille vs. número</p>
+        <p class="note-text"><em>Talla</em> pour les vêtements, <em>número</em> pour les chaussures. L'Espagne utilise les tailles européennes (38/40/42). S/M/L/XL sont universellement compris.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COULEURS + TAILLES ────────────────────────────────── -->
+<section class="color-size-section">
+  <p class="section-label">Couleurs et tailles — Référence rapide</p>
+  <div class="color-size-grid">
+
+    <div>
+      <p style="font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);margin-bottom:4px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Los colores · Les couleurs</p>
+      <div class="color-strip">
+        <div class="color-chip"><div class="color-swatch" style="background:#c0392b"></div><span class="color-es">rojo</span><span class="color-fr">rouge</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#2471a3"></div><span class="color-es">azul</span><span class="color-fr">bleu</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#27ae60"></div><span class="color-es">verde</span><span class="color-fr">vert</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#1a1a1a;border-color:#555"></div><span class="color-es">negro</span><span class="color-fr">noir</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#f5f5f5"></div><span class="color-es">blanco</span><span class="color-fr">blanc</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#f4d03f"></div><span class="color-es">amarillo</span><span class="color-fr">jaune</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#e59866"></div><span class="color-es">naranja</span><span class="color-fr">orange</span></div>
+        <div class="color-chip"><div class="color-swatch" style="background:#8e44ad"></div><span class="color-es">morado</span><span class="color-fr">violet</span></div>
+      </div>
+      <p style="font-family:'Caveat',cursive;font-size:16px;color:var(--sage);margin-top:16px;">
+        Invariables : azul, verde, gris — pas de -a au féminin.
+      </p>
+    </div>
+
+    <div>
+      <p style="font-family:'Inter',sans-serif;font-size:13px;color:var(--muted);margin-bottom:4px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Las tallas · Les tailles</p>
+      <table class="size-table">
+        <thead>
+          <tr>
+            <th>Español</th>
+            <th>Français</th>
+            <th>EU</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="size-es">pequeño (P)</td><td class="size-fr">Petit (S)</td><td>36–38</td></tr>
+          <tr><td class="size-es">mediano (M)</td><td class="size-fr">Moyen (M)</td><td>40–42</td></tr>
+          <tr><td class="size-es">grande (G)</td><td class="size-fr">Grand (L)</td><td>44–46</td></tr>
+          <tr><td class="size-es">extra grande (XG)</td><td class="size-fr">Très grand (XL)</td><td>48+</td></tr>
+        </tbody>
+      </table>
+      <p style="font-family:'Caveat',cursive;font-size:16px;color:var(--terra);margin-top:16px;">
+        Chaussures → número : ¿Tiene número 42?
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── DIALOGUE ─────────────────────────────────────────── -->
+<section class="dialogue-section">
+  <p class="section-label">Dialogue complet — Boulangerie</p>
+  <div class="dialogue-bubbles">
+    <div>
+      <p class="dialogue-col-label">VENDEUR (dependiente/a)</p>
+      <div class="bubble"><span class="bubble-es">Buenas tardes.</span><span class="bubble-fr">Bonjour (après-midi).</span></div>
+      <div class="bubble"><span class="bubble-es">¿En qué puedo ayudarle?</span><span class="bubble-fr">Comment puis-je vous aider ?</span></div>
+      <div class="bubble"><span class="bubble-es">Son tres euros cincuenta.</span><span class="bubble-fr">Ça fait 3,50 €.</span></div>
+      <div class="bubble"><span class="bubble-es">De nada. ¡Hasta luego!</span><span class="bubble-fr">De rien. Au revoir !</span></div>
+    </div>
+    <div>
+      <p class="dialogue-col-label">VOUS (cliente/a)</p>
+      <div class="bubble"><span class="bubble-es">Buenas tardes.</span><span class="bubble-fr">Bonjour.</span></div>
+      <div class="bubble"><span class="bubble-es">Quería dos baguettes y un croissant, por favor.</span><span class="bubble-fr">Je voudrais deux baguettes et un croissant, s'il vous plaît.</span></div>
+      <div class="bubble"><span class="bubble-es">Aquí tiene. Gracias.</span><span class="bubble-fr">Voilà. Merci.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AIDE-MÉMOIRE EXTRA ────────────────────────────────── -->
+<section class="cheat-section">
+  <p class="section-label">Aide-mémoire — Expressions supplémentaires</p>
+  <div class="cheat-grid">
+
+    <div class="cheat-card">
+      <p class="cheat-title">Types de magasins</p>
+      <div class="cheat-pair"><span class="cheat-es">la tienda</span><span class="cheat-fr">le magasin</span></div>
+      <div class="cheat-pair"><span class="cheat-es">el mercado</span><span class="cheat-fr">le marché</span></div>
+      <div class="cheat-pair"><span class="cheat-es">la panadería</span><span class="cheat-fr">la boulangerie</span></div>
+      <div class="cheat-pair"><span class="cheat-es">la zapatería</span><span class="cheat-fr">le magasin de chaussures</span></div>
+    </div>
+
+    <div class="cheat-card terra">
+      <p class="cheat-title">Demander de l'aide</p>
+      <div class="cheat-pair"><span class="cheat-es">Quería…</span><span class="cheat-fr">Je voudrais…</span></div>
+      <div class="cheat-pair"><span class="cheat-es">¿Tiene…?</span><span class="cheat-fr">Avez-vous… ?</span></div>
+      <div class="cheat-pair"><span class="cheat-es">Busco…</span><span class="cheat-fr">Je cherche…</span></div>
+      <div class="cheat-pair"><span class="cheat-es">Estoy mirando.</span><span class="cheat-fr">Je regarde seulement.</span></div>
+    </div>
+
+    <div class="cheat-card sage">
+      <p class="cheat-title">Taille et couleur</p>
+      <div class="cheat-pair"><span class="cheat-es">¿Qué talla tiene?</span><span class="cheat-fr">Quelle taille ?</span></div>
+      <div class="cheat-pair"><span class="cheat-es">¿Lo tiene en azul?</span><span class="cheat-fr">Vous l'avez en bleu ?</span></div>
+      <div class="cheat-pair"><span class="cheat-es">una talla más grande</span><span class="cheat-fr">une taille au-dessus</span></div>
+      <div class="cheat-pair"><span class="cheat-es">¿Qué número tiene?</span><span class="cheat-fr">Quelle pointure ?</span></div>
+    </div>
+
+    <div class="cheat-card night">
+      <p class="cheat-title">Payer et partir</p>
+      <div class="cheat-pair"><span class="cheat-es">¿Cuánto cuesta?</span><span class="cheat-fr">Combien ça coûte ?</span></div>
+      <div class="cheat-pair"><span class="cheat-es">Me lo / la llevo.</span><span class="cheat-fr">Je le / la prends.</span></div>
+      <div class="cheat-pair"><span class="cheat-es">Pago con tarjeta.</span><span class="cheat-fr">Je paie par carte.</span></div>
+      <div class="cheat-pair"><span class="cheat-es">¡Hasta luego!</span><span class="cheat-fr">Au revoir !</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────── -->
+<footer class="footer">
+  <span class="footer-brand">Español con Diana</span>
+  <span class="footer-meta">A1 · Thème 11 · Faire les courses</span>
+  <span class="footer-lang">FR</span>
+</footer>
+
+</body>
+</html>

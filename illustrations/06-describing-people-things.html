@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Describir Personas y Cosas — Comic Strip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&family=DM+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:       #FAF6EE;
+      --paper-dark:  #EEE8DA;
+      --ink:         #1F1A14;
+      --ochre:       #C99A3D;
+      --terracotta:  #C4593A;
+      --sage:        #6B8E6B;
+      --night:       #2A2540;
+      --muted:       #7B736B;
+    }
+
+    body {
+      background-color: var(--paper-dark);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 72px;
+      font-family: 'Caveat', cursive;
+    }
+
+    /* ── Page header ── */
+    .strip-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .strip-headline {
+      font-family: 'Fraunces', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .strip-subhead {
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 44px;
+      font-style: italic;
+    }
+
+    /* ── Comic strip container ── */
+    .comic-strip {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: nowrap;
+      max-width: 1360px;
+      width: 100%;
+    }
+
+    /* ── Individual panels ── */
+    .panel-wrap {
+      flex: 1;
+      min-width: 240px;
+      max-width: 340px;
+      position: relative;
+    }
+
+    .panel-wrap:nth-child(1) { transform: rotate(-1.6deg) translateY(8px);  z-index: 2; }
+    .panel-wrap:nth-child(2) { transform: rotate(1.4deg)  translateY(-5px); z-index: 3; }
+    .panel-wrap:nth-child(3) { transform: rotate(-0.9deg) translateY(10px); z-index: 2; }
+    .panel-wrap:nth-child(4) { transform: rotate(2.0deg)  translateY(-3px); z-index: 1; }
+
+    .panel {
+      background: var(--paper);
+      border: 2.5px solid var(--ink);
+      border-radius: 3px;
+      box-shadow:
+        5px 5px 0 var(--ink),
+        7px 7px 14px rgba(31,26,20,0.16);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .panel-scene {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── Caption bar ── */
+    .caption {
+      background: var(--paper-dark);
+      border-top: 2.5px solid var(--ink);
+      padding: 10px 14px 13px;
+    }
+    .caption-es {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--ink);
+      line-height: 1;
+      display: block;
+    }
+    .caption-en {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 4px;
+      display: block;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Panel number gutter ── */
+    .panel-num {
+      position: absolute;
+      top: 7px;
+      left: 9px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--ink);
+      opacity: 0.3;
+      z-index: 20;
+    }
+
+    /* ── Key-rule strip (below panels) ── */
+    .rule-strip {
+      margin-top: 52px;
+      max-width: 1040px;
+      width: 100%;
+      border: 2.5px solid var(--ink);
+      border-radius: 4px;
+      background: var(--paper);
+      box-shadow: 3px 3px 0 var(--ink);
+      padding: 20px 28px 18px;
+      display: flex;
+      gap: 0;
+      align-items: stretch;
+    }
+    .rule-col {
+      flex: 1;
+      padding: 0 20px;
+      border-right: 1.5px solid var(--ink);
+    }
+    .rule-col:last-child { border-right: none; }
+    .rule-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .rule-text {
+      font-family: 'Caveat', cursive;
+      font-size: 17px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .hl-ochre   { color: var(--ochre); font-weight: 700; }
+    .hl-terra   { color: var(--terracotta); font-weight: 700; }
+    .hl-sage    { color: var(--sage); font-weight: 700; }
+    .hl-night   { color: var(--night); font-weight: 700; }
+
+    /* ── Footer ── */
+    .strip-footer {
+      margin-top: 40px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      color: var(--muted);
+      opacity: 0.5;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="strip-title">Español con Diana &nbsp;·&nbsp; A1 &nbsp;·&nbsp; Lección 06</p>
+  <h1 class="strip-headline">¿Cómo es?</h1>
+  <p class="strip-subhead">Describing people &amp; things — adjective agreement</p>
+
+  <!-- Comic Strip — 4 panels -->
+  <div class="comic-strip">
+
+    <!-- ───────────────────────────────────────────────
+         PANEL 1: Physical adjectives (alto/bajo/rubio)
+         Scene: two friends side by side, one tall blond, one short dark-haired
+    ──────────────────────────────────────────────── -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">1</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink1" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.042" numOctaves="3" seed="7" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D4E8F0"/>
+              <stop offset="100%" stop-color="#FAF6EE"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Background -->
+          <rect width="290" height="260" fill="url(#sky1)"/>
+          <rect y="260" width="290" height="80" fill="#EEE8DA"/>
+          <line x1="0" y1="260" x2="290" y2="260" stroke="#1F1A14" stroke-width="2"/>
+
+          <!-- Ground texture lines -->
+          <line x1="20" y1="275" x2="80" y2="275" stroke="#1F1A14" stroke-width="1" opacity="0.15"/>
+          <line x1="100" y1="280" x2="160" y2="280" stroke="#1F1A14" stroke-width="1" opacity="0.12"/>
+          <line x1="200" y1="272" x2="260" y2="272" stroke="#1F1A14" stroke-width="1" opacity="0.13"/>
+
+          <!-- TALL BLOND CHARACTER (left) — "alto y rubio" -->
+          <!-- Body -->
+          <path d="M55,320 Q52,270 62,240 Q70,225 80,215 Q90,205 95,195 Q100,185 105,195 Q110,205 120,215 Q130,225 138,240 Q148,270 145,320 Z"
+            fill="#6B8E6B" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Legs -->
+          <rect x="68" y="295" width="22" height="45" rx="4" fill="#2A2540" stroke="#1F1A14" stroke-width="2"/>
+          <rect x="100" y="295" width="22" height="45" rx="4" fill="#2A2540" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="100" cy="176" rx="24" ry="26" fill="#F5CBA7" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Blond hair — wide swept -->
+          <path d="M76,164 Q78,145 100,148 Q122,145 124,164" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.8"/>
+          <path d="M78,164 Q74,155 76,148" fill="none" stroke="#C99A3D" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+          <path d="M122,164 Q126,155 124,148" fill="none" stroke="#C99A3D" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+          <!-- Eyes + smile -->
+          <circle cx="91" cy="174" r="3" fill="#1F1A14"/>
+          <circle cx="109" cy="174" r="3" fill="#1F1A14"/>
+          <path d="M88,188 Q100,196 112,188" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Height indicator arrow -->
+          <line x1="32" y1="150" x2="32" y2="320" stroke="#C99A3D" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <path d="M28,153 L32,145 L36,153" fill="#C99A3D"/>
+          <path d="M28,317 L32,325 L36,317" fill="#C99A3D"/>
+
+          <!-- SMALL DARK-HAIRED CHARACTER (right) — "bajo y moreno" -->
+          <!-- Body — shorter, lower baseline -->
+          <path d="M175,320 Q172,285 180,268 Q186,255 192,248 Q197,242 200,238 Q203,242 208,248 Q214,255 220,268 Q228,285 225,320 Z"
+            fill="#C4593A" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Legs -->
+          <rect x="178" y="298" width="19" height="42" rx="4" fill="#2A2540" stroke="#1F1A14" stroke-width="2"/>
+          <rect x="205" y="298" width="19" height="42" rx="4" fill="#2A2540" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="200" cy="225" rx="22" ry="24" fill="#C8956A" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Dark hair -->
+          <path d="M179,212 Q181,196 200,199 Q219,196 221,212" fill="#1F1A14" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyes + smile -->
+          <circle cx="191" cy="223" r="3" fill="#1F1A14"/>
+          <circle cx="209" cy="223" r="3" fill="#1F1A14"/>
+          <path d="M188,237 Q200,244 212,237" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Speech bubble (left character speaks) -->
+          <path d="M50,60 Q50,44 70,44 L230,44 Q250,44 250,62 Q250,80 230,80 L162,80 L150,96 L155,80 L70,80 Q50,80 50,62 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink1)"/>
+          <text x="150" y="67" font-family="'Caveat', cursive" font-size="18" font-weight="700" fill="#1F1A14" text-anchor="middle">Él es</text>
+          <text x="98" y="67" font-family="'Caveat', cursive" font-size="18" font-weight="700" fill="#C99A3D" text-anchor="middle">alto</text>
+          <text x="118" y="67" font-family="'Caveat', cursive" font-size="18" font-weight="700" fill="#1F1A14" text-anchor="middle">, </text>
+          <!-- reflow as single line -->
+          <text x="150" y="67" font-family="'Caveat', cursive" font-size="0" fill="none">x</text>
+
+          <!-- Better single-line speech bubble text -->
+          <text x="150" y="58" font-family="'Caveat', cursive" font-size="17" font-weight="700" fill="#1F1A14" text-anchor="middle">
+            <tspan fill="#1F1A14">Él es </tspan><tspan fill="#C99A3D">alto</tspan><tspan fill="#1F1A14"> y </tspan><tspan fill="#C99A3D">rubio</tspan><tspan fill="#1F1A14">.</tspan>
+          </text>
+          <text x="150" y="76" font-family="'Caveat', cursive" font-size="17" font-weight="700" fill="#1F1A14" text-anchor="middle">
+            <tspan fill="#1F1A14">Él es </tspan><tspan fill="#C4593A">bajo</tspan><tspan fill="#1F1A14"> y </tspan><tspan fill="#C4593A">moreno</tspan><tspan fill="#1F1A14">.</tspan>
+          </text>
+
+          <!-- Label annotations -->
+          <text x="100" y="130" font-family="'Caveat', cursive" font-size="13" fill="#C99A3D" text-anchor="middle" transform="rotate(-3,100,130)">alto / tall</text>
+          <text x="200" y="185" font-family="'Caveat', cursive" font-size="13" fill="#C4593A" text-anchor="middle" transform="rotate(2,200,185)">bajo / short</text>
+        </svg>
+        <div class="caption">
+          <span class="caption-es">alto · bajo · rubio · moreno</span>
+          <span class="caption-en">tall · short · blond · dark-haired</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────────────────
+         PANEL 2: Object adjectives — grande / pequeño + colors
+         Scene: market stall with a big red apple and small blue bag
+    ──────────────────────────────────────────────── -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">2</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink2" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.038" numOctaves="3" seed="13" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="awning" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#C4593A"/>
+              <stop offset="100%" stop-color="#A03B20"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Background wall -->
+          <rect width="290" height="340" fill="#FAF6EE"/>
+          <!-- Wall texture lines -->
+          <line x1="0" y1="80" x2="290" y2="80" stroke="#1F1A14" stroke-width="0.8" opacity="0.1"/>
+          <line x1="0" y1="160" x2="290" y2="160" stroke="#1F1A14" stroke-width="0.8" opacity="0.08"/>
+
+          <!-- Market stall awning -->
+          <path d="M0,40 Q145,18 290,40 L290,72 Q145,50 0,72 Z" fill="url(#awning)" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Awning stripes -->
+          <line x1="40" y1="25" x2="38" y2="68" stroke="#FAF6EE" stroke-width="8" stroke-linecap="round" opacity="0.25"/>
+          <line x1="90" y1="20" x2="88" y2="65" stroke="#FAF6EE" stroke-width="8" stroke-linecap="round" opacity="0.25"/>
+          <line x1="145" y1="18" x2="143" y2="63" stroke="#FAF6EE" stroke-width="8" stroke-linecap="round" opacity="0.25"/>
+          <line x1="200" y1="20" x2="198" y2="65" stroke="#FAF6EE" stroke-width="8" stroke-linecap="round" opacity="0.25"/>
+          <line x1="250" y1="25" x2="248" y2="68" stroke="#FAF6EE" stroke-width="8" stroke-linecap="round" opacity="0.25"/>
+          <!-- Awning fringe -->
+          <path d="M0,72 Q8,82 0,80 Q10,72 20,80 Q30,82 40,80 Q50,72 60,80 Q70,82 80,80 Q90,72 100,80 Q110,82 120,80 Q130,72 140,80 Q150,82 160,80 Q170,72 180,80 Q190,82 200,80 Q210,72 220,80 Q230,82 240,80 Q250,72 260,80 Q270,82 280,80 Q285,72 290,72" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.2"/>
+
+          <!-- Market shelf / counter -->
+          <rect x="0" y="185" width="290" height="18" rx="2" fill="#C8A97E" stroke="#1F1A14" stroke-width="2.2"/>
+          <rect x="0" y="200" width="290" height="140" fill="#EEE8DA"/>
+          <!-- Counter legs -->
+          <rect x="18" y="203" width="14" height="80" rx="2" fill="#A08060" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="258" y="203" width="14" height="80" rx="2" fill="#A08060" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- BIG RED APPLE — on shelf left -->
+          <!-- Apple body -->
+          <ellipse cx="82" cy="165" rx="42" ry="38" fill="#C4593A" stroke="#1F1A14" stroke-width="2.5" filter="url(#ink2)"/>
+          <!-- Apple highlight -->
+          <ellipse cx="68" cy="148" rx="12" ry="9" fill="#E07060" opacity="0.5"/>
+          <!-- Apple stem -->
+          <path d="M82,127 Q86,115 94,110" fill="none" stroke="#6B8E6B" stroke-width="3" stroke-linecap="round"/>
+          <!-- Leaf -->
+          <path d="M91,115 Q102,108 105,120 Q97,122 91,115 Z" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.2"/>
+          <!-- Apple dent -->
+          <path d="M74,128 Q82,122 90,128" fill="none" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+
+          <!-- SMALL BLUE BAG — on shelf right -->
+          <rect x="176" y="142" width="62" height="48" rx="6" fill="#4A6FA5" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink2)"/>
+          <!-- Bag handle -->
+          <path d="M188,142 Q188,126 195,122 Q207,118 213,122 Q220,126 220,142" fill="none" stroke="#1F1A14" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Bag flap line -->
+          <line x1="176" y1="163" x2="238" y2="163" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Bag clasp -->
+          <ellipse cx="207" cy="163" rx="7" ry="5" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Bag stitch detail -->
+          <rect x="183" y="148" width="48" height="30" rx="3" fill="none" stroke="#6A90C0" stroke-width="1.2" stroke-dasharray="3,2" opacity="0.6"/>
+
+          <!-- Speech bubble — apple -->
+          <path d="M8,95 Q8,80 25,80 L132,80 Q149,80 149,97 Q149,114 132,114 L82,114 L72,128 L76,114 L25,114 Q8,114 8,97 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2" filter="url(#ink2)"/>
+          <text x="78" y="101" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#1F1A14" text-anchor="middle">
+            <tspan fill="#1F1A14">La manzana es </tspan>
+          </text>
+          <text x="78" y="112" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#1F1A14" text-anchor="middle">
+            <tspan fill="#C4593A">grande</tspan><tspan fill="#1F1A14"> y </tspan><tspan fill="#C4593A">roja</tspan><tspan fill="#1F1A14">.</tspan>
+          </text>
+
+          <!-- Speech bubble — bag -->
+          <path d="M148,95 Q148,80 165,80 L272,80 Q282,80 282,97 Q282,114 272,114 L210,114 L200,128 L204,114 L165,114 Q148,114 148,97 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2" filter="url(#ink2)"/>
+          <text x="215" y="101" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#1F1A14" text-anchor="middle">
+            <tspan fill="#1F1A14">El bolso es </tspan>
+          </text>
+          <text x="215" y="112" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#1F1A14" text-anchor="middle">
+            <tspan fill="#4A6FA5">pequeño</tspan><tspan fill="#1F1A14"> y </tspan><tspan fill="#4A6FA5">azul</tspan><tspan fill="#1F1A14">.</tspan>
+          </text>
+
+          <!-- Labels below objects -->
+          <text x="82" y="215" font-family="'Caveat', cursive" font-size="13" fill="#C4593A" text-anchor="middle" transform="rotate(-2,82,215)">grande / big</text>
+          <text x="207" y="215" font-family="'Caveat', cursive" font-size="13" fill="#4A6FA5" text-anchor="middle" transform="rotate(2,207,215)">pequeño / small</text>
+
+          <!-- "invariable" note for grande -->
+          <text x="82" y="232" font-family="'Caveat', cursive" font-size="11" fill="#7B736B" text-anchor="middle" font-style="italic">no cambia con género</text>
+          <text x="82" y="244" font-family="'Caveat', cursive" font-size="11" fill="#7B736B" text-anchor="middle" font-style="italic">doesn't change for gender</text>
+        </svg>
+        <div class="caption">
+          <span class="caption-es">grande · pequeño · rojo · azul</span>
+          <span class="caption-en">big · small · red · blue (grande = invariable!)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────────────────
+         PANEL 3: Gender agreement — -o / -a rule
+         Scene: two labeled figures with adjective tables
+    ──────────────────────────────────────────────── -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">3</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink3" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="19" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+
+          <!-- Background -->
+          <rect width="290" height="340" fill="#FAF6EE"/>
+
+          <!-- Chalkboard / rule panel at top -->
+          <rect x="12" y="10" width="266" height="110" rx="5" fill="#2A2540" stroke="#1F1A14" stroke-width="2.5" filter="url(#ink3)"/>
+          <!-- Chalk frame line -->
+          <rect x="20" y="18" width="250" height="94" rx="3" fill="none" stroke="#FAF6EE" stroke-width="1.5" opacity="0.25" stroke-dasharray="6,4"/>
+
+          <!-- Rule heading -->
+          <text x="145" y="36" font-family="'Caveat', cursive" font-size="16" font-weight="700" fill="#C99A3D" text-anchor="middle">La regla / The rule</text>
+          <line x1="28" y1="42" x2="262" y2="42" stroke="#FAF6EE" stroke-width="1" opacity="0.3"/>
+
+          <!-- Table headers -->
+          <text x="80" y="58" font-family="'Caveat', cursive" font-size="14" fill="#C99A3D" text-anchor="middle">Masculino (-o)</text>
+          <text x="210" y="58" font-family="'Caveat', cursive" font-size="14" fill="#C4593A" text-anchor="middle">Femenino (-a)</text>
+          <line x1="145" y1="46" x2="145" y2="112" stroke="#FAF6EE" stroke-width="1" opacity="0.25"/>
+
+          <!-- Table rows -->
+          <text x="80" y="73" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#FAF6EE" text-anchor="middle">alt<tspan fill="#C99A3D">o</tspan></text>
+          <text x="210" y="73" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#FAF6EE" text-anchor="middle">alt<tspan fill="#C4593A">a</tspan></text>
+          <text x="80" y="88" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#FAF6EE" text-anchor="middle">moren<tspan fill="#C99A3D">o</tspan></text>
+          <text x="210" y="88" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#FAF6EE" text-anchor="middle">moren<tspan fill="#C4593A">a</tspan></text>
+          <text x="80" y="103" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#FAF6EE" text-anchor="middle">roj<tspan fill="#C99A3D">o</tspan></text>
+          <text x="210" y="103" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#FAF6EE" text-anchor="middle">roj<tspan fill="#C4593A">a</tspan></text>
+
+          <!-- Él/Ella figure pair -->
+          <!-- ÉL (masc.) left -->
+          <!-- Body -->
+          <rect x="40" y="185" width="48" height="65" rx="8" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="64" cy="172" rx="22" ry="24" fill="#F5CBA7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M42,162 Q44,148 64,151 Q84,148 86,162" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyes -->
+          <circle cx="56" cy="170" r="2.5" fill="#1F1A14"/>
+          <circle cx="72" cy="170" r="2.5" fill="#1F1A14"/>
+          <!-- Smile -->
+          <path d="M54,182 Q64,188 74,182" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Legs -->
+          <rect x="44" y="248" width="16" height="38" rx="4" fill="#2A2540" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="72" y="248" width="16" height="38" rx="4" fill="#2A2540" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- ÉL label -->
+          <text x="64" y="305" font-family="'Caveat', cursive" font-size="14" font-weight="700" fill="#C99A3D" text-anchor="middle">él</text>
+
+          <!-- Speech bubble él -->
+          <path d="M28,128 Q28,115 40,115 L128,115 Q140,115 140,128 Q140,141 128,141 L82,141 L75,152 L78,141 L40,141 Q28,141 28,128 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.8" filter="url(#ink3)"/>
+          <text x="84" y="132" font-family="'Caveat', cursive" font-size="14" font-weight="700" fill="#1F1A14" text-anchor="middle">
+            <tspan fill="#1F1A14">Es alt</tspan><tspan fill="#C99A3D">o</tspan><tspan fill="#1F1A14"> y rubi</tspan><tspan fill="#C99A3D">o</tspan><tspan fill="#1F1A14">.</tspan>
+          </text>
+
+          <!-- ELLA (fem.) right -->
+          <!-- Body -->
+          <rect x="202" y="185" width="48" height="65" rx="8" fill="#C4593A" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Skirt flare -->
+          <path d="M200,235 Q200,260 168,268 L172,250 Q178,248 192,250 L202,250 Z" fill="#C4593A" stroke="#1F1A14" stroke-width="1.8"/>
+          <path d="M250,235 Q250,260 282,268 L278,250 Q272,248 258,250 L250,250 Z" fill="#C4593A" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Head -->
+          <ellipse cx="226" cy="172" rx="22" ry="24" fill="#C8956A" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Long dark hair -->
+          <path d="M204,162 Q206,148 226,151 Q246,148 248,162 Q250,185 248,215 Q240,220 226,218 Q212,220 204,215 Q202,185 204,162 Z"
+            fill="#1F1A14" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Face over hair -->
+          <ellipse cx="226" cy="172" rx="18" ry="20" fill="#C8956A" stroke="none"/>
+          <!-- Eyes -->
+          <circle cx="218" cy="170" r="2.5" fill="#1F1A14"/>
+          <circle cx="234" cy="170" r="2.5" fill="#1F1A14"/>
+          <!-- Smile -->
+          <path d="M216,184 Q226,190 236,184" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Legs -->
+          <rect x="208" y="248" width="16" height="38" rx="4" fill="#2A2540" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="236" y="248" width="16" height="38" rx="4" fill="#2A2540" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- ELLA label -->
+          <text x="226" y="305" font-family="'Caveat', cursive" font-size="14" font-weight="700" fill="#C4593A" text-anchor="middle">ella</text>
+
+          <!-- Speech bubble ella -->
+          <path d="M152,128 Q152,115 162,115 L260,115 Q272,115 272,128 Q272,141 260,141 L210,141 L203,152 L206,141 L162,141 Q152,141 152,128 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.8" filter="url(#ink3)"/>
+          <text x="212" y="132" font-family="'Caveat', cursive" font-size="14" font-weight="700" fill="#1F1A14" text-anchor="middle">
+            <tspan fill="#1F1A14">Es alt</tspan><tspan fill="#C4593A">a</tspan><tspan fill="#1F1A14"> y moren</tspan><tspan fill="#C4593A">a</tspan><tspan fill="#1F1A14">.</tspan>
+          </text>
+        </svg>
+        <div class="caption">
+          <span class="caption-es">-o (masc.) → -a (fem.) · la regla base</span>
+          <span class="caption-en">swap -o to -a for feminine — the core rule</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────────────────
+         PANEL 4: ¿Cómo es…? — question in action
+         Scene: Diana asks about a mystery silhouette
+    ──────────────────────────────────────────────── -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">4</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink4" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="31" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#F0EBE0"/>
+              <stop offset="100%" stop-color="#FAF6EE"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Background -->
+          <rect width="290" height="340" fill="url(#bg4)"/>
+
+          <!-- Bookshelf (top) -->
+          <rect x="0" y="0" width="290" height="50" fill="#EEE8DA" stroke="#1F1A14" stroke-width="0"/>
+          <line x1="0" y1="50" x2="290" y2="50" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Books on shelf -->
+          <rect x="8" y="10" width="18" height="38" rx="2" fill="#C4593A" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="28" y="14" width="14" height="34" rx="2" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="44" y="10" width="20" height="38" rx="2" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="66" y="16" width="12" height="32" rx="2" fill="#2A2540" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="80" y="12" width="22" height="36" rx="2" fill="#4A6FA5" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="200" y="10" width="16" height="38" rx="2" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="218" y="14" width="20" height="34" rx="2" fill="#C4593A" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="240" y="8" width="14" height="40" rx="2" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="256" y="12" width="24" height="36" rx="2" fill="#2A2540" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Diana character left -->
+          <!-- Body -->
+          <path d="M30,310 Q28,270 38,250 Q44,238 52,230 Q57,224 60,218 Q63,224 68,230 Q76,238 82,250 Q92,270 90,310 Z"
+            fill="#C99A3D" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="60" cy="204" rx="22" ry="24" fill="#F5CBA7" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair – dark ponytail -->
+          <path d="M38,196 Q40,180 60,183 Q80,180 82,196" fill="#1F1A14" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M78,192 Q90,188 88,210 Q84,222 78,220 Q82,210 80,202 Z" fill="#1F1A14" stroke="#1F1A14" stroke-width="1.2"/>
+          <!-- Eyes (curious, raised brow) -->
+          <circle cx="51" cy="202" r="2.8" fill="#1F1A14"/>
+          <circle cx="69" cy="202" r="2.8" fill="#1F1A14"/>
+          <path d="M47,196 Q51,193 55,196" fill="none" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M65,196 Q69,193 73,196" fill="none" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Mouth open (asking) -->
+          <path d="M52,215 Q60,222 68,215" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Diana pointing arm -->
+          <path d="M82,250 Q110,240 130,245" fill="none" stroke="#F5CBA7" stroke-width="12" stroke-linecap="round"/>
+          <path d="M82,250 Q110,240 130,245" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Pointing finger extension -->
+          <path d="M126,244 L136,242" stroke="#F5CBA7" stroke-width="8" stroke-linecap="round"/>
+          <path d="M126,244 L138,241" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+
+          <!-- Mystery silhouette right (tall blob with ?) -->
+          <ellipse cx="215" cy="196" rx="26" ry="28" fill="#2A2540" stroke="#1F1A14" stroke-width="2.2"/>
+          <path d="M160,320 Q158,265 172,242 Q183,225 192,215 Q200,207 215,205 Q230,207 238,215 Q247,225 258,242 Q272,265 270,320 Z"
+            fill="#2A2540" stroke="#1F1A14" stroke-width="2.2"/>
+          <!-- Question mark on silhouette -->
+          <text x="215" y="210" font-family="'Caveat', cursive" font-size="38" font-weight="700" fill="#C99A3D" text-anchor="middle" opacity="0.9">?</text>
+
+          <!-- Diana's question bubble -->
+          <path d="M22,68 Q22,52 38,52 L240,52 Q256,52 256,68 Q256,86 240,86 L135,86 L124,102 L128,86 L38,86 Q22,86 22,68 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink4)"/>
+          <text x="139" y="73" font-family="'Caveat', cursive" font-size="20" font-weight="700" fill="#C4593A" text-anchor="middle">¿Cómo es…?</text>
+
+          <!-- Answer bubble (mystery figure answers) -->
+          <path d="M138,120 Q138,106 152,106 L270,106 Q282,106 282,120 Q282,136 270,136 L210,136 L200,150 L204,136 L152,136 Q138,136 138,120 Z"
+            fill="#2A2540" stroke="#1F1A14" stroke-width="2" filter="url(#ink4)"/>
+          <text x="210" y="126" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#FAF6EE" text-anchor="middle">
+            <tspan fill="#C99A3D">Es</tspan><tspan fill="#FAF6EE"> alto, rubio</tspan>
+          </text>
+          <text x="210" y="142" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#FAF6EE" text-anchor="middle">
+            <tspan fill="#FAF6EE">y delgado.</tspan>
+          </text>
+
+          <!-- "Diana" name tag -->
+          <text x="60" y="330" font-family="'Caveat', cursive" font-size="13" fill="#7B736B" text-anchor="middle">Diana</text>
+          <!-- "¿…?" label -->
+          <text x="215" y="330" font-family="'Caveat', cursive" font-size="13" fill="#7B736B" text-anchor="middle">¿quién es? / who is it?</text>
+        </svg>
+        <div class="caption">
+          <span class="caption-es">¿Cómo es…? — Es alto, rubio y delgado.</span>
+          <span class="caption-en">What is … like? — He is tall, blond and slim.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Key-rule reference strip ── -->
+  <div class="rule-strip">
+    <div class="rule-col">
+      <span class="rule-label">Concordancia / Agreement</span>
+      <div class="rule-text">
+        <span class="hl-ochre">-o</span> masc. → <span class="hl-terra">-a</span> fem.<br>
+        alto → alta<br>
+        moreno → morena<br>
+        rojo → roja
+      </div>
+    </div>
+    <div class="rule-col">
+      <span class="rule-label">Invariables / No change</span>
+      <div class="rule-text">
+        <span class="hl-sage">grande</span> — el/la grande<br>
+        <span class="hl-sage">azul</span> — el/la azul<br>
+        <span class="hl-sage">verde</span> — el/la verde<br>
+        <span class="hl-night">marrón</span> — el/la marrón
+      </div>
+    </div>
+    <div class="rule-col">
+      <span class="rule-label">Plural / Plural forms</span>
+      <div class="rule-text">
+        vocal → <span class="hl-ochre">+s</span>: altos, rojas<br>
+        cons. → <span class="hl-terra">+es</span>: azules<br>
+        <em style="font-size:14px;color:var(--muted);">-ón → -ones: marrón → marrones</em>
+      </div>
+    </div>
+    <div class="rule-col">
+      <span class="rule-label">La pregunta / The question</span>
+      <div class="rule-text">
+        <span class="hl-night">¿Cómo es…?</span><br>
+        <span style="font-size:14px;">→ Es alto y moreno.</span><br>
+        <span class="hl-night">¿Cómo son…?</span><br>
+        <span style="font-size:14px;">→ Son altos y rubios.</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="strip-footer">Español con Diana &nbsp;·&nbsp; Lección A1-06</p>
+
+</body>
+</html>

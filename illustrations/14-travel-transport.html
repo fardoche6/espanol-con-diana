@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viajes y Transporte — Comic Strip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,wght@0,700;1,400&family=Inter:wght@400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:       #FAF6EE;
+      --paper-dark:  #EDE8DC;
+      --ink:         #1F1A14;
+      --ochre:       #C99A3D;
+      --terra:       #C4593A;
+      --sage:        #6B8E6B;
+      --night:       #2A2540;
+      --muted:       #7B736B;
+      --panel-bdr:   2.5px;
+    }
+
+    body {
+      background-color: var(--paper-dark);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 72px;
+      font-family: 'Caveat', cursive;
+    }
+
+    /* ── Header ── */
+    .strip-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .strip-title {
+      font-family: 'Fraunces', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .strip-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* ── Comic strip container ── */
+    .comic-strip {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: nowrap;
+      max-width: 1340px;
+      width: 100%;
+    }
+
+    /* ── Individual panels ── */
+    .panel-wrap {
+      flex: 1;
+      min-width: 240px;
+      max-width: 320px;
+      position: relative;
+    }
+
+    .panel-wrap:nth-child(1) { transform: rotate(-1.6deg) translateY(8px);  z-index: 2; }
+    .panel-wrap:nth-child(2) { transform: rotate(1.4deg)  translateY(-5px); z-index: 3; }
+    .panel-wrap:nth-child(3) { transform: rotate(-0.9deg) translateY(10px); z-index: 2; }
+    .panel-wrap:nth-child(4) { transform: rotate(2deg)    translateY(-3px); z-index: 1; }
+
+    .panel {
+      background: var(--paper);
+      border: var(--panel-bdr) solid var(--ink);
+      border-radius: 3px;
+      box-shadow:
+        4px 4px 0 var(--ink),
+        7px 7px 14px rgba(31,26,20,0.18);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Paper grain overlay */
+    .panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .panel-scene { width: 100%; display: block; }
+
+    /* ── Caption bar ── */
+    .caption {
+      background: var(--paper-dark);
+      border-top: var(--panel-bdr) solid var(--ink);
+      padding: 10px 14px 14px;
+    }
+    .phrase {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--ink);
+      line-height: 1;
+      display: block;
+    }
+    .hint {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* ── Panel number ── */
+    .panel-num {
+      position: absolute;
+      top: 7px;
+      left: 9px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--ink);
+      opacity: 0.3;
+      z-index: 20;
+    }
+
+    /* ── Reference strip below ── */
+    .ref-strip {
+      margin-top: 52px;
+      max-width: 1000px;
+      width: 100%;
+      border: 2.5px solid var(--ink);
+      border-radius: 4px;
+      background: var(--paper);
+      box-shadow: 4px 4px 0 var(--ink);
+      padding: 20px 28px 18px;
+    }
+    .ref-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .ref-card {
+      background: var(--paper-dark);
+      border: 1.5px solid var(--ink);
+      border-radius: 3px;
+      padding: 10px 12px 9px;
+    }
+    .ref-es {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--ink);
+      display: block;
+    }
+    .ref-en {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 2px;
+      display: block;
+    }
+
+    /* ── Footer ── */
+    .strip-footer {
+      margin-top: 36px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="strip-label">Español con Diana &nbsp;·&nbsp; A1 &nbsp;·&nbsp; Tema 14</p>
+  <h1 class="strip-title">Viajes y Transporte</h1>
+  <p class="strip-subtitle">Travel &amp; Transport — four scenes from station to sky</p>
+
+  <div class="comic-strip">
+
+    <!-- ────────────────── PANEL 1: Bus stop ────────────────── -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">1</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink1" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="3" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="skyDay" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d0e8f4"/>
+              <stop offset="100%" stop-color="#f7f0e0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Sky background -->
+          <rect width="280" height="220" fill="url(#skyDay)"/>
+          <!-- Ground -->
+          <rect y="220" width="280" height="120" fill="#EDE8DC"/>
+          <line x1="0" y1="220" x2="280" y2="220" stroke="#1F1A14" stroke-width="2.5"/>
+
+          <!-- Pavement markings -->
+          <rect y="310" width="280" height="30" fill="#d8d2c4"/>
+          <line x1="0" y1="310" x2="280" y2="310" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Bus stop sign pole -->
+          <rect x="30" y="60" width="6" height="160" fill="#C4593A" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Sign board -->
+          <rect x="14" y="45" width="64" height="38" rx="3" fill="#C4593A" stroke="#1F1A14" stroke-width="2" filter="url(#ink1)"/>
+          <text x="46" y="60" font-family="'Caveat', cursive" font-size="11" font-weight="700" fill="#FAF6EE" text-anchor="middle">PARADA</text>
+          <text x="46" y="74" font-family="'Caveat', cursive" font-size="10" fill="#FAF6EE" text-anchor="middle">de autobús</text>
+
+          <!-- Bus shelter roof -->
+          <rect x="14" y="185" width="130" height="8" rx="2" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Shelter pillars -->
+          <rect x="14" y="193" width="5" height="35" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="139" y="193" width="5" height="35" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Autobús arriving (side view) -->
+          <!-- Bus body -->
+          <rect x="110" y="155" width="155" height="65" rx="6" fill="#C99A3D" stroke="#1F1A14" stroke-width="2.5" filter="url(#ink1)"/>
+          <!-- Bus windows -->
+          <rect x="125" y="163" width="28" height="24" rx="2" fill="#d0e8f4" stroke="#1F1A14" stroke-width="1.8"/>
+          <rect x="162" y="163" width="28" height="24" rx="2" fill="#d0e8f4" stroke="#1F1A14" stroke-width="1.8"/>
+          <rect x="199" y="163" width="28" height="24" rx="2" fill="#d0e8f4" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Bus door -->
+          <rect x="240" y="162" width="22" height="40" rx="2" fill="#EDE8DC" stroke="#1F1A14" stroke-width="1.8"/>
+          <line x1="251" y1="162" x2="251" y2="202" stroke="#1F1A14" stroke-width="1.2"/>
+          <!-- Wheels -->
+          <circle cx="145" cy="222" r="14" fill="#1F1A14"/>
+          <circle cx="145" cy="222" r="8" fill="#7B736B"/>
+          <circle cx="145" cy="222" r="3" fill="#1F1A14"/>
+          <circle cx="233" cy="222" r="14" fill="#1F1A14"/>
+          <circle cx="233" cy="222" r="8" fill="#7B736B"/>
+          <circle cx="233" cy="222" r="3" fill="#1F1A14"/>
+          <!-- Bus destination sign -->
+          <rect x="120" y="155" width="80" height="16" rx="2" fill="#1F1A14"/>
+          <text x="160" y="167" font-family="'Caveat', cursive" font-size="10" fill="#C99A3D" text-anchor="middle">CÓRDOBA</text>
+
+          <!-- Character waiting — woman with bag -->
+          <!-- Body -->
+          <rect x="58" y="235" width="38" height="55" rx="4" fill="#2A2540" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="77" cy="222" rx="18" ry="20" fill="#d4a574" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair (bun) -->
+          <path d="M60,215 Q62,198 77,200 Q92,198 94,215" fill="#3a2e18" stroke="#1F1A14" stroke-width="1.5"/>
+          <circle cx="77" cy="200" r="8" fill="#3a2e18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyes -->
+          <circle cx="71" cy="221" r="2.5" fill="#1F1A14"/>
+          <circle cx="83" cy="221" r="2.5" fill="#1F1A14"/>
+          <!-- Smile -->
+          <path d="M70,230 Q77,236 84,230" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Arm + bag -->
+          <path d="M58,250 Q46,258 44,272" fill="none" stroke="#d4a574" stroke-width="12" stroke-linecap="round"/>
+          <path d="M58,250 Q46,258 44,272" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Bag -->
+          <rect x="28" y="265" width="26" height="22" rx="3" fill="#C4593A" stroke="#1F1A14" stroke-width="1.8"/>
+          <path d="M32,265 Q41,257 50,265" fill="none" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Other arm raised -->
+          <path d="M96,248 Q108,238 112,228" fill="none" stroke="#d4a574" stroke-width="12" stroke-linecap="round"/>
+          <path d="M96,248 Q108,238 112,228" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Speech bubble -->
+          <path d="M98,70 Q98,52 118,52 L248,52 Q265,52 265,70 Q265,88 248,88 L175,88 L165,104 L168,88 L118,88 Q98,88 98,70 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink1)"/>
+          <text x="182" y="68" font-family="'Caveat', cursive" font-size="13" font-weight="700" fill="#1F1A14" text-anchor="middle">¿A qué hora</text>
+          <text x="182" y="84" font-family="'Caveat', cursive" font-size="13" font-weight="700" fill="#C4593A" text-anchor="middle">sale el autobús?</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">la parada de autobús</span>
+          <span class="hint">bus stop &nbsp;·&nbsp; ¿A qué hora sale?</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────── PANEL 2: Train station ticket counter ────────────────── -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">2</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink2" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="7" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.3" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+
+          <!-- Station interior background -->
+          <rect width="280" height="340" fill="#FAF6EE"/>
+
+          <!-- Ceiling arch -->
+          <path d="M0,0 Q140,-30 280,0 L280,80 Q140,50 0,80 Z" fill="#EDE8DC" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Arched window / station hall -->
+          <path d="M90,10 Q140,-10 190,10 L190,80 Q140,60 90,80 Z" fill="#d0e8f4" stroke="#1F1A14" stroke-width="2"/>
+          <line x1="140" y1="10" x2="140" y2="80" stroke="#1F1A14" stroke-width="1.2"/>
+          <line x1="90" y1="45" x2="190" y2="45" stroke="#1F1A14" stroke-width="1.2"/>
+
+          <!-- Station name banner -->
+          <rect x="18" y="90" width="244" height="28" rx="3" fill="#2A2540" stroke="#1F1A14" stroke-width="2"/>
+          <text x="140" y="109" font-family="'Caveat', cursive" font-size="16" font-weight="700" fill="#C99A3D" text-anchor="middle">ESTACIÓN DE TREN</text>
+
+          <!-- Ticket counter surface -->
+          <rect x="18" y="200" width="244" height="90" rx="4" fill="#c8a97e" stroke="#1F1A14" stroke-width="2.5" filter="url(#ink2)"/>
+          <!-- Counter top -->
+          <rect x="18" y="200" width="244" height="14" rx="3" fill="#a0785a" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Glass partition -->
+          <rect x="80" y="128" width="2.5" height="72" fill="#1F1A14"/>
+          <rect x="80" y="128" width="120" height="72" rx="2" fill="#d0e8f4" stroke="#1F1A14" stroke-width="2" opacity="0.6"/>
+          <rect x="80" y="128" width="120" height="72" rx="2" fill="none" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Ticket slot -->
+          <rect x="110" y="194" width="60" height="6" rx="1" fill="#7B736B"/>
+
+          <!-- Agent behind counter -->
+          <!-- Body -->
+          <rect x="110" y="162" width="60" height="40" rx="4" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Lanyard -->
+          <path d="M130,162 Q140,155 150,162" fill="none" stroke="#C4593A" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Head -->
+          <ellipse cx="140" cy="150" rx="18" ry="19" fill="#e0c49a" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M122,145 Q124,130 140,133 Q156,130 158,145" fill="#7B736B" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyes (friendly) -->
+          <circle cx="134" cy="150" r="2.5" fill="#1F1A14"/>
+          <circle cx="146" cy="150" r="2.5" fill="#1F1A14"/>
+          <!-- Smile -->
+          <path d="M133,160 Q140,166 147,160" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Ticket printed -->
+          <rect x="178" y="188" width="55" height="30" rx="2" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.8" filter="url(#ink2)"/>
+          <text x="205" y="201" font-family="'Caveat', cursive" font-size="9" fill="#1F1A14" text-anchor="middle">BILLETE</text>
+          <text x="205" y="212" font-family="'Caveat', cursive" font-size="9" fill="#C4593A" text-anchor="middle">SEVILLA</text>
+          <line x1="178" y1="206" x2="233" y2="206" stroke="#1F1A14" stroke-width="0.8" stroke-dasharray="3,3"/>
+
+          <!-- Customer (left side) -->
+          <!-- Body -->
+          <rect x="22" y="228" width="50" height="80" rx="4" fill="#C4593A" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="47" cy="215" rx="20" ry="21" fill="#f0c08a" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M27,208 Q29,190 47,193 Q65,190 67,208" fill="#3a2e18" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyes -->
+          <circle cx="40" cy="215" r="2.5" fill="#1F1A14"/>
+          <circle cx="54" cy="215" r="2.5" fill="#1F1A14"/>
+          <!-- Eyebrows raised (asking) -->
+          <path d="M37,208 Q40,204 43,208" fill="none" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M51,208 Q54,204 57,208" fill="none" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Mouth (speaking) -->
+          <path d="M41,224 Q47,228 53,224" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Arm up at counter -->
+          <path d="M72,240 Q84,230 80,215" fill="none" stroke="#f0c08a" stroke-width="12" stroke-linecap="round"/>
+          <path d="M72,240 Q84,230 80,215" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Speech bubble (customer) -->
+          <path d="M14,125 Q14,108 32,108 L165,108 Q182,108 182,125 Q182,143 165,143 L80,143 L70,158 L74,143 L32,143 Q14,143 14,125 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink2)"/>
+          <text x="97" y="122" font-family="'Caveat', cursive" font-size="12" font-weight="700" fill="#1F1A14" text-anchor="middle">Un billete para</text>
+          <text x="97" y="138" font-family="'Caveat', cursive" font-size="12" font-weight="700" fill="#C4593A" text-anchor="middle">Sevilla, por favor.</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">la estación de tren</span>
+          <span class="hint">train station &nbsp;·&nbsp; Un billete para…</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────── PANEL 3: Metro platform / departure board ────────────────── -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">3</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink3" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="11" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+          </defs>
+
+          <!-- Dark metro tunnel interior -->
+          <rect width="280" height="340" fill="#2A2540"/>
+
+          <!-- Ceiling arch of tunnel -->
+          <path d="M0,0 Q140,40 280,0 L280,100 Q140,140 0,100 Z" fill="#1F1A14" stroke="#7B736B" stroke-width="1.5"/>
+
+          <!-- Track lines -->
+          <line x1="0" y1="290" x2="280" y2="290" stroke="#7B736B" stroke-width="2.5"/>
+          <line x1="0" y1="305" x2="280" y2="305" stroke="#7B736B" stroke-width="2.5"/>
+          <!-- Rail ties -->
+          <g stroke="#7B736B" stroke-width="2">
+            <line x1="30"  y1="290" x2="30"  y2="305"/>
+            <line x1="65"  y1="290" x2="65"  y2="305"/>
+            <line x1="100" y1="290" x2="100" y2="305"/>
+            <line x1="135" y1="290" x2="135" y2="305"/>
+            <line x1="170" y1="290" x2="170" y2="305"/>
+            <line x1="205" y1="290" x2="205" y2="305"/>
+            <line x1="240" y1="290" x2="240" y2="305"/>
+          </g>
+
+          <!-- Platform edge -->
+          <rect x="0" y="260" width="280" height="30" fill="#3d3857"/>
+          <line x1="0" y1="260" x2="280" y2="260" stroke="#C99A3D" stroke-width="2.5"/>
+
+          <!-- Departure board (mounted high) -->
+          <rect x="55" y="90" width="170" height="75" rx="4" fill="#1F1A14" stroke="#C99A3D" stroke-width="2.5" filter="url(#ink3)"/>
+          <!-- Board header -->
+          <rect x="55" y="90" width="170" height="20" rx="3" fill="#C99A3D"/>
+          <text x="140" y="105" font-family="'DM Mono', monospace" font-size="9" fill="#1F1A14" text-anchor="middle" font-weight="700">SALIDAS — DEPARTURES</text>
+          <!-- Board rows -->
+          <text x="68" y="126" font-family="'DM Mono', monospace" font-size="9" fill="#C99A3D">14:30</text>
+          <text x="105" y="126" font-family="'Caveat', cursive" font-size="11" fill="#FAF6EE">Madrid Atocha</text>
+          <text x="210" y="126" font-family="'DM Mono', monospace" font-size="9" fill="#6B8E6B">PUNTUAL</text>
+
+          <line x1="62" y1="130" x2="218" y2="130" stroke="#7B736B" stroke-width="0.8"/>
+
+          <text x="68" y="146" font-family="'DM Mono', monospace" font-size="9" fill="#C99A3D">15:05</text>
+          <text x="105" y="146" font-family="'Caveat', cursive" font-size="11" fill="#FAF6EE">Sevilla Santa Justa</text>
+          <text x="210" y="146" font-family="'DM Mono', monospace" font-size="9" fill="#C4593A">+20 MIN</text>
+
+          <line x1="62" y1="150" x2="218" y2="150" stroke="#7B736B" stroke-width="0.8"/>
+
+          <text x="68" y="160" font-family="'DM Mono', monospace" font-size="9" fill="#C99A3D">15:40</text>
+          <text x="105" y="160" font-family="'Caveat', cursive" font-size="11" fill="#FAF6EE">Barcelona Sants</text>
+          <text x="210" y="160" font-family="'DM Mono', monospace" font-size="9" fill="#6B8E6B">ANDÉN 4</text>
+
+          <!-- Retraso sign -->
+          <rect x="170" y="175" width="96" height="24" rx="3" fill="#C4593A" stroke="#1F1A14" stroke-width="1.8" filter="url(#ink3)"/>
+          <text x="218" y="191" font-family="'Caveat', cursive" font-size="13" font-weight="700" fill="#FAF6EE" text-anchor="middle">RETRASO</text>
+
+          <!-- Character on platform — frustrated man checking phone -->
+          <!-- Body -->
+          <rect x="165" y="215" width="45" height="45" rx="4" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="187" cy="204" rx="18" ry="19" fill="#d4a070" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M169,200 Q170,185 187,187 Q204,185 205,200" fill="#7B736B" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyebrows furrowed -->
+          <path d="M177,200 Q181,196 185,200" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <path d="M189,200 Q193,196 197,200" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Eyes (annoyed) -->
+          <circle cx="181" cy="204" r="2.5" fill="#1F1A14"/>
+          <circle cx="193" cy="204" r="2.5" fill="#1F1A14"/>
+          <!-- Mouth straight/annoyed -->
+          <line x1="180" y1="213" x2="194" y2="213" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Arms: holding phone -->
+          <path d="M165,230 Q152,225 148,215" fill="none" stroke="#d4a070" stroke-width="12" stroke-linecap="round"/>
+          <path d="M165,230 Q152,225 148,215" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Phone -->
+          <rect x="136" y="204" width="18" height="28" rx="3" fill="#1F1A14" stroke="#C99A3D" stroke-width="1.5"/>
+          <rect x="138" y="207" width="14" height="20" rx="1" fill="#d0e8f4"/>
+          <circle cx="145" cy="229" r="2" fill="#7B736B"/>
+
+          <!-- Second character waiting calmly -->
+          <!-- Body -->
+          <rect x="55" y="225" width="40" height="35" rx="4" fill="#C99A3D" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="75" cy="215" rx="17" ry="18" fill="#f0c08a" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair long -->
+          <path d="M58,212 Q59,196 75,198 Q91,196 92,212" fill="#3a2e18" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M58,212 Q56,225 58,240" fill="#3a2e18" stroke="#1F1A14" stroke-width="1"/>
+          <path d="M92,212 Q94,225 92,240" fill="#3a2e18" stroke="#1F1A14" stroke-width="1"/>
+          <!-- Eyes calm -->
+          <circle cx="69" cy="215" r="2.5" fill="#1F1A14"/>
+          <circle cx="81" cy="215" r="2.5" fill="#1F1A14"/>
+          <!-- Calm smile -->
+          <path d="M68,224 Q75,230 82,224" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Speech bubble from man -->
+          <path d="M14,30 Q14,14 32,14 L180,14 Q196,14 196,30 Q196,47 180,47 L110,47 L100,62 L104,47 L32,47 Q14,47 14,30 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink3)"/>
+          <text x="105" y="28" font-family="'Caveat', cursive" font-size="12" font-weight="700" fill="#1F1A14" text-anchor="middle">¡Hay un retraso!</text>
+          <text x="105" y="44" font-family="'Caveat', cursive" font-size="11" fill="#C4593A" text-anchor="middle">Estoy perdido…</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">el andén — el retraso</span>
+          <span class="hint">platform — delay &nbsp;·&nbsp; ¡Hay un retraso!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────── PANEL 4: Airport / flight ────────────────── -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">4</span>
+        <svg class="panel-scene" viewBox="0 0 280 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink4" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="13" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.3" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="aeropuertoSky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1e3a5f"/>
+              <stop offset="60%" stop-color="#4a7ab5"/>
+              <stop offset="100%" stop-color="#f0c870"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Dawn sky background -->
+          <rect width="280" height="340" fill="url(#aeropuertoSky)"/>
+
+          <!-- Runway -->
+          <rect y="260" width="280" height="80" fill="#3a3a3a"/>
+          <line x1="0" y1="260" x2="280" y2="260" stroke="#1F1A14" stroke-width="2.5"/>
+          <!-- Runway dashes -->
+          <g stroke="#C99A3D" stroke-width="2.5" stroke-dasharray="18,10">
+            <line x1="0" y1="298" x2="280" y2="298"/>
+          </g>
+
+          <!-- Clouds -->
+          <ellipse cx="50" cy="40" rx="40" ry="18" fill="#EDE8DC" stroke="#1F1A14" stroke-width="1.5" opacity="0.7" filter="url(#ink4)"/>
+          <ellipse cx="35" cy="42" rx="28" ry="14" fill="#FAF6EE" opacity="0.8"/>
+          <ellipse cx="65" cy="38" rx="25" ry="12" fill="#FAF6EE" opacity="0.8"/>
+
+          <ellipse cx="220" cy="25" rx="32" ry="14" fill="#EDE8DC" stroke="#1F1A14" stroke-width="1.2" opacity="0.6" filter="url(#ink4)"/>
+          <ellipse cx="207" cy="27" rx="22" ry="11" fill="#FAF6EE" opacity="0.7"/>
+          <ellipse cx="235" cy="23" rx="20" ry="10" fill="#FAF6EE" opacity="0.7"/>
+
+          <!-- Airplane (side view, taking off) -->
+          <!-- Fuselage -->
+          <path d="M30,160 Q80,148 230,150 Q260,150 265,162 Q260,174 230,174 Q80,176 30,164 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.5" filter="url(#ink4)"/>
+          <!-- Nose -->
+          <path d="M230,150 Q270,155 272,162 Q270,169 230,174 Z"
+            fill="#EDE8DC" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Windows -->
+          <g fill="#d0e8f4" stroke="#1F1A14" stroke-width="1.2">
+            <ellipse cx="110" cy="158" rx="6" ry="5"/>
+            <ellipse cx="130" cy="158" rx="6" ry="5"/>
+            <ellipse cx="150" cy="158" rx="6" ry="5"/>
+            <ellipse cx="170" cy="158" rx="6" ry="5"/>
+            <ellipse cx="190" cy="158" rx="6" ry="5"/>
+            <ellipse cx="210" cy="158" rx="6" ry="5"/>
+          </g>
+          <!-- Main wing -->
+          <path d="M100,162 L80,230 L145,200 L145,162 Z"
+            fill="#EDE8DC" stroke="#1F1A14" stroke-width="2" filter="url(#ink4)"/>
+          <!-- Wing detail -->
+          <line x1="100" y1="162" x2="80" y2="230" stroke="#7B736B" stroke-width="1.2"/>
+          <!-- Tail fin -->
+          <path d="M42,162 L35,120 L65,150 L65,162 Z"
+            fill="#EDE8DC" stroke="#1F1A14" stroke-width="2" filter="url(#ink4)"/>
+          <!-- Tail horizontal -->
+          <path d="M42,166 L28,210 L68,195 L68,166 Z"
+            fill="#EDE8DC" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Airline stripe -->
+          <line x1="65" y1="158" x2="265" y2="160" stroke="#C99A3D" stroke-width="3.5" stroke-linecap="round"/>
+
+          <!-- Airport tower (far right background) -->
+          <rect x="230" y="195" width="16" height="65" fill="#7B736B" stroke="#1F1A14" stroke-width="1.8"/>
+          <rect x="222" y="188" width="32" height="16" rx="2" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.8"/>
+          <circle cx="238" cy="184" r="5" fill="#C4593A" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- AEROPUERTO sign (low left foreground) -->
+          <rect x="14" y="220" width="130" height="32" rx="3" fill="#2A2540" stroke="#C99A3D" stroke-width="2" filter="url(#ink4)"/>
+          <text x="79" y="232" font-family="'DM Mono', monospace" font-size="8" fill="#C99A3D" text-anchor="middle" font-weight="700">AEROPUERTO</text>
+          <text x="79" y="245" font-family="'Caveat', cursive" font-size="11" fill="#FAF6EE" text-anchor="middle">Vuelo IB3452 → BCN</text>
+
+          <!-- Passenger waving from gate (tiny, bottom left) -->
+          <ellipse cx="48" cy="285" rx="10" ry="11" fill="#d4a070" stroke="#1F1A14" stroke-width="1.8"/>
+          <rect x="38" y="295" width="20" height="28" rx="3" fill="#C4593A" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Waving arm -->
+          <path d="M58,300 Q72,288 74,278" fill="none" stroke="#d4a070" stroke-width="8" stroke-linecap="round"/>
+          <path d="M58,300 Q72,288 74,278" fill="none" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+
+          <!-- Speech bubble -->
+          <path d="M70,290 Q70,272 88,272 L250,272 Q266,272 266,288 Q266,304 250,304 L150,304 L140,318 L144,304 L88,304 Q70,304 70,288 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink4)"/>
+          <text x="168" y="287" font-family="'Caveat', cursive" font-size="12" font-weight="700" fill="#1F1A14" text-anchor="middle">¿A qué hora llega</text>
+          <text x="168" y="301" font-family="'Caveat', cursive" font-size="12" font-weight="700" fill="#2A2540" text-anchor="middle">el avión a Barcelona?</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase">el aeropuerto — el avión</span>
+          <span class="hint">airport — plane &nbsp;·&nbsp; ¿A qué hora llega?</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- .comic-strip -->
+
+  <!-- ── Reference vocabulary strip ── -->
+  <div class="ref-strip">
+    <p class="ref-title">Vocabulario esencial &nbsp;·&nbsp; Core vocabulary</p>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <span class="ref-es">el billete</span>
+        <span class="ref-en">ticket (Spain) / boleto (LatAm)</span>
+      </div>
+      <div class="ref-card">
+        <span class="ref-es">ida y vuelta</span>
+        <span class="ref-en">round-trip / return</span>
+      </div>
+      <div class="ref-card">
+        <span class="ref-es">¿A qué hora sale?</span>
+        <span class="ref-en">What time does it leave?</span>
+      </div>
+      <div class="ref-card">
+        <span class="ref-es">¿Cuánto cuesta?</span>
+        <span class="ref-en">How much does it cost?</span>
+      </div>
+      <div class="ref-card">
+        <span class="ref-es">voy en tren</span>
+        <span class="ref-en">I go by train (always "en")</span>
+      </div>
+      <div class="ref-card">
+        <span class="ref-es">el andén</span>
+        <span class="ref-en">platform (train)</span>
+      </div>
+      <div class="ref-card">
+        <span class="ref-es">hay un retraso</span>
+        <span class="ref-en">there is a delay</span>
+      </div>
+      <div class="ref-card">
+        <span class="ref-es">estoy perdido/a</span>
+        <span class="ref-en">I am lost (m/f)</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="strip-footer">Español con Diana &nbsp;·&nbsp; A1-14 &nbsp;·&nbsp; Viajes y Transporte</p>
+
+</body>
+</html>

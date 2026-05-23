@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Español con Diana icon">
+  <title>Español con Diana</title>
+
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAF6EE"/>
+      <stop offset="100%" stop-color="#F0EAE0"/>
+    </linearGradient>
+    <linearGradient id="sunGradI" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8B84B"/>
+      <stop offset="100%" stop-color="#C99A3D"/>
+    </linearGradient>
+    <linearGradient id="tildeGradI" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C4593A"/>
+      <stop offset="100%" stop-color="#D4694A"/>
+    </linearGradient>
+
+    <!-- Clip to square with rounded corners (for favicon shaping) -->
+    <clipPath id="iconClip">
+      <rect x="0" y="0" width="512" height="512" rx="96" ry="96"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background — warm paper square with rounded corners -->
+  <rect x="0" y="0" width="512" height="512" rx="96" ry="96"
+        fill="url(#bgGrad)"/>
+
+  <!-- ══════════════════════════════
+       Sun disc — centered, large
+       ══════════════════════════════ -->
+  <!-- Sun sits slightly below center — gives visual weight to bottom half -->
+  <circle cx="256" cy="290" r="130"
+          fill="url(#sunGradI)"
+          clip-path="url(#iconClip)"/>
+
+  <!-- Sun rays — 8 rays emanating from disc center -->
+  <g clip-path="url(#iconClip)"
+     stroke="#C99A3D"
+     stroke-linecap="round">
+    <!-- top -->
+    <line x1="256" y1="142" x2="256" y2="84"  stroke-width="14"/>
+    <!-- top-right 45° -->
+    <line x1="347" y1="199" x2="393" y2="153" stroke-width="12"/>
+    <!-- right -->
+    <line x1="396" y1="290" x2="454" y2="290" stroke-width="12"/>
+    <!-- top-left 45° -->
+    <line x1="165" y1="199" x2="119" y2="153" stroke-width="12"/>
+    <!-- left -->
+    <line x1="116" y1="290" x2="58"  y2="290" stroke-width="12"/>
+    <!-- bottom-right 45° — partially clipped by bg -->
+    <line x1="347" y1="381" x2="393" y2="427" stroke-width="10" opacity="0.5"/>
+    <!-- bottom-left 45° -->
+    <line x1="165" y1="381" x2="119" y2="427" stroke-width="10" opacity="0.5"/>
+  </g>
+
+  <!-- ══════════════════════════════
+       Tilde arch — the ñ gesture
+       Sinuous brush stroke at ~y=255
+       (horizon line crossing the sun)
+       ══════════════════════════════ -->
+  <path d="M 60 258 C 120 200, 196 320, 256 258 C 316 196, 392 320, 452 258"
+        fill="none"
+        stroke="url(#tildeGradI)"
+        stroke-width="28"
+        stroke-linecap="round"
+        clip-path="url(#iconClip)"/>
+
+  <!-- ══════════════════════════════
+       "ñ" letterform — large, centered
+       The entire concept distilled to one glyph:
+       the ñ in night color, sitting above the sun.
+       Provides immediate readability at 512px
+       and remains legible as a tiny favicon.
+       ══════════════════════════════ -->
+  <text x="256" y="224"
+        font-family="'Fraunces', 'Playfair Display', Georgia, serif"
+        font-size="184"
+        font-weight="600"
+        fill="#2A2540"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        clip-path="url(#iconClip)">&#xF1;</text>
+
+  <!-- Ochre ring border — frames the icon at any size -->
+  <rect x="14" y="14" width="484" height="484" rx="84" ry="84"
+        fill="none"
+        stroke="#C99A3D"
+        stroke-width="10"
+        opacity="0.6"/>
+
+</svg>

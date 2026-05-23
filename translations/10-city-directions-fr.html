@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1280" />
+<title>En ville et les directions — Español con Diana (FR)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&family=Inter:wght@400;600;700&family=Caveat:wght@500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #FAF6EE;
+    --ink:   #1F1A14;
+    --ochre: #C99A3D;
+    --terra: #C4593A;
+    --sage:  #6B8E6B;
+    --night: #2A2540;
+    --muted: #7B736B;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--terra);
+    color: var(--paper);
+    padding: 28px 60px 24px;
+    display: flex;
+    align-items: flex-end;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: 0.22;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; left: 250px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: var(--night);
+    opacity: 0.16;
+  }
+  .header-badge {
+    background: var(--paper);
+    color: var(--terra);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+  .header-title {
+    font-family: 'Fraunces', serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: rgba(250,246,238,0.6);
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+  }
+  .header-lang {
+    margin-left: auto;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--paper);
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── VOCAB BAND ── */
+  .vocab-band {
+    margin: 0 60px;
+    display: flex;
+    border: 2px solid var(--ink);
+    border-top: none;
+    flex-wrap: wrap;
+  }
+  .vocab-item {
+    flex: 0 0 25%;
+    padding: 20px 18px 16px;
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    position: relative;
+  }
+  .vocab-item:nth-child(4n) { border-right: none; }
+  .vocab-item.dark  { background: var(--night); color: var(--paper); }
+  .vocab-item.warm  { background: var(--ochre); color: var(--ink); }
+  .vocab-item.green { background: var(--sage);  color: var(--paper); }
+  .vocab-item.red   { background: var(--terra); color: var(--paper); }
+
+  .vi-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 6px;
+  }
+  .vi-es {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .vi-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.8;
+    margin-bottom: 6px;
+  }
+  .vi-note {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    line-height: 1.4;
+    opacity: 0.72;
+    border-top: 1px dashed currentColor;
+    padding-top: 6px;
+  }
+
+  /* ── MAP COMPASS SECTION ── */
+  .compass-section {
+    margin: 0 60px;
+    border: 2px solid var(--ink);
+    border-top: none;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+  }
+  .compass-main {
+    padding: 32px 32px 28px;
+    border-right: 2px solid var(--ink);
+  }
+  .compass-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .compass-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  .cg-item {
+    background: var(--night);
+    color: var(--paper);
+    border-radius: 6px;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .cg-item.light { background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); }
+  .cg-item.warm  { background: var(--ochre); color: var(--ink); }
+  .cg-item.green { background: var(--sage);  color: var(--paper); }
+  .cg-item.red   { background: var(--terra); color: var(--paper); }
+  .cg-arrow {
+    font-size: 26px;
+    line-height: 1;
+  }
+  .cg-es {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.15;
+  }
+  .cg-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    opacity: 0.7;
+    font-style: italic;
+  }
+  .cg-formal {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    opacity: 0.55;
+    margin-top: 2px;
+  }
+
+  .compass-side {
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .compass-side-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  /* SVG compass rose */
+  .compass-svg-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  /* Contraction callout -->  */
+  .contraction-box {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 6px;
+    padding: 16px 14px;
+    margin-top: auto;
+  }
+  .cb-head {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ochre);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .cb-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .cb-wrong {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-decoration: line-through;
+    opacity: 0.45;
+  }
+  .cb-arrow { font-size: 14px; color: var(--ochre); }
+  .cb-right {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .cb-note {
+    font-family: 'Caveat', cursive;
+    font-size: 12px;
+    color: var(--ochre);
+    margin-top: 2px;
+    opacity: 0.85;
+  }
+
+  /* ── DIALOGUE + TIPS 2-col ── */
+  .lower-section {
+    margin: 0 60px;
+    border: 2px solid var(--ink);
+    border-top: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .lower-col {
+    padding: 28px 26px;
+  }
+  .lower-col:first-child { border-right: 2px solid var(--ink); }
+  .lower-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  /* Dialogue */
+  .d-line { display: flex; gap: 10px; margin-bottom: 8px; align-items: baseline; }
+  .d-spk  {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--terra);
+    flex-shrink: 0;
+    width: 18px;
+    font-weight: 500;
+  }
+  .d-es {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .d-fr {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: 28px;
+    margin-bottom: 5px;
+    font-style: italic;
+  }
+  .dialogue-divider {
+    border: none;
+    border-top: 1.5px dashed var(--muted);
+    opacity: 0.4;
+    margin: 14px 0;
+  }
+
+  /* Tips list -->  */
+  .tip-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+  .tip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--terra);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .tip-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .tip-text strong {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin: 0 60px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    border-top: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+  }
+  .footer-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .footer-topic {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ochre);
+  }
+  .footer-cefr {
+    font-size: 12px;
+    color: rgba(250,246,238,0.4);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <div class="header-badge">Sujet 10 · A1</div>
+  </div>
+  <div>
+    <div class="header-title">En ville &amp; les directions</div>
+    <div class="header-sub">Español con Diana · Infographie de référence en français</div>
+  </div>
+  <div class="header-lang">FR 🗺</div>
+</div>
+
+<!-- VOCAB BAND — 12 items, 3 rows × 4 -->
+<div class="vocab-band">
+  <div class="vocab-item dark">
+    <div class="vi-tag">Lieu</div>
+    <div class="vi-es">el banco</div>
+    <div class="vi-fr">la banque</div>
+    <div class="vi-note">Masculin → el banco. Le H de hospital est toujours muet.</div>
+  </div>
+  <div class="vocab-item">
+    <div class="vi-tag">Lieu</div>
+    <div class="vi-es">la farmacia</div>
+    <div class="vi-fr">la pharmacie</div>
+    <div class="vi-note">Le c de farmacia = /s/ en espagnol d'Amérique latine.</div>
+  </div>
+  <div class="vocab-item warm">
+    <div class="vi-tag">Lieu</div>
+    <div class="vi-es">el museo</div>
+    <div class="vi-fr">le musée</div>
+    <div class="vi-note">el museo está cerca — aucun accord de genre pour cerca/lejos.</div>
+  </div>
+  <div class="vocab-item">
+    <div class="vi-tag">Lieu</div>
+    <div class="vi-es">la estación</div>
+    <div class="vi-fr">la gare / la station</div>
+    <div class="vi-note">Accent : es-ta-CIÓN — le tilde indique où frapper.</div>
+  </div>
+
+  <div class="vocab-item">
+    <div class="vi-tag">Lieu</div>
+    <div class="vi-es">el hospital</div>
+    <div class="vi-fr">l'hôpital</div>
+    <div class="vi-note">Faux-ami utile : même racine latine. H toujours muet.</div>
+  </div>
+  <div class="vocab-item green">
+    <div class="vi-tag">Lieu</div>
+    <div class="vi-es">el parque</div>
+    <div class="vi-fr">le parc</div>
+    <div class="vi-note">el parque — penser à "park" en anglais pour retenir le genre.</div>
+  </div>
+  <div class="vocab-item">
+    <div class="vi-tag">Lieu</div>
+    <div class="vi-es">el restaurante</div>
+    <div class="vi-fr">le restaurant</div>
+    <div class="vi-note">Accent : res-tau-RAN-te — 4 syllabes, accent sur la 3e.</div>
+  </div>
+  <div class="vocab-item red">
+    <div class="vi-tag">Lieu</div>
+    <div class="vi-es">la iglesia</div>
+    <div class="vi-fr">l'église</div>
+    <div class="vi-note">Même racine latine qu'« ecclésiastique » → aide-mémoire.</div>
+  </div>
+
+  <div class="vocab-item">
+    <div class="vi-tag">Question</div>
+    <div class="vi-es">¿Dónde está…?</div>
+    <div class="vi-fr">Où est… ?</div>
+    <div class="vi-note">DON-de — accent = marque de question, pas de son long.</div>
+  </div>
+  <div class="vocab-item dark">
+    <div class="vi-tag">Poli</div>
+    <div class="vi-es">¿Me puede decir…?</div>
+    <div class="vi-fr">Pouvez-vous me dire… ?</div>
+    <div class="vi-note">L'infinitif decir ne change jamais dans cette formule.</div>
+  </div>
+  <div class="vocab-item">
+    <div class="vi-tag">Politesse</div>
+    <div class="vi-es">Muchas gracias / De nada</div>
+    <div class="vi-fr">Merci beaucoup / De rien</div>
+    <div class="vi-note">Toujours finir la demande avec gracias + attendre de nada.</div>
+  </div>
+  <div class="vocab-item warm">
+    <div class="vi-tag">Distance-temps</div>
+    <div class="vi-es">A cinco minutos</div>
+    <div class="vi-fr">À cinq minutes</div>
+    <div class="vi-note">Les Espagnols donnent la distance en temps, pas en km.</div>
+  </div>
+</div>
+
+<!-- COMPASS DIRECTION SECTION -->
+<div class="compass-section">
+  <div class="compass-main">
+    <div class="compass-title">Verbes et mots de direction</div>
+    <div class="compass-grid">
+      <div class="cg-item">
+        <div class="cg-arrow">↑</div>
+        <div class="cg-es">Todo recto</div>
+        <div class="cg-fr">tout droit</div>
+        <div class="cg-formal">Siga todo recto (formel)</div>
+      </div>
+      <div class="cg-item light">
+        <div class="cg-arrow">←</div>
+        <div class="cg-es">A la izquierda</div>
+        <div class="cg-fr">à gauche</div>
+        <div class="cg-formal">iz-QUIER-da · qu = /k/</div>
+      </div>
+      <div class="cg-item">
+        <div class="cg-arrow">→</div>
+        <div class="cg-es">A la derecha</div>
+        <div class="cg-fr">à droite</div>
+        <div class="cg-formal">Gire a la derecha (formel)</div>
+      </div>
+      <div class="cg-item warm">
+        <div class="cg-arrow">↵</div>
+        <div class="cg-es">Gire / Gira</div>
+        <div class="cg-fr">tournez / tourne</div>
+        <div class="cg-formal">formel (usted) / informel (tú)</div>
+      </div>
+      <div class="cg-item green">
+        <div class="cg-arrow">→→</div>
+        <div class="cg-es">Siga / Sigue</div>
+        <div class="cg-fr">continuez / continue</div>
+        <div class="cg-formal">formel / informel</div>
+      </div>
+      <div class="cg-item red">
+        <div class="cg-arrow">✕</div>
+        <div class="cg-es">Cruce / Cruza</div>
+        <div class="cg-fr">traversez / traverse</div>
+        <div class="cg-formal">Cruce la plaza (formel)</div>
+      </div>
+      <div class="cg-item light">
+        <div class="cg-arrow">⇥</div>
+        <div class="cg-es">Al final de la calle</div>
+        <div class="cg-fr">au bout de la rue</div>
+        <div class="cg-formal">de la (fém.) → pas de contraction</div>
+      </div>
+      <div class="cg-item">
+        <div class="cg-arrow">①</div>
+        <div class="cg-es">La primera calle</div>
+        <div class="cg-fr">la première rue</div>
+        <div class="cg-formal">fém. car calle est féminin</div>
+      </div>
+      <div class="cg-item">
+        <div class="cg-arrow">②</div>
+        <div class="cg-es">Después del banco</div>
+        <div class="cg-fr">après la banque</div>
+        <div class="cg-formal">del = de + el (masc.)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="compass-side">
+    <div class="compass-side-title">Boussole de direction</div>
+    <div class="compass-svg-wrap">
+      <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer ring -->
+        <circle cx="90" cy="90" r="84" fill="none" stroke="#C99A3D" stroke-width="2" stroke-dasharray="8,6"/>
+        <circle cx="90" cy="90" r="72" fill="#2A2540"/>
+        <!-- N arrow -->
+        <polygon points="90,22 83,70 97,70" fill="#C4593A"/>
+        <!-- S arrow -->
+        <polygon points="90,158 83,110 97,110" fill="#FAF6EE" opacity="0.4"/>
+        <!-- E arrow -->
+        <polygon points="158,90 110,83 110,97" fill="#FAF6EE" opacity="0.4"/>
+        <!-- W arrow -->
+        <polygon points="22,90 70,83 70,97" fill="#FAF6EE" opacity="0.4"/>
+        <!-- Center -->
+        <circle cx="90" cy="90" r="10" fill="#C99A3D"/>
+        <circle cx="90" cy="90" r="4" fill="#2A2540"/>
+        <!-- Labels -->
+        <text x="90" y="15" text-anchor="middle" fill="#C4593A" font-family="'Fraunces',serif" font-size="14" font-weight="700">N</text>
+        <text x="90" y="172" text-anchor="middle" fill="#FAF6EE" font-family="'Fraunces',serif" font-size="12" opacity="0.4">S</text>
+        <text x="170" y="94" text-anchor="middle" fill="#FAF6EE" font-family="'Fraunces',serif" font-size="12" opacity="0.4">E</text>
+        <text x="10" y="94" text-anchor="middle" fill="#FAF6EE" font-family="'Fraunces',serif" font-size="12" opacity="0.4">O</text>
+        <!-- Direction words -->
+        <text x="90" y="52" text-anchor="middle" fill="#FAF6EE" font-family="'Caveat',cursive" font-size="11">todo recto</text>
+        <text x="48" y="94" text-anchor="middle" fill="#FAF6EE" font-family="'Caveat',cursive" font-size="10">izquierda</text>
+        <text x="132" y="94" text-anchor="middle" fill="#FAF6EE" font-family="'Caveat',cursive" font-size="10">derecha</text>
+      </svg>
+    </div>
+
+    <div class="contraction-box">
+      <div class="cb-head">Contractions obligatoires</div>
+      <div class="cb-row">
+        <span class="cb-wrong">a el banco</span>
+        <span class="cb-arrow">→</span>
+        <span class="cb-right">al banco</span>
+      </div>
+      <div class="cb-note">a + el = al (toujours)</div>
+      <div class="cb-row" style="margin-top:8px">
+        <span class="cb-wrong">de el parque</span>
+        <span class="cb-arrow">→</span>
+        <span class="cb-right">del parque</span>
+      </div>
+      <div class="cb-note">de + el = del (toujours)</div>
+      <div style="margin-top:10px; font-family:'Caveat',cursive; font-size:12px; color:rgba(250,246,238,0.5);">
+        Jamais de contraction avec la / las / los
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIALOGUE + TIPS -->
+<div class="lower-section">
+  <div class="lower-col">
+    <div class="lower-title">Dialogue de rue — Demander son chemin</div>
+    <div class="d-line">
+      <span class="d-spk">A:</span>
+      <span class="d-es">Perdón, ¿dónde está el banco?</span>
+    </div>
+    <div class="d-fr">Pardon, où est la banque ?</div>
+    <div class="d-line">
+      <span class="d-spk">B:</span>
+      <span class="d-es">Todo recto, al final de la calle.</span>
+    </div>
+    <div class="d-fr">Tout droit, au bout de la rue.</div>
+    <div class="d-line">
+      <span class="d-spk">A:</span>
+      <span class="d-es">Muchas gracias.</span>
+    </div>
+    <div class="d-fr">Merci beaucoup.</div>
+    <div class="d-line">
+      <span class="d-spk">B:</span>
+      <span class="d-es">De nada.</span>
+    </div>
+    <div class="d-fr">De rien.</div>
+
+    <hr class="dialogue-divider"/>
+
+    <div class="lower-title">Version polie</div>
+    <div class="d-line">
+      <span class="d-spk">A:</span>
+      <span class="d-es">Perdón, ¿me puede decir dónde está la farmacia?</span>
+    </div>
+    <div class="d-fr">Pardon, pouvez-vous me dire où est la pharmacie ?</div>
+    <div class="d-line">
+      <span class="d-spk">B:</span>
+      <span class="d-es">Sí, claro. Gire a la izquierda y es la segunda calle.</span>
+    </div>
+    <div class="d-fr">Oui, bien sûr. Tournez à gauche, c'est la deuxième rue.</div>
+    <div class="d-line">
+      <span class="d-spk">A:</span>
+      <span class="d-es">¿Está lejos?</span>
+    </div>
+    <div class="d-fr">C'est loin ?</div>
+    <div class="d-line">
+      <span class="d-spk">B:</span>
+      <span class="d-es">No, está muy cerca, a cinco minutos.</span>
+    </div>
+    <div class="d-fr">Non, c'est tout près, à cinq minutes.</div>
+  </div>
+
+  <div class="lower-col">
+    <div class="lower-title">Pièges courants &amp; conseils de prononciation</div>
+
+    <div class="tip-item">
+      <div class="tip-dot"></div>
+      <div class="tip-text"><strong>Gire vs. gira</strong> — Avec un inconnu, toujours la forme polie <em>-e</em>: gire, siga, cruce. La forme <em>-a</em> (gira, sigue, cruza) est réservée aux amis et enfants.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot"></div>
+      <div class="tip-text"><strong>Izquierda</strong> — Le groupe <em>qu</em> = /k/ en espagnol, jamais /kw/. Dites « ees-KYEHR-da » en levant la main gauche pour ancrer le mot physiquement.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot"></div>
+      <div class="tip-text"><strong>Todo recto ≠ derecha</strong> — Les deux commencent par une syllabe avec R-voyelle. Mnémonique : <em>recto</em> → rectangle → avance en ligne droite.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot"></div>
+      <div class="tip-text"><strong>Al lado de la farmacia</strong> — Jamais de contraction quand l'article est <em>la/las</em>. Seul <em>el</em> (masc. sing.) déclenche <em>del</em> ou <em>al</em>.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot"></div>
+      <div class="tip-text"><strong>Première / deuxième rue</strong> — <em>la primera calle</em>, <em>la segunda calle</em> : accord féminin car <em>calle</em> est féminin, même si ça ressemble à un mot masculin.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot"></div>
+      <div class="tip-text"><strong>Ordre naturel</strong> — En espagnol, on dit d'abord le repère puis l'action : <em>después del banco, gira a la derecha</em> — pas l'inverse.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot"></div>
+      <div class="tip-text"><strong>Perdón vs. disculpe</strong> — Les deux signifient « pardon/excusez-moi ». <em>Perdón</em> est plus courant en Espagne ; <em>disculpe</em> en Amérique latine. Diana dit <em>perdón</em> → copiez-la.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">Español con Diana</div>
+  <div class="footer-topic">Sujet 10 · En ville &amp; les directions · A1</div>
+  <div class="footer-cefr">CECR A1 · Aligné DELE A1</div>
+</div>
+
+</body>
+</html>

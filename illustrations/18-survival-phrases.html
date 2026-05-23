@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frases de Supervivencia — Comic Strip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fraunces:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:        #FAF6EE;
+      --ink:          #1F1A14;
+      --ochre:        #C99A3D;
+      --terracotta:   #C4593A;
+      --sage:         #6B8E6B;
+      --night:        #2A2540;
+      --muted:        #7B736B;
+      --paper-shadow: #EDE6D6;
+    }
+
+    body {
+      background-color: var(--paper-shadow);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 72px;
+      font-family: 'Caveat', cursive;
+    }
+
+    .strip-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .strip-heading {
+      font-family: 'Fraunces', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 36px;
+      text-align: center;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Comic strip container ── */
+    .comic-strip {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: nowrap;
+      max-width: 1340px;
+      width: 100%;
+    }
+
+    /* ── Individual panels ── */
+    .panel-wrap {
+      flex: 1;
+      min-width: 240px;
+      max-width: 330px;
+      position: relative;
+    }
+
+    .panel-wrap:nth-child(1) { transform: rotate(-1.6deg) translateY(8px);  z-index: 2; }
+    .panel-wrap:nth-child(2) { transform: rotate(1.4deg)  translateY(-5px); z-index: 3; }
+    .panel-wrap:nth-child(3) { transform: rotate(-0.9deg) translateY(10px); z-index: 2; }
+    .panel-wrap:nth-child(4) { transform: rotate(2.0deg)  translateY(-3px); z-index: 1; }
+
+    .panel {
+      background: var(--paper);
+      border: 2.5px solid var(--ink);
+      border-radius: 3px;
+      box-shadow:
+        5px 5px 0 var(--ink),
+        7px 7px 14px rgba(31,26,20,0.16);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .panel-scene {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── Caption bar ── */
+    .caption {
+      background: var(--paper-shadow);
+      border-top: 2.5px solid var(--ink);
+      padding: 10px 16px 13px;
+    }
+
+    .phrase-es {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--ink);
+      line-height: 1.1;
+      display: block;
+    }
+
+    .phrase-en {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 3px;
+      display: block;
+      letter-spacing: 0.02em;
+    }
+
+    .panel-num {
+      position: absolute;
+      top: 7px;
+      left: 9px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--ink);
+      opacity: 0.30;
+      z-index: 20;
+    }
+
+    /* ── Reference strip below ── */
+    .ref-strip {
+      margin-top: 52px;
+      max-width: 1100px;
+      width: 100%;
+      border: 2.5px solid var(--ink);
+      border-radius: 4px;
+      background: var(--paper);
+      box-shadow: 4px 4px 0 var(--ink);
+      padding: 22px 28px 18px;
+    }
+
+    .ref-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .ref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px 20px;
+    }
+
+    .ref-row {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      border-bottom: 1px dashed rgba(31,26,20,0.12);
+      padding-bottom: 6px;
+    }
+
+    .ref-es {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--ink);
+      min-width: 0;
+      flex-shrink: 0;
+    }
+
+    .ref-en {
+      font-family: 'Inter', sans-serif;
+      font-size: 10.5px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .strip-footer {
+      margin-top: 40px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      opacity: 0.55;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="strip-title">Español con Diana &nbsp;·&nbsp; A1 &nbsp;·&nbsp; Lección 18</p>
+  <h1 class="strip-heading">Frases de supervivencia</h1>
+
+  <div class="comic-strip">
+
+    <!-- PANEL 1: No entiendo — street scene, confused tourist -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">1</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink1" x="-6%" y="-6%" width="112%" height="112%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.042" numOctaves="3" seed="3" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="skyA" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D9EEFF"/>
+              <stop offset="100%" stop-color="#F0E8D8"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Sky -->
+          <rect width="290" height="200" fill="url(#skyA)"/>
+          <!-- Ground / sidewalk -->
+          <rect y="200" width="290" height="140" fill="#E8E0D0"/>
+          <line x1="0" y1="200" x2="290" y2="200" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Sidewalk lines -->
+          <line x1="0" y1="230" x2="290" y2="230" stroke="#1F1A14" stroke-width="0.8" stroke-dasharray="8,6" opacity="0.25"/>
+          <line x1="0" y1="260" x2="290" y2="260" stroke="#1F1A14" stroke-width="0.8" stroke-dasharray="8,6" opacity="0.25"/>
+
+          <!-- Building facade -->
+          <rect x="0" y="30" width="100" height="170" fill="#C4593A" opacity="0.15"/>
+          <rect x="0" y="30" width="100" height="170" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Windows on building -->
+          <rect x="10" y="45" width="30" height="25" rx="2" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.2"/>
+          <rect x="55" y="45" width="30" height="25" rx="2" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.2"/>
+          <rect x="10" y="85" width="30" height="25" rx="2" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.2"/>
+          <rect x="55" y="85" width="30" height="25" rx="2" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.2"/>
+          <!-- Door -->
+          <rect x="25" y="150" width="50" height="50" rx="3" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.8"/>
+          <circle cx="62" cy="175" r="3" fill="#1F1A14"/>
+
+          <!-- Street sign post -->
+          <rect x="185" y="90" width="4" height="110" fill="#7B736B"/>
+          <rect x="172" y="68" width="50" height="22" rx="3" fill="#2A2540" stroke="#1F1A14" stroke-width="1.5"/>
+          <text x="197" y="83" font-family="'Caveat', cursive" font-size="12" font-weight="700" fill="#FAF6EE" text-anchor="middle">CALLE MAYOR</text>
+
+          <!-- Character A: fast-talking local, on left -->
+          <!-- Body -->
+          <rect x="108" y="222" width="34" height="60" rx="6" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="125" cy="210" rx="20" ry="22" fill="#C8A97E" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M106,203 Q108,186 125,190 Q142,186 144,203" fill="#1F1A14" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Confident eyes -->
+          <circle cx="118" cy="208" r="3" fill="#1F1A14"/>
+          <circle cx="132" cy="208" r="3" fill="#1F1A14"/>
+          <!-- Talking mouth open -->
+          <path d="M117,220 Q125,226 133,220" fill="#C4593A" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Arm gesturing -->
+          <path d="M142,235 Q162,225 168,210" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <!-- Hand -->
+          <ellipse cx="170" cy="207" rx="7" ry="6" fill="#C8A97E" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Character B: confused tourist, on right -->
+          <!-- Body -->
+          <rect x="210" y="230" width="34" height="60" rx="6" fill="#C99A3D" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Backpack suggestion -->
+          <rect x="244" y="232" width="16" height="40" rx="4" fill="#C4593A" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Head -->
+          <ellipse cx="227" cy="217" rx="20" ry="22" fill="#F0C9A0" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hat -->
+          <rect x="207" y="197" width="40" height="8" rx="3" fill="#2A2540" stroke="#1F1A14" stroke-width="1.5"/>
+          <rect x="213" y="183" width="28" height="15" rx="3" fill="#2A2540" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Confused eyes (wide) -->
+          <circle cx="220" cy="215" r="4" fill="#1F1A14"/>
+          <circle cx="222" cy="213" r="1.5" fill="#FAF6EE"/>
+          <circle cx="234" cy="215" r="4" fill="#1F1A14"/>
+          <circle cx="236" cy="213" r="1.5" fill="#FAF6EE"/>
+          <!-- Squiggly confused eyebrows -->
+          <path d="M215,208 Q218,205 222,207" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M229,208 Q232,205 236,207" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Open mouth - ??? expression -->
+          <ellipse cx="227" cy="225" rx="5" ry="4" fill="#1F1A14"/>
+
+          <!-- Confusion swirls near tourist head -->
+          <text x="248" y="210" font-family="'Caveat', cursive" font-size="16" fill="#C99A3D" opacity="0.8" transform="rotate(12,248,210)">?</text>
+          <text x="258" y="198" font-family="'Caveat', cursive" font-size="20" fill="#C99A3D" opacity="0.6" transform="rotate(8,258,198)">?</text>
+          <text x="244" y="193" font-family="'Caveat', cursive" font-size="13" fill="#C99A3D" opacity="0.5" transform="rotate(-5,244,193)">?</text>
+
+          <!-- Fast-speech bubble from local (squiggly border = fast speech) -->
+          <path d="M135,40 Q140,26 155,26 L258,26 Q272,26 272,42 Q272,58 258,58 L188,58 L177,74 L180,58 L155,58 Q140,58 135,42 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2" filter="url(#ink1)"/>
+          <text x="200" y="40" font-family="'Caveat', cursive" font-size="13" font-weight="700" fill="#C4593A" text-anchor="middle">rapidorapidorápido</text>
+          <text x="203" y="52" font-family="'Caveat', cursive" font-size="10" fill="#7B736B" text-anchor="middle">(too fast!)</text>
+
+          <!-- Tourist reply bubble -->
+          <path d="M138,100 Q138,84 155,84 L270,84 Q282,84 282,100 Q282,118 270,118 L220,118 L213,134 L216,118 L155,118 Q138,118 138,100 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink1)"/>
+          <text x="210" y="102" font-family="'Caveat', cursive" font-size="18" font-weight="700" fill="#1F1A14" text-anchor="middle">No entiendo.</text>
+          <text x="210" y="115" font-family="'Caveat', cursive" font-size="12" fill="#7B736B" text-anchor="middle">I don't understand.</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase-es">No entiendo.</span>
+          <span class="phrase-en">I don't understand.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: Más despacio, por favor — metro scene -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">2</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink2" x="-6%" y="-6%" width="112%" height="112%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="7"/>
+              <feDisplacementMap in="SourceGraphic" scale="1.3" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="metroWall" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2A2540"/>
+              <stop offset="100%" stop-color="#3D3860"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Metro underground background -->
+          <rect width="290" height="340" fill="url(#metroWall)"/>
+
+          <!-- Metro tile wall -->
+          <g stroke="#3D3860" stroke-width="1" opacity="0.4">
+            <line x1="0" y1="60" x2="290" y2="60"/>
+            <line x1="0" y1="90" x2="290" y2="90"/>
+            <line x1="0" y1="120" x2="290" y2="120"/>
+            <line x1="50" y1="60" x2="50" y2="130"/>
+            <line x1="100" y1="60" x2="100" y2="130"/>
+            <line x1="150" y1="60" x2="150" y2="130"/>
+            <line x1="200" y1="60" x2="200" y2="130"/>
+            <line x1="250" y1="60" x2="250" y2="130"/>
+          </g>
+
+          <!-- Metro sign -->
+          <circle cx="35" cy="35" r="22" fill="#C4593A" stroke="#1F1A14" stroke-width="2"/>
+          <text x="35" y="40" font-family="'Fraunces', serif" font-size="22" font-weight="700" fill="#FAF6EE" text-anchor="middle">M</text>
+
+          <!-- Platform line (floor) -->
+          <rect y="240" width="290" height="100" fill="#1A1630"/>
+          <rect y="238" width="290" height="8" fill="#C99A3D"/>
+          <line x1="0" y1="238" x2="290" y2="238" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Yellow safety line -->
+          <line x1="0" y1="244" x2="290" y2="244" stroke="#C99A3D" stroke-width="2" stroke-dasharray="12,8"/>
+
+          <!-- Metro map poster on wall -->
+          <rect x="180" y="65" width="90" height="55" rx="3" fill="#FAF6EE" stroke="#C99A3D" stroke-width="1.5"/>
+          <text x="225" y="78" font-family="'Inter', sans-serif" font-size="8" fill="#1F1A14" text-anchor="middle">MAPA DEL METRO</text>
+          <!-- Simplified metro lines on map -->
+          <line x1="190" y1="88" x2="260" y2="88" stroke="#C4593A" stroke-width="3"/>
+          <line x1="210" y1="78" x2="210" y2="110" stroke="#6B8E6B" stroke-width="3"/>
+          <circle cx="210" cy="88" r="4" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1"/>
+
+          <!-- Ticket machine suggestion -->
+          <rect x="10" y="150" width="50" height="80" rx="4" fill="#3D3860" stroke="#C99A3D" stroke-width="1.5"/>
+          <rect x="18" y="158" width="34" height="22" rx="2" fill="#6B8E6B" opacity="0.6"/>
+          <rect x="18" y="186" width="34" height="8" rx="1" fill="#C99A3D" opacity="0.8"/>
+          <rect x="18" y="200" width="34" height="8" rx="1" fill="#7B736B" opacity="0.5"/>
+          <rect x="22" y="216" width="10" height="6" rx="1" fill="#C4593A" opacity="0.9"/>
+
+          <!-- Character A: ticket agent behind glass -->
+          <!-- Glass booth -->
+          <rect x="80" y="148" width="55" height="90" rx="3" fill="#2A2540" stroke="#C99A3D" stroke-width="1.5" opacity="0.9"/>
+          <rect x="83" y="151" width="49" height="60" rx="2" fill="#5A7080" opacity="0.5"/>
+          <text x="107" y="225" font-family="'Caveat', cursive" font-size="9" fill="#C99A3D" text-anchor="middle" opacity="0.7">INFORMACIÓN</text>
+          <!-- Agent head (behind glass) -->
+          <ellipse cx="107" cy="178" rx="18" ry="20" fill="#C8A97E" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M89,168 Q90,153 107,157 Q124,153 125,168" fill="#1F1A14"/>
+          <!-- Uniform collar -->
+          <rect x="94" y="196" width="26" height="20" rx="3" fill="#2A2540"/>
+          <!-- Eyes (bored but helpful) -->
+          <circle cx="100" cy="176" r="2.5" fill="#1F1A14"/>
+          <circle cx="114" cy="176" r="2.5" fill="#1F1A14"/>
+          <!-- Small smile -->
+          <path d="M101,187 Q107,192 113,187" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Microphone grille on booth -->
+          <rect x="90" y="215" width="34" height="10" rx="2" fill="#1F1A14" opacity="0.5"/>
+          <g stroke="#C99A3D" stroke-width="0.7" opacity="0.5">
+            <line x1="94" y1="215" x2="94" y2="225"/>
+            <line x1="99" y1="215" x2="99" y2="225"/>
+            <line x1="104" y1="215" x2="104" y2="225"/>
+            <line x1="109" y1="215" x2="109" y2="225"/>
+            <line x1="114" y1="215" x2="114" y2="225"/>
+            <line x1="119" y1="215" x2="119" y2="225"/>
+          </g>
+
+          <!-- Character B: tourist with hand gesture -->
+          <!-- Body -->
+          <rect x="178" y="252" width="36" height="58" rx="6" fill="#C99A3D" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="196" cy="240" rx="21" ry="23" fill="#F0C9A0" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M175,232 Q177,214 196,218 Q215,214 217,232" fill="#7B736B" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Eyes (earnest) -->
+          <circle cx="189" cy="238" r="3" fill="#1F1A14"/>
+          <circle cx="203" cy="238" r="3" fill="#1F1A14"/>
+          <!-- Slightly open mouth - asking -->
+          <path d="M189,250 Q196,255 203,250" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- "Slow down" hand gesture: flat hand pressing down -->
+          <path d="M214,260 Q232,248 240,240" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <!-- Hand (flat, palm down) -->
+          <rect x="236" y="233" width="22" height="10" rx="4" fill="#F0C9A0" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Fingers suggested -->
+          <line x1="240" y1="233" x2="238" y2="228" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="246" y1="233" x2="244" y2="227" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="252" y1="233" x2="251" y2="228" stroke="#1F1A14" stroke-width="1.5" stroke-linecap="round"/>
+
+          <!-- Tourist speech bubble (dark bg = lighter bubble) -->
+          <path d="M142,50 Q142,32 160,32 L272,32 Q282,32 282,50 Q282,70 272,70 L214,70 L204,86 L208,70 L160,70 Q142,70 142,50 Z"
+            fill="#FAF6EE" stroke="#C99A3D" stroke-width="2" filter="url(#ink2)"/>
+          <text x="212" y="52" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#1F1A14" text-anchor="middle">Más despacio,</text>
+          <text x="212" y="65" font-family="'Caveat', cursive" font-size="15" font-weight="700" fill="#1F1A14" text-anchor="middle">por favor.</text>
+
+          <!-- Agent speech bubble (response) -->
+          <path d="M60,110 Q60,94 78,94 L200,94 Q215,94 215,110 Q215,126 200,126 L130,126 L120,140 L123,126 L78,126 Q60,126 60,110 Z"
+            fill="#C99A3D" stroke="#1F1A14" stroke-width="1.8" filter="url(#ink2)"/>
+          <text x="137" y="112" font-family="'Caveat', cursive" font-size="13" font-weight="700" fill="#1F1A14" text-anchor="middle">Claro, con mucho</text>
+          <text x="137" y="124" font-family="'Caveat', cursive" font-size="13" font-weight="700" fill="#1F1A14" text-anchor="middle">gusto. ¿Adónde va?</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase-es">Más despacio, por favor.</span>
+          <span class="phrase-en">More slowly, please.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: ¿Me puede ayudar? — pharmacy/street emergency -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">3</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink3" x="-6%" y="-6%" width="112%" height="112%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.043" numOctaves="3" seed="11"/>
+              <feDisplacementMap in="SourceGraphic" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="shopBg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F0EBE0"/>
+              <stop offset="100%" stop-color="#E0D8C8"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Shop interior background -->
+          <rect width="290" height="340" fill="url(#shopBg)"/>
+
+          <!-- Back wall / shelves -->
+          <rect x="0" y="0" width="290" height="160" fill="#FAF6EE"/>
+          <line x1="0" y1="160" x2="290" y2="160" stroke="#1F1A14" stroke-width="2"/>
+
+          <!-- Pharmacy cross sign -->
+          <rect x="220" y="10" width="50" height="50" rx="4" fill="#6B8E6B" stroke="#1F1A14" stroke-width="2"/>
+          <rect x="231" y="20" width="28" height="8" rx="2" fill="#FAF6EE"/>
+          <rect x="240" y="15" width="10" height="18" rx="2" fill="#FAF6EE"/>
+
+          <!-- Shelf rows -->
+          <rect x="10" y="50" width="190" height="6" rx="1" fill="#C8A97E" stroke="#1F1A14" stroke-width="1"/>
+          <rect x="10" y="90" width="190" height="6" rx="1" fill="#C8A97E" stroke="#1F1A14" stroke-width="1"/>
+          <rect x="10" y="130" width="190" height="6" rx="1" fill="#C8A97E" stroke="#1F1A14" stroke-width="1"/>
+
+          <!-- Medicine boxes on shelves -->
+          <rect x="16" y="36" width="20" height="14" rx="2" fill="#C4593A" stroke="#1F1A14" stroke-width="1"/>
+          <rect x="42" y="36" width="20" height="14" rx="2" fill="#2A2540" stroke="#1F1A14" stroke-width="1"/>
+          <rect x="68" y="36" width="20" height="14" rx="2" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1"/>
+          <rect x="94" y="36" width="20" height="14" rx="2" fill="#C99A3D" stroke="#1F1A14" stroke-width="1"/>
+          <rect x="120" y="36" width="20" height="14" rx="2" fill="#C4593A" stroke="#1F1A14" stroke-width="1"/>
+          <rect x="16" y="76" width="20" height="14" rx="2" fill="#6B8E6B" stroke="#1F1A14" stroke-width="1"/>
+          <rect x="42" y="76" width="20" height="14" rx="2" fill="#C99A3D" stroke="#1F1A14" stroke-width="1"/>
+          <rect x="68" y="76" width="20" height="14" rx="2" fill="#2A2540" stroke="#1F1A14" stroke-width="1"/>
+          <rect x="94" y="76" width="20" height="14" rx="2" fill="#C4593A" stroke="#1F1A14" stroke-width="1"/>
+
+          <!-- Counter / floor line -->
+          <rect x="0" y="230" width="290" height="110" fill="#E0D8C8"/>
+          <rect x="10" y="220" width="270" height="18" rx="3" fill="#C8A97E" stroke="#1F1A14" stroke-width="2"/>
+          <line x1="0" y1="220" x2="290" y2="220" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Counter surface detail -->
+          <rect x="20" y="210" width="80" height="14" rx="2" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1"/>
+
+          <!-- Pharmacist (Character A) behind counter -->
+          <!-- Body (lab coat) -->
+          <rect x="158" y="234" width="38" height="60" rx="6" fill="#FAF6EE" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Lab coat pocket -->
+          <rect x="162" y="248" width="14" height="10" rx="2" fill="none" stroke="#1F1A14" stroke-width="1"/>
+          <!-- Head -->
+          <ellipse cx="177" cy="222" rx="20" ry="22" fill="#C8A97E" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair - bun -->
+          <path d="M158,214 Q160,198 177,202 Q194,198 196,214" fill="#3D2E18" stroke="#1F1A14" stroke-width="1.5"/>
+          <ellipse cx="177" cy="200" rx="10" ry="7" fill="#3D2E18" stroke="#1F1A14" stroke-width="1.2"/>
+          <!-- Glasses -->
+          <rect x="162" y="218" width="12" height="8" rx="3" fill="none" stroke="#2A2540" stroke-width="1.8"/>
+          <rect x="178" y="218" width="12" height="8" rx="3" fill="none" stroke="#2A2540" stroke-width="1.8"/>
+          <line x1="174" y1="222" x2="178" y2="222" stroke="#2A2540" stroke-width="1.5"/>
+          <line x1="160" y1="222" x2="156" y2="221" stroke="#2A2540" stroke-width="1.5"/>
+          <line x1="190" y1="222" x2="194" y2="221" stroke="#2A2540" stroke-width="1.5"/>
+          <!-- Kind smile -->
+          <path d="M168,234 Q177,240 186,234" fill="none" stroke="#1F1A14" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Pointing to paper / showing -->
+          <path d="M196,248 Q218,236 228,228" fill="none" stroke="#1F1A14" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Paper held up -->
+          <rect x="224" y="216" width="30" height="24" rx="2" fill="#FAF6EE" stroke="#C99A3D" stroke-width="2"/>
+          <!-- Writing on paper (suggested) -->
+          <line x1="228" y1="222" x2="248" y2="222" stroke="#1F1A14" stroke-width="1"/>
+          <line x1="228" y1="227" x2="248" y2="227" stroke="#1F1A14" stroke-width="1"/>
+          <line x1="228" y1="232" x2="240" y2="232" stroke="#1F1A14" stroke-width="1"/>
+
+          <!-- Customer (Character B) -->
+          <!-- Body -->
+          <rect x="56" y="245" width="34" height="55" rx="6" fill="#C4593A" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="73" cy="233" rx="20" ry="22" fill="#F0C9A0" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M53,225 Q55,208 73,212 Q91,208 93,225" fill="#C99A3D" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Worried eyes -->
+          <circle cx="66" cy="231" r="3" fill="#1F1A14"/>
+          <circle cx="80" cy="231" r="3" fill="#1F1A14"/>
+          <!-- Worried eyebrows -->
+          <path d="M62,224 Q66,221 70,223" fill="none" stroke="#1F1A14" stroke-width="1.8"/>
+          <path d="M76,224 Q80,221 84,223" fill="none" stroke="#1F1A14" stroke-width="1.8"/>
+          <!-- Open plea mouth -->
+          <path d="M67,243 Q73,248 79,243" fill="none" stroke="#1F1A14" stroke-width="2" stroke-linecap="round"/>
+          <!-- Hand raised (asking for help) -->
+          <path d="M90,258 Q108,245 116,236" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="118" cy="232" rx="7" ry="8" fill="#F0C9A0" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Customer speech bubble (main phrase) -->
+          <path d="M25,48 Q25,30 45,30 L258,30 Q275,30 275,48 Q275,68 258,68 L115,68 L104,84 L108,68 L45,68 Q25,68 25,48 Z"
+            fill="#FAF6EE" stroke="#1F1A14" stroke-width="2.2" filter="url(#ink3)"/>
+          <text x="152" y="50" font-family="'Caveat', cursive" font-size="16" font-weight="700" fill="#1F1A14" text-anchor="middle">Disculpe — hablo poco</text>
+          <text x="152" y="64" font-family="'Caveat', cursive" font-size="16" font-weight="700" fill="#1F1A14" text-anchor="middle">español. ¿Me puede ayudar?</text>
+
+          <!-- Pharmacist response bubble -->
+          <path d="M108,110 Q108,94 128,94 L265,94 Q278,94 278,110 Q278,128 265,128 L210,128 L200,144 L204,128 L128,128 Q108,128 108,110 Z"
+            fill="#6B8E6B" stroke="#1F1A14" stroke-width="1.8" filter="url(#ink3)"/>
+          <text x="193" y="112" font-family="'Caveat', cursive" font-size="14" font-weight="700" fill="#FAF6EE" text-anchor="middle">Claro que sí.</text>
+          <text x="193" y="126" font-family="'Caveat', cursive" font-size="12" fill="#FAF6EE" text-anchor="middle">Of course!</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase-es">¿Me puede ayudar?</span>
+          <span class="phrase-en">Can you help me?</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 4: ¡Socorro! / emergency — street scene -->
+    <div class="panel-wrap">
+      <div class="panel">
+        <span class="panel-num">4</span>
+        <svg class="panel-scene" viewBox="0 0 290 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="ink4" x="-6%" y="-6%" width="112%" height="112%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="17"/>
+              <feDisplacementMap in="SourceGraphic" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <linearGradient id="skyB" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3A3060"/>
+              <stop offset="100%" stop-color="#2A2540"/>
+            </linearGradient>
+            <!-- Urgency radial glow -->
+            <radialGradient id="urgencyGlow" cx="50%" cy="35%" r="55%">
+              <stop offset="0%" stop-color="#C4593A" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#2A2540" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- Night scene / emergency -->
+          <rect width="290" height="340" fill="url(#skyB)"/>
+          <rect width="290" height="340" fill="url(#urgencyGlow)"/>
+
+          <!-- Stars -->
+          <g fill="#FAF6EE" opacity="0.6">
+            <circle cx="20" cy="18" r="1.2"/>
+            <circle cx="55" cy="10" r="0.8"/>
+            <circle cx="90" cy="25" r="1.2"/>
+            <circle cx="135" cy="8" r="0.8"/>
+            <circle cx="175" cy="20" r="1.2"/>
+            <circle cx="220" cy="12" r="0.8"/>
+            <circle cx="258" cy="28" r="1"/>
+            <circle cx="278" cy="8" r="1.2"/>
+            <circle cx="40" cy="40" r="0.7"/>
+            <circle cx="200" cy="40" r="0.9"/>
+          </g>
+
+          <!-- Buildings (dark silhouettes) -->
+          <rect x="0" y="80" width="70" height="180" fill="#1A1530" stroke="#2A2540" stroke-width="1"/>
+          <rect x="10" y="60" width="50" height="30" fill="#1A1530" stroke="#2A2540" stroke-width="1"/>
+          <!-- Lit windows in building -->
+          <rect x="15" y="92" width="12" height="10" rx="1" fill="#C99A3D" opacity="0.7"/>
+          <rect x="35" y="92" width="12" height="10" rx="1" fill="#C99A3D" opacity="0.4"/>
+          <rect x="15" y="112" width="12" height="10" rx="1" fill="#C99A3D" opacity="0.5"/>
+          <rect x="35" y="112" width="12" height="10" rx="1" fill="#C99A3D" opacity="0.7"/>
+
+          <rect x="200" y="95" width="90" height="165" fill="#1A1530" stroke="#2A2540" stroke-width="1"/>
+          <rect x="215" y="75" width="60" height="25" fill="#1A1530" stroke="#2A2540" stroke-width="1"/>
+          <rect x="208" y="108" width="14" height="10" rx="1" fill="#C99A3D" opacity="0.6"/>
+          <rect x="230" y="108" width="14" height="10" rx="1" fill="#C99A3D" opacity="0.3"/>
+          <rect x="252" y="108" width="14" height="10" rx="1" fill="#C99A3D" opacity="0.7"/>
+          <rect x="208" y="128" width="14" height="10" rx="1" fill="#C99A3D" opacity="0.4"/>
+          <rect x="252" y="128" width="14" height="10" rx="1" fill="#C99A3D" opacity="0.5"/>
+
+          <!-- Ground / street -->
+          <rect y="260" width="290" height="80" fill="#1A1530"/>
+          <line x1="0" y1="260" x2="290" y2="260" stroke="#C99A3D" stroke-width="1.5" opacity="0.5"/>
+          <!-- Street center line -->
+          <line x1="0" y1="280" x2="290" y2="280" stroke="#FAF6EE" stroke-width="1" stroke-dasharray="18,10" opacity="0.2"/>
+
+          <!-- Map / phone in hand (dropped on ground) -->
+          <rect x="152" y="272" width="28" height="16" rx="3" fill="#2A2540" stroke="#C99A3D" stroke-width="1.5" transform="rotate(-20,166,280)"/>
+          <!-- Screen glow -->
+          <rect x="154" y="274" width="24" height="12" rx="2" fill="#6B8E6B" opacity="0.5" transform="rotate(-20,166,280)"/>
+
+          <!-- Character: lost / scared person -->
+          <!-- Body -->
+          <rect x="104" y="270" width="36" height="50" rx="6" fill="#C4593A" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Head -->
+          <ellipse cx="122" cy="256" rx="22" ry="24" fill="#F0C9A0" stroke="#1F1A14" stroke-width="2"/>
+          <!-- Hair -->
+          <path d="M100,248 Q102,228 122,232 Q142,228 144,248" fill="#7B736B" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Wide scared eyes -->
+          <ellipse cx="114" cy="254" rx="4.5" ry="5" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+          <circle cx="114" cy="255" r="2.5" fill="#1F1A14"/>
+          <ellipse cx="130" cy="254" rx="4.5" ry="5" fill="#FAF6EE" stroke="#1F1A14" stroke-width="1.5"/>
+          <circle cx="130" cy="255" r="2.5" fill="#1F1A14"/>
+          <!-- Open mouth shouting -->
+          <ellipse cx="122" cy="266" rx="8" ry="6" fill="#C4593A" stroke="#1F1A14" stroke-width="1.5"/>
+          <!-- Arms raised -->
+          <path d="M104,280 Q88,264 78,252" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="75" cy="249" rx="7" ry="8" fill="#F0C9A0" stroke="#1F1A14" stroke-width="1.5"/>
+          <path d="M140,280 Q156,264 166,252" fill="none" stroke="#1F1A14" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="169" cy="249" rx="7" ry="8" fill="#F0C9A0" stroke="#1F1A14" stroke-width="1.5"/>
+
+          <!-- Urgency lines around character -->
+          <g stroke="#C4593A" stroke-width="1.5" opacity="0.6" stroke-linecap="round">
+            <line x1="68" y1="240" x2="60" y2="232"/>
+            <line x1="72" y1="234" x2="62" y2="228"/>
+            <line x1="175" y1="240" x2="183" y2="232"/>
+            <line x1="171" y1="234" x2="181" y2="228"/>
+          </g>
+
+          <!-- SOCORRO burst — main focal point -->
+          <!-- Starburst shape -->
+          <polygon
+            points="145,38 150,65 168,48 168,76 186,55 180,82 202,70 190,92 214,88 196,106 218,108 196,120 215,128 190,134 202,148 176,146 178,168 158,158 150,178 142,158 122,168 124,146 98,148 110,134 84,128 103,120 82,108 106,106 88,88 112,92 100,70 122,82 116,55 134,76 132,48 150,65"
+            fill="#C4593A"
+            stroke="#1F1A14"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+            filter="url(#ink4)"
+          />
+          <text x="148" y="102" font-family="'Caveat', cursive" font-size="26" font-weight="700" fill="#FAF6EE" text-anchor="middle">¡Socorro!</text>
+          <text x="148" y="120" font-family="'Caveat', cursive" font-size="13" fill="#FAF6EE" text-anchor="middle" opacity="0.9">Help!</text>
+
+          <!-- Sub-phrases bottom strip -->
+          <rect x="4" y="192" width="282" height="36" rx="3" fill="#1F1A14" opacity="0.75"/>
+          <text x="145" y="208" font-family="'Caveat', cursive" font-size="13" font-weight="700" fill="#C99A3D" text-anchor="middle">Estoy perdido/a.</text>
+          <text x="145" y="222" font-family="'Caveat', cursive" font-size="11" fill="#FAF6EE" text-anchor="middle" opacity="0.75">Llamen a la policía.</text>
+        </svg>
+        <div class="caption">
+          <span class="phrase-es">¡Socorro! Estoy perdido/a.</span>
+          <span class="phrase-en">Help! I'm lost.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Reference grid strip -->
+  <div class="ref-strip">
+    <p class="ref-title">Frases esenciales — Essential phrases at a glance</p>
+    <div class="ref-grid">
+      <div class="ref-row"><span class="ref-es">No entiendo.</span><span class="ref-en">I don't understand.</span></div>
+      <div class="ref-row"><span class="ref-es">No comprendo.</span><span class="ref-en">I don't understand. (formal)</span></div>
+      <div class="ref-row"><span class="ref-es">¿Puede repetir?</span><span class="ref-en">Can you repeat? (formal)</span></div>
+      <div class="ref-row"><span class="ref-es">Repite, por favor.</span><span class="ref-en">Repeat, please. (informal)</span></div>
+      <div class="ref-row"><span class="ref-es">Más despacio, por favor.</span><span class="ref-en">More slowly, please.</span></div>
+      <div class="ref-row"><span class="ref-es">¿Qué significa...?</span><span class="ref-en">What does ... mean?</span></div>
+      <div class="ref-row"><span class="ref-es">¿Cómo se dice... en español?</span><span class="ref-en">How do you say ... in Spanish?</span></div>
+      <div class="ref-row"><span class="ref-es">¿Me puede ayudar?</span><span class="ref-en">Can you help me? (formal)</span></div>
+      <div class="ref-row"><span class="ref-es">¿Puedes ayudarme?</span><span class="ref-en">Can you help me? (informal)</span></div>
+      <div class="ref-row"><span class="ref-es">¡Socorro! / ¡Ayuda!</span><span class="ref-en">Help!</span></div>
+      <div class="ref-row"><span class="ref-es">Estoy perdido/a.</span><span class="ref-en">I'm lost. (m/f)</span></div>
+      <div class="ref-row"><span class="ref-es">Hablo poco español.</span><span class="ref-en">I speak a little Spanish.</span></div>
+      <div class="ref-row"><span class="ref-es">Soy principiante.</span><span class="ref-en">I'm a beginner.</span></div>
+      <div class="ref-row"><span class="ref-es">Perdón / Disculpe.</span><span class="ref-en">Sorry / Excuse me.</span></div>
+      <div class="ref-row"><span class="ref-es">¿Puede escribirlo?</span><span class="ref-en">Can you write it down?</span></div>
+      <div class="ref-row"><span class="ref-es">Muéstreme / Muéstrame.</span><span class="ref-en">Show me. (formal/informal)</span></div>
+    </div>
+  </div>
+
+  <p class="strip-footer">Español con Diana &nbsp;·&nbsp; Lección A1-18</p>
+
+</body>
+</html>

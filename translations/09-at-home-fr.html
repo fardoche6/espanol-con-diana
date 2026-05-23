@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>À la Maison — Espagnol A1 (FR)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=Caveat:wght@600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:  #FAF6EE;
+    --ink:    #1F1A14;
+    --ochre:  #C99A3D;
+    --terra:  #C4593A;
+    --sage:   #6B8E6B;
+    --night:  #2A2540;
+    --muted:  #7B736B;
+    --cream:  #F0E9D8;
+    --ochre-light: #F5E8C2;
+    --sage-light:  #D6E8D6;
+    --terra-light: #F5DDD6;
+    --night-light: #E4E2EF;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-width: 1280px;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--terra);
+    color: var(--paper);
+    padding: 48px 80px 40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: var(--ochre);
+    opacity: 0.2;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 300px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: white;
+    opacity: 0.06;
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ochre-light);
+    margin-bottom: 8px;
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .hero-title span { color: var(--ochre); }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(250,246,238,0.65);
+    margin-top: 12px;
+    font-weight: 400;
+  }
+  .hero-badge {
+    position: relative; z-index: 1;
+    background: var(--night);
+    color: var(--paper);
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+
+  /* ─── LAYOUT ─── */
+  .main { padding: 56px 80px; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--cream);
+  }
+
+  /* ─── HOUSE SECTION ─── */
+  .house-section {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 48px;
+    margin-bottom: 64px;
+    align-items: start;
+  }
+  .house-wrap {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 32px;
+  }
+  .house-svg-title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--night);
+    margin-bottom: 20px;
+  }
+  .floorplan { width: 100%; max-width: 680px; }
+
+  /* ─── CALLOUTS ─── */
+  .callout-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .callout-card {
+    background: white;
+    border-radius: 10px;
+    padding: 16px 20px;
+    border-left: 4px solid var(--ochre);
+    box-shadow: 0 2px 8px rgba(31,26,20,0.06);
+    position: relative;
+  }
+  .callout-card.terra { border-left-color: var(--terra); }
+  .callout-card.sage  { border-left-color: var(--sage); }
+  .callout-card.night { border-left-color: var(--night); }
+
+  .callout-es {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--night);
+    margin-bottom: 2px;
+  }
+  .callout-fr {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+    font-style: italic;
+  }
+  .callout-note {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  .callout-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: white;
+    background: var(--ochre);
+    padding: 2px 8px;
+    border-radius: 3px;
+    position: absolute;
+    top: 12px; right: 16px;
+  }
+  .callout-card.terra .callout-tag { background: var(--terra); }
+  .callout-card.sage  .callout-tag { background: var(--sage); }
+  .callout-card.night .callout-tag { background: var(--night); }
+
+  /* ─── PHRASE GRID ─── */
+  .phrase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 56px;
+  }
+  .phrase-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(31,26,20,0.07);
+  }
+  .phrase-card-header {
+    padding: 16px 20px 14px;
+    background: var(--ochre-light);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .phrase-card.terra .phrase-card-header { background: var(--terra-light); }
+  .phrase-card.sage  .phrase-card-header { background: var(--sage-light); }
+  .phrase-card.night .phrase-card-header { background: var(--night-light); }
+
+  .phrase-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--ochre);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .phrase-card.terra .phrase-icon { background: var(--terra); }
+  .phrase-card.sage  .phrase-icon { background: var(--sage); }
+  .phrase-card.night .phrase-icon { background: var(--night); }
+
+  .phrase-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .phrase-card-es {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--night);
+    line-height: 1.2;
+  }
+  .phrase-card-body { padding: 14px 20px 16px; }
+  .phrase-card-fr {
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  .phrase-card-tip {
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ─── COGNATE PANEL ─── */
+  .cognate-section {
+    background: var(--night);
+    border-radius: 12px;
+    padding: 40px 48px;
+    margin-bottom: 56px;
+    color: var(--paper);
+  }
+  .cognate-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--ochre);
+    margin-bottom: 6px;
+  }
+  .cognate-subtitle {
+    font-size: 14px;
+    color: rgba(250,246,238,0.55);
+    margin-bottom: 32px;
+  }
+  .cognate-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .cognate-card {
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .cognate-es {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ochre);
+    margin-bottom: 4px;
+  }
+  .cognate-fr {
+    font-size: 13px;
+    color: rgba(250,246,238,0.8);
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+  .cognate-note {
+    font-family: 'Caveat', cursive;
+    font-size: 12px;
+    color: rgba(250,246,238,0.5);
+  }
+
+  /* ─── TRAP BOX ─── */
+  .trap-box {
+    background: linear-gradient(135deg, #3d3760 0%, var(--night) 100%);
+    color: var(--paper);
+    border-radius: 12px;
+    padding: 36px 48px;
+    margin-bottom: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .trap-title {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--ochre);
+    margin-bottom: 4px;
+  }
+  .trap-subtitle {
+    font-size: 14px;
+    color: rgba(250,246,238,0.55);
+    margin-bottom: 24px;
+  }
+  .trap-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+  }
+  .trap-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .trap-badge.wrong { background: var(--terra); color: white; }
+  .trap-badge.right { background: var(--sage);  color: white; }
+
+  .trap-es {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .trap-fr {
+    font-size: 13px;
+    color: rgba(250,246,238,0.65);
+    margin-top: 2px;
+    font-style: italic;
+  }
+  .trap-rule {
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 20px 24px;
+  }
+  .trap-rule-title {
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ochre);
+    margin-bottom: 10px;
+  }
+  .trap-rule-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(250,246,238,0.8);
+  }
+  .trap-rule strong { color: var(--paper); }
+
+  /* ─── PREP TABLE ─── */
+  .prep-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 56px;
+  }
+  .prep-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(31,26,20,0.06);
+  }
+  .prep-card-top {
+    background: var(--terra);
+    color: var(--paper);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .prep-es {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 700;
+    flex: 1;
+  }
+  .prep-arrow {
+    font-size: 12px;
+    color: var(--ochre-light);
+    font-family: 'DM Mono', monospace;
+  }
+  .prep-fr {
+    font-size: 12px;
+    color: rgba(250,246,238,0.75);
+    font-style: italic;
+  }
+  .prep-card-body { padding: 14px 18px; }
+  .prep-example {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--night);
+    margin-bottom: 4px;
+  }
+  .prep-example-fr {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+  .prep-tip {
+    font-family: 'Caveat', cursive;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--cream);
+    border-top: 1px solid rgba(31,26,20,0.08);
+    padding: 28px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--night);
+  }
+  .footer-brand span { color: var(--terra); }
+  .footer-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--night), var(--terra), var(--ochre));
+    margin-bottom: 56px;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Español con Diana · A1 · Thème 09</div>
+    <h1 class="hero-title">À la <span>Maison</span></h1>
+    <p class="hero-sub">Pièces · Meubles · Localisation · Description</p>
+  </div>
+  <div class="hero-badge">Référence Française</div>
+</header>
+
+<main class="main">
+
+  <!-- HOUSE SECTION -->
+  <div class="section-label">Plan de Maison — Pièces &amp; Phrases Clés</div>
+
+  <div class="house-section">
+    <div class="house-wrap">
+      <div class="house-svg-title">Una casa típica / Une maison typique</div>
+
+      <svg class="floorplan" viewBox="0 0 660 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- House base -->
+        <rect x="10" y="60" width="640" height="370" rx="6" fill="#EDE6D8" stroke="#C99A3D" stroke-width="2.5"/>
+        <!-- Roof -->
+        <polygon points="330,10 670,80 -10,80" fill="#C4593A" opacity="0.9"/>
+        <polygon points="330,18 655,78 5,78" fill="#C4593A"/>
+
+        <!-- ROOMS -->
+        <rect x="20" y="70" width="200" height="160" rx="4" fill="#D6E8D6" stroke="#6B8E6B" stroke-width="1.5"/>
+        <rect x="230" y="70" width="220" height="160" rx="4" fill="#F5E8C2" stroke="#C99A3D" stroke-width="1.5"/>
+        <rect x="460" y="70" width="180" height="160" rx="4" fill="#E4E2EF" stroke="#2A2540" stroke-width="1.5"/>
+        <rect x="20" y="240" width="140" height="180" rx="4" fill="#F5DDD6" stroke="#C4593A" stroke-width="1.5"/>
+        <rect x="170" y="240" width="120" height="180" rx="4" fill="#EDE6D8" stroke="#7B736B" stroke-width="1.5"/>
+        <rect x="300" y="240" width="190" height="180" rx="4" fill="#E4E2EF" stroke="#2A2540" stroke-width="1.5"/>
+        <rect x="500" y="240" width="140" height="180" rx="4" fill="#F5E8C2" stroke="#C99A3D" stroke-width="1.5"/>
+
+        <!-- LABELS — Spanish + French -->
+        <text x="120" y="138" text-anchor="middle" font-family="Fraunces, serif" font-size="13" font-weight="700" fill="#1F1A14">la cocina</text>
+        <text x="120" y="156" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#6B8E6B">la cuisine</text>
+
+        <text x="340" y="138" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-weight="700" fill="#1F1A14">el salón</text>
+        <text x="340" y="156" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7B736B">le salon</text>
+
+        <text x="550" y="138" text-anchor="middle" font-family="Fraunces, serif" font-size="12" font-weight="700" fill="#1F1A14">dormitorio</text>
+        <text x="550" y="154" text-anchor="middle" font-family="Fraunces, serif" font-size="12" font-weight="700" fill="#1F1A14">principal</text>
+        <text x="550" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#7B736B">chambre principale</text>
+
+        <text x="90" y="320" text-anchor="middle" font-family="Fraunces, serif" font-size="13" font-weight="700" fill="#1F1A14">el baño</text>
+        <text x="90" y="338" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#C4593A">la salle de bain</text>
+
+        <text x="230" y="322" text-anchor="middle" font-family="Fraunces, serif" font-size="12" font-weight="700" fill="#1F1A14">el pasillo</text>
+        <text x="230" y="338" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#7B736B">le couloir</text>
+
+        <text x="395" y="322" text-anchor="middle" font-family="Fraunces, serif" font-size="12" font-weight="700" fill="#1F1A14">dormitorio 2</text>
+        <text x="395" y="338" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7B736B">chambre 2</text>
+
+        <text x="570" y="322" text-anchor="middle" font-family="Fraunces, serif" font-size="13" font-weight="700" fill="#1F1A14">la entrada</text>
+        <text x="570" y="338" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#C99A3D">l'entrée</text>
+
+        <!-- FURNITURE — Cocina: table + chairs -->
+        <rect x="60" y="182" width="70" height="8" rx="2" fill="#6B8E6B"/>
+        <rect x="68" y="190" width="6" height="18" rx="1" fill="#6B8E6B"/>
+        <rect x="116" y="190" width="6" height="18" rx="1" fill="#6B8E6B"/>
+        <rect x="48" y="192" width="14" height="10" rx="2" fill="#C99A3D"/>
+        <rect x="128" y="192" width="14" height="10" rx="2" fill="#C99A3D"/>
+
+        <!-- FURNITURE — Salón: sofá -->
+        <rect x="250" y="185" width="100" height="28" rx="6" fill="#C4593A" opacity="0.7"/>
+        <rect x="248" y="183" width="16" height="30" rx="4" fill="#C4593A" opacity="0.5"/>
+        <rect x="334" y="183" width="16" height="30" rx="4" fill="#C4593A" opacity="0.5"/>
+
+        <!-- FURNITURE — Dormitorio 1: cama -->
+        <rect x="478" y="98" width="70" height="110" rx="6" fill="#6B8E6B" opacity="0.65"/>
+        <rect x="478" y="98" width="70" height="24" rx="4" fill="#2A2540" opacity="0.45"/>
+
+        <!-- FURNITURE — Baño: bañera -->
+        <rect x="30" y="278" width="110" height="50" rx="10" fill="white" stroke="#C4593A" stroke-width="1.5"/>
+        <ellipse cx="85" cy="303" rx="40" ry="16" fill="#D0E8F5" opacity="0.8"/>
+
+        <!-- Armario dorm 2 -->
+        <rect x="310" y="260" width="50" height="80" rx="4" fill="#2A2540" opacity="0.28"/>
+        <line x1="335" y1="260" x2="335" y2="340" stroke="#2A2540" stroke-width="1" opacity="0.4"/>
+
+        <!-- Door arcs -->
+        <path d="M220 70 Q220 100 200 100" stroke="#C4593A" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+        <path d="M450 70 Q450 100 460 100" stroke="#C4593A" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+      </svg>
+    </div>
+
+    <!-- CALLOUT PANEL -->
+    <div class="callout-panel">
+
+      <div class="callout-card">
+        <div class="callout-tag">Localisation</div>
+        <div class="callout-es">¿Dónde está el baño?</div>
+        <div class="callout-fr">Où est la salle de bain ?</div>
+        <div class="callout-note">Attention à l'accent : DÓN-de. Sans accent = pronom relatif "donde".</div>
+      </div>
+
+      <div class="callout-card terra">
+        <div class="callout-tag">Réponse</div>
+        <div class="callout-es">Está al fondo a la derecha.</div>
+        <div class="callout-fr">C'est au fond à droite.</div>
+        <div class="callout-note">Réponse native courante — pas besoin d'une phrase complète !</div>
+      </div>
+
+      <div class="callout-card sage">
+        <div class="callout-tag">Existence</div>
+        <div class="callout-es">Hay un jardín grande.</div>
+        <div class="callout-fr">Il y a un grand jardin.</div>
+        <div class="callout-note">Hay = il y a. Jamais "Hay el…" — pas d'article défini après hay.</div>
+      </div>
+
+      <div class="callout-card night">
+        <div class="callout-tag">Description</div>
+        <div class="callout-es">El salón es grande pero el dormitorio es pequeño.</div>
+        <div class="callout-fr">Le salon est grand mais la chambre est petite.</div>
+        <div class="callout-note">pero = mais · también = aussi — vos deux connecteurs A1.</div>
+      </div>
+
+      <div class="callout-card">
+        <div class="callout-tag">Préposition</div>
+        <div class="callout-es">La cama está al lado de la ventana.</div>
+        <div class="callout-fr">Le lit est à côté de la fenêtre.</div>
+        <div class="callout-note">de + el → del (contraction obligatoire). Jamais "de el".</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COGNATE BONUS — French speakers have advantages -->
+  <div class="section-label">Avantage Francophone — Mots Proches</div>
+
+  <div class="cognate-section">
+    <div class="cognate-title">Faux amis &amp; vrais amis</div>
+    <div class="cognate-subtitle">Mots espagnols qui ressemblent au français — votre atout de francophone</div>
+    <div class="cognate-grid">
+
+      <div class="cognate-card">
+        <div class="cognate-es">el armario</div>
+        <div class="cognate-fr">l'armoire (fr)</div>
+        <div class="cognate-note">Même origine — vrai ami !</div>
+      </div>
+
+      <div class="cognate-card">
+        <div class="cognate-es">el sofá</div>
+        <div class="cognate-fr">le canapé ≠ le sofá</div>
+        <div class="cognate-note">Attention : "sofa" (fr) = sofá (es). Même mot, facile.</div>
+      </div>
+
+      <div class="cognate-card">
+        <div class="cognate-es">la estantería</div>
+        <div class="cognate-fr">l'étagère (fr)</div>
+        <div class="cognate-note">Racine commune estante. 5 syllabes : es-tan-te-RÍ-a.</div>
+      </div>
+
+      <div class="cognate-card">
+        <div class="cognate-es">la entrada</div>
+        <div class="cognate-fr">l'entrée (fr)</div>
+        <div class="cognate-note">Vrai ami parfait. Même sens, prononciation proche.</div>
+      </div>
+
+      <div class="cognate-card">
+        <div class="cognate-es">el dormitorio</div>
+        <div class="cognate-fr">le dortoir (fr)</div>
+        <div class="cognate-note">Même racine latine dormire. Dortoir ≠ chambre, mais aide à mémoriser.</div>
+      </div>
+
+      <div class="cognate-card">
+        <div class="cognate-es">el pasillo</div>
+        <div class="cognate-fr">le couloir (fr)</div>
+        <div class="cognate-note">Faux ami — pasillo ≠ passage. Mémoriser séparément.</div>
+      </div>
+
+      <div class="cognate-card">
+        <div class="cognate-es">la terraza</div>
+        <div class="cognate-fr">la terrasse (fr)</div>
+        <div class="cognate-note">Vrai ami ! Même sens, très fréquent en Espagne.</div>
+      </div>
+
+      <div class="cognate-card">
+        <div class="cognate-es">moderno/a</div>
+        <div class="cognate-fr">moderne (fr)</div>
+        <div class="cognate-note">Vrai ami. Accord : moderno (m) / moderna (f).</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KEY PHRASES GRID -->
+  <div class="section-label">Phrases Clés — 12 Points Focaux</div>
+
+  <div class="phrase-grid">
+
+    <div class="phrase-card">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">🏠</div>
+        <div>
+          <div class="phrase-card-label">Type de logement</div>
+          <div class="phrase-card-es">Vivo en un piso.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">J'habite dans un appartement.</div>
+        <div class="phrase-card-tip">piso en Espagne = appartement. En Amérique latine : apartamento. Casa = maison.</div>
+      </div>
+    </div>
+
+    <div class="phrase-card terra">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">🛋️</div>
+        <div>
+          <div class="phrase-card-label">Meuble</div>
+          <div class="phrase-card-es">El sofá está en el salón.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">Le canapé est dans le salon.</div>
+        <div class="phrase-card-tip">El sofá — masculin malgré le -a final (mot arabe emprunté). Flaguer comme irrégulier.</div>
+      </div>
+    </div>
+
+    <div class="phrase-card sage">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">🛏️</div>
+        <div>
+          <div class="phrase-card-label">Chambre</div>
+          <div class="phrase-card-es">Duermo en el dormitorio.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">Je dors dans la chambre.</div>
+        <div class="phrase-card-tip">dormir → duermo (changement o→ue). Mémoriser comme bloc : "Duermo en el dormitorio".</div>
+      </div>
+    </div>
+
+    <div class="phrase-card night">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">📍</div>
+        <div>
+          <div class="phrase-card-label">Sur</div>
+          <div class="phrase-card-es">El libro está encima de la mesa.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">Le livre est sur la table.</div>
+        <div class="phrase-card-tip">encima de = sur la surface précisément. en = plus vague (dans/à).</div>
+      </div>
+    </div>
+
+    <div class="phrase-card">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">📦</div>
+        <div>
+          <div class="phrase-card-label">Sous</div>
+          <div class="phrase-card-es">El gato está debajo de la cama.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">Le chat est sous le lit.</div>
+        <div class="phrase-card-tip">debajo → "de-base-de". Accent sur BA : de-BA-jo.</div>
+      </div>
+    </div>
+
+    <div class="phrase-card terra">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">↔️</div>
+        <div>
+          <div class="phrase-card-label">À côté de</div>
+          <div class="phrase-card-es">El baño está al lado del pasillo.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">La salle de bain est à côté du couloir.</div>
+        <div class="phrase-card-tip">de + el = del. Contraction obligatoire — jamais "de el".</div>
+      </div>
+    </div>
+
+    <div class="phrase-card sage">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">🚿</div>
+        <div>
+          <div class="phrase-card-label">Verbe réfléchi</div>
+          <div class="phrase-card-es">Me ducho en el baño.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">Je me douche dans la salle de bain.</div>
+        <div class="phrase-card-tip">ducharse = verbe réfléchi. me/te/se — comme en français "je me douche".</div>
+      </div>
+    </div>
+
+    <div class="phrase-card night">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">🪟</div>
+        <div>
+          <div class="phrase-card-label">Entre</div>
+          <div class="phrase-card-es">La cama está entre la ventana y el armario.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">Le lit est entre la fenêtre et l'armoire.</div>
+        <div class="phrase-card-tip">entre = entre (vrai ami !). Toujours deux éléments liés par y (et).</div>
+      </div>
+    </div>
+
+    <div class="phrase-card">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">🏢</div>
+        <div>
+          <div class="phrase-card-label">Étage</div>
+          <div class="phrase-card-es">Está en el primer piso.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">C'est au premier étage.</div>
+        <div class="phrase-card-tip">Attention : primer piso en Espagne = 1er étage. Planta baja = rez-de-chaussée.</div>
+      </div>
+    </div>
+
+    <div class="phrase-card terra">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">🏡</div>
+        <div>
+          <div class="phrase-card-label">Décrire</div>
+          <div class="phrase-card-es">Mi casa tiene tres habitaciones.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">Ma maison a trois pièces.</div>
+        <div class="phrase-card-tip">tener = avoir. Mi casa tiene… = Ma maison a… Structure de départ.</div>
+      </div>
+    </div>
+
+    <div class="phrase-card sage">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">🪑</div>
+        <div>
+          <div class="phrase-card-label">Pluriel</div>
+          <div class="phrase-card-es">Las sillas están en la cocina.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">Les chaises sont dans la cuisine.</div>
+        <div class="phrase-card-tip">están = pluriel de está. Le verbe s'accorde avec le sujet (las sillas).</div>
+      </div>
+    </div>
+
+    <div class="phrase-card night">
+      <div class="phrase-card-header">
+        <div class="phrase-icon">📚</div>
+        <div>
+          <div class="phrase-card-label">Étagère</div>
+          <div class="phrase-card-es">Hay una estantería en mi cuarto.</div>
+        </div>
+      </div>
+      <div class="phrase-card-body">
+        <div class="phrase-card-fr">Il y a une étagère dans ma chambre.</div>
+        <div class="phrase-card-tip">5 syllabes : es-tan-te-RÍ-a. Tapez-les avec le doigt !</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TRAP BOX -->
+  <div class="trap-box">
+    <div>
+      <div class="trap-title">Está vs Hay</div>
+      <div class="trap-subtitle">L'erreur la plus fréquente au niveau A1 — maîtrisez-la ici.</div>
+
+      <div class="trap-row">
+        <div class="trap-badge wrong">FAUX</div>
+        <div>
+          <div class="trap-es">Hay el sofá en el salón.</div>
+          <div class="trap-fr">× hay + article défini = toujours faux</div>
+        </div>
+      </div>
+      <div class="trap-row">
+        <div class="trap-badge right">JUSTE</div>
+        <div>
+          <div class="trap-es">El sofá está en el salón.</div>
+          <div class="trap-fr">✓ Chose précise → está (localisé)</div>
+        </div>
+      </div>
+      <div class="trap-row">
+        <div class="trap-badge right">JUSTE</div>
+        <div>
+          <div class="trap-es">Hay un sofá en el salón.</div>
+          <div class="trap-fr">✓ Existence, indéfini → hay</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trap-rule">
+      <div class="trap-rule-title">La règle d'or</div>
+      <div class="trap-rule-text">
+        Si vous entendez <strong>Hay el…</strong> ou <strong>Hay la…</strong> dans votre tête — arrêtez.<br><br>
+        <strong>Hay</strong> = il y a (existence, indéfini)<br>
+        <em>Hay un baño en este piso.</em> Il y a une salle de bain dans cet appartement.<br><br>
+        <strong>Está</strong> = se trouve (localisé, défini)<br>
+        <em>El baño está arriba.</em> La salle de bain est en haut.<br><br>
+        Test : pouvez-vous pointer la chose ? → <strong>está</strong>. Vous dites juste qu'elle existe ? → <strong>hay</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- PREPOSITIONS -->
+  <div class="section-label">Prépositions de Lieu</div>
+
+  <div class="prep-grid">
+
+    <div class="prep-card">
+      <div class="prep-card-top">
+        <div class="prep-es">en</div>
+        <div class="prep-arrow">→</div>
+        <div class="prep-fr">dans / à (général)</div>
+      </div>
+      <div class="prep-card-body">
+        <div class="prep-example">El libro está en la habitación.</div>
+        <div class="prep-example-fr">Le livre est dans la pièce.</div>
+        <div class="prep-tip">Plus vague qu'encima de — dans/à la pièce, pas sur une surface.</div>
+      </div>
+    </div>
+
+    <div class="prep-card">
+      <div class="prep-card-top">
+        <div class="prep-es">encima de</div>
+        <div class="prep-arrow">→</div>
+        <div class="prep-fr">sur (la surface)</div>
+      </div>
+      <div class="prep-card-body">
+        <div class="prep-example">El café está encima de la mesa.</div>
+        <div class="prep-example-fr">Le café est sur la table.</div>
+        <div class="prep-tip">Posé physiquement sur une surface. Plus précis que en.</div>
+      </div>
+    </div>
+
+    <div class="prep-card">
+      <div class="prep-card-top">
+        <div class="prep-es">debajo de</div>
+        <div class="prep-arrow">→</div>
+        <div class="prep-fr">sous / en dessous de</div>
+      </div>
+      <div class="prep-card-body">
+        <div class="prep-example">El gato está debajo de la cama.</div>
+        <div class="prep-example-fr">Le chat est sous le lit.</div>
+        <div class="prep-tip">Pensez "de-BASE-de" → à la base. Accent : de-BA-jo.</div>
+      </div>
+    </div>
+
+    <div class="prep-card">
+      <div class="prep-card-top">
+        <div class="prep-es">al lado de</div>
+        <div class="prep-arrow">→</div>
+        <div class="prep-fr">à côté de</div>
+      </div>
+      <div class="prep-card-body">
+        <div class="prep-example">El baño está al lado de la cocina.</div>
+        <div class="prep-example-fr">La salle de bain est à côté de la cuisine.</div>
+        <div class="prep-tip">de + el → del. "Al lado DEL sofá" — jamais "de el".</div>
+      </div>
+    </div>
+
+    <div class="prep-card">
+      <div class="prep-card-top">
+        <div class="prep-es">entre</div>
+        <div class="prep-arrow">→</div>
+        <div class="prep-fr">entre</div>
+      </div>
+      <div class="prep-card-body">
+        <div class="prep-example">El pasillo está entre la cocina y el salón.</div>
+        <div class="prep-example-fr">Le couloir est entre la cuisine et le salon.</div>
+        <div class="prep-tip">Vrai ami ! Toujours deux éléments liés par y.</div>
+      </div>
+    </div>
+
+    <div class="prep-card">
+      <div class="prep-card-top">
+        <div class="prep-es">detrás de / delante de</div>
+        <div class="prep-arrow">→</div>
+        <div class="prep-fr">derrière / devant</div>
+      </div>
+      <div class="prep-card-body">
+        <div class="prep-example">El escritorio está delante de la ventana.</div>
+        <div class="prep-example-fr">Le bureau est devant la fenêtre.</div>
+        <div class="prep-tip">detrás → "au-delà-de-tras". À mémoriser en paire opposée.</div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">Español con <span>Diana</span></div>
+  <div class="footer-meta">A1 · Thème 09 · À la Maison · Référence Française</div>
+</footer>
+
+</body>
+</html>
