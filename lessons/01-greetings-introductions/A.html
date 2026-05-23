@@ -10,7 +10,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600&family=Caveat:wght@400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/app.css">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     .breadcrumb {
       font-family: var(--font-data);
@@ -768,22 +767,248 @@
       </div>
     </section>
 
-    <!-- 3. Block content -->
+    <!-- 3. Block content — step cards -->
     <section aria-labelledby="label-content">
-      <h2 class="section-label" id="label-content">Content</h2>
-      <div class="lesson-body" id="lesson-body"></div>
-      <script type="text/markdown" id="block-content">
-### Block A — Time-of-day greetings (3 steps / 6 min)
+      <h2 class="section-label" id="label-content">Steps</h2>
 
-- **A1 — Hola + Buenos días** — listen → repeat 3× each. Practice: greet me as if it's morning.
-- **A2 — Buenas tardes + Buenas noches** — when does each one start? (~12:00, ~20:00). Practice: greet me as if it's right now.
-- **Tips & Tricks**:
-  - Stress falls on the accented syllable: **dí**-as, tar-**des**, no-**ches** — never flatten them.
-  - *días* has two syllables (dee-as), not one — the written accent is your cue.
-  - Cognate trick: *nocturnal* → *noches* — both share the Latin root for night.
-  - Cultural note: "Buenos días" ends around noon in much of Latin America; switch to *tardes* from roughly 12:00–13:00.
-- **A3 — Quick review** — I say a time, you say the greeting (4 items).
-      </script>
+      <style>
+        .ba-steps { display: flex; flex-direction: column; gap: 12px; }
+
+        .ba-step {
+          border: 1.5px solid var(--color-surface-300, #DDD8CE);
+          border-radius: 10px;
+          overflow: hidden;
+          background: #FAF6EE;
+        }
+        .ba-step-header {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 18px 20px;
+          cursor: pointer;
+          user-select: none;
+          list-style: none;
+        }
+        .ba-step-header::-webkit-details-marker { display: none; }
+        .ba-step[open] .ba-step-header { border-bottom: 1.5px solid var(--color-surface-300, #DDD8CE); }
+        .ba-step-num {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: #2A2540;
+          color: #FAF6EE;
+          font-family: 'DM Mono', monospace;
+          font-size: 0.75rem;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          letter-spacing: 0.04em;
+        }
+        .ba-step[open] .ba-step-num { background: #C4593A; }
+        .ba-step-title {
+          flex: 1;
+          font-family: 'Fraunces', Georgia, serif;
+          font-size: 1.05rem;
+          font-weight: 600;
+          color: #1F1A14;
+          font-style: italic;
+        }
+        .ba-step-meta {
+          font-family: 'DM Mono', monospace;
+          font-size: 0.7rem;
+          color: #C99A3D;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          white-space: nowrap;
+        }
+        .ba-step-chevron {
+          color: #7B736B;
+          transition: transform 0.2s;
+          flex-shrink: 0;
+        }
+        .ba-step[open] .ba-step-chevron { transform: rotate(180deg); }
+
+        .ba-step-body {
+          padding: 20px 20px 22px;
+        }
+        .ba-step-instruction {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.95rem;
+          color: #3A3328;
+          margin-bottom: 16px;
+          line-height: 1.6;
+        }
+        .ba-step-phrases {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+          margin-bottom: 16px;
+        }
+        .ba-step-phrase {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: #2A2540;
+          color: #FAF6EE;
+          font-family: 'Fraunces', Georgia, serif;
+          font-size: 1rem;
+          font-style: italic;
+          padding: 8px 14px;
+          border-radius: 6px;
+        }
+        .ba-step-phrase button {
+          background: none;
+          border: none;
+          color: #C99A3D;
+          cursor: pointer;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          line-height: 1;
+        }
+        .ba-step-phrase button:hover { color: #FAF6EE; }
+        .ba-step-phrase button.speaking { color: #C4593A; }
+
+        .ba-tips {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+        .ba-tip {
+          display: flex;
+          gap: 10px;
+          align-items: flex-start;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.875rem;
+          color: #3A3328;
+          line-height: 1.55;
+        }
+        .ba-tip-icon {
+          width: 20px;
+          height: 20px;
+          border-radius: 4px;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 1px;
+          font-size: 11px;
+        }
+        .ba-tip--accent .ba-tip-icon { background: rgba(201,154,61,0.15); color: #C99A3D; }
+        .ba-tip--culture .ba-tip-icon { background: rgba(42,37,64,0.1); color: #2A2540; }
+        .ba-tip--cognate .ba-tip-icon { background: rgba(196,89,58,0.1); color: #C4593A; }
+
+        .ba-step-practice {
+          margin-top: 14px;
+          padding: 12px 16px;
+          background: rgba(201,154,61,0.08);
+          border-left: 3px solid #C99A3D;
+          border-radius: 0 6px 6px 0;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.875rem;
+          color: #3A3328;
+          line-height: 1.55;
+        }
+        .ba-step-practice strong { color: #C99A3D; font-weight: 600; }
+
+        .ba-step-review-items {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+          margin-top: 4px;
+        }
+        .ba-review-chip {
+          font-family: 'DM Mono', monospace;
+          font-size: 0.75rem;
+          padding: 5px 10px;
+          border-radius: 4px;
+          border: 1.5px solid #DDD8CE;
+          background: #FAF6EE;
+          color: #7B736B;
+        }
+
+        @media (max-width: 600px) {
+          .ba-step-header { padding: 14px 16px; }
+          .ba-step-body { padding: 16px; }
+        }
+      </style>
+
+      <div class="ba-steps">
+
+        <!-- Step A1 -->
+        <details class="ba-step" open>
+          <summary class="ba-step-header">
+            <span class="ba-step-num">A1</span>
+            <span class="ba-step-title">Hola + Buenos días</span>
+            <span class="ba-step-meta">~2 min</span>
+            <svg class="ba-step-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="ba-step-body">
+            <p class="ba-step-instruction">Listen to each phrase, then repeat it 3 times out loud. Focus on matching the rhythm — not just the words.</p>
+            <div class="ba-step-phrases">
+              <span class="ba-step-phrase">Hola <button data-speak="Hola" aria-label="Pronounce Hola"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></span>
+              <span class="ba-step-phrase">Buenos días <button data-speak="Buenos días" aria-label="Pronounce Buenos días"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></span>
+            </div>
+            <div class="ba-step-practice"><strong>Practice:</strong> Greet Diana as if it's 9 in the morning.</div>
+          </div>
+        </details>
+
+        <!-- Step A2 -->
+        <details class="ba-step">
+          <summary class="ba-step-header">
+            <span class="ba-step-num">A2</span>
+            <span class="ba-step-title">Buenas tardes + Buenas noches</span>
+            <span class="ba-step-meta">~2 min</span>
+            <svg class="ba-step-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="ba-step-body">
+            <p class="ba-step-instruction">When does each one start? <em>Tardes</em> around 12:00, <em>noches</em> around 20:00. Listen and repeat.</p>
+            <div class="ba-step-phrases">
+              <span class="ba-step-phrase">Buenas tardes <button data-speak="Buenas tardes" aria-label="Pronounce Buenas tardes"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></span>
+              <span class="ba-step-phrase">Buenas noches <button data-speak="Buenas noches" aria-label="Pronounce Buenas noches"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></span>
+            </div>
+            <div class="ba-tips">
+              <div class="ba-tip ba-tip--accent">
+                <span class="ba-tip-icon">á</span>
+                <span>Stress the accented syllable: <strong>dí</strong>-as, tar-<strong>des</strong>, no-<strong>ches</strong> — never flatten them. <em>Días</em> is two syllables (dee-as), not one.</span>
+              </div>
+              <div class="ba-tip ba-tip--cognate">
+                <span class="ba-tip-icon">≈</span>
+                <span>Cognate: <em>nocturnal</em> → <em>noches</em> — both share the Latin root for night.</span>
+              </div>
+            </div>
+            <div class="ba-step-practice"><strong>Practice:</strong> Greet Diana using whichever greeting fits the current time right now.</div>
+          </div>
+        </details>
+
+        <!-- Step A3 -->
+        <details class="ba-step">
+          <summary class="ba-step-header">
+            <span class="ba-step-num">A3</span>
+            <span class="ba-step-title">Quick review</span>
+            <span class="ba-step-meta">~2 min</span>
+            <svg class="ba-step-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="ba-step-body">
+            <p class="ba-step-instruction">Diana says a time — you say the right greeting. 4 rounds, no peeking.</p>
+            <div class="ba-step-review-items">
+              <span class="ba-review-chip">7:00 → ?</span>
+              <span class="ba-review-chip">14:00 → ?</span>
+              <span class="ba-review-chip">21:00 → ?</span>
+              <span class="ba-review-chip">any time → ?</span>
+            </div>
+            <div class="ba-tips" style="margin-top:16px">
+              <div class="ba-tip ba-tip--culture">
+                <span class="ba-tip-icon">🌎</span>
+                <span>Cultural note: in much of Latin America <em>buenos días</em> ends right at noon — switch to <em>tardes</em> from roughly 12:00–13:00.</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
+      </div>
     </section>
 
     <!-- 4. Mini-test -->
@@ -865,11 +1090,6 @@
   <script>
   (function () {
     'use strict';
-
-    // Render markdown
-    var md = document.getElementById('block-content');
-    var body = document.getElementById('lesson-body');
-    if (md && body) body.innerHTML = marked.parse(md.textContent);
 
     // Block completion
     var TOPIC_ID = '01-greetings-introductions';
