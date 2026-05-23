@@ -349,6 +349,10 @@
         <li><a href="../../about.html">Method</a></li>
         <li><a href="index.html" aria-current="page">Lessons</a></li>
       </ul>
+      <div class="lang-toggle" aria-label="Translation language">
+        <button class="lang-toggle__btn" data-lang="en" aria-pressed="true">EN</button>
+        <button class="lang-toggle__btn" data-lang="fr" aria-pressed="false">FR</button>
+      </div>
       <button class="site-nav__toggle" aria-label="Open menu" aria-expanded="false">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <line x1="2" y1="6" x2="20" y2="6"/><line x1="2" y1="11" x2="20" y2="11"/><line x1="2" y1="16" x2="20" y2="16"/>
@@ -781,7 +785,7 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
           </button>
           <div class="ba-trans-es">Buenos días</div>
-          <div class="ba-trans-en">Good morning</div>
+          <div class="ba-trans-tl" data-en="Good morning" data-fr="Bonjour">Good morning</div>
           <div class="ba-trans-when">6am – 12pm</div>
         </div>
         <div class="ba-trans-card">
@@ -789,7 +793,7 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
           </button>
           <div class="ba-trans-es">Buenas tardes</div>
-          <div class="ba-trans-en">Good afternoon</div>
+          <div class="ba-trans-tl" data-en="Good afternoon" data-fr="Bon après-midi">Good afternoon</div>
           <div class="ba-trans-when">12pm – 8pm</div>
         </div>
         <div class="ba-trans-card">
@@ -797,7 +801,7 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
           </button>
           <div class="ba-trans-es">Buenas noches</div>
-          <div class="ba-trans-en">Good evening / night</div>
+          <div class="ba-trans-tl" data-en="Good evening / night" data-fr="Bonsoir / Bonne nuit">Good evening / night</div>
           <div class="ba-trans-when">after 8pm</div>
         </div>
       </div>
@@ -1031,12 +1035,16 @@
             <svg class="ba-step-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </summary>
           <div class="ba-step-body">
-            <p class="ba-step-instruction">Listen to each phrase, then repeat it 3 times out loud. Focus on matching the rhythm — not just the words.</p>
+            <p class="ba-step-instruction"
+               data-en="Listen to each phrase, then repeat it 3 times out loud. Focus on matching the rhythm — not just the words."
+               data-fr="Écoutez chaque phrase, puis répétez-la 3 fois à voix haute. Concentrez-vous sur le rythme, pas seulement les mots.">Listen to each phrase, then repeat it 3 times out loud. Focus on matching the rhythm — not just the words.</p>
             <div class="ba-step-phrases">
               <span class="ba-step-phrase">Hola <button data-speak="Hola" aria-label="Pronounce Hola"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></span>
               <span class="ba-step-phrase">Buenos días <button data-speak="Buenos días" aria-label="Pronounce Buenos días"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></span>
             </div>
-            <div class="ba-step-practice"><strong>Practice:</strong> Greet Diana as if it's 9 in the morning.</div>
+            <div class="ba-step-practice"
+                 data-en="<strong>Practice:</strong> Greet Diana as if it's 9 in the morning."
+                 data-fr="<strong>Exercice&nbsp;:</strong> Saluez Diana comme s'il est 9h du matin."><strong>Practice:</strong> Greet Diana as if it's 9 in the morning.</div>
           </div>
         </details>
 
@@ -1049,7 +1057,9 @@
             <svg class="ba-step-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </summary>
           <div class="ba-step-body">
-            <p class="ba-step-instruction">When does each one start? <em>Tardes</em> around 12:00, <em>noches</em> around 20:00. Listen and repeat.</p>
+            <p class="ba-step-instruction"
+               data-en="When does each one start? <em>Tardes</em> around 12:00, <em>noches</em> around 20:00. Listen and repeat."
+               data-fr="À quelle heure commence chacune ? <em>Tardes</em> vers 12h, <em>noches</em> vers 20h. Écoutez et répétez.">When does each one start? <em>Tardes</em> around 12:00, <em>noches</em> around 20:00. Listen and repeat.</p>
             <div class="ba-step-phrases">
               <span class="ba-step-phrase">Buenas tardes <button data-speak="Buenas tardes" aria-label="Pronounce Buenas tardes"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></span>
               <span class="ba-step-phrase">Buenas noches <button data-speak="Buenas noches" aria-label="Pronounce Buenas noches"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button></span>
@@ -1057,14 +1067,18 @@
             <div class="ba-tips">
               <div class="ba-tip ba-tip--accent">
                 <span class="ba-tip-icon">á</span>
-                <span>Stress the accented syllable: <strong>dí</strong>-as, tar-<strong>des</strong>, no-<strong>ches</strong> — never flatten them. <em>Días</em> is two syllables (dee-as), not one.</span>
+                <span data-en="Stress the accented syllable: <strong>dí</strong>-as, tar-<strong>des</strong>, no-<strong>ches</strong> — never flatten them. <em>Días</em> is two syllables (dee-as), not one."
+                      data-fr="Accentuez la syllabe accentuée : <strong>dí</strong>-as, tar-<strong>des</strong>, no-<strong>ches</strong> — ne les aplatissez jamais. <em>Días</em> a deux syllabes (dee-as), pas une.">Stress the accented syllable: <strong>dí</strong>-as, tar-<strong>des</strong>, no-<strong>ches</strong> — never flatten them. <em>Días</em> is two syllables (dee-as), not one.</span>
               </div>
               <div class="ba-tip ba-tip--cognate">
                 <span class="ba-tip-icon">≈</span>
-                <span>Cognate: <em>nocturnal</em> → <em>noches</em> — both share the Latin root for night.</span>
+                <span data-en="Cognate: <em>nocturnal</em> → <em>noches</em> — both share the Latin root for night."
+                      data-fr="Mot apparenté : <em>nocturne</em> → <em>noches</em> — tous deux partagent la racine latine pour la nuit.">Cognate: <em>nocturnal</em> → <em>noches</em> — both share the Latin root for night.</span>
               </div>
             </div>
-            <div class="ba-step-practice"><strong>Practice:</strong> Greet Diana using whichever greeting fits the current time right now.</div>
+            <div class="ba-step-practice"
+                 data-en="<strong>Practice:</strong> Greet Diana using whichever greeting fits the current time right now."
+                 data-fr="<strong>Exercice&nbsp;:</strong> Saluez Diana avec la formule qui correspond à l'heure actuelle."><strong>Practice:</strong> Greet Diana using whichever greeting fits the current time right now.</div>
           </div>
         </details>
 
@@ -1077,17 +1091,20 @@
             <svg class="ba-step-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </summary>
           <div class="ba-step-body">
-            <p class="ba-step-instruction">Diana says a time — you say the right greeting. 4 rounds, no peeking.</p>
+            <p class="ba-step-instruction"
+               data-en="Diana says a time — you say the right greeting. 4 rounds, no peeking."
+               data-fr="Diana dit une heure — vous dites la bonne salutation. 4 tours, sans regarder.">Diana says a time — you say the right greeting. 4 rounds, no peeking.</p>
             <div class="ba-step-review-items">
               <span class="ba-review-chip">7:00 → ?</span>
               <span class="ba-review-chip">14:00 → ?</span>
               <span class="ba-review-chip">21:00 → ?</span>
-              <span class="ba-review-chip">any time → ?</span>
+              <span class="ba-review-chip" data-en="any time → ?" data-fr="à tout moment → ?">any time → ?</span>
             </div>
             <div class="ba-tips" style="margin-top:16px">
               <div class="ba-tip ba-tip--culture">
                 <span class="ba-tip-icon">🌎</span>
-                <span>Cultural note: in much of Latin America <em>buenos días</em> ends right at noon — switch to <em>tardes</em> from roughly 12:00–13:00.</span>
+                <span data-en="Cultural note: in much of Latin America <em>buenos días</em> ends right at noon — switch to <em>tardes</em> from roughly 12:00–13:00."
+                      data-fr="Note culturelle : dans une grande partie de l'Amérique latine, <em>buenos días</em> s'arrête à midi — passez à <em>tardes</em> entre 12h et 13h environ.">Cultural note: in much of Latin America <em>buenos días</em> ends right at noon — switch to <em>tardes</em> from roughly 12:00–13:00.</span>
               </div>
             </div>
           </div>
@@ -1204,6 +1221,33 @@
         document.querySelector('.complete-hint').textContent = 'Test passed! Mark the block as complete.';
       }
     });
+
+    // EN / FR content switcher
+    (function () {
+      function applyLang(lang) {
+        // translation cards
+        document.querySelectorAll('.ba-trans-tl').forEach(function (el) {
+          el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+        });
+        // bilingual elements ([data-en][data-fr])
+        document.querySelectorAll('[data-en][data-fr]').forEach(function (el) {
+          el.innerHTML = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+        });
+        // review chip that has a data-en/fr
+        document.querySelectorAll('.ba-review-chip[data-en]').forEach(function (el) {
+          el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+        });
+      }
+
+      // Init on load
+      var initLang = localStorage.getItem('lang') || 'en';
+      applyLang(initLang);
+
+      // React to toggle
+      window.addEventListener('lang-changed', function (e) {
+        applyLang(e.detail && e.detail.lang ? e.detail.lang : 'en');
+      });
+    })();
 
     // Confetti engine
     var baConfetti = (function () {
