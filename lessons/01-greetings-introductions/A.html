@@ -509,8 +509,25 @@
           }
           .bac-bar-note strong { color: #C4593A; }
           @media (max-width: 600px) {
-            .bac-strip { flex-wrap: wrap; }
-            .bac-panel-wrap { min-width: 120px; }
+            .bac-strip {
+              flex-wrap: nowrap;
+              overflow-x: auto;
+              -webkit-overflow-scrolling: touch;
+              scroll-snap-type: x mandatory;
+              gap: 12px;
+              padding-bottom: 8px;
+            }
+            .bac-panel-wrap {
+              flex: 0 0 76vw;
+              max-width: 76vw;
+              scroll-snap-align: center;
+            }
+            /* hide rotations on mobile so panels don't clip */
+            .bac-panel-wrap:nth-child(1),
+            .bac-panel-wrap:nth-child(2),
+            .bac-panel-wrap:nth-child(3) {
+              transform: none;
+            }
             .bac-greeting { font-size: 20px; }
           }
         </style>
@@ -935,6 +952,55 @@
         }
       </style>
 
+      <div class="ba-progress" id="ba-progress" aria-label="Step progress">
+        <button class="ba-prog-pip" data-step="A1" aria-label="Step A1">A1</button>
+        <div class="ba-prog-line"></div>
+        <button class="ba-prog-pip" data-step="A2" aria-label="Step A2">A2</button>
+        <div class="ba-prog-line"></div>
+        <button class="ba-prog-pip" data-step="A3" aria-label="Step A3">A3</button>
+      </div>
+
+      <style>
+        .ba-progress {
+          display: flex;
+          align-items: center;
+          gap: 0;
+          margin-bottom: 18px;
+        }
+        .ba-prog-pip {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          border: 2px solid #DDD8CE;
+          background: #FAF6EE;
+          color: #7B736B;
+          font-family: 'DM Mono', monospace;
+          font-size: 0.7rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: border-color 0.2s, background 0.2s, color 0.2s;
+          flex-shrink: 0;
+          letter-spacing: 0.04em;
+        }
+        .ba-prog-pip.active {
+          border-color: #2A2540;
+          background: #2A2540;
+          color: #FAF6EE;
+        }
+        .ba-prog-pip.done {
+          border-color: #C4593A;
+          background: #C4593A;
+          color: #FAF6EE;
+        }
+        .ba-prog-line {
+          flex: 1;
+          height: 2px;
+          background: #DDD8CE;
+          transition: background 0.3s;
+        }
+        .ba-prog-line.done { background: #C4593A; }
+      </style>
+
       <div class="ba-steps">
 
         <!-- Step A1 -->
@@ -1117,6 +1183,45 @@
         document.querySelector('.complete-hint').textContent = 'Test passed! Mark the block as complete.';
       }
     });
+
+    // Step progress tracker
+    (function () {
+      var steps = Array.from(document.querySelectorAll('.ba-step'));
+      var pips  = Array.from(document.querySelectorAll('.ba-prog-pip'));
+      var lines = Array.from(document.querySelectorAll('.ba-prog-line'));
+      var done  = [false, false, false];
+
+      function syncProgress() {
+        pips.forEach(function (pip, i) {
+          pip.classList.toggle('done',   done[i]);
+          pip.classList.toggle('active', !done[i] && steps[i] && steps[i].open);
+        });
+        lines.forEach(function (line, i) {
+          line.classList.toggle('done', done[i]);
+        });
+      }
+
+      // Mark a step done when it's closed after being opened
+      steps.forEach(function (step, i) {
+        var wasOpen = step.open;
+        step.addEventListener('toggle', function () {
+          if (wasOpen && !step.open) done[i] = true;
+          wasOpen = step.open;
+          syncProgress();
+        });
+      });
+
+      // Clicking a pip scrolls to that step and opens it
+      pips.forEach(function (pip, i) {
+        pip.addEventListener('click', function () {
+          steps[i].open = true;
+          steps[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          syncProgress();
+        });
+      });
+
+      syncProgress();
+    })();
 
     // Audio pronunciation via Web Speech API
     (function () {
