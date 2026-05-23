@@ -404,17 +404,29 @@
             font-family: 'Inter', sans-serif;
           }
           .block-a-comic * { box-sizing: border-box; }
+
+          /* Scroll wrapper: handles overflow on all viewports */
+          .bac-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            /* pull edge-to-edge so first panel isn't clipped by subpage padding */
+            margin-inline: calc(-1 * var(--space-6, 24px));
+            padding-inline: var(--space-6, 24px);
+            padding-bottom: 12px;
+          }
+
           .bac-strip {
             display: flex;
             gap: 0;
             align-items: flex-start;
             justify-content: center;
             flex-wrap: nowrap;
-            width: 100%;
+            /* min-content so strip never shrinks below panel size */
+            width: max-content;
+            min-width: 100%;
           }
           .bac-panel-wrap {
-            flex: 1;
-            min-width: 160px;
+            flex: 0 0 240px;
             max-width: 300px;
             position: relative;
           }
@@ -532,20 +544,22 @@
           }
           .bac-bar-note strong { color: #C4593A; }
           @media (max-width: 600px) {
-            .bac-strip {
-              flex-wrap: nowrap;
-              overflow-x: auto;
-              -webkit-overflow-scrolling: touch;
+            .bac-scroll {
               scroll-snap-type: x mandatory;
+              /* align with screen edges, let panels breathe */
+              margin-inline: -16px;
+              padding-inline: 16px;
+            }
+            .bac-strip {
               gap: 12px;
-              padding-bottom: 8px;
+              justify-content: flex-start;
             }
             .bac-panel-wrap {
-              flex: 0 0 76vw;
-              max-width: 76vw;
-              scroll-snap-align: center;
+              flex: 0 0 78vw;
+              max-width: 78vw;
+              scroll-snap-align: start;
             }
-            /* hide rotations on mobile so panels don't clip */
+            /* remove tilt so panels don't get clipped */
             .bac-panel-wrap:nth-child(1),
             .bac-panel-wrap:nth-child(2),
             .bac-panel-wrap:nth-child(3) {
@@ -555,6 +569,7 @@
           }
         </style>
 
+        <div class="bac-scroll">
         <div class="bac-strip">
 
           <!-- Panel 1: Buenos días -->
@@ -751,6 +766,7 @@
           </div>
 
         </div><!-- /.bac-strip -->
+        </div><!-- /.bac-scroll -->
 
         <!-- Timeline bar -->
         <div class="bac-timeline-wrap">
