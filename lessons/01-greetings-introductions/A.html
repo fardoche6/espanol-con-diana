@@ -125,11 +125,30 @@
     }
     @media (max-width: 600px) {
       .subpage-hero {
-        padding: 40px 28px 36px;
+        padding: 32px 20px 28px;
         border-radius: 8px;
       }
-      .subpage-hero h1 { font-size: 2.2rem; }
+      .subpage-hero h1 { font-size: 2rem; }
       .subpage-hero .hero-sun { display: none; }
+
+      .subpage { padding: var(--space-3) var(--space-4) var(--space-16); }
+      .breadcrumb { padding: var(--space-4) var(--space-4) 0; }
+
+      /* Translation cards: full width stack on mobile */
+      .ba-trans-grid { flex-direction: column; gap: 10px; }
+      .ba-trans-card { flex: unset; }
+      /* Bigger tap target for speak btn */
+      .ba-speak-btn { width: 40px; height: 40px; }
+      .bac-caption-speak { width: 36px; height: 36px; }
+
+      /* Nav buttons full width */
+      .subpage-nav { flex-direction: column; gap: 10px; }
+      .nav-prev, .nav-next { width: 100%; justify-content: center; padding: var(--space-4); font-size: var(--text-base); }
+
+      /* Step cards */
+      .ba-step-header { padding: 14px 14px; gap: 10px; }
+      .ba-step-body { padding: 14px 14px 16px; }
+      .ba-step-phrase { font-size: 0.95rem; }
     }
 
     .section-label {
@@ -1150,6 +1169,8 @@
   <script type="application/json" id="lesson-translations">
 [{"es":"¿En qué puedo ayudarle?","en":"How can I help you?"},{"es":"Buenas noches","en":"Good evening / Good night"},{"es":"Buenas tardes","en":"Good afternoon"},{"es":"Buenos días","en":"Good morning"},{"es":"días","en":"days"},{"es":"noches","en":"nights / evenings"},{"es":"tardes","en":"afternoons"},{"es":"Hola","en":"Hello / Hi"}]
   </script>
+  <canvas id="ba-confetti" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;display:none;"></canvas>
+
   <script src="../../assets/test-engine.js"></script>
   <script src="../../assets/hover-translate.js"></script>
   <script src="../../assets/lesson-ui.js"></script>
@@ -1184,12 +1205,82 @@
       }
     });
 
+    // Confetti engine
+    var baConfetti = (function () {
+      var canvas = document.getElementById('ba-confetti');
+      var ctx = canvas.getContext('2d');
+      var particles = [];
+      var raf;
+      var COLORS = ['#C99A3D','#C4593A','#2A2540','#6B8E6B','#FAF6EE','#E8C99A'];
+
+      function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+
+      function rand(a, b) { return a + Math.random() * (b - a); }
+
+      function spawn() {
+        for (var i = 0; i < 120; i++) {
+          particles.push({
+            x: rand(0, canvas.width),
+            y: rand(-40, -10),
+            w: rand(6, 12),
+            h: rand(4, 8),
+            color: COLORS[Math.floor(Math.random() * COLORS.length)],
+            vx: rand(-2, 2),
+            vy: rand(3, 7),
+            angle: rand(0, Math.PI * 2),
+            spin: rand(-0.12, 0.12),
+            opacity: 1
+          });
+        }
+      }
+
+      function tick() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles = particles.filter(function (p) { return p.opacity > 0.02; });
+        particles.forEach(function (p) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.12; // gravity
+          p.angle += p.spin;
+          p.opacity -= 0.008;
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, p.opacity);
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.angle);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        });
+        if (particles.length) {
+          raf = requestAnimationFrame(tick);
+        } else {
+          canvas.style.display = 'none';
+          cancelAnimationFrame(raf);
+        }
+      }
+
+      return {
+        fire: function () {
+          resize();
+          canvas.style.display = 'block';
+          spawn();
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(tick);
+        }
+      };
+    })();
+
     // Step progress tracker
     (function () {
       var steps = Array.from(document.querySelectorAll('.ba-step'));
       var pips  = Array.from(document.querySelectorAll('.ba-prog-pip'));
       var lines = Array.from(document.querySelectorAll('.ba-prog-line'));
       var done  = [false, false, false];
+      var celebrated = false;
 
       function syncProgress() {
         pips.forEach(function (pip, i) {
@@ -1199,6 +1290,10 @@
         lines.forEach(function (line, i) {
           line.classList.toggle('done', done[i]);
         });
+        if (!celebrated && done.every(Boolean)) {
+          celebrated = true;
+          setTimeout(function () { baConfetti.fire(); }, 120);
+        }
       }
 
       // Mark a step done when it's closed after being opened
