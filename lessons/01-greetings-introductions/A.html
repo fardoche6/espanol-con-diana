@@ -362,8 +362,8 @@
   </nav>
 
   <div class="breadcrumb">
-    <a href="../../index.html">Lessons</a> &rsaquo;
-    <a href="index.html">Lesson 01: Greetings</a> &rsaquo;
+    <a href="../../index.html" data-en="Lessons" data-fr="Leçons">Lessons</a> &rsaquo;
+    <a href="index.html" data-en="Lesson 01: Greetings" data-fr="Leçon 01 : Salutations">Lesson 01: Greetings</a> &rsaquo;
     <span>Block A</span>
   </div>
 
@@ -388,16 +388,16 @@
       <div class="kicker">Lesson 01 · Block A</div>
       <h1>
         Saludos
-        <span class="title-bilingual">/ Greetings!</span>
+        <span class="title-bilingual" data-en="/ Greetings!" data-fr="/ Salutations !">/ Greetings!</span>
       </h1>
       <span class="title-accent"></span>
-      <div class="subtitle">Time-of-day greetings</div>
+      <div class="subtitle" data-en="Time-of-day greetings" data-fr="Salutations selon l'heure">Time-of-day greetings</div>
       <div class="meta">3 steps · ~6 min · A1</div>
     </header>
 
     <!-- 1. Comic illustration (Block A only: panels 1–3, time-of-day greetings) -->
     <section aria-labelledby="label-comic">
-      <h2 class="section-label" id="label-comic">Illustration</h2>
+      <h2 class="section-label" id="label-comic" data-en="Illustration" data-fr="Illustration">Illustration</h2>
       <div class="block-a-comic">
         <style>
           .block-a-comic {
@@ -784,7 +784,8 @@
               <span>midnight</span>
             </div>
             <div class="bac-bar-note">
-              ¡<strong>Hola!</strong> — cualquier hora &nbsp;·&nbsp; ¡<strong>Hola!</strong> — any time
+              <span data-en="¡<strong>Hola!</strong> — cualquier hora &nbsp;·&nbsp; ¡<strong>Hola!</strong> — any time"
+                    data-fr="¡<strong>Hola!</strong> — cualquier hora &nbsp;·&nbsp; ¡<strong>Hola!</strong> — à toute heure">¡<strong>Hola!</strong> — cualquier hora &nbsp;·&nbsp; ¡<strong>Hola!</strong> — any time</span>
             </div>
           </div>
         </div>
@@ -794,7 +795,7 @@
 
     <!-- 2. Translations — Block A: time-of-day greetings only -->
     <section aria-labelledby="label-trans">
-      <h2 class="section-label" id="label-trans">Translations</h2>
+      <h2 class="section-label" id="label-trans" data-en="Translations" data-fr="Traductions">Translations</h2>
       <div class="ba-trans-grid">
         <div class="ba-trans-card">
           <button class="ba-speak-btn" data-speak="Buenos días" aria-label="Pronounce Buenos días" title="Listen">
@@ -825,7 +826,7 @@
 
     <!-- 3. Block content — step cards -->
     <section aria-labelledby="label-content">
-      <h2 class="section-label" id="label-content">Steps</h2>
+      <h2 class="section-label" id="label-content" data-en="Steps" data-fr="Étapes">Steps</h2>
 
       <style>
         .ba-steps { display: flex; flex-direction: column; gap: 12px; }
@@ -1131,7 +1132,7 @@
 
     <!-- 4. Mini-test -->
     <section aria-labelledby="label-test">
-      <h2 class="section-label" id="label-test">Mini-test</h2>
+      <h2 class="section-label" id="label-test" data-en="Mini-test" data-fr="Mini-test">Mini-test</h2>
       <div class="test" data-test-id="block-a"></div>
       <script type="application/json" id="lesson-tests">
 {
@@ -1171,9 +1172,9 @@
     <!-- 5. Completion -->
     <section class="subpage-complete">
       <button class="complete-btn" id="complete-btn-block" data-topic-id="01-greetings-introductions" data-block-code="A" disabled>
-        Mark as complete
+        <span data-en="Mark as complete" data-fr="Marquer comme terminé">Mark as complete</span>
       </button>
-      <p class="complete-hint">Pass the mini-test to complete this block.</p>
+      <p class="complete-hint" data-en="Pass the mini-test to complete this block." data-fr="Réussissez le mini-test pour terminer ce bloc.">Pass the mini-test to complete this block.</p>
     </section>
 
     <!-- 6. Sub-page nav -->
@@ -1218,7 +1219,8 @@
     var key = 'completed-' + TOPIC_ID + '-' + BLOCK_CODE;
 
     function markDone() {
-      completeBtn.textContent = 'Block complete ✓';
+      var lang = localStorage.getItem('lang') || 'en';
+      completeBtn.querySelector('[data-en]').textContent = lang === 'fr' ? 'Bloc terminé ✓' : 'Block complete ✓';
       completeBtn.classList.add('complete-btn--done');
       completeBtn.disabled = true;
       document.querySelector('.complete-hint').style.display = 'none';
@@ -1234,7 +1236,10 @@
       var d = e.detail || {};
       if (d.testId === 'block-a' && d.allCorrect) {
         completeBtn.disabled = false;
-        document.querySelector('.complete-hint').textContent = 'Test passed! Mark the block as complete.';
+        var lang2 = localStorage.getItem('lang') || 'en';
+        document.querySelector('.complete-hint').textContent = lang2 === 'fr'
+          ? 'Test réussi ! Marquez le bloc comme terminé.'
+          : 'Test passed! Mark the block as complete.';
       }
     });
 
@@ -1261,7 +1266,13 @@
 
       // React to toggle
       window.addEventListener('lang-changed', function (e) {
-        applyLang(e.detail && e.detail.lang ? e.detail.lang : 'en');
+        var l = e.detail && e.detail.lang ? e.detail.lang : 'en';
+        applyLang(l);
+        // Re-sync complete hint if already in "test passed" state
+        var hint = document.querySelector('.complete-hint');
+        if (hint && hint.getAttribute('data-' + l)) {
+          hint.innerHTML = hint.getAttribute('data-' + l);
+        }
       });
     })();
 
