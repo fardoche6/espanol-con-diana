@@ -314,6 +314,205 @@
     }
     .nav-prev:hover { background: var(--color-surface-200); border-color: var(--color-ochre); color: var(--color-ink); }
     .nav-next:hover { background: var(--color-surface-200); border-color: var(--color-ochre); color: var(--color-ink); }
+
+    /* ── Theme toggle pill ── */
+    .theme-toggle {
+      display: flex;
+      gap: 2px;
+      background: var(--color-surface-200, #E8E2D8);
+      border-radius: 6px;
+      padding: 2px;
+    }
+    .theme-toggle__btn {
+      font-family: var(--font-data);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 4px 9px;
+      border: none;
+      border-radius: 4px;
+      background: transparent;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .theme-toggle__btn--active {
+      background: #1F1A14;
+      color: #FAF6EE;
+    }
+
+    /* ── Realist illustration wrapper ── */
+    .illus-comic  { display: block; }
+    .illus-realist { display: none; }
+    [data-theme="realist"] .illus-comic  { display: none; }
+    [data-theme="realist"] .illus-realist { display: block; }
+
+    /* Visual-novel scene container */
+    .real-scene-wrap {
+      position: relative;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+      margin-bottom: 20px;
+      cursor: default;
+    }
+    .real-scene-wrap svg { width: 100%; display: block; }
+
+    /* Subtitle bar */
+    .real-subtitle {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(5,3,2,0.95) 0%, rgba(5,3,2,0.7) 70%, transparent 100%);
+      padding: 32px 24px 20px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .real-subtitle-text { flex: 1; }
+    .real-phrase {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-style: italic;
+      color: #FAF6EE;
+      line-height: 1.05;
+      display: block;
+    }
+    .real-translation {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: rgba(250,246,238,0.6);
+      margin-top: 4px;
+      display: block;
+    }
+    .real-subtitle .bac-caption-speak {
+      background: rgba(250,246,238,0.12);
+      border-color: rgba(250,246,238,0.3);
+      color: #FAF6EE;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      margin-bottom: 2px;
+    }
+    .real-subtitle .bac-caption-speak:hover { background: #C99A3D; border-color: #C99A3D; }
+
+    /* Scene navigator dots */
+    .real-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .real-nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(201,154,61,0.5);
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+    .real-nav-dot.active { background: #C99A3D; border-color: #C99A3D; transform: scale(1.25); }
+
+    /* ── Realist page-wide overrides ── */
+    [data-theme="realist"] body,
+    [data-theme="realist"] { background: #0A0806; }
+
+    [data-theme="realist"] .subpage-hero {
+      background: linear-gradient(160deg, #0A0806 0%, #1C1008 55%, #2E1C0A 100%);
+    }
+    [data-theme="realist"] .subpage-hero::after {
+      border-color: rgba(201,154,61,0.15);
+    }
+    [data-theme="realist"] .subpage-hero h1 { color: #F0E8D5; }
+    [data-theme="realist"] .subpage-hero .subtitle { color: rgba(240,232,213,0.6); }
+    [data-theme="realist"] .subpage-hero .meta { color: rgba(240,232,213,0.4); }
+
+    [data-theme="realist"] .section-label { color: #C99A3D; }
+    [data-theme="realist"] .section-label::after { background: rgba(201,154,61,0.2); }
+
+    [data-theme="realist"] .ba-trans-card {
+      background: #1A1410;
+      border-color: rgba(201,154,61,0.4);
+      box-shadow: 3px 3px 0 rgba(201,154,61,0.1);
+    }
+    [data-theme="realist"] .ba-trans-es { color: #F0E8D5; }
+    [data-theme="realist"] .ba-trans-tl { color: #9A8E7E; }
+    [data-theme="realist"] .ba-speak-btn {
+      background: #1A1410;
+      border-color: rgba(201,154,61,0.5);
+      color: #C99A3D;
+    }
+    [data-theme="realist"] .ba-speak-btn:hover { background: #C99A3D; color: #0A0806; }
+
+    [data-theme="realist"] .ba-step {
+      background: #120E0A;
+      border-color: #2E2218;
+    }
+    [data-theme="realist"] .ba-step[open] .ba-step-header { border-bottom-color: #2E2218; }
+    [data-theme="realist"] .ba-step-num { background: #3A2A10; color: #C99A3D; }
+    [data-theme="realist"] .ba-step[open] .ba-step-num { background: #C4593A; color: #FAF6EE; }
+    [data-theme="realist"] .ba-step-title { color: #F0E8D5; }
+    [data-theme="realist"] .ba-step-meta { color: rgba(201,154,61,0.7); }
+    [data-theme="realist"] .ba-step-chevron { color: #5A4A38; }
+    [data-theme="realist"] .ba-step-instruction { color: #C8B898; }
+    [data-theme="realist"] .ba-step-phrase { background: #2A1E12; }
+    [data-theme="realist"] .ba-step-phrase button { color: #C99A3D; }
+    [data-theme="realist"] .ba-tip { color: #C8B898; }
+    [data-theme="realist"] .ba-tip--accent .ba-tip-icon { background: rgba(201,154,61,0.12); }
+    [data-theme="realist"] .ba-step-practice {
+      background: rgba(201,154,61,0.06);
+      border-left-color: #C99A3D;
+      color: #C8B898;
+    }
+    [data-theme="realist"] .ba-step-practice strong { color: #C99A3D; }
+    [data-theme="realist"] .ba-review-chip {
+      border-color: #2E2218;
+      background: #1A1410;
+      color: #8A7A68;
+    }
+
+    [data-theme="realist"] .ba-prog-pip {
+      border-color: #2E2218;
+      background: #120E0A;
+      color: #5A4A38;
+    }
+    [data-theme="realist"] .ba-prog-pip.active { background: #3A2A10; border-color: #C99A3D; color: #C99A3D; }
+    [data-theme="realist"] .ba-prog-pip.done { background: #C4593A; border-color: #C4593A; color: #FAF6EE; }
+    [data-theme="realist"] .ba-prog-line { background: #2E2218; }
+    [data-theme="realist"] .ba-prog-line.done { background: #C4593A; }
+
+    [data-theme="realist"] .subpage-complete {
+      background: #120E0A;
+      border-color: #2E2218;
+    }
+    [data-theme="realist"] .complete-hint { color: #5A4A38; }
+
+    [data-theme="realist"] .subpage-nav { border-top-color: #2E2218; }
+    [data-theme="realist"] .nav-prev,
+    [data-theme="realist"] .nav-next {
+      background: #120E0A;
+      border-color: #2E2218;
+      color: #5A4A38;
+    }
+    [data-theme="realist"] .nav-prev:hover,
+    [data-theme="realist"] .nav-next:hover {
+      background: #1A1410;
+      border-color: #C99A3D;
+      color: #F0E8D5;
+    }
+
+    [data-theme="realist"] .breadcrumb { color: #5A4A38; }
+    [data-theme="realist"] .breadcrumb a { color: #C99A3D; }
+
+    @media (max-width: 600px) {
+      .real-phrase { font-size: 1.3rem; }
+      .real-subtitle { padding: 20px 14px 14px; }
+    }
   </style>
 </head>
 <body>
@@ -352,6 +551,10 @@
       <div class="lang-toggle" aria-label="Translation language">
         <button class="lang-toggle__btn" data-lang="en" aria-pressed="true">EN</button>
         <button class="lang-toggle__btn" data-lang="fr" aria-pressed="false">FR</button>
+      </div>
+      <div class="theme-toggle" aria-label="Visual theme">
+        <button class="theme-toggle__btn theme-toggle__btn--active" data-theme-val="comic">COMIC</button>
+        <button class="theme-toggle__btn" data-theme-val="realist">REAL</button>
       </div>
       <button class="site-nav__toggle" aria-label="Open menu" aria-expanded="false">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -395,9 +598,542 @@
       <div class="meta">3 steps · ~6 min · A1</div>
     </header>
 
-    <!-- 1. Comic illustration (Block A only: panels 1–3, time-of-day greetings) -->
+    <!-- 1. Illustration — dual theme -->
     <section aria-labelledby="label-comic">
       <h2 class="section-label" id="label-comic" data-en="Illustration" data-fr="Illustration">Illustration</h2>
+
+      <!-- REALIST theme: 3 cinematic scenes -->
+      <div class="illus-realist">
+
+        <!-- Scene navigator dots -->
+        <div class="real-nav" role="tablist" aria-label="Scenes">
+          <button class="real-nav-dot active" data-scene="0" aria-label="Buenos días scene"></button>
+          <button class="real-nav-dot" data-scene="1" aria-label="Buenas tardes scene"></button>
+          <button class="real-nav-dot" data-scene="2" aria-label="Buenas noches scene"></button>
+        </div>
+
+        <!-- Scene 0: Buenos días — morning café -->
+        <div class="real-scene-wrap" id="real-scene-0">
+          <svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="rs-sky0" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#87CEEB" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#F5C842" stop-opacity="0.7"/>
+              </linearGradient>
+              <linearGradient id="rs-wall0" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1C1208"/>
+                <stop offset="100%" stop-color="#2A1C0E"/>
+              </linearGradient>
+              <linearGradient id="rs-skin0" x1="0" y1="0" x2="0.3" y2="1">
+                <stop offset="0%" stop-color="#D4956A"/>
+                <stop offset="40%" stop-color="#C07848"/>
+                <stop offset="100%" stop-color="#8B4A22"/>
+              </linearGradient>
+              <linearGradient id="rs-keylight0" x1="1" y1="0" x2="0" y2="0.5">
+                <stop offset="0%" stop-color="#F5C842" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#F5C842" stop-opacity="0"/>
+              </linearGradient>
+              <radialGradient id="rs-glow0" cx="75%" cy="30%" r="40%">
+                <stop offset="0%" stop-color="#F5D060" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#F5D060" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="rs-grain0">
+                <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="noise"/>
+                <feColorMatrix type="saturate" values="0" in="noise" result="gray"/>
+                <feBlend in="SourceGraphic" in2="gray" mode="overlay" result="blend"/>
+                <feComposite in="blend" in2="SourceGraphic" operator="in"/>
+              </filter>
+              <clipPath id="rs-scene0-clip"><rect width="800" height="420"/></clipPath>
+            </defs>
+
+            <!-- BG: dark café wall -->
+            <rect width="800" height="420" fill="url(#rs-wall0)"/>
+
+            <!-- Floor darker -->
+            <rect y="300" width="800" height="120" fill="#14100A"/>
+
+            <!-- Window — large, morning light -->
+            <rect x="460" y="20" width="300" height="280" rx="4" fill="url(#rs-sky0)" opacity="0.9"/>
+            <rect x="460" y="20" width="300" height="280" rx="4" fill="none" stroke="#3A2A14" stroke-width="6"/>
+            <!-- Window cross bars -->
+            <line x1="610" y1="20" x2="610" y2="300" stroke="#3A2A14" stroke-width="5"/>
+            <line x1="460" y1="155" x2="760" y2="155" stroke="#3A2A14" stroke-width="5"/>
+            <!-- Window glow on wall -->
+            <rect x="460" y="20" width="300" height="280" fill="url(#rs-keylight0)"/>
+            <rect x="0" y="0" width="800" height="420" fill="url(#rs-glow0)"/>
+
+            <!-- Buildings visible through window -->
+            <rect x="470" y="60" width="55" height="200" fill="#4A6A8A" opacity="0.6"/>
+            <rect x="540" y="90" width="40" height="170" fill="#3A5A7A" opacity="0.5"/>
+            <rect x="595" y="40" width="70" height="220" fill="#567090" opacity="0.55"/>
+            <rect x="678" y="75" width="50" height="185" fill="#4A6A8A" opacity="0.5"/>
+            <!-- Window panes reflections -->
+            <rect x="462" y="22" width="145" height="130" fill="white" opacity="0.04"/>
+            <rect x="612" y="22" width="146" height="130" fill="white" opacity="0.02"/>
+
+            <!-- Table -->
+            <rect x="80" y="310" width="360" height="16" rx="3" fill="#3A2814" stroke="#1A1008" stroke-width="2"/>
+            <rect x="130" y="326" width="14" height="80" rx="2" fill="#2A1C0E"/>
+            <rect x="390" y="326" width="14" height="80" rx="2" fill="#2A1C0E"/>
+
+            <!-- Espresso cup -->
+            <ellipse cx="260" cy="312" rx="28" ry="8" fill="#1A1008" stroke="#3A2814" stroke-width="1.5"/>
+            <path d="M232,312 Q232,336 260,336 Q288,336 288,312" fill="#2A1C0E" stroke="#3A2814" stroke-width="1.5"/>
+            <ellipse cx="260" cy="312" rx="28" ry="8" fill="#0A0806" opacity="0.6"/>
+            <ellipse cx="260" cy="312" rx="18" ry="5" fill="#3A2010"/>
+            <ellipse cx="257" cy="311" rx="6" ry="2" fill="white" opacity="0.12"/>
+            <!-- Cup handle -->
+            <path d="M288,318 Q302,318 302,324 Q302,330 288,330" fill="none" stroke="#3A2814" stroke-width="2.5"/>
+            <!-- Saucer -->
+            <ellipse cx="260" cy="338" rx="36" ry="6" fill="#2A1C0E" stroke="#3A2814" stroke-width="1"/>
+
+            <!-- Key light spill on table from window -->
+            <rect x="200" y="295" width="250" height="35" fill="#F5C842" opacity="0.07" rx="2"/>
+
+            <!-- MAN — seated, lit from window right side -->
+            <!-- Body / shirt — dark indigo -->
+            <path d="M310,420 L310,260 Q310,240 330,235 L380,225 Q420,218 440,225 L490,235 Q510,240 510,260 L510,420 Z" fill="#1A1E2E"/>
+            <!-- Shirt collar -->
+            <path d="M370,225 Q390,218 410,225 L405,245 Q390,252 375,245 Z" fill="#F0E8D5" opacity="0.9"/>
+            <!-- Shirt shading -->
+            <path d="M310,420 L310,260 Q310,240 330,235 L355,228 L350,420 Z" fill="#0E1018" opacity="0.5"/>
+            <!-- Light catch on shoulder from window -->
+            <path d="M460,225 Q490,228 510,245 L510,290 Q490,275 460,270 Z" fill="#C8A050" opacity="0.18"/>
+
+            <!-- Neck -->
+            <rect x="378" y="195" width="44" height="38" rx="6" fill="#C88050"/>
+            <!-- Shadow under jaw -->
+            <ellipse cx="400" cy="228" rx="22" ry="6" fill="#6A3810" opacity="0.5"/>
+
+            <!-- HEAD -->
+            <ellipse cx="400" cy="160" rx="68" ry="76" fill="#C88050"/>
+            <!-- Jaw shape refinement -->
+            <path d="M332,168 Q334,215 360,230 Q380,240 400,242 Q420,240 440,230 Q466,215 468,168 Z" fill="#C07848"/>
+
+            <!-- Hair — dark, full -->
+            <path d="M332,148 Q334,90 400,82 Q466,90 468,148 Q460,120 440,110 Q420,104 400,104 Q380,104 360,110 Q340,120 332,148 Z" fill="#1A0C06"/>
+            <!-- Hair texture -->
+            <path d="M340,130 Q360,112 400,108 Q440,112 460,130" fill="none" stroke="#2A1408" stroke-width="3" opacity="0.6"/>
+            <!-- Side hair -->
+            <path d="M332,148 Q328,162 330,180 Q332,165 340,155 Z" fill="#1A0C06"/>
+            <path d="M468,148 Q472,162 470,180 Q468,165 460,155 Z" fill="#1A0C06"/>
+
+            <!-- Ear left (shadow side) -->
+            <ellipse cx="334" cy="170" rx="10" ry="14" fill="#A86838"/>
+            <path d="M336,160 Q330,170 336,180" fill="none" stroke="#8A4A22" stroke-width="1.5"/>
+            <!-- Ear right (lit side) -->
+            <ellipse cx="466" cy="170" rx="10" ry="14" fill="#D09060"/>
+            <path d="M464,160 Q470,170 464,180" fill="none" stroke="#B87040" stroke-width="1.5"/>
+
+            <!-- Eyebrows — strong, dark -->
+            <path d="M356,138 Q372,131 390,134" fill="none" stroke="#1A0C06" stroke-width="4" stroke-linecap="round"/>
+            <path d="M410,134 Q428,131 444,138" fill="none" stroke="#1A0C06" stroke-width="4" stroke-linecap="round"/>
+
+            <!-- Eyes -->
+            <!-- Left eye (shadow) -->
+            <ellipse cx="372" cy="152" rx="16" ry="11" fill="#2A1A0E"/>
+            <ellipse cx="372" cy="152" rx="11" ry="9" fill="#3A2818"/>
+            <ellipse cx="372" cy="152" rx="7" ry="7" fill="#0A0604"/>
+            <ellipse cx="375" cy="149" rx="2.5" ry="2" fill="white" opacity="0.55"/>
+            <!-- Right eye (lit) -->
+            <ellipse cx="428" cy="152" rx="16" ry="11" fill="#3A2818"/>
+            <ellipse cx="428" cy="152" rx="11" ry="9" fill="#4A3020"/>
+            <ellipse cx="428" cy="152" rx="7" ry="7" fill="#0A0604"/>
+            <ellipse cx="431" cy="149" rx="2.5" ry="2" fill="white" opacity="0.7"/>
+            <!-- Eye lids -->
+            <path d="M356,147 Q372,140 388,147" fill="none" stroke="#1A0C06" stroke-width="1.5"/>
+            <path d="M412,147 Q428,140 444,147" fill="none" stroke="#1A0C06" stroke-width="1.5"/>
+
+            <!-- Nose -->
+            <path d="M394,162 Q388,175 386,186 Q393,192 400,192 Q407,192 414,186 Q412,175 406,162 Z" fill="#B06838" opacity="0.7"/>
+            <ellipse cx="390" cy="187" rx="7" ry="4" fill="#8A4820" opacity="0.5"/>
+            <ellipse cx="410" cy="187" rx="7" ry="4" fill="#8A4820" opacity="0.5"/>
+
+            <!-- Mouth — subtle smile, early morning -->
+            <path d="M378,208 Q400,220 422,208" fill="none" stroke="#8A4020" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M382,210 Q400,218 418,210" fill="#C07040" opacity="0.4"/>
+
+            <!-- Facial stubble shadow -->
+            <path d="M360,195 Q380,210 400,212 Q420,210 440,195 Q445,220 435,232 Q420,240 400,242 Q380,240 365,232 Q355,220 360,195 Z" fill="#8A4818" opacity="0.25"/>
+
+            <!-- Light rim from window on face right side -->
+            <path d="M442,130 Q470,145 468,180 Q464,165 450,155 Q440,148 438,135 Z" fill="#F5C842" opacity="0.22"/>
+
+            <!-- Film grain overlay -->
+            <rect width="800" height="420" fill="url(#rs-grain0)" opacity="0.06" clip-path="url(#rs-scene0-clip)"/>
+
+            <!-- Vignette -->
+            <radialGradient id="rs-vig0" cx="50%" cy="50%" r="70%">
+              <stop offset="0%" stop-color="black" stop-opacity="0"/>
+              <stop offset="100%" stop-color="black" stop-opacity="0.6"/>
+            </radialGradient>
+            <rect width="800" height="420" fill="url(#rs-vig0)"/>
+          </svg>
+          <div class="real-subtitle">
+            <div class="real-subtitle-text">
+              <span class="real-phrase">Buenos días</span>
+              <span class="real-translation" data-en="Good morning" data-fr="Bonjour">Good morning</span>
+            </div>
+            <button class="bac-caption-speak" data-speak="Buenos días" aria-label="Pronounce Buenos días">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Scene 1: Buenas tardes — street terrace, afternoon -->
+        <div class="real-scene-wrap" id="real-scene-1" style="display:none">
+          <svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="rs-sky1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4A90C8"/>
+                <stop offset="70%" stop-color="#87CEEB"/>
+                <stop offset="100%" stop-color="#D4A843"/>
+              </linearGradient>
+              <linearGradient id="rs-street1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#C8B070"/>
+                <stop offset="100%" stop-color="#8A7040"/>
+              </linearGradient>
+              <radialGradient id="rs-sun1" cx="80%" cy="15%" r="25%">
+                <stop offset="0%" stop-color="#FFF0A0" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#FFF0A0" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="rs-skin1" x1="0.2" y1="0" x2="0.8" y2="1">
+                <stop offset="0%" stop-color="#E0A870"/>
+                <stop offset="50%" stop-color="#C88050"/>
+                <stop offset="100%" stop-color="#9A5828"/>
+              </linearGradient>
+              <filter id="rs-blur1">
+                <feGaussianBlur stdDeviation="2.5"/>
+              </filter>
+              <clipPath id="rs-scene1-clip"><rect width="800" height="420"/></clipPath>
+            </defs>
+
+            <!-- Sky -->
+            <rect width="800" height="280" fill="url(#rs-sky1)"/>
+            <!-- Sun halo -->
+            <rect width="800" height="420" fill="url(#rs-sun1)"/>
+            <!-- Street / ground -->
+            <rect y="280" width="800" height="140" fill="url(#rs-street1)"/>
+            <!-- Sidewalk line -->
+            <line x1="0" y1="310" x2="800" y2="310" stroke="#A89050" stroke-width="2" opacity="0.5"/>
+
+            <!-- BG buildings — Mexico City style -->
+            <!-- Far left building -->
+            <rect x="0" y="60" width="120" height="220" fill="#C8A870" opacity="0.7" filter="url(#rs-blur1)"/>
+            <rect x="10" y="80" width="30" height="40" fill="#8A7848" opacity="0.5" filter="url(#rs-blur1)"/>
+            <rect x="50" y="75" width="30" height="40" fill="#8A7848" opacity="0.5" filter="url(#rs-blur1)"/>
+            <rect x="80" y="85" width="30" height="35" fill="#8A7848" opacity="0.5" filter="url(#rs-blur1)"/>
+            <!-- Far right building -->
+            <rect x="620" y="40" width="180" height="240" fill="#B89860" opacity="0.65" filter="url(#rs-blur1)"/>
+            <rect x="635" y="60" width="35" height="50" fill="#7A6838" opacity="0.5" filter="url(#rs-blur1)"/>
+            <rect x="685" y="55" width="35" height="55" fill="#7A6838" opacity="0.5" filter="url(#rs-blur1)"/>
+            <rect x="740" y="65" width="40" height="45" fill="#7A6838" opacity="0.5" filter="url(#rs-blur1)"/>
+            <!-- Mid buildings -->
+            <rect x="100" y="100" width="80" height="180" fill="#D4B880" opacity="0.6" filter="url(#rs-blur1)"/>
+            <rect x="580" y="80" width="80" height="200" fill="#C8A870" opacity="0.6" filter="url(#rs-blur1)"/>
+
+            <!-- Street trees (blurred) -->
+            <ellipse cx="150" cy="270" rx="45" ry="55" fill="#3A6830" opacity="0.55" filter="url(#rs-blur1)"/>
+            <rect x="146" y="295" width="8" height="50" fill="#2A1C08" opacity="0.5"/>
+            <ellipse cx="640" cy="265" rx="50" ry="60" fill="#3A6830" opacity="0.5" filter="url(#rs-blur1)"/>
+            <rect x="636" y="295" width="8" height="50" fill="#2A1C08" opacity="0.5"/>
+
+            <!-- Café terrace — table edge -->
+            <rect x="160" y="330" width="480" height="14" rx="3" fill="#4A3010" stroke="#2A1C08" stroke-width="2"/>
+            <rect x="200" y="344" width="12" height="60" rx="2" fill="#3A2208"/>
+            <rect x="590" y="344" width="12" height="60" rx="2" fill="#3A2208"/>
+            <!-- Terrace railing -->
+            <rect x="100" y="295" width="600" height="6" rx="2" fill="#5A4020" opacity="0.7"/>
+            <line x1="120" y1="295" x2="120" y2="330" stroke="#5A4020" stroke-width="3" opacity="0.7"/>
+            <line x1="200" y1="295" x2="200" y2="330" stroke="#5A4020" stroke-width="3" opacity="0.7"/>
+            <line x1="280" y1="295" x2="280" y2="330" stroke="#5A4020" stroke-width="3" opacity="0.7"/>
+            <line x1="520" y1="295" x2="520" y2="330" stroke="#5A4020" stroke-width="3" opacity="0.7"/>
+            <line x1="600" y1="295" x2="600" y2="330" stroke="#5A4020" stroke-width="3" opacity="0.7"/>
+            <line x1="680" y1="295" x2="680" y2="330" stroke="#5A4020" stroke-width="3" opacity="0.7"/>
+
+            <!-- Drink on table -->
+            <rect x="370" y="302" width="18" height="30" rx="3" fill="#3A7048" opacity="0.8" stroke="#2A5038" stroke-width="1.5"/>
+            <rect x="368" y="300" width="22" height="6" rx="2" fill="#2A5038"/>
+            <line x1="379" y1="296" x2="379" y2="282" stroke="#3A5028" stroke-width="1.5" stroke-dasharray="2,2"/>
+
+            <!-- MAN — standing, relaxed, sunglasses -->
+            <!-- Body — casual shirt, open collar, afternoon heat -->
+            <path d="M320,420 L320,265 Q320,248 338,242 L380,232 Q400,226 420,232 L462,242 Q480,248 480,265 L480,420 Z" fill="#2A4858"/>
+            <!-- Shirt lighter left shoulder -->
+            <path d="M320,265 Q320,248 338,242 L360,236 L355,420 L320,420 Z" fill="white" opacity="0.06"/>
+            <!-- Top button undone — collar open -->
+            <path d="M372,232 L390,222 L408,232 L400,255 Q390,260 380,255 Z" fill="#F0E8D5" opacity="0.85"/>
+            <!-- Shirt detail -->
+            <line x1="390" y1="255" x2="390" y2="330" stroke="white" stroke-width="1" opacity="0.1"/>
+
+            <!-- Strong afternoon sunlight on shoulder right -->
+            <path d="M450,232 Q475,240 480,260 L480,300 Q465,285 455,270 Q445,255 448,238 Z" fill="#F0C040" opacity="0.2"/>
+            <!-- Shadow side left -->
+            <path d="M320,420 L320,265 Q320,248 338,242 L350,238 L346,420 Z" fill="black" opacity="0.2"/>
+
+            <!-- Neck -->
+            <rect x="374" y="197" width="42" height="36" rx="6" fill="#C88050"/>
+
+            <!-- HEAD -->
+            <ellipse cx="395" cy="155" rx="66" ry="72" fill="#C88050"/>
+            <path d="M329,163 Q330,208 358,224 Q376,235 395,237 Q414,235 432,224 Q460,208 461,163 Z" fill="#C07848"/>
+
+            <!-- Hair — wavy, dark brown, afternoon shine -->
+            <path d="M329,148 Q330,88 395,80 Q460,88 461,148 Q453,115 432,105 Q414,98 395,98 Q376,98 358,105 Q337,115 329,148 Z" fill="#1A0C06"/>
+            <path d="M336,130 Q358,110 395,106 Q432,110 454,130" fill="none" stroke="#2A1408" stroke-width="2.5" opacity="0.5"/>
+            <!-- Afternoon sun glint in hair -->
+            <path d="M395,82 Q415,80 435,90 Q420,84 395,84 Q370,84 355,90 Z" fill="#8A5020" opacity="0.4"/>
+
+            <!-- Ear left -->
+            <ellipse cx="331" cy="164" rx="10" ry="13" fill="#A86838"/>
+            <!-- Ear right -->
+            <ellipse cx="459" cy="164" rx="10" ry="13" fill="#D09060"/>
+
+            <!-- SUNGLASSES — aviator style -->
+            <path d="M342,145 Q360,135 390,138 L392,155 Q374,162 354,157 Q340,153 342,145 Z" fill="#0A0806" opacity="0.9"/>
+            <path d="M398,155 L400,138 Q430,135 448,145 Q450,153 436,157 Q416,162 398,155 Z" fill="#0A0806" opacity="0.9"/>
+            <!-- Frame bridge -->
+            <path d="M392,147 Q395,144 400,144 Q403,144 408,147" fill="none" stroke="#C0A040" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Frame edges -->
+            <path d="M342,149 Q334,152 330,158" fill="none" stroke="#C0A040" stroke-width="2"/>
+            <path d="M448,149 Q456,152 460,158" fill="none" stroke="#C0A040" stroke-width="2"/>
+            <!-- Lens shine -->
+            <path d="M350,140 Q358,138 368,141" fill="none" stroke="white" stroke-width="1.5" opacity="0.3"/>
+            <path d="M406,141 Q416,138 424,140" fill="none" stroke="white" stroke-width="1.5" opacity="0.3"/>
+
+            <!-- Eyebrows visible above glasses -->
+            <path d="M348,133 Q366,126 384,129" fill="none" stroke="#1A0C06" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M406,129 Q424,126 442,133" fill="none" stroke="#1A0C06" stroke-width="3.5" stroke-linecap="round"/>
+
+            <!-- Nose -->
+            <path d="M388,160 Q382,173 380,182 Q387,188 395,188 Q403,188 410,182 Q408,173 402,160 Z" fill="#B06838" opacity="0.65"/>
+
+            <!-- Smile — relaxed, open -->
+            <path d="M370,205 Q395,220 420,205" fill="none" stroke="#8A3E18" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M374,208 Q395,218 416,208" fill="#D08050" opacity="0.35"/>
+            <!-- Slight teeth show -->
+            <path d="M378,210 Q395,216 412,210 Q412,216 395,218 Q378,216 378,210 Z" fill="#F0E8D5" opacity="0.5"/>
+
+            <!-- Stubble -->
+            <path d="M358,190 Q376,205 395,207 Q414,205 432,190 Q437,212 428,225 Q414,235 395,237 Q376,235 362,225 Q353,212 358,190 Z" fill="#7A3A10" opacity="0.22"/>
+
+            <!-- Strong sunlight rim on right -->
+            <path d="M438,125 Q464,140 461,175 Q456,160 444,148 Q435,140 434,128 Z" fill="#F5D040" opacity="0.28"/>
+            <!-- Hot sun highlight top head -->
+            <ellipse cx="415" cy="92" rx="25" ry="12" fill="#F5D040" opacity="0.15"/>
+
+            <!-- Vignette -->
+            <radialGradient id="rs-vig1" cx="50%" cy="50%" r="70%">
+              <stop offset="0%" stop-color="black" stop-opacity="0"/>
+              <stop offset="100%" stop-color="black" stop-opacity="0.45"/>
+            </radialGradient>
+            <rect width="800" height="420" fill="url(#rs-vig1)"/>
+          </svg>
+          <div class="real-subtitle">
+            <div class="real-subtitle-text">
+              <span class="real-phrase">Buenas tardes</span>
+              <span class="real-translation" data-en="Good afternoon" data-fr="Bon après-midi">Good afternoon</span>
+            </div>
+            <button class="bac-caption-speak" data-speak="Buenas tardes" aria-label="Pronounce Buenas tardes">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Scene 2: Buenas noches — café interior, night -->
+        <div class="real-scene-wrap" id="real-scene-2" style="display:none">
+          <svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="rs-bg2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#06040A"/>
+                <stop offset="100%" stop-color="#0E0A06"/>
+              </linearGradient>
+              <radialGradient id="rs-lamp2" cx="38%" cy="5%" r="45%">
+                <stop offset="0%" stop-color="#D4980C" stop-opacity="0.9"/>
+                <stop offset="40%" stop-color="#A06810" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#A06810" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="rs-facelight2" cx="40%" cy="35%" r="30%">
+                <stop offset="0%" stop-color="#D4980C" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#D4980C" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="rs-skin2" x1="0.3" y1="0" x2="0.7" y2="1">
+                <stop offset="0%" stop-color="#E0A060"/>
+                <stop offset="50%" stop-color="#B86830"/>
+                <stop offset="100%" stop-color="#6A3010"/>
+              </linearGradient>
+              <radialGradient id="rs-window2" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#1A2840" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#080C14" stop-opacity="0.95"/>
+              </radialGradient>
+              <filter id="rs-glow2-filter">
+                <feGaussianBlur stdDeviation="8" result="blur"/>
+                <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+              </filter>
+              <clipPath id="rs-scene2-clip"><rect width="800" height="420"/></clipPath>
+            </defs>
+
+            <!-- BG: dark café -->
+            <rect width="800" height="420" fill="url(#rs-bg2)"/>
+
+            <!-- Lamp light atmospheric fill -->
+            <rect width="800" height="420" fill="url(#rs-lamp2)"/>
+
+            <!-- Window at back — city at night -->
+            <rect x="480" y="30" width="270" height="220" rx="3" fill="url(#rs-window2)" stroke="#1A1208" stroke-width="5"/>
+            <line x1="615" y1="30" x2="615" y2="250" stroke="#1A1208" stroke-width="4"/>
+            <line x1="480" y1="140" x2="750" y2="140" stroke="#1A1208" stroke-width="4"/>
+            <!-- City lights through window -->
+            <rect x="490" y="40" width="8" height="10" fill="#F0D060" opacity="0.7"/>
+            <rect x="510" y="55" width="6" height="8" fill="#E0C050" opacity="0.5"/>
+            <rect x="530" y="42" width="8" height="12" fill="#F0D060" opacity="0.6"/>
+            <rect x="560" y="50" width="6" height="8" fill="#D0E0F0" opacity="0.4"/>
+            <rect x="580" y="38" width="10" height="8" fill="#F0D060" opacity="0.65"/>
+            <rect x="490" y="85" width="6" height="8" fill="#D0E0F0" opacity="0.35"/>
+            <rect x="520" y="95" width="8" height="10" fill="#F0D060" opacity="0.5"/>
+            <rect x="540" y="80" width="6" height="10" fill="#F0D060" opacity="0.6"/>
+            <rect x="490" y="150" width="8" height="10" fill="#F0D060" opacity="0.55"/>
+            <rect x="530" y="155" width="6" height="8" fill="#D0E0F0" opacity="0.4"/>
+            <rect x="560" y="148" width="8" height="10" fill="#F0D060" opacity="0.5"/>
+            <rect x="625" y="42" width="8" height="10" fill="#F0D060" opacity="0.6"/>
+            <rect x="650" y="55" width="6" height="8" fill="#E0C050" opacity="0.45"/>
+            <rect x="680" y="40" width="8" height="14" fill="#F0D060" opacity="0.55"/>
+            <rect x="705" y="52" width="6" height="8" fill="#D0E0F0" opacity="0.35"/>
+            <rect x="625" y="90" width="8" height="10" fill="#F0D060" opacity="0.5"/>
+            <rect x="660" y="80" width="6" height="10" fill="#F0D060" opacity="0.55"/>
+            <rect x="700" y="88" width="8" height="8" fill="#D0E0F0" opacity="0.3"/>
+            <rect x="625" y="155" width="6" height="8" fill="#F0D060" opacity="0.45"/>
+            <rect x="665" y="148" width="8" height="10" fill="#F0D060" opacity="0.5"/>
+            <rect x="700" y="155" width="6" height="8" fill="#D0E0F0" opacity="0.35"/>
+
+            <!-- Lamp fixture hanging -->
+            <line x1="305" y1="0" x2="305" y2="40" stroke="#1A1208" stroke-width="3"/>
+            <ellipse cx="305" cy="44" rx="30" ry="14" fill="#2A1A08" stroke="#1A1008" stroke-width="2"/>
+            <ellipse cx="305" cy="48" rx="22" ry="8" fill="#D4980C" opacity="0.9"/>
+            <!-- Lamp glow burst -->
+            <ellipse cx="305" cy="55" rx="18" ry="10" fill="#F0C030" opacity="0.6" filter="url(#rs-glow2-filter)"/>
+
+            <!-- Face light from lamp -->
+            <rect width="800" height="420" fill="url(#rs-facelight2)"/>
+
+            <!-- Table -->
+            <rect x="100" y="338" width="420" height="14" rx="3" fill="#1E140A" stroke="#0E0A04" stroke-width="2"/>
+            <rect x="150" y="352" width="12" height="68" rx="2" fill="#180E06"/>
+            <rect x="460" y="352" width="12" height="68" rx="2" fill="#180E06"/>
+
+            <!-- Glass on table -->
+            <rect x="270" y="305" width="24" height="35" rx="3" fill="#1A3A5A" opacity="0.65" stroke="#2A4A6A" stroke-width="1.5"/>
+            <rect x="268" y="303" width="28" height="6" rx="2" fill="#2A4A6A" opacity="0.6"/>
+            <!-- Liquid level -->
+            <rect x="272" y="318" width="20" height="20" rx="2" fill="#D4780C" opacity="0.35"/>
+            <!-- Glass shine -->
+            <line x1="275" y1="308" x2="275" y2="325" stroke="white" stroke-width="1.5" opacity="0.2"/>
+            <!-- Table lamp glow -->
+            <ellipse cx="310" cy="340" rx="120" ry="20" fill="#D4980C" opacity="0.08"/>
+
+            <!-- MAN — leaning forward, engaged, dramatic side lighting -->
+            <!-- Body — dark jacket, night out -->
+            <path d="M285,420 L285,258 Q285,240 303,234 L350,224 Q375,218 400,218 Q425,218 450,224 L497,234 Q515,240 515,258 L515,420 Z" fill="#0E0E14"/>
+            <!-- Jacket lapels -->
+            <path d="M368,224 L385,215 L400,224 L395,248 Q385,255 375,248 Z" fill="#1A1A24" opacity="0.9"/>
+            <path d="M400,224 L415,215 L432,224 L425,248 Q415,255 405,248 Z" fill="#1A1A24" opacity="0.9"/>
+            <!-- Shirt under jacket -->
+            <path d="M382,224 Q400,218 418,224 L412,245 Q400,250 388,245 Z" fill="#F0E8D5" opacity="0.8"/>
+            <!-- Jacket lit by lamp — right shoulder only -->
+            <path d="M450,224 Q490,232 515,255 L515,300 Q495,280 468,270 Q452,262 450,244 Z" fill="#D4980C" opacity="0.12"/>
+            <!-- Jacket deep shadow left -->
+            <path d="M285,420 L285,258 Q285,240 303,234 L318,230 L314,420 Z" fill="black" opacity="0.5"/>
+
+            <!-- Neck -->
+            <rect x="378" y="192" width="44" height="34" rx="5" fill="#B86830"/>
+            <!-- Shadow under jaw -->
+            <ellipse cx="400" cy="224" rx="22" ry="6" fill="#4A2008" opacity="0.7"/>
+
+            <!-- HEAD — lit dramatically from lamp (upper left) -->
+            <ellipse cx="400" cy="152" rx="67" ry="73" fill="#B86830"/>
+            <path d="M333,160 Q334,205 360,222 Q378,233 400,235 Q422,233 440,222 Q466,205 467,160 Z" fill="#A85F28"/>
+
+            <!-- Lamp light cast on face — left-upper bright patch -->
+            <radialGradient id="rs-facepatch2" cx="30%" cy="25%" r="40%">
+              <stop offset="0%" stop-color="#E8A040" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#E8A040" stop-opacity="0"/>
+            </radialGradient>
+            <ellipse cx="385" cy="145" rx="55" ry="60" fill="url(#rs-facepatch2)"/>
+
+            <!-- Hair — dark, slicked back, night -->
+            <path d="M333,145 Q333,84 400,76 Q467,84 467,145 Q459,112 440,102 Q422,95 400,95 Q378,95 360,102 Q341,112 333,145 Z" fill="#100806"/>
+            <path d="M340,125 Q362,105 400,100 Q438,105 460,125" fill="none" stroke="#1A0A04" stroke-width="2.5" opacity="0.6"/>
+            <!-- Hair lamp gleam -->
+            <path d="M355,96 Q375,86 400,84 Q415,84 400,88 Q378,90 360,98 Z" fill="#4A2A08" opacity="0.5"/>
+
+            <!-- Ear left (dark) -->
+            <ellipse cx="335" cy="162" rx="10" ry="13" fill="#8A4820"/>
+            <!-- Ear right (lamp lit) -->
+            <ellipse cx="465" cy="162" rx="10" ry="13" fill="#C87030"/>
+
+            <!-- Eyebrows — strong, expressive -->
+            <path d="M350,134 Q368,126 388,130" fill="none" stroke="#100806" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M412,130 Q432,126 450,134" fill="none" stroke="#100806" stroke-width="4.5" stroke-linecap="round"/>
+            <!-- Eyebrow lamp highlight -->
+            <path d="M350,132 Q368,124 385,128" fill="none" stroke="#8A5018" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+
+            <!-- Eyes — engaged, leaning in -->
+            <!-- Left (shadow) -->
+            <ellipse cx="370" cy="149" rx="15" ry="10" fill="#1A1008"/>
+            <ellipse cx="370" cy="149" rx="10" ry="8" fill="#2A1A0C"/>
+            <ellipse cx="370" cy="149" rx="6" ry="6" fill="#08060A"/>
+            <ellipse cx="373" cy="146" rx="2" ry="1.8" fill="white" opacity="0.4"/>
+            <!-- Right (lamp lit) -->
+            <ellipse cx="430" cy="149" rx="15" ry="10" fill="#2A1A0C"/>
+            <ellipse cx="430" cy="149" rx="10" ry="8" fill="#3A2410"/>
+            <ellipse cx="430" cy="149" rx="6" ry="6" fill="#08060A"/>
+            <ellipse cx="433" cy="146" rx="2.5" ry="2" fill="white" opacity="0.65"/>
+            <!-- Lamp catchlight — bright point in right eye -->
+            <ellipse cx="428" cy="144" rx="1.5" ry="1.5" fill="#F0D060" opacity="0.8"/>
+
+            <!-- Lids -->
+            <path d="M355,144 Q370,137 385,144" fill="none" stroke="#100806" stroke-width="1.5"/>
+            <path d="M415,144 Q430,137 445,144" fill="none" stroke="#100806" stroke-width="1.5"/>
+
+            <!-- Nose — dramatic shadow side -->
+            <path d="M392,158 Q386,172 384,182 Q391,188 400,188 Q409,188 416,182 Q414,172 408,158 Z" fill="#8A4018" opacity="0.6"/>
+            <ellipse cx="388" cy="183" rx="6" ry="3.5" fill="#5A2808" opacity="0.6"/>
+            <ellipse cx="412" cy="183" rx="6" ry="3.5" fill="#7A3810" opacity="0.4"/>
+
+            <!-- Expression — engaged, slight lean -->
+            <path d="M375,205 Q400,218 425,205" fill="none" stroke="#7A3210" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M380,208 Q400,216 420,208" fill="#C06838" opacity="0.4"/>
+
+            <!-- Night stubble — heavier shadow side -->
+            <path d="M355,190 Q375,208 400,210 Q425,208 445,190 Q450,215 440,227 Q424,237 400,238 Q376,237 360,227 Q350,215 355,190 Z" fill="#5A2808" opacity="0.3"/>
+
+            <!-- Lamp rim light — strong on right cheek/jaw -->
+            <path d="M443,122 Q468,138 467,172 Q462,155 448,143 Q440,135 440,125 Z" fill="#D4980C" opacity="0.3"/>
+            <!-- Lamp light on forehead -->
+            <ellipse cx="385" cy="118" rx="30" ry="18" fill="#D4980C" opacity="0.15"/>
+
+            <!-- Vignette — deep, cinematic -->
+            <radialGradient id="rs-vig2" cx="40%" cy="40%" r="65%">
+              <stop offset="0%" stop-color="black" stop-opacity="0"/>
+              <stop offset="100%" stop-color="black" stop-opacity="0.75"/>
+            </radialGradient>
+            <rect width="800" height="420" fill="url(#rs-vig2)"/>
+          </svg>
+          <div class="real-subtitle">
+            <div class="real-subtitle-text">
+              <span class="real-phrase">Buenas noches</span>
+              <span class="real-translation" data-en="Good evening / night" data-fr="Bonsoir / Bonne nuit">Good evening / night</span>
+            </div>
+            <button class="bac-caption-speak" data-speak="Buenas noches" aria-label="Pronounce Buenas noches">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /.illus-realist -->
+
+      <!-- COMIC theme (existing) -->
+      <div class="illus-comic">
       <div class="block-a-comic">
         <style>
           .block-a-comic {
@@ -791,6 +1527,7 @@
         </div>
 
       </div><!-- /.block-a-comic -->
+      </div><!-- /.illus-comic -->
     </section>
 
     <!-- 2. Translations — Block A: time-of-day greetings only -->
@@ -1243,11 +1980,70 @@
       }
     });
 
+    // Theme toggle (COMIC | REAL)
+    (function () {
+      var STORAGE_KEY = 'diana-theme';
+
+      function applyTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        document.querySelectorAll('.theme-toggle__btn').forEach(function (btn) {
+          btn.classList.toggle('theme-toggle__btn--active', btn.getAttribute('data-theme-val') === theme);
+        });
+        localStorage.setItem(STORAGE_KEY, theme);
+      }
+
+      // Init
+      applyTheme(localStorage.getItem(STORAGE_KEY) || 'comic');
+
+      // Clicks
+      document.querySelectorAll('.theme-toggle__btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyTheme(btn.getAttribute('data-theme-val'));
+        });
+      });
+    })();
+
+    // Realist scene navigator
+    (function () {
+      var scenes = [
+        document.getElementById('real-scene-0'),
+        document.getElementById('real-scene-1'),
+        document.getElementById('real-scene-2')
+      ];
+      var dots = Array.from(document.querySelectorAll('.real-nav-dot'));
+      var current = 0;
+
+      function showScene(idx) {
+        scenes.forEach(function (s, i) { if (s) s.style.display = i === idx ? 'block' : 'none'; });
+        dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+        current = idx;
+      }
+
+      dots.forEach(function (dot, i) {
+        dot.addEventListener('click', function () { showScene(i); });
+      });
+
+      // Swipe support on mobile
+      scenes.forEach(function (scene) {
+        if (!scene) return;
+        var startX = 0;
+        scene.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+        scene.addEventListener('touchend', function (e) {
+          var dx = e.changedTouches[0].clientX - startX;
+          if (Math.abs(dx) > 40) showScene(dx < 0 ? Math.min(current + 1, 2) : Math.max(current - 1, 0));
+        });
+      });
+    })();
+
     // EN / FR content switcher
     (function () {
       function applyLang(lang) {
         // translation cards
         document.querySelectorAll('.ba-trans-tl').forEach(function (el) {
+          el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+        });
+        // realist subtitle translations
+        document.querySelectorAll('.real-translation').forEach(function (el) {
           el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
         });
         // bilingual elements ([data-en][data-fr])
